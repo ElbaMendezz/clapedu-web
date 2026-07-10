@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/politica-privacidad/Hero.astro";
+import Contenido from "../components/politica-privacidad/Contenido.astro";
+---
+
+<BaseLayout
+  title="Política de Privacidad"
+  description="Política de Privacidad y Tratamiento de Datos Personales de la Asociación Centro Latinoamericano del Propósito — CLAP, vigente desde el 21 de septiembre de 2018."
+  path="/politica-privacidad"
+  breadcrumbs={[
+    { name: "Inicio", path: "/" },
+    { name: "Política de Privacidad", path: "/politica-privacidad" },
+  ]}
+>
+  <Hero />
+  <Contenido />
+</BaseLayout>

@@ -1,0 +1,140 @@
+---
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import ToTopButton from "../components/layout/ToTopButton.astro";
+import "../styles/global.css";
+
+export interface BreadcrumbItem {
+  name: string;
+  path: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  /** Ruta relativa al sitio, ej. "/sobre-nosotros". Default: "/". */
+  path?: string;
+  /** Imagen para Open Graph / Twitter Card. Placeholder hasta tener un
+   * asset social 1200x630 real — ver nota en el checkpoint. */
+  ogImage?: string;
+  /** Dimensiones reales de `ogImage`, para los meta og:image:width/height.
+   * Default: las del placeholder actual (150x57, el isotipo). Actualizar
+   * junto con `ogImage` cuando se reemplace por el asset social real. */
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  noindex?: boolean;
+  breadcrumbs?: BreadcrumbItem[];
+  /** Resalta el trigger del dropdown de nav correspondiente, ver Header.astro. */
+  activeDropdown?: "conocenos" | "educacion";
+  /** Resalta el ítem activo dentro del submenu desplegado, ver Header.astro. */
+  activeNavLink?: "metodologia" | "equipo" | "programas";
+}
+
+const {
+  title,
+  description,
+  path = "/",
+  ogImage = "/social-preview-fallback.png",
+  ogImageWidth = 150,
+  ogImageHeight = 57,
+  noindex = false,
+  breadcrumbs,
+  activeDropdown,
+  activeNavLink,
+} = Astro.props;
+
+// El build usa formato "directory" (cada página compila a
+// <ruta>/index.html), así que la URL real que sirve el hosting y la que
+// lista el sitemap llevan siempre "/" final — el canonical debe coincidir
+// exactamente con esa URL para no mandar una señal contradictoria.
+const normalizedPath = path.endsWith("/") ? path : `${path}/`;
+const canonicalURL = new URL(normalizedPath, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+const fullTitle = `${title} · CLAP — Centro Latinoamericano del Propósito`;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "CLAP — Centro Latinoamericano del Propósito",
+  url: Astro.site?.toString(),
+  logo: new URL("/logo-clap-purple.png", Astro.site).toString(),
+  sameAs: [
+    "https://www.facebook.com/claplatam/",
+    "https://www.instagram.com/clapedu/",
+    "https://www.linkedin.com/company/claplatam/",
+    "https://x.com/claplatam",
+    "https://www.youtube.com/channel/UCrw8CK1KtvkyAUrlJdn3YMQ",
+  ],
+};
+
+const breadcrumbSchema = breadcrumbs?.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbs.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: new URL(item.path.endsWith("/") ? item.path : `${item.path}/`, Astro.site).toString(),
+      })),
+    }
+  : null;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#341c65" />
+
+    <!-- Fuentes críticas -->
+    <link rel="preload" href="/fonts/Montserrat-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ProximaNova-Semibold.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CLAP" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content={ogImageWidth.toString()} />
+    <meta property="og:image:height" content={ogImageHeight.toString()} />
+    <meta property="og:image:alt" content="Logo de CLAP — Centro Latinoamericano del Propósito" />
+    <meta property="og:locale" content="es_CO" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@claplatam" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} is:inline />
+    {breadcrumbSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+    )}
+  </head>
+  <body>
+    <Header activeDropdown={activeDropdown} activeNavLink={activeNavLink} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <ToTopButton />
+
+    <script>
+      import { scrollToAnchorOnLoad } from "../scripts/scroll-to-anchor-on-load";
+      scrollToAnchorOnLoad(72);
+    </script>
+  </body>
+</html>

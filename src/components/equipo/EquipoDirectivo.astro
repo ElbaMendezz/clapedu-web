@@ -1,0 +1,543 @@
+---
+import { Image } from "astro:assets";
+import fotoDaniel from "../../assets/images/equipo-dir-daniel.webp";
+import fotoRenzo from "../../assets/images/equipo-dir-renzo.webp";
+import fotoFrancisco from "../../assets/images/equipo-dir-francisco.webp";
+import fotoJulian from "../../assets/images/equipo-dir-julian.webp";
+import fotoErika from "../../assets/images/equipo-dir-erika.jpg";
+import type { ImageMetadata } from "astro";
+
+interface Director {
+  slug: string;
+  theme: "purple" | "teal" | "gold" | "orange" | "violet";
+  roleFront: string;
+  roleBack: string;
+  /** Nombre del frente; puede incluir `<br>` cuando el original lo parte en dos líneas (solo Ivonne). */
+  nameFrontHtml: string;
+  nameBack: string;
+  desc: string;
+  photo?: ImageMetadata;
+  initials?: string;
+}
+
+const directors: Director[] = [
+  {
+    slug: "ivonne",
+    theme: "purple",
+    roleFront: "Directora Ejecutiva",
+    roleBack: "Directora Ejecutiva",
+    nameFrontHtml: "Ivonne Daniela<br>Angarita Ramos",
+    nameBack: "Ivonne D. Angarita",
+    desc: "Lidera la estrategia y la visión global de CLAP, articulando equipos y alianzas para que cada proyecto sea posible.",
+    initials: "IA",
+  },
+  {
+    slug: "daniel",
+    theme: "teal",
+    roleFront: "Chief of Staff",
+    roleBack: "Chief of Staff",
+    nameFrontHtml: "Daniel H. Corzo",
+    nameBack: "Daniel H. Corzo",
+    desc: "Coordina la operación entre la dirección y las áreas, traduciendo las decisiones en ejecución y resultados.",
+    photo: fotoDaniel,
+  },
+  {
+    slug: "jorge",
+    theme: "gold",
+    roleFront: "Director Administrativo y Financiero",
+    roleBack: "Dir. Administrativo y Financiero",
+    nameFrontHtml: "Jorge Toledo",
+    nameBack: "Jorge Toledo",
+    desc: "Gestiona los recursos, la planeación financiera y la administración que dan sostenibilidad a la organización.",
+    initials: "JT",
+  },
+  {
+    slug: "renzo",
+    theme: "orange",
+    roleFront: "Director de Comunidad",
+    roleBack: "Director de Comunidad",
+    nameFrontHtml: "Renzo Cuadra",
+    nameBack: "Renzo Cuadra",
+    desc: "Conecta y fortalece la red de líderes, aliados y participantes que conforman la comunidad CLAP.",
+    photo: fotoRenzo,
+  },
+  {
+    slug: "francisco",
+    theme: "violet",
+    roleFront: "Director de Incidencia",
+    roleBack: "Director de Incidencia",
+    nameFrontHtml: "Francisco Rey",
+    nameBack: "Francisco Rey",
+    desc: "Impulsa la incidencia en política pública y los procesos que transforman territorios y comunidades.",
+    photo: fotoFrancisco,
+  },
+  {
+    slug: "julian",
+    theme: "teal",
+    roleFront: "Director de Marca y Comunicaciones",
+    roleBack: "Dir. de Marca y Comunicaciones",
+    nameFrontHtml: "Julián Amorocho",
+    nameBack: "Julián Amorocho",
+    desc: "Dirige la narrativa, la identidad y la comunicación que proyectan el propósito de CLAP.",
+    photo: fotoJulian,
+  },
+  {
+    slug: "mariapaz",
+    theme: "violet",
+    roleFront: "Directora de Proyectos",
+    roleBack: "Directora de Proyectos",
+    nameFrontHtml: "María Paz Cuadra",
+    nameBack: "María Paz Cuadra",
+    desc: "Lidera el diseño, la gestión y la ejecución de los proyectos de impacto social y territorial.",
+    initials: "MC",
+  },
+  {
+    slug: "diana",
+    theme: "orange",
+    roleFront: "Directora de Educación",
+    roleBack: "Directora de Educación",
+    nameFrontHtml: "Diana Rodríguez",
+    nameBack: "Diana Rodríguez",
+    desc: "Encabeza los programas formativos y la oferta educativa que desarrollan liderazgo y conocimiento.",
+    initials: "DR",
+  },
+  {
+    slug: "erika",
+    theme: "purple",
+    roleFront: "Directora de Cultura Organizacional",
+    roleBack: "Dir. de Cultura Organizacional",
+    nameFrontHtml: "Erika Gaspar",
+    nameBack: "Erika Gaspar",
+    desc: "Cuida la cultura, el bienestar y el desarrollo del talento humano que mueve a CLAP.",
+    photo: fotoErika,
+  },
+];
+---
+
+<section class="directivo">
+  <div class="ring" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-reveal data-delay="0">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>equipo directivo</span>
+      </div>
+      <h2 data-reveal data-delay="160">Quienes lideran el <span class="accent">camino</span></h2>
+      <p data-reveal data-delay="300">
+        Pasa el cursor sobre cada tarjeta —o tócala en el móvil— para descubrir qué hace cada dirección.
+      </p>
+    </div>
+
+    <div class="grid">
+      {directors.map((d) => (
+        <div class="flipcard" data-flipcard>
+          <div class={`flipinner theme--${d.theme}`} data-flipinner>
+            <div class="face face--front">
+              {d.photo ? (
+                <Image src={d.photo} alt="" width={520} height={410} class="photo" />
+              ) : (
+                <div class="photo photo--placeholder">
+                  <span>{d.initials}</span>
+                </div>
+              )}
+              <div class:list={["scrim", d.photo ? "scrim--photo" : "scrim--placeholder"]} aria-hidden="true"></div>
+              <div class="front-text">
+                <div class="role">{d.roleFront}</div>
+                <div class="front-row">
+                  <h4 set:html={d.nameFrontHtml} />
+                  <span class="more-pill">
+                    Ver más
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="23 4 23 10 17 10"></polyline>
+                      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="face face--back">
+              <div class="back-ring" aria-hidden="true"></div>
+              <div class="back-blob" aria-hidden="true"></div>
+              <div class="back-content">
+                {d.photo ? (
+                  <Image src={d.photo} alt="" width={108} height={108} class="avatar" />
+                ) : (
+                  <div class="avatar avatar--placeholder"><span>{d.initials}</span></div>
+                )}
+                <div class="role">{d.roleBack}</div>
+                <h4>{d.nameBack}</h4>
+                <p>{d.desc}</p>
+                <a class="linkedin" href="#" target="_blank" rel="noopener">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"></path>
+                  </svg>
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachFlipCards } from "../../scripts/flip-cards";
+
+  const section = document.querySelector<HTMLElement>(".directivo");
+  if (section) {
+    attachReveal(section, { threshold: 0.12, rootMargin: "0px 0px -6% 0px", repeat: false, duration: 700 });
+    attachFlipCards(section);
+  }
+</script>
+
+<style>
+  .directivo {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #ffffff 0%, #f7f5fc 100%);
+    padding: 90px 48px 70px;
+  }
+
+  .ring {
+    position: absolute;
+    right: -140px;
+    top: -90px;
+    width: 380px;
+    height: 380px;
+    border: 2px solid rgba(123, 77, 255, 0.09);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 50px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    margin-bottom: 16px;
+    background: rgba(123, 77, 255, 0.08);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #43197c;
+    font-weight: 400;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 40px;
+    letter-spacing: -0.025em;
+    color: #341c65;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #13b89a;
+  }
+  .head p {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: #6b6786;
+    margin-top: 12px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+
+  /* ---------- flip mechanics ---------- */
+  .flipcard {
+    position: relative;
+    height: 306px;
+    perspective: 1600px;
+    cursor: pointer;
+  }
+  .flipinner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.4, 0.15, 0.2, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+    transform: rotateY(0deg);
+  }
+  .flipinner.is-open {
+    transform: rotateY(180deg);
+  }
+  @media (hover: hover) {
+    .flipcard:hover .flipinner:not(.is-locked) {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 22px;
+    overflow: hidden;
+  }
+  .face--front {
+    box-shadow: 0 20px 44px -30px var(--shadow-color);
+  }
+  .face--back {
+    transform: rotateY(180deg);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 26px;
+    background: var(--back-gradient);
+  }
+
+  /* ---------- themes ---------- */
+  .theme--purple {
+    --bg-color: #160830;
+    --shadow-color: rgba(52, 28, 101, 0.55);
+    --scrim-rgb: 42, 20, 87;
+    --back-gradient: linear-gradient(150deg, #5d2099, #341c65);
+    --link-color: #5d2099;
+  }
+  .theme--teal {
+    --bg-color: #041a12;
+    --shadow-color: rgba(11, 136, 112, 0.55);
+    --scrim-rgb: 11, 136, 112;
+    --back-gradient: linear-gradient(150deg, #16bd9f, #0b8870);
+    --link-color: #0b8f76;
+  }
+  .theme--gold {
+    --bg-color: #1a1002;
+    --shadow-color: rgba(199, 122, 10, 0.55);
+    --scrim-rgb: 199, 122, 10;
+    --back-gradient: linear-gradient(150deg, #e8a400, #c77a0a);
+    --link-color: #c77a0a;
+  }
+  .theme--orange {
+    --bg-color: #1a0a04;
+    --shadow-color: rgba(206, 103, 17, 0.55);
+    --scrim-rgb: 185, 86, 12;
+    --back-gradient: linear-gradient(150deg, #f0951a, #ce6711);
+    --link-color: #ce6711;
+  }
+  .theme--violet {
+    --bg-color: #12093a;
+    --shadow-color: rgba(123, 77, 255, 0.55);
+    --scrim-rgb: 82, 36, 189;
+    --back-gradient: linear-gradient(150deg, #8a5cff, #5e2ccc);
+    --link-color: #6b3ff0;
+  }
+
+  /* ---------- front face ---------- */
+  .face--front {
+    background: var(--bg-color);
+  }
+  .photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--back-gradient);
+  }
+  .photo--placeholder span {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 54px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .scrim {
+    position: absolute;
+    inset: 0;
+  }
+  .scrim--photo {
+    background: linear-gradient(
+      to top,
+      rgba(var(--scrim-rgb), 0.95) 0%,
+      rgba(var(--scrim-rgb), 0.55) 30%,
+      transparent 62%
+    );
+  }
+  .scrim--placeholder {
+    background: linear-gradient(
+      to top,
+      rgba(var(--scrim-rgb), 0.95) 0%,
+      rgba(var(--scrim-rgb), 0.6) 35%,
+      transparent 68%
+    );
+  }
+
+  .front-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 22px 20px;
+  }
+  .role {
+    font-family: var(--font-label);
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 2px;
+  }
+  .front-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .front-row h4 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .more-pill {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 15px;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-display);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(4px);
+  }
+
+  /* ---------- back face ---------- */
+  .back-ring {
+    position: absolute;
+    right: -44px;
+    top: -44px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+  }
+  .back-blob {
+    position: absolute;
+    left: -30px;
+    bottom: -30px;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .back-content {
+    position: relative;
+  }
+  .avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(255, 255, 255, 0.6);
+    object-fit: cover;
+    display: block;
+    margin-bottom: 13px;
+  }
+  .avatar--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .avatar--placeholder span {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    color: #fff;
+  }
+  .back-content .role {
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0;
+  }
+  .back-content h4 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 19px;
+    line-height: 1.12;
+    margin-top: 5px;
+    color: #fff;
+  }
+  .back-content p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.93);
+    margin-top: 12px;
+  }
+  .linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    background: #fff;
+    color: var(--link-color);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 9px 16px;
+    border-radius: 30px;
+    text-decoration: none;
+  }
+
+  @media (max-width: 979.98px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 619.98px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 414.98px) {
+    h2 {
+      font-size: 28px;
+    }
+  }
+</style>

@@ -1,0 +1,49 @@
+<button type="button" data-totop aria-label="Subir arriba">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"></path>
+    <path d="m5 12 7-7 7 7"></path>
+  </svg>
+</button>
+
+<script>
+  import { attachScrollToTop } from "../../scripts/scroll-to-top";
+
+  const button = document.querySelector<HTMLButtonElement>("[data-totop]");
+  if (button) attachScrollToTop(button);
+</script>
+
+<style>
+  button {
+    position: fixed;
+    right: 26px;
+    bottom: 26px;
+    z-index: 60;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-ink);
+    color: var(--color-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 14px 34px -12px rgba(52, 28, 101, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease, background 0.25s, box-shadow 0.25s;
+  }
+
+  button:hover {
+    background: var(--color-teal);
+    color: #0c1f1a;
+    box-shadow: 0 18px 40px -12px rgba(59, 224, 187, 0.6);
+  }
+
+  button.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+</style>

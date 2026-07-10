@@ -1,0 +1,83 @@
+---
+---
+
+<section class="hero">
+  <div class="ring" aria-hidden="true"></div>
+
+  <div class="content">
+    <div class="eyebrow">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      <span>Legal · Protección de datos</span>
+    </div>
+    <h1>Política de Privacidad y Tratamiento de Datos Personales</h1>
+    <p>Vigente desde el 21 de septiembre de 2018 · Asociación Centro Latinoamericano del Propósito — CLAP</p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(120% 90% at 85% 0%, #2a1358 0%, transparent 55%), #1a0f36;
+    padding: 132px 48px 66px;
+  }
+
+  .ring {
+    position: absolute;
+    right: -120px;
+    top: -40px;
+    width: 340px;
+    height: 340px;
+    border: 1.5px solid rgba(59, 224, 187, 0.16);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.4);
+    border-radius: 40px;
+    margin-bottom: 20px;
+    background: rgba(59, 224, 187, 0.1);
+    backdrop-filter: blur(6px);
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+  .eyebrow span:last-child {
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #3be0bb;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 46px;
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  .content p {
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.66);
+    margin-top: 18px;
+  }
+</style>

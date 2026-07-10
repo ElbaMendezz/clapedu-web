@@ -1,0 +1,726 @@
+---
+import { Image } from "astro:assets";
+import diagramImage from "../../assets/images/metodologia-diagram.png";
+
+interface CompNode {
+  key: string;
+  label: string;
+  desc: string;
+  phases: { slug: string; name: string }[];
+  iconPaths: string;
+}
+
+const nodes: CompNode[] = [
+  {
+    key: "analizar",
+    label: "Analizar",
+    desc: "Tomamos decisiones informadas a partir del contexto y los datos del territorio, identificando las raíces reales de cada problema y midiendo el impacto de nuestras acciones.",
+    phases: [
+      { slug: "explorar", name: "Explorar" },
+      { slug: "resolver", name: "Resolver" },
+    ],
+    iconPaths: '<path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path>',
+  },
+  {
+    key: "articular",
+    label: "Articular",
+    desc: "Conectamos a los actores clave y creamos sinergias entre comunidad, aliados e instituciones para que cada estrategia tenga el respaldo y los recursos que necesita.",
+    phases: [
+      { slug: "explorar", name: "Explorar" },
+      { slug: "crear", name: "Crear" },
+    ],
+    iconPaths: '<circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="18" r="3"></circle><path d="M9 6h6a3 3 0 0 1 3 3v6"></path>',
+  },
+  {
+    key: "gestionar",
+    label: "Gestionar",
+    desc: "Coordinamos recursos, equipos y tiempos para dirigir la iniciativa con eficiencia, traduciendo la estrategia en una operación real y sostenible.",
+    phases: [
+      { slug: "crear", name: "Crear" },
+      { slug: "actuar", name: "Actuar" },
+    ],
+    iconPaths: '<path d="M12 20a8 8 0 1 0-8-8"></path><path d="M12 8v4l3 2"></path><path d="m2 12 2-2 2 2"></path>',
+  },
+  {
+    key: "intervenir",
+    label: "Intervenir",
+    desc: "Ejecutamos las acciones en territorio junto a la comunidad, monitoreando su efecto y adaptando lo necesario para lograr el cambio que buscamos.",
+    phases: [
+      { slug: "actuar", name: "Actuar" },
+      { slug: "resolver", name: "Resolver" },
+    ],
+    iconPaths: '<path d="m13 2-3 7h6l-3 7"></path><path d="M5 13H2l3-7"></path><path d="M22 11h-3l-3 7"></path>',
+  },
+];
+---
+
+<section class="competencias">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="blob blob--main" aria-hidden="true"></div>
+  <div class="blob blob--left" aria-hidden="true"></div>
+  <div class="blob blob--right" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-reveal data-delay="0">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>el modelo</span>
+      </div>
+      <h2 data-reveal data-delay="120">Cuatro competencias que se <span class="accent">entrelazan</span></h2>
+      <p data-reveal data-delay="240">
+        Cada fase activa dos competencias. Juntas forman un ciclo continuo de aprendizaje y acción. Pasa
+        el cursor sobre cada una para descubrir cómo se conectan.
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="orbit-col" data-reveal="left">
+        <div class="orbit">
+          <div class="orbit-ring" aria-hidden="true"></div>
+
+          <div class="hub" data-comp-hub>
+            <span class="hub-label">modelo</span>
+            <span class="hub-title">Liderar</span>
+            <span class="hub-hint">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 3l3.057 15.428L11 14l4.428-2.943L5 3z"></path>
+              </svg>
+              <span>Tócame</span>
+            </span>
+          </div>
+
+          {nodes.map((node, i) => (
+            <button
+              type="button"
+              class:list={["node", `node--${node.key}`, { "is-active": i === 0 }]}
+              data-comp-node={i}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={node.iconPaths} />
+              <span class="node-label">{node.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="card-col" data-reveal="right">
+        <div class="card-wrap">
+          {nodes.map((node, i) => (
+            <div class:list={["card", `card--${node.key}`, { "is-active": i === 0 }]} data-comp-panel={i}>
+              <span class={`card-tag card-tag--${node.key}`}>
+                <span class="card-dot" aria-hidden="true"></span>
+                <span class="card-label">competencia</span>
+              </span>
+              <h3>{node.label}</h3>
+              <p>{node.desc}</p>
+              <div class="card-phases-wrap">
+                <div class="card-phases-label">Presente en las fases</div>
+                <div class="card-phases">
+                  {node.phases.map((phase) => (
+                    <span class={`phase-chip phase-chip--${phase.slug}`}>
+                      <span class="phase-chip-dot" aria-hidden="true"></span>
+                      {phase.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap" data-reveal>
+      <a class="cta-link" href="/programas">
+        <span class="cta-label">Conoce nuestros programas</span>
+        <span class="cta-arrow" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"></path><path d="M7 7h10v10"></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="diagram-popup" data-comp-popup aria-hidden="true">
+    <Image src={diagramImage} alt="diagram" width={580} height={580} />
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachCompOrbit } from "../../scripts/comp-orbit";
+
+  const section = document.querySelector<HTMLElement>(".competencias");
+  if (section) {
+    attachReveal(section, { threshold: 0.08, rootMargin: "0px 0px -4% 0px", repeat: false, duration: 700 });
+    attachCompOrbit(section);
+  }
+</script>
+
+<style>
+  .competencias {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 85% at 82% 112%, rgba(19, 184, 154, 0.42), transparent 58%),
+      radial-gradient(95% 70% at 8% -12%, rgba(123, 77, 255, 0.26), transparent 55%),
+      linear-gradient(165deg, #1a0f36 0%, #15123a 48%, #0b2a25 100%);
+    padding: 92px 48px 100px;
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    opacity: 0.45;
+    background-image: url("../../assets/images/grain.png");
+    background-size: 600px;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .blob--main {
+    left: 50%;
+    bottom: -160px;
+    width: 620px;
+    height: 520px;
+    margin-left: -310px;
+    background: radial-gradient(circle, rgba(19, 184, 154, 0.3), transparent 68%);
+    filter: blur(70px);
+  }
+  .blob--left {
+    left: -140px;
+    bottom: -100px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(59, 224, 187, 0.14), transparent 70%);
+    filter: blur(50px);
+    animation: clap-float-a 20s ease-in-out infinite;
+  }
+  .blob--right {
+    right: -120px;
+    top: -80px;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(123, 77, 255, 0.18), transparent 70%);
+    filter: blur(45px);
+  }
+
+  .wrap {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .head {
+    text-align: center;
+    max-width: 740px;
+    margin: 0 auto 56px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.4);
+    border-radius: 40px;
+    margin-bottom: 18px;
+    background: rgba(59, 224, 187, 0.1);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #3be0bb;
+    font-weight: 400;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 40px;
+    letter-spacing: -0.025em;
+    color: #fff;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #3be0bb;
+  }
+  .head p {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 12px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 56px;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+
+  /* ---------- orbit ---------- */
+  .orbit {
+    position: relative;
+    aspect-ratio: 1;
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .orbit-ring {
+    position: absolute;
+    inset: 14%;
+    border: 1.5px dashed rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 26px rgba(255, 255, 255, 0.22), inset 0 0 26px rgba(255, 255, 255, 0.12);
+  }
+
+  .hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 34%;
+    height: 34%;
+    border-radius: 50%;
+    background: linear-gradient(140deg, #43197c, #13b89a);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 24px 60px -20px rgba(59, 224, 187, 0.4);
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .hub:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 0 30px 70px -20px rgba(59, 224, 187, 0.6);
+  }
+  .hub-label {
+    font-family: var(--font-label);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .hub-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .hub-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 7px;
+    padding: 3px 9px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+    animation: comp-pulse 2s ease-in-out infinite;
+  }
+  .hub-hint span {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .node {
+    position: absolute;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #fff;
+    padding: 0;
+    font-family: inherit;
+    z-index: 1;
+    transform: scale(1);
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s, border-color 0.4s;
+  }
+  .node.is-active {
+    z-index: 3;
+    transform: scale(1.12);
+  }
+  .node-label {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 12.5px;
+  }
+
+  .node--analizar {
+    top: 0;
+    left: 50%;
+    margin-left: -46px;
+    border-color: #6978df;
+    background: rgba(105, 120, 223, 0.16);
+    box-shadow: 0 16px 40px -18px rgba(105, 120, 223, 0.7);
+  }
+  .node--analizar svg {
+    stroke: #aab4ff;
+  }
+  .node--analizar.is-active {
+    background: #6978df;
+    box-shadow: 0 22px 50px -16px rgba(105, 120, 223, 0.85);
+  }
+  .node--analizar.is-active svg {
+    stroke: #fff;
+  }
+
+  .node--articular {
+    top: 50%;
+    right: 0;
+    margin-top: -46px;
+    border-color: #fc7859;
+    background: rgba(252, 120, 89, 0.16);
+    box-shadow: 0 16px 40px -18px rgba(252, 120, 89, 0.7);
+  }
+  .node--articular svg {
+    stroke: #ffab95;
+  }
+  .node--articular.is-active {
+    background: #fc7859;
+    box-shadow: 0 22px 50px -16px rgba(252, 120, 89, 0.85);
+  }
+  .node--articular.is-active svg {
+    stroke: #fff;
+  }
+
+  .node--gestionar {
+    bottom: 0;
+    left: 50%;
+    margin-left: -46px;
+    border-color: #8fbf40;
+    background: rgba(143, 191, 64, 0.16);
+    box-shadow: 0 16px 40px -18px rgba(143, 191, 64, 0.7);
+  }
+  .node--gestionar svg {
+    stroke: #c3e88a;
+  }
+  .node--gestionar.is-active {
+    background: #8fbf40;
+    box-shadow: 0 22px 50px -16px rgba(143, 191, 64, 0.85);
+  }
+  .node--gestionar.is-active svg {
+    stroke: #fff;
+  }
+
+  .node--intervenir {
+    top: 50%;
+    left: 0;
+    margin-top: -46px;
+    border-color: #40a1bc;
+    background: rgba(64, 161, 188, 0.16);
+    box-shadow: 0 16px 40px -18px rgba(64, 161, 188, 0.7);
+  }
+  .node--intervenir svg {
+    stroke: #7fd0e0;
+  }
+  .node--intervenir.is-active {
+    background: #40a1bc;
+    box-shadow: 0 22px 50px -16px rgba(64, 161, 188, 0.85);
+  }
+  .node--intervenir.is-active svg {
+    stroke: #fff;
+  }
+
+  /* ---------- detail card ---------- */
+  .card-wrap {
+    position: relative;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 26px;
+    backdrop-filter: blur(10px);
+    min-height: 300px;
+    transition: border-color 0.4s;
+  }
+  .card-wrap:has(.card--analizar.is-active) {
+    border-color: rgba(105, 120, 223, 0.4);
+  }
+  .card-wrap:has(.card--articular.is-active) {
+    border-color: rgba(252, 120, 89, 0.4);
+  }
+  .card-wrap:has(.card--gestionar.is-active) {
+    border-color: rgba(143, 191, 64, 0.4);
+  }
+  .card-wrap:has(.card--intervenir.is-active) {
+    border-color: rgba(64, 161, 188, 0.4);
+  }
+
+  .card {
+    display: none;
+    padding: 38px 38px;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .card.is-active {
+    display: block;
+  }
+  .card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 15px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+  .card-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .card-label {
+    font-family: var(--font-label);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .card-tag--analizar {
+    background: rgba(105, 120, 223, 0.18);
+  }
+  .card-tag--analizar .card-dot {
+    background: #6978df;
+  }
+  .card-tag--analizar .card-label {
+    color: #aab4ff;
+  }
+  .card-tag--articular {
+    background: rgba(252, 120, 89, 0.18);
+  }
+  .card-tag--articular .card-dot {
+    background: #fc7859;
+  }
+  .card-tag--articular .card-label {
+    color: #ffab95;
+  }
+  .card-tag--gestionar {
+    background: rgba(143, 191, 64, 0.18);
+  }
+  .card-tag--gestionar .card-dot {
+    background: #8fbf40;
+  }
+  .card-tag--gestionar .card-label {
+    color: #c3e88a;
+  }
+  .card-tag--intervenir {
+    background: rgba(64, 161, 188, 0.18);
+  }
+  .card-tag--intervenir .card-dot {
+    background: #40a1bc;
+  }
+  .card-tag--intervenir .card-label {
+    color: #7fd0e0;
+  }
+
+  .card h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .card p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.82);
+    margin-top: 14px;
+  }
+
+  .card-phases-wrap {
+    margin-top: 26px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .card-phases-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 12px;
+  }
+  .card-phases {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .phase-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+  }
+  .phase-chip-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .phase-chip--explorar {
+    background: rgba(255, 31, 122, 0.14);
+    border-color: rgba(255, 31, 122, 0.4);
+  }
+  .phase-chip--explorar .phase-chip-dot {
+    background: #ff1f7a;
+  }
+  .phase-chip--crear {
+    background: rgba(245, 184, 46, 0.14);
+    border-color: rgba(245, 184, 46, 0.4);
+  }
+  .phase-chip--crear .phase-chip-dot {
+    background: #f5b82e;
+  }
+  .phase-chip--actuar {
+    background: rgba(55, 188, 67, 0.14);
+    border-color: rgba(55, 188, 67, 0.4);
+  }
+  .phase-chip--actuar .phase-chip-dot {
+    background: #37bc43;
+  }
+  .phase-chip--resolver {
+    background: rgba(68, 151, 234, 0.14);
+    border-color: rgba(68, 151, 234, 0.4);
+  }
+  .phase-chip--resolver .phase-chip-dot {
+    background: #4497ea;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: transform 0.25s;
+  }
+  .cta-link:hover {
+    transform: translateY(-3px);
+  }
+  .cta-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 17px 32px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(8px);
+  }
+  .cta-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(8px);
+  }
+
+  /* ---------- diagram hover popup ---------- */
+  .diagram-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%) scale(0.95);
+    z-index: 150;
+    width: min(580px, 85vw);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 48px 100px -20px rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .diagram-popup.is-open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .diagram-popup :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @keyframes comp-pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 899.98px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .competencias {
+      padding: 62px 22px;
+    }
+    h2 {
+      font-size: 30px;
+    }
+  }
+</style>

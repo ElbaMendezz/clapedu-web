@@ -1,0 +1,296 @@
+---
+import { Image } from "astro:assets";
+import t1 from "../../assets/images/t1.jpg";
+import t2 from "../../assets/images/t2.jpg";
+import t3 from "../../assets/images/t3.jpg";
+import t4 from "../../assets/images/t4.jpg";
+import t5 from "../../assets/images/t5.jpg";
+import t6 from "../../assets/images/t6.jpg";
+
+const testimonials = [
+  {
+    image: t1,
+    name: "Juliana Pombo",
+    location: "Buenos Aires, Argentina",
+    color: "yellow",
+    quote:
+      "Reunirse o encontrarse con distintas personas, con diferente cultura, distintos orígenes y diferentes profesiones, hace que sea mucho más rico y se complemente el trabajo que realizamos.",
+  },
+  {
+    image: t2,
+    name: "Paola Alevante",
+    location: "Santiago, República Dominicana",
+    color: "teal",
+    quote:
+      "Es pasar de mirarlo todo nublado, de querer hacer un cambio y no saber cómo, a tener las herramientas y poder crear puentes. Desde conocer la comunidad y cómo intervenir, hasta el proceso de evaluación.",
+  },
+  {
+    image: t3,
+    name: "Daniela Torres",
+    location: "Arequipa, Perú",
+    color: "purple",
+    quote:
+      "Lo mejor fue conocer a un equipo de trabajo increíble. Aprendimos mucho el uno del otro, a trabajar en conjunto, a escucharnos y a cumplir los proyectos con los que nos comprometimos.",
+  },
+  {
+    image: t4,
+    name: "Giovanna Mora",
+    location: "Cartagena, Colombia",
+    color: "dark-teal",
+    quote:
+      "Nos brindan herramientas para comprender la realidad social y emprender soluciones con las comunidades. Gracias a CLAP reafirmé mi propósito de vida y me siento muy feliz y agradecida.",
+  },
+  {
+    image: t5,
+    name: "Sebastián Gómez",
+    location: "Cartagena, Colombia",
+    color: "yellow",
+    quote:
+      "Tuve muchas experiencias enriquecedoras, conocí muchas personas y pude conectarme con lo que en realidad me gusta. Me ha dado muchas energías y herramientas para continuar construyendo mi propósito.",
+  },
+  {
+    image: t6,
+    name: "Paola Gómez",
+    location: "Antioquia, Colombia",
+    color: "teal",
+    quote:
+      "Ha sido una de las mejores experiencias para mí como profesional y como persona. Si quieres ser un agente de cambio en América Latina, CLAP es definitivamente la mejor opción para ti.",
+  },
+];
+
+// Set duplicado para el loop vertical continuo (igual que el marquee de Aliados).
+const loop = [...testimonials, ...testimonials];
+---
+
+<section id="testimonios">
+  <div class="blob" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="ring ring--1" aria-hidden="true"></div>
+  <div class="ring ring--2" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="intro">
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>lo que dicen</span>
+      </div>
+      <h2>Historias de impacto y transformación</h2>
+    </div>
+
+    <div class="scroll-wrap">
+      <div class="scroll-track">
+        {loop.map((item, i) => (
+          <div class="card" aria-hidden={i >= testimonials.length}>
+            <div class={`quote-mark quote-mark--${item.color}`}>&ldquo;</div>
+            <p class="quote">{item.quote}</p>
+            <div class="author">
+              <Image src={item.image} alt={item.name} width={50} height={50} class={`avatar avatar--${item.color}`} />
+              <div>
+                <div class="author-name">{item.name}</div>
+                <div class="author-location">{item.location}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 93% 10%, rgba(30, 201, 166, 0.55), transparent 38%),
+      radial-gradient(circle at 100% 100%, rgba(30, 201, 166, 0.42), transparent 42%),
+      linear-gradient(118deg, #3a2d86 0%, #2c3596 28%, #235aa6 52%, #15879e 78%, #139c8f 100%);
+    padding: 128px 48px 96px;
+  }
+
+  .blob {
+    position: absolute;
+    left: -120px;
+    bottom: -120px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123, 77, 255, 0.4), transparent 70%);
+    filter: blur(40px);
+  }
+
+  .noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/noise-texture.png");
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .ring {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .ring--1 {
+    bottom: -360px;
+    width: 760px;
+    height: 760px;
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+  }
+  .ring--2 {
+    bottom: -420px;
+    width: 980px;
+    height: 980px;
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .container {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .intro {
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    background: rgba(123, 77, 255, 0.15);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    font-weight: 600;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 48px;
+    letter-spacing: -0.025em;
+    color: var(--color-white);
+    line-height: 1.08;
+    text-wrap: balance;
+    margin-top: 16px;
+  }
+
+  .scroll-wrap {
+    position: relative;
+    height: 680px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  }
+
+  .scroll-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    animation: clap-scroll-vertical 28s linear infinite;
+  }
+
+  .card {
+    width: 380px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 26px;
+    padding: 32px 30px;
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quote-mark {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 52px;
+    line-height: 0.6;
+    margin-bottom: 16px;
+  }
+  .quote-mark--yellow { color: #ffc200; }
+  .quote-mark--teal { color: var(--color-teal); }
+  .quote-mark--purple { color: #7b4dff; }
+  .quote-mark--dark-teal { color: #13b89a; }
+
+  .quote {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 24px;
+    flex: 1;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .author :global(.avatar) {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid;
+  }
+  .author :global(.avatar--yellow) { border-color: #ffc200; }
+  .author :global(.avatar--teal) { border-color: var(--color-teal); }
+  .author :global(.avatar--purple) { border-color: #7b4dff; }
+  .author :global(.avatar--dark-teal) { border-color: #13b89a; }
+
+  .author-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-white);
+  }
+  .author-location {
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  @media (max-width: 1099.98px) {
+    .scroll-wrap {
+      height: 640px;
+    }
+    .scroll-track {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .card {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    section {
+      padding: 90px 22px 62px;
+    }
+    h2 {
+      font-size: 34px;
+    }
+    .scroll-wrap {
+      height: 580px;
+    }
+    .scroll-track {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

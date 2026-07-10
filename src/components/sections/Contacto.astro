@@ -1,0 +1,352 @@
+---
+const WHATSAPP =
+  "https://api.whatsapp.com/send/?phone=3114481160&text&type=phone_number&app_absent=0&utm_source=ig";
+
+const socialLinks = [
+  {
+    label: "WhatsApp",
+    href: WHATSAPP,
+    size: 22,
+    fill: true,
+    path: "M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.219zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.078 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/claplatam/",
+    size: 21,
+    fill: true,
+    path: "M13.5 22v-9h3l.5-3.5h-3.5V7.2c0-1 .3-1.7 1.8-1.7H17V2.3C16.6 2.25 15.5 2.1 14.3 2.1c-2.6 0-4.3 1.55-4.3 4.4V9.5H7V13h3v9h3.5z",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/clapedu/",
+    size: 21,
+    fill: false,
+    path: null,
+    isInstagram: true,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/claplatam/posts/?feedView=all",
+    size: 21,
+    fill: true,
+    path: "M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.5 1s2.48 1.12 2.48 2.5zM0.25 8h4.5V23h-4.5V8zM8 8h4.3v2.05h.06c.6-1.13 2.06-2.32 4.24-2.32C21.2 7.73 22 10.06 22 14.1V23h-4.5v-7.9c0-1.88-.03-4.3-2.62-4.3-2.62 0-3.02 2.05-3.02 4.16V23H8V8z",
+  },
+  {
+    label: "X",
+    href: "https://x.com/claplatam",
+    size: 18,
+    fill: true,
+    path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/channel/UCrw8CK1KtvkyAUrlJdn3YMQ",
+    size: 22,
+    fill: true,
+    path: "M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2C.5 9.1.5 12 .5 12s0 2.9.5 4.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.8.5-4.8s0-2.9-.5-4.8zM9.8 15.5v-7l6 3.5-6 3.5z",
+  },
+];
+---
+
+<section id="contacto">
+  <div class="blob" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="ring ring--1" aria-hidden="true"></div>
+  <div class="ring ring--2" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="intro" data-reveal="left">
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>hablemos</span>
+      </div>
+      <h2>Únete a la comunidad que transforma</h2>
+      <p>
+        Cuéntanos en qué estás trabajando. Te contactamos para sumarte al
+        ecosistema CLAP.
+      </p>
+      <div class="social-links">
+        {
+          socialLinks.map((social) => (
+            <a href={social.href} target="_blank" rel="noopener" class="social-icon" aria-label={social.label}>
+              {social.isInstagram ? (
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"></circle>
+                </svg>
+              ) : (
+                <svg width={social.size} height={social.size} viewBox="0 0 24 24" fill="#fff">
+                  <path d={social.path} />
+                </svg>
+              )}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="form-card" data-reveal="right">
+      <div data-contact-form-state>
+        <form data-contact-form>
+          <label for="contact-name">Nombre</label>
+          <input id="contact-name" name="name" required placeholder="Tu nombre" />
+
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" required placeholder="tucorreo@email.com" />
+
+          <label for="contact-message">Mensaje</label>
+          <textarea id="contact-message" name="message" rows="4" required placeholder="Cuéntanos sobre tu propósito..."></textarea>
+
+          <button type="submit">Enviar mensaje</button>
+        </form>
+      </div>
+
+      <div data-contact-success-state class="success">
+        <div class="success-icon">✓</div>
+        <h3>¡Gracias!</h3>
+        <p>Recibimos tu mensaje. El equipo CLAP te contactará muy pronto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachContactForm } from "../../scripts/contact-form";
+
+  const section = document.querySelector<HTMLElement>("#contacto");
+  if (section) {
+    attachReveal(section);
+    attachContactForm(section);
+  }
+</script>
+
+<style>
+  section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(125deg, #2a1457, #43197c 45%, #13b89a);
+    background-size: 200% 200%;
+    animation: clap-gradient-shift 18s ease infinite;
+    padding: 96px 48px;
+  }
+
+  .blob {
+    position: absolute;
+    right: -120px;
+    top: -120px;
+    width: 460px;
+    height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 224, 187, 0.4), transparent 70%);
+    filter: blur(40px);
+    animation: clap-float-b 16s ease-in-out infinite;
+  }
+
+  .noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/noise-texture.png");
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .ring--1 {
+    left: -220px;
+    bottom: -260px;
+    width: 720px;
+    height: 720px;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+  }
+  .ring--2 {
+    left: -300px;
+    bottom: -340px;
+    width: 940px;
+    height: 940px;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .container {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    margin-bottom: 20px;
+    background: rgba(123, 77, 255, 0.15);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    font-weight: 600;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  .intro h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 46px;
+    letter-spacing: -0.025em;
+    color: var(--color-white);
+    line-height: 1.05;
+    margin-bottom: 18px;
+    text-wrap: balance;
+  }
+
+  .intro p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 34px;
+    max-width: 380px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 13px;
+  }
+  .social-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .social-icon:hover {
+    background: var(--color-teal);
+    transform: translateY(-3px);
+  }
+
+  .form-card {
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 28px;
+    padding: 38px;
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.4);
+  }
+
+  .form-card label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    margin-bottom: 7px;
+  }
+
+  .form-card input,
+  .form-card textarea {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 15px;
+    padding: 14px 16px;
+    border: 1.5px solid #e6e0f2;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    outline: none;
+    color: var(--color-ink);
+    background: var(--color-white);
+  }
+  .form-card input:focus,
+  .form-card textarea:focus {
+    border-color: var(--color-teal);
+  }
+  .form-card textarea {
+    resize: vertical;
+    margin-bottom: 22px;
+  }
+
+  .form-card button[type="submit"] {
+    width: 100%;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-white);
+    background: var(--color-ink);
+    border: none;
+    padding: 16px;
+    border-radius: 46px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .form-card button[type="submit"]:hover {
+    background: var(--color-ink-strong);
+    transform: translateY(-2px);
+  }
+
+  .success {
+    display: none;
+    text-align: center;
+    padding: 40px 10px;
+  }
+  .success-icon {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: #eafaf5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+    font-size: 34px;
+    color: #13b89a;
+  }
+  .success h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--color-ink);
+    margin-bottom: 10px;
+  }
+  .success p {
+    font-size: 15px;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1099.98px) {
+    .container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    section {
+      padding: 62px 22px;
+    }
+    .intro h2 {
+      font-size: 32px;
+    }
+    .form-card {
+      padding: 26px;
+    }
+  }
+</style>

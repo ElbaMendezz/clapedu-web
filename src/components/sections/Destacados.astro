@@ -1,0 +1,564 @@
+---
+import { Image } from "astro:assets";
+import ecoProgramas from "../../assets/images/eco-programas.webp";
+import bannerEscuela from "../../assets/images/banner-escuela.jpg";
+import escuelaMobile from "../../assets/images/escuela-mobile.png";
+import bannerHackaton from "../../assets/images/banner-hackaton.jpg";
+import hackatonMobile from "../../assets/images/hackaton-mobile.png";
+---
+
+<section id="destacados">
+  <div class="container">
+    <div class="intro">
+      <div data-reveal>
+        <div class="eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          <span>lo que está pasando</span>
+        </div>
+        <h2>Iniciativas <span class="accent">destacadas</span></h2>
+      </div>
+      <p data-reveal>
+        Programas y experiencias que están marcando la diferencia en el
+        ecosistema CLAP.
+      </p>
+    </div>
+
+    <div class="carousel" data-carousel-root>
+      <div class="track" data-carousel-track>
+        <a href="/#ecosistema" class="card card--programas">
+          <Image src={ecoProgramas} alt="Programas Especializados" width={560} height={300} />
+          <div class="card-overlay card-overlay--programas"></div>
+          <div class="card-top">
+            <span class="tag tag--teal">Educación</span>
+            <span class="arrow" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+              </svg>
+            </span>
+          </div>
+          <div class="card-body">
+            <h3>Programas Especializados</h3>
+            <p>Tres rutas para formarte como agente de cambio en un solo semestre.</p>
+          </div>
+        </a>
+
+        <a href="https://innpulsamujeres.com/" target="_blank" rel="noopener" class="card card--innpulsa">
+          <div class="innpulsa-ring" aria-hidden="true"></div>
+          <div class="innpulsa-star innpulsa-star--big" aria-hidden="true">✦</div>
+          <div class="innpulsa-star innpulsa-star--small" aria-hidden="true">✦</div>
+          <div class="card-top">
+            <span class="tag tag--purple">Proyecto</span>
+            <span class="arrow" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+              </svg>
+            </span>
+          </div>
+          <div class="card-body">
+            <h3>iNNpulsa <span class="light">Mujeres</span></h3>
+            <div class="innpulsa-tags">
+              <span class="innpulsa-tag innpulsa-tag--yellow">Mujer, tú sostienes el país.</span>
+              <span class="innpulsa-tag innpulsa-tag--pink">Ahora es momento de impulsarte.</span>
+            </div>
+            <p>Acompañamiento, formación y oportunidades para hacer crecer tu negocio.</p>
+          </div>
+        </a>
+
+        <a href="https://www.instagram.com/clapedu/" target="_blank" rel="noopener" class="card card--banner card--escuela">
+          <Image src={bannerEscuela} alt="Escuela de Liderazgo" width={560} height={300} class="banner-desk" />
+          <Image src={escuelaMobile} alt="Escuela de Liderazgo" width={560} height={480} class="banner-mob" />
+          <div class="card-overlay card-overlay--escuela">
+            <span class="tag tag--teal-escuela">Educación</span>
+            <h3 class="hide-mobile">Escuela Santandereana de Liderazgo Público y Político</h3>
+          </div>
+          <span class="arrow arrow--floating arrow--purple" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </a>
+
+        <a href="https://www.instagram.com/clapedu/" target="_blank" rel="noopener" class="card card--banner card--hackaton">
+          <Image src={bannerHackaton} alt="Hackatón" width={560} height={300} class="banner-desk" />
+          <Image src={hackatonMobile} alt="Hackatón" width={560} height={480} class="banner-mob" />
+          <div class="card-overlay card-overlay--hackaton">
+            <span class="tag tag--purple">Proyecto</span>
+            <h3 class="hide-mobile">Hackatón: ¡Diseña una Universidad!</h3>
+          </div>
+          <span class="arrow arrow--floating arrow--purple" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+
+      <button type="button" class="carousel-arrow carousel-arrow--prev" data-carousel-arrow="prev" aria-label="Anterior">‹</button>
+      <button type="button" class="carousel-arrow carousel-arrow--next" data-carousel-arrow="next" aria-label="Siguiente">›</button>
+
+      <div class="dots" data-carousel-dots>
+        <button type="button" class="dot" data-carousel-dot aria-label="Ir al 1"></button>
+        <button type="button" class="dot" data-carousel-dot aria-label="Ir al 2"></button>
+        <button type="button" class="dot" data-carousel-dot aria-label="Ir al 3"></button>
+        <button type="button" class="dot" data-carousel-dot aria-label="Ir al 4"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachCarousel } from "../../scripts/carousel";
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>("#destacados");
+  if (section) {
+    attachReveal(section);
+    const carouselRoot = section.querySelector<HTMLElement>("[data-carousel-root]");
+    if (carouselRoot) attachCarousel(carouselRoot);
+  }
+</script>
+
+<style>
+  section {
+    background: var(--color-white);
+    padding: 90px 48px;
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .intro {
+    max-width: 760px;
+    margin-bottom: 36px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    background: rgba(123, 77, 255, 0.08);
+    backdrop-filter: blur(6px);
+    margin-bottom: 16px;
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-ink-strong);
+    font-weight: 600;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+
+  h2 .accent {
+    color: var(--color-ink-strong);
+  }
+
+  .intro p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+
+  .carousel {
+    position: relative;
+  }
+
+  .track {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .card {
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    text-decoration: none;
+    min-height: 225px;
+    max-height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 24px 50px -28px rgba(52, 28, 101, 0.45);
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s;
+  }
+
+  .card:hover {
+    transform: translateY(-10px) scale(1.015);
+  }
+
+  /* Sombra al hover: un color distinto por tarjeta (no por tipo visual —
+     el original la define por posición en el grid, con !important, y esos
+     valores ganan sobre los style-hover individuales de cada tarjeta que
+     en la práctica nunca llegan a aplicarse). */
+  .track > .card--programas:hover {
+    box-shadow: 0 26px 60px -14px rgba(19, 184, 154, 0.75);
+  }
+  .track > .card--innpulsa:hover {
+    box-shadow: 0 26px 60px -14px rgba(123, 77, 255, 0.7);
+  }
+  .track > .card--escuela:hover {
+    box-shadow: 0 26px 60px -14px rgba(237, 111, 214, 0.78);
+  }
+  .track > .card--hackaton:hover {
+    box-shadow: 0 26px 60px -14px rgba(19, 184, 154, 0.72);
+  }
+
+  .card--programas {
+    background: var(--color-ink);
+    padding: 32px;
+  }
+  .card--programas :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+    display: block;
+  }
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+  }
+  .card-overlay--programas {
+    background: linear-gradient(150deg, rgba(52, 28, 101, 0.82) 0%, rgba(41, 22, 80, 0.5) 42%, rgba(19, 184, 154, 0.62) 100%);
+  }
+
+  .card--programas .card-top,
+  .card--programas .card-body {
+    position: relative;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 30px;
+  }
+
+  .tag--teal {
+    color: var(--color-ink);
+    background: var(--color-teal);
+  }
+
+  /* Mismo fondo teal que .tag--teal, pero con un texto azul marino propio
+     (#0d3256) — así lo tiene el original solo en la tarjeta de Escuela, no
+     es el mismo tono que el resto de tags "Educación". */
+  .tag--teal-escuela {
+    color: #0d3256;
+    background: var(--color-teal);
+  }
+
+  .tag--purple {
+    color: var(--color-white);
+    background: var(--color-ink-strong);
+  }
+
+  .arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    flex: none;
+    transition: background 0.3s, color 0.3s, transform 0.3s, border-color 0.3s;
+  }
+
+  .card:hover .arrow {
+    background: var(--color-teal);
+    border-color: var(--color-teal);
+    color: var(--color-ink);
+    transform: translateX(4px);
+  }
+
+  .card-body h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--color-white);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .card-body > p {
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+  }
+
+  /* -- iNNpulsa Mujeres -- */
+  .card--innpulsa {
+    background: linear-gradient(135deg, #c948c0 0%, #b061d4 45%, #a98ddb 100%);
+    padding: 32px;
+    box-shadow: 0 24px 50px -28px rgba(168, 72, 196, 0.5);
+  }
+
+  /* Título y párrafo de esta tarjeta usan tamaños propios, distintos a los
+     compartidos por defecto en .card-body h3 / .card-body > p. */
+  .card--innpulsa .card-body h3 {
+    font-size: 30px;
+    line-height: 1;
+    margin-bottom: 0;
+  }
+  .card--innpulsa .card-body > p {
+    font-size: 14px;
+  }
+
+  .innpulsa-ring {
+    position: absolute;
+    right: 18px;
+    bottom: 34px;
+    width: 170px;
+    height: 170px;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    transform: rotate(-18deg);
+  }
+
+  .innpulsa-star {
+    position: absolute;
+    color: var(--color-white);
+    line-height: 1;
+  }
+  .innpulsa-star--big {
+    left: 30px;
+    top: 88px;
+    font-size: 22px;
+  }
+  .innpulsa-star--small {
+    right: 46px;
+    bottom: 54px;
+    font-size: 16px;
+  }
+
+  .card--innpulsa .card-top,
+  .card--innpulsa .card-body {
+    position: relative;
+  }
+
+  .card-body h3 .light {
+    font-weight: 300;
+  }
+
+  .card--innpulsa h3 {
+    text-shadow: 0 2px 16px rgba(120, 30, 110, 0.35);
+  }
+
+  .innpulsa-tags {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+
+  .innpulsa-tag {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    color: #1a1a1a;
+    padding: 4px 10px;
+    line-height: 1.3;
+  }
+  .innpulsa-tag--yellow {
+    background: #d6f23a;
+  }
+  .innpulsa-tag--pink {
+    background: #ed6fd6;
+  }
+
+  .card--innpulsa .card-body > p {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  /* -- Tarjetas con imagen de fondo (Escuela / Hackatón) -- */
+  .card--banner {
+    box-shadow: 0 24px 50px -28px rgba(52, 28, 101, 0.35);
+  }
+  .card--banner :global(img) {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  .card--banner :global(.banner-mob) {
+    display: none;
+    height: 480px;
+  }
+
+  @media (max-width: 1099.98px) {
+    .card--banner :global(.banner-desk) {
+      display: none;
+    }
+    .card--banner :global(.banner-mob) {
+      display: block;
+    }
+  }
+
+  .card-overlay--escuela,
+  .card-overlay--hackaton {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 26px;
+  }
+  .card-overlay--escuela {
+    background: linear-gradient(180deg, rgba(4, 18, 12, 0.25), transparent 35%, rgba(4, 18, 12, 0.85));
+  }
+  .card-overlay--hackaton {
+    background: linear-gradient(180deg, rgba(10, 4, 30, 0.25), transparent 35%, rgba(10, 4, 30, 0.85));
+  }
+  /* El overlay es flex-column: sin esto el tag se estira a todo el ancho
+     (align-items:stretch por defecto). */
+  .card-overlay--escuela .tag,
+  .card-overlay--hackaton .tag {
+    align-self: flex-start;
+  }
+  .card-overlay h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--color-white);
+    line-height: 1.15;
+  }
+
+  @media (max-width: 767.98px) {
+    .hide-mobile {
+      display: none;
+    }
+  }
+
+  .arrow--floating {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 3;
+    backdrop-filter: blur(6px);
+  }
+  .arrow--purple {
+    background: rgba(123, 77, 255, 0.25);
+    border-color: rgba(123, 77, 255, 0.45);
+  }
+
+  /* -- Controles de carrusel: solo visibles en móvil (mismo breakpoint que activa el drag/autoplay en carousel.ts) -- */
+  .carousel-arrow {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(52, 28, 101, 0.14);
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--color-ink);
+    cursor: pointer;
+    box-shadow: 0 10px 26px -12px rgba(52, 28, 101, 0.5);
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 1;
+    padding: 0;
+    backdrop-filter: blur(6px);
+  }
+  .carousel-arrow--prev {
+    left: -4px;
+  }
+  .carousel-arrow--next {
+    right: -4px;
+  }
+
+  .dots {
+    display: none;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 22px;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #cdc5e0;
+    cursor: pointer;
+    transition: width 0.3s, background 0.3s, border-radius 0.3s;
+  }
+  .dot.is-active {
+    width: 26px;
+    background: var(--color-ink-strong);
+    border-radius: 5px;
+  }
+
+  @media (max-width: 767.98px) {
+    section {
+      padding: 62px 22px;
+    }
+    .track {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      touch-action: pan-x;
+      scroll-snap-type: x mandatory;
+      gap: 14px;
+      scroll-behavior: smooth;
+      cursor: grab;
+      scrollbar-width: none;
+      align-items: stretch;
+    }
+    .track::-webkit-scrollbar {
+      display: none;
+    }
+    .track > .card {
+      flex: 0 0 85%;
+      scroll-snap-align: start;
+      min-height: 360px;
+    }
+    .track > .card:hover {
+      transform: none !important;
+      box-shadow: 0 24px 50px -28px rgba(52, 28, 101, 0.4) !important;
+    }
+    .card:hover .arrow {
+      transform: none !important;
+    }
+    .carousel-arrow,
+    .dots {
+      display: flex;
+    }
+  }
+</style>

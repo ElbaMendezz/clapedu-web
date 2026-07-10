@@ -1,0 +1,580 @@
+---
+type Block = { type: "p"; html: string } | { type: "ul"; items: string[] } | { type: "h3"; text: string };
+
+interface Section {
+  numeral: string;
+  title: string;
+  blocks: Block[];
+}
+
+const MAIL_LINK = '<a class="mail-link" href="mailto:direccion@clapedu.org">direccion@clapedu.org</a>';
+
+const sections: Section[] = [
+  {
+    numeral: "I",
+    title: "Aspectos generales",
+    blocks: [
+      { type: "p", html: "Los aspectos generales que orientan la Política de CLAP son los siguientes:" },
+      {
+        type: "p",
+        html: "En la presente Política de CLAP se establece bajo qué condiciones CLAP obtiene la Información personal, cómo se usa, cómo se protege, y los derechos que el Titular de información tiene en relación con el tratamiento de dicha información.",
+      },
+      {
+        type: "p",
+        html: "La aceptación de la presente Política de CLAP por parte de los titulares tendrá lugar cuando se presente cualquiera de los siguientes eventos:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Suministro de datos en los formularios de registro del sitio web y de utilización de cualquiera de los servicios disponibles en dicho sitio.",
+          "El empleo de los mecanismos de aceptación, seguridad y acceso al sitio web que establezca CLAP.",
+          "La consulta de cualquier contenido incorporado en el sitio web de CLAP.",
+          "El suministro de datos personales a CLAP de manera física, digital o por cualquier otro medio.",
+        ],
+      },
+      {
+        type: "p",
+        html: 'Mediante la autorización otorgada por el Titular al momento de proporcionar sus datos, éste acepta la presente Política de conformidad con lo señalado en el Artículo 7° del Decreto 1377 de 2013. Dicha autorización es requisito indispensable para acceder o usar el sitio web de CLAP.',
+      },
+      { type: "p", html: "El tratamiento de los datos personales del Titular tendrá como finalidad exclusiva:" },
+      {
+        type: "ul",
+        items: [
+          "Proporcionar información relacionada con las actividades de CLAP.",
+          "El envío de boletines informativos.",
+          "El análisis estadístico estratégico.",
+        ],
+      },
+      {
+        type: "p",
+        html: "La presente Política podrá ser modificada en cualquier momento y sin previo aviso por CLAP, por razones de orden legal o institucional, mediando, para tal efecto, una comunicación oportuna en la que se le notificará a los Titulares las modificaciones realizadas, salvo que haya una modificación sustancial a las finalidades de la Política o se realice un cambio en cuanto a los responsables del tratamiento de datos, caso en el cual se informarán dichas modificaciones de manera precisa a los Titulares de información en los términos señalados en la Ley 1581 de 2012 y el Decreto 1377 de 2013.",
+      },
+    ],
+  },
+  {
+    numeral: "II",
+    title: "Información personal de registro en la web de CLAP",
+    blocks: [
+      {
+        type: "p",
+        html: "El recaudo, registro, acceso y uso de la información personal es la mínima requerida para darle cumplimiento a las normas legales colombianas y a los usos internacionales sobre privacidad y protección de datos en Internet.",
+      },
+      {
+        type: "p",
+        html: "En el tratamiento de la información se respetarán los derechos fundamentales y prevalentes de los menores de edad y los adolescentes en los términos señalados por el Artículo 7° de la Ley 1581 de 2012 y el Artículo 12 del Decreto 1377 de 2013 y demás normas que regulen la materia.",
+      },
+      {
+        type: "p",
+        html: "Para el caso particular del uso del sitio web de CLAP, es posible que al usuario o visitante se le solicite el suministro de ciertos datos personales necesarios para la consulta de cualquier información o contenido incorporado en dicho sitio, la utilización de cualquiera de los servicios disponibles en él o para acceder a los mecanismos interactivos. Dichos datos harán parte de un archivo y/o base de datos que podrá ser usado por CLAP dentro de las finalidades establecidas en el presente documento o en el documento de autorización respectivo.",
+      },
+    ],
+  },
+  {
+    numeral: "III",
+    title: "Uso de la información",
+    blocks: [
+      {
+        type: "p",
+        html: "CLAP no divulga, ni vende o alquila a terceros la información personal suministrada por los Titulares y/o los usuarios de su sitio web. Dicha información será mantenida con las debidas condiciones de seguridad y confidencialidad establecidas en la presente Política y en las normas legales que rigen la materia y su uso se hará exclusivamente para cumplir con los propósitos y fines para los cuales fue suministrada.",
+      },
+      {
+        type: "p",
+        html: "No obstante, es posible que CLAP tenga que compartir dicha información con otras instituciones o personas con las cuales tiene algún tipo de relación, o que por disposición legal esté obligado a ello, como en los siguientes casos (Artículo 13 de la Ley 1581 de 2012):",
+      },
+      {
+        type: "ul",
+        items: [
+          "Empleados, contratistas o afiliados, a fin de apoyar las operaciones y actividades tendientes a desarrollar su objeto social.",
+          "Entidades financieras, crediticias o calificadoras de riesgo crediticio.",
+          "Otras entidades que conforman la comunidad de CLAP, como Tesorería, Contabilidad o miembros de los Equipos Regionales.",
+          "Despachos judiciales o autoridades administrativas cuando así lo requieran, al tenor del inciso final del Artículo 15 de la Constitución Nacional de Colombia.",
+        ],
+      },
+      {
+        type: "p",
+        html: "Dada la naturaleza de las actividades que desarrolla CLAP, la Información personal de carácter financiero que sea recolectada de los Titulares y que éstos suministren con ocasión de los servicios que utilicen o soliciten, podrá ser compartida con terceros que presten servicios a CLAP para realizar evaluaciones financieras, todo de conformidad con lo establecido en la Ley 1266 de 2008, Ley 1581 de 2012, el Decreto 1377 de 2013 y las demás normas complementarias sobre manejo de la información contenida en bases de datos personales, en especial la financiera, crediticia, comercial y de servicios. CLAP adoptará las medidas necesarias para que dichos terceros apliquen las medidas de confidencialidad y seguridad a fin de que la información suministrada no sea divulgada ni utilizada para propósitos diferentes a los establecidos en las normas legales y los definidos en la presente Política.",
+      },
+      {
+        type: "p",
+        html: "Es probable que, como consecuencia de un proceso de organización institucional, CLAP permita que la información personal suministrada por los Titulares pueda ser consultada o usada para casos específicos por otros miembros de CLAP, como por ejemplo por los equipos regionales. En estos casos, debe entenderse que si CLAP así lo permite, lo hace única y exclusivamente para efectos de los programas y proyectos que lleva a cabo, pero siempre ligados a CLAP y a sus actividades y nunca por fuera de los motivos y finalidades por las cuales se recaudó la información. Por consiguiente, los terceros que accedan a esta información no podrán en ningún caso utilizarla para contactar a los Titulares o a otros miembros de CLAP con propósitos comerciales, profesionales, de servicios o de cualquier otra índole.",
+      },
+      {
+        type: "p",
+        html: "En caso de que la información personal solicitada sea susceptible de ser transferida a terceros para los fines arriba mencionados, dicha transferencia se hará con base en la autorización dada por los Titulares de manera previa, expresa y escrita mediante la cual se autorizará la transferencia de la información personal suministrada.",
+      },
+    ],
+  },
+  {
+    numeral: "IV",
+    title: "Autorización",
+    blocks: [
+      {
+        type: "p",
+        html: "Para CLAP, el consentimiento de los Titulares para el tratamiento de sus datos es uno de los elementos más importantes que integran el concepto de privacidad. Por ello, dentro de la presente Política, la manifestación de dicho consentimiento estará regulada por las siguientes prescripciones:",
+      },
+      {
+        type: "p",
+        html: "Para el tratamiento de la información se requiere una autorización previa, expresa e informada del Titular, la cual deberá ser obtenida por cualquier medio que pueda ser objeto de consulta posterior. CLAP al momento de solicitar al Titular la autorización, le informará de manera clara y expresa lo siguiente:",
+      },
+      {
+        type: "ul",
+        items: [
+          "El tratamiento al cual serán sometidos sus datos personales y la finalidad del mismo.",
+          "El carácter facultativo de la respuesta a las preguntas que le sean hechas, cuando éstas versen sobre datos sensibles o sobre los datos de las niñas, niños y adolescentes.",
+          "Los derechos que le asisten como Titular.",
+          "La identificación, dirección física o electrónica y teléfono del Responsable del tratamiento.",
+        ],
+      },
+      {
+        type: "p",
+        html: "Dicha autorización facultará a CLAP para recolectar y ser responsable del tratamiento de la información dada por los Titulares que por cualquier medio, incluyendo el sitio web de CLAP, le suministren información.",
+      },
+      {
+        type: "p",
+        html: "El sitio web de CLAP ha sido diseñado para una audiencia general y no de manera específica para menores de edad. No obstante, CLAP no recopila, usa o difunde datos de niños, niñas o adolescentes. Sin embargo, somos conscientes de que en caso tal de que se recolecte información de identificación personal con respecto a un niño, niña o adolescente, usaremos dicha información con el único propósito de contactar a un padre o tutor del menor para obtener el consentimiento y autorización para el tratamiento de los datos. Si no podemos obtener el consentimiento después de un periodo razonable de tiempo, o si cuando hagamos el contacto, el padre o tutor nos solicita no usar o mantener dicha información, dicha información será eliminada de nuestras bases de datos.",
+      },
+    ],
+  },
+  {
+    numeral: "V",
+    title: "Manejo de la información recolectada a través del sitio web de CLAP",
+    blocks: [
+      {
+        type: "p",
+        html: "Se advierte que CLAP se comunicará con los usuarios de su sitio web por medios electrónicos y será entonces responsabilidad de éstos informarse de las actividades, noticias y decisiones de CLAP, en caso de que el Titular o usuario opte por no recibir comunicaciones electrónicas, o decida no ingresar más al sitio.",
+      },
+      {
+        type: "p",
+        html: "Para ciertas comunicaciones y servicios, CLAP le solicitará al usuario su consentimiento explícito antes de comenzar el trámite del servicio pedido a través de su sitio web. El usuario podrá optar por no recibir nuestras comunicaciones o servicios electrónicos, cambiando la opción de notificaciones dada en el sitio web, o mediante el enlace que se envía adjunto a todos los correos y comunicaciones de CLAP, el cual le permitirá dejar de estar suscrito en la lista de mensajes electrónicos para ese servicio o distribución particular.",
+      },
+    ],
+  },
+  {
+    numeral: "VI",
+    title: "Derechos de los Titulares",
+    blocks: [
+      { type: "p", html: "El Titular de la información tendrá los siguientes derechos:" },
+      {
+        type: "ul",
+        items: [
+          "Conocer, actualizar y rectificar sus datos personales frente a los responsables del tratamiento o encargados del tratamiento. Este derecho se podrá ejercer, entre otros, frente a datos parciales, inexactos, incompletos, fraccionados, que induzcan a error, o aquellos cuyo tratamiento esté expresamente prohibido o no haya sido autorizado.",
+          "Solicitar prueba de la autorización otorgada al responsable del tratamiento, salvo cuando expresamente se exceptúe como requisito para el tratamiento.",
+          "Ser informado por el responsable del tratamiento o el encargado del tratamiento, previa solicitud, respecto del uso que le ha dado a sus datos personales.",
+          "Presentar ante la Superintendencia de Industria y Comercio quejas por infracciones a lo dispuesto en la ley.",
+          "Revocar la autorización y/o solicitar la supresión del dato cuando en el tratamiento no se respeten los principios, derechos y garantías constitucionales y legales. La revocatoria y/o supresión procederá cuando la Superintendencia de Industria y Comercio haya determinado que en el tratamiento el responsable o encargado han incurrido en conductas contrarias a la ley y a la Constitución.",
+          "Acceder en forma gratuita a los datos personales propios que hayan sido objeto de tratamiento.",
+        ],
+      },
+    ],
+  },
+  {
+    numeral: "VII",
+    title: "Consultas",
+    blocks: [
+      {
+        type: "p",
+        html: "Los Titulares o sus causahabientes podrán consultar la información personal que repose en cualquier base de datos de CLAP. CLAP o el responsable o encargado de la información suministrará a éstos toda la información contenida en el registro individual o que esté vinculada con la identificación del Titular.",
+      },
+      {
+        type: "p",
+        html: `La consulta se formulará por los Titulares o sus causahabientes de forma escrita, dirigida al siguiente correo electrónico: ${MAIL_LINK}, mencionando información suficiente para identificar los datos del Titular requeridos. CLAP hará constar la fecha de recepción de la misma y se encargará de darle trámite.`,
+      },
+      {
+        type: "p",
+        html: "La consulta será atendida en un término máximo de diez (10) días hábiles contados a partir de la fecha de recibo de la misma. Cuando no fuere posible atender la consulta dentro de dicho término, se informará al interesado, expresando los motivos de la demora y señalando la fecha en que se atenderá su consulta, la cual en ningún caso podrá superar los cinco (5) días hábiles siguientes al vencimiento del primer término.",
+      },
+    ],
+  },
+  {
+    numeral: "VIII",
+    title: "Acceso para revisar, corregir y suprimir información suministrada en el sitio web de CLAP",
+    blocks: [
+      {
+        type: "p",
+        html: "Teniendo en cuenta que CLAP usa la información personal únicamente para los fines y propósitos que fue solicitada, en tanto que sus Titulares dieron su autorización, CLAP tomará medidas razonables para asegurar que dicha información sea utilizada de manera correcta y pertinente de acuerdo al propósito por el cual se recaudó.",
+      },
+      {
+        type: "p",
+        html: `Una de las medidas señaladas consiste en permitir a los usuarios el acceso a la información suministrada mediante el sitio web, para que la puedan revisar, modificar o actualizar según lo consideren necesario o conveniente. Para poderlo hacer, el usuario deberá usar los mecanismos de retroalimentación ofrecidos en el sitio, o ponerse en contacto con CLAP en la siguiente dirección: ${MAIL_LINK}. CLAP podrá, en cualquier momento, solicitar a los usuarios la información impresa para verificar su autenticidad.`,
+      },
+    ],
+  },
+  {
+    numeral: "IX",
+    title: "Reclamos",
+    blocks: [
+      {
+        type: "p",
+        html: "El Titular, o sus causahabientes, que considere que la información contenida en una base de datos debe ser objeto de corrección, actualización o supresión, o cuando adviertan el presunto incumplimiento de cualquiera de los deberes contenidos por la ley, podrán presentar un reclamo ante CLAP o el responsable o encargado de la información, el cual será tramitado bajo las siguientes reglas:",
+      },
+      {
+        type: "p",
+        html: "El reclamo se formulará mediante solicitud dirigida al responsable del tratamiento o al encargado del tratamiento, con la identificación del Titular, la descripción de los hechos que dan lugar al reclamo, la dirección, y acompañando los documentos que se quiera hacer valer. Si el reclamo resulta incompleto, se requerirá al interesado dentro de los cinco (5) días siguientes a la recepción del reclamo para que subsane las fallas. Transcurridos dos (2) meses desde la fecha del requerimiento, sin que el solicitante presente la información requerida, se entenderá que ha desistido del reclamo.",
+      },
+      {
+        type: "p",
+        html: "En caso que, quien reciba el reclamo no sea competente para resolverlo, dará traslado a quien corresponda en un término máximo de dos (2) días hábiles e informará de la situación al interesado.",
+      },
+      {
+        type: "p",
+        html: 'Una vez recibido el reclamo completo, se incluirá en la base de datos una leyenda que diga "reclamo en trámite" y el motivo del mismo, en un término no mayor a dos (2) días hábiles. Dicha leyenda deberá mantenerse hasta que el reclamo sea decidido.',
+      },
+      {
+        type: "p",
+        html: "El término máximo para atender el reclamo será de quince (15) días hábiles contados a partir del día siguiente a la fecha de su recibo. Cuando no fuere posible atender el reclamo dentro de dicho término, se informará al interesado los motivos de la demora y la fecha en que se atenderá su reclamo, la cual en ningún caso podrá superar los ocho (8) días hábiles siguientes al vencimiento del primer término.",
+      },
+    ],
+  },
+  {
+    numeral: "X",
+    title: "Obligaciones y deberes de los usuarios del sitio web de CLAP",
+    blocks: [
+      {
+        type: "p",
+        html: "Las obligaciones, deberes, prácticas mínimas y advertencias que debe cumplir y tener en cuenta el usuario al acceder al Sitio Web de CLAP, son las siguientes:",
+      },
+      {
+        type: "p",
+        html: "El usuario deberá proporcionar a CLAP una información verdadera, precisa, actualizada y completa cuando esta se le solicite para el registro o trámite de un servicio, según se indique en el correspondiente formulario. Adicionalmente, el usuario se compromete a mantener esta información actualizada y completa.",
+      },
+      {
+        type: "p",
+        html: "CLAP se reserva el derecho a retirar sin previa notificación al usuario, cualquier información que se divulgue en el sitio web y que considere nociva o perjudicial para sus intereses o los intereses de terceros. Sin embargo, CLAP no queda obligada a retirar información que cualquier usuario considere ofensiva o lesiva, o a supervisar las conversaciones o diálogos de los usuarios o visitantes del sitio web.",
+      },
+      {
+        type: "p",
+        html: "Cuando el usuario suministre cualquier información a CLAP, el mismo usuario deberá tomar medidas de precaución tendientes a evitar la pérdida o el uso inadecuado de dicha información. En caso de no tomar tales medidas, CLAP no se hará responsable por el uso que terceros puedan hacer de la información que no haya sido debidamente asegurada y protegida por el usuario.",
+      },
+      {
+        type: "p",
+        html: "El usuario se compromete a no recaudar ni divulgar los datos personales o información de los demás usuarios del sitio web de CLAP y que se divulguen a través del mismo, o que reposen en los sistemas de información de CLAP. Tampoco podrá publicarlos en otros sitios web a través de cualquier medio.",
+      },
+      {
+        type: "p",
+        html: "El suministro de información falsa o la omisión de cualquier obligación o deber del usuario establecido en la presente Política, otorga el derecho a CLAP para terminar automáticamente, sin previo aviso y de forma definitiva, la provisión de servicios al usuario.",
+      },
+    ],
+  },
+  {
+    numeral: "XI",
+    title: "Incorporación por remisión",
+    blocks: [
+      {
+        type: "p",
+        html: "Se advierte tanto al visitante como al usuario del sitio web de CLAP que, conforme al Artículo 44 de la Ley 527 de 1999, la presente Política hace parte integrante de las condiciones de uso de este sitio web y se incorpora, por remisión, a las mismas. Por consiguiente, la presente Política y sus términos serán jurídicamente válidos como si hubieran sido incorporados en su totalidad, en el texto de las condiciones de uso del sitio web de CLAP.",
+      },
+    ],
+  },
+  {
+    numeral: "XII",
+    title: "Seguridad",
+    blocks: [
+      {
+        type: "p",
+        html: "CLAP está firmemente empeñada en proteger la información personal que los Titulares le suministren, para ello se han tomado precauciones razonables de seguridad para mantener dicha protección.",
+      },
+      {
+        type: "p",
+        html: "No obstante lo anterior, en el caso del tratamiento y recolección de información a través del sitio web de CLAP, y en atención a los potenciales peligros del internet, CLAP no garantiza que la información suministrada esté completamente a salvo de personas que traten de burlar las medidas de seguridad o de interceptar las transmisiones por Internet. Por lo tanto, el usuario o visitante acepta el potencial riesgo que ello implica.",
+      },
+    ],
+  },
+  {
+    numeral: "XIII",
+    title: "Transferencia de datos a terceros países",
+    blocks: [
+      {
+        type: "p",
+        html: "Según se ha explicado en la presente Política, es posible que la obtención, uso y divulgación de la información personal, requiera la transferencia de dicha información a terceros. Pero cuando esa transferencia deba hacerse a entidades ubicadas en otros países donde no existan normas equivalentes a las de Colombia sobre privacidad y protección de los datos, CLAP le pedirá al titular de la información su consentimiento para efectuar tales transferencias, todo de acuerdo con la presente Política y con sujeción a los requisitos establecidos en la legislación colombiana sobre el particular. CLAP podrá encargar el tratamiento de datos personales a terceros quienes deberán realizarlo bajo esta Política.",
+      },
+    ],
+  },
+  {
+    numeral: "XIV",
+    title: "Término de almacenamiento de la información",
+    blocks: [
+      {
+        type: "p",
+        html: "La información personal suministrada a CLAP será guardada y mantenida durante el tiempo que sea necesario para la prestación eficiente de los servicios solicitados por los Titulares, a menos que éstos hayan dado instrucciones diferentes o, en todo caso, por el periodo de retención contemplado en las leyes aplicables.",
+      },
+    ],
+  },
+  {
+    numeral: "XV",
+    title: "Información recopilada automáticamente a través del sitio web de CLAP",
+    blocks: [
+      { type: "h3", text: "Información no identificable" },
+      {
+        type: "p",
+        html: "Como es usual en muchas páginas web, el servidor del sitio recibe automáticamente cierta información no identificable concerniente a los usuarios de dicha página, tales como: dirección del Protocolo de Internet (IP) de la computadora, dirección del IP del proveedor de servicio de internet, fecha y hora en que ingresó en la página web, dirección de internet de la página desde la que se conectó directamente a nuestra página web, sistema operativo que está usando, secciones de la página web visitadas, páginas leídas e imágenes visualizadas, y cualquier otro contenido que haya enviado o bajado de la página web. CLAP utilizará esta información no identificable sólo con propósitos administrativos o estadísticos, para identificar personas que amenacen su sitio y para mejorar el servicio que brinda la página web.",
+      },
+      { type: "h3", text: "Cookies" },
+      {
+        type: "p",
+        html: "El sitio web de CLAP utiliza cookies, una tecnología mediante la cual se instala información no visible para el usuario en su computadora, a efectos de permitir que ésta reconozca futuras visitas por parte de esa computadora. Las cookies aumentan la conveniencia y mejoran el uso del sitio web.",
+      },
+      {
+        type: "p",
+        html: "CLAP sólo puede leer las cookies que el sitio coloca y no podrá acceder ni leer las que han sido colocadas por otros. Puede ser también que se usen cookies colectivamente para detectar la navegación por el sitio y las tendencias en la circulación. Esta información conjunta y anónima ayudará a mejorar el contenido del sitio y podría ser compartida con los asociados de CLAP o con los terceros indicados en el presente documento.",
+      },
+      {
+        type: "p",
+        html: "Si el usuario está registrado en el sitio de CLAP, cuando entra a él es posible que se le suministre una cookie que su explorador mantiene y que contiene su identificador. Este tipo de cookie, que no suministra información personal, se usa para identificar al usuario y para brindarle acceso a ciertas áreas del sitio de CLAP que están limitadas a usuarios no registrados, tales como las que le permiten ver y manejar su cuenta.",
+      },
+      {
+        type: "p",
+        html: 'El usuario podrá optar por rechazar las cookies colocadas en el sitio web de CLAP si su navegador así lo permite. No obstante, cabe mencionar que eso podría afectar su utilización de la página y su capacidad para acceder a ciertas secciones. Pero si decide registrarse y entrar a ellas, deberá aceptarlas. La mayoría de los exploradores están programados con la opción por defecto para aceptar y mantener cookies. Para obtener más datos sobre las cookies y sobre cómo especificar sus preferencias sobre las mismas, por favor busque cookie en el menú de "Ayuda" de su explorador.',
+      },
+      { type: "h3", text: "Auditoría de visitas (señales en internet)" },
+      {
+        type: "p",
+        html: "A fin de medir el interés y uso del sitio web, este podría usar auditorías de visitas junto con las cookies, las cuales pueden estar incluidas en los mensajes electrónicos con formato web que CLAP envía (o que son enviados en su nombre) a fin de determinar cuáles mensajes electrónicos fueron abiertos y determinar si alguno de ellos dio lugar a una acción. El usuario podrá hacer que algunas de estas señales sean inutilizables, rechazando las cookies con las cuales están asociadas. CLAP no usa estas señales para obtener ninguna información personal.",
+      },
+      { type: "h3", text: "Tendencia de navegación" },
+      {
+        type: "p",
+        html: 'Los "clics de usuario" o los "datos obtenidos de los clics de usuario" reflejan las páginas específicas en internet visitadas por un usuario individual y, lo que es muy importante, la manera o pauta de circulación por la cual un usuario se mueve de una página a otra. CLAP sigue tal información únicamente dentro de su sitio, mas no sigue ninguna actividad de este tipo fuera de las páginas de CLAP en internet.',
+      },
+      {
+        type: "p",
+        html: "Los datos obtenidos de la tendencia de navegación no contienen ni revelan ninguna información personal sobre el usuario, y nosotros no comparamos dichos datos con la información personal que él nos suministra.",
+      },
+    ],
+  },
+  {
+    numeral: "XVI",
+    title: "Cambios en la Política de Tratamiento de Datos de CLAP",
+    blocks: [
+      {
+        type: "p",
+        html: "La presente Política podrá ser modificada en cualquier momento y sin previo aviso por CLAP, por razones de orden legal o institucional, mediando, para tal efecto, una comunicación oportuna en la que se le notificará a los Titulares las modificaciones realizadas, salvo que haya una modificación sustancial a las finalidades de la Política o se realice un cambio en cuanto a los responsables del tratamiento de datos, caso en el cual se informarán dichas modificaciones de manera precisa a los Titulares de información en los términos señalados en la Ley 1581 de 2012 y el Decreto 1377 de 2013.",
+      },
+    ],
+  },
+  {
+    numeral: "XVII",
+    title: "Contáctenos",
+    blocks: [
+      {
+        type: "p",
+        html: `CLAP verificará constantemente el cumplimiento de la presente Política. Si el Titular tiene alguna duda o consulta sobre esta Política, o sobre la obtención, uso y prácticas de divulgación de la información personal por parte de CLAP, puede contactarnos al correo electrónico: ${MAIL_LINK}.`,
+      },
+      {
+        type: "p",
+        html: "Al contactarnos, el Titular deberá indicar que solicita información así como la naturaleza de la misma. CLAP hará un esfuerzo razonable para responder con prontitud las solicitudes, preguntas o inquietudes que el usuario tenga con respecto al uso de su información personal.",
+      },
+      {
+        type: "p",
+        html: "Si el Titular recibe un mensaje de correo electrónico no solicitado, o cualquier mensaje amenazador u ofensivo, o considera que otro usuario o cualquier persona le está vulnerando un derecho conforme a la presente Política, deberá remitirle a CLAP una copia completa y sin modificar del mensaje de correo electrónico recibido, con los encabezados completos a la dirección electrónica arriba indicada. La presente Política se rige por las normas legales colombianas que regulan la materia y cualquier controversia que surja con ocasión del uso de la misma, será dirimida por la jurisdicción ordinaria colombiana.",
+      },
+    ],
+  },
+];
+
+const definitions: { term: string; text: string }[] = [
+  { term: "Titular:", text: "Persona natural cuyos datos personales sean objeto de Tratamiento." },
+  {
+    term: "Responsable del Tratamiento:",
+    text: "Es CLAP o cualquier otra persona natural o jurídica, pública o privada, que por sí misma o en asocio con otros, decida sobre el Tratamiento de los datos.",
+  },
+  {
+    term: "Encargado del Tratamiento:",
+    text: "Persona natural o jurídica, pública o privada, que por sí misma o en asocio con otros realice el Tratamiento de datos personales por cuenta del Responsable del Tratamiento.",
+  },
+  {
+    term: "Autorización:",
+    text: "Consentimiento previo, expreso e informado del Titular para llevar a cabo el tratamiento de datos personales.",
+  },
+  { term: "Base de Datos:", text: "Conjunto organizado de datos personales que sea objeto de Tratamiento." },
+  {
+    term: "Datos personales:",
+    text: "Cualquier información vinculada o que pueda asociarse a una o varias personas naturales determinadas o determinables.",
+  },
+  {
+    term: "Tratamiento:",
+    text: "Cualquier operación o conjunto de operaciones sobre datos personales, tales como la recolección, almacenamiento, uso, circulación o supresión.",
+  },
+  {
+    term: "Sitio Web de CLAP:",
+    text: "Es la página virtual de CLAP la cual se encuentra en la dirección virtual: www.clapedu.org",
+  },
+];
+---
+
+<section class="contenido">
+  <div class="wrap">
+    <p>
+      La Asociación Centro Latinoamericano del Propósito (en adelante "CLAP") es una organización no gubernamental
+      constituida con el fin de formar líderes innovadores para resolver problemas complejos de la sociedad
+      latinoamericana. Para ello desarrollamos programas educativos adaptados al contexto latinoamericano, creamos
+      proyectos que contribuyan al fortalecimiento empresarial, social y tecnológico de la región y colaboramos con
+      la labor educativa, científica e investigativa del sector público, privado y social.
+    </p>
+    <p>
+      Conforme a lo previsto en el Artículo 15 de la Constitución Política de Colombia y en la legislación
+      internacional aplicable sobre protección de datos, CLAP asume el firme compromiso de velar por la debida
+      protección de los derechos de los Titulares de información, así como el de salvaguardar la información
+      personal suministrada por estos. Para lograrlo, ha establecido una POLÍTICA DE TRATAMIENTO DE DATOS DE LA
+      ASOCIACIÓN CENTRO LATINOAMERICANO DEL PROPÓSITO – CLAP (en adelante "la Política").
+    </p>
+    <p>
+      La presente Política de Tratamiento de Datos será aplicable al tratamiento de datos que CLAP recolecte a
+      través de diferentes medios tales como el sitio web de CLAP, formularios de datos o por cualquier otro
+      mecanismo físico o digital. Mediante esta Política se establecen los derechos y responsabilidades de los
+      Titulares de la información, así como los deberes y compromisos de CLAP en la utilización de dicha
+      información.
+    </p>
+    <p>
+      Para tales efectos se define como "información o datos personales" los datos suministrados por los Titulares
+      relacionados con nombres y apellidos, identificación, edad, género, profesión, direcciones, correo
+      electrónico, teléfonos, y demás datos que generalmente se utilizan para identificar a las personas.
+    </p>
+    <p>
+      Con base en lo anterior, los Titulares deben leer previa, detallada y cuidadosamente esta Política. Los
+      términos y condiciones señalados en la presente aplicarán para los datos suministrados físicamente así como a
+      través del sitio web o formularios digitales de CLAP, razón por la cual se recomienda estar al tanto de los
+      mismos antes de utilizar o explorar el sitio web de CLAP. De no estar de acuerdo con la presente Política, los
+      Titulares deberán abstenerse de utilizar el sitio web de CLAP o de proveer sus datos a CLAP.
+    </p>
+
+    <h2>Definiciones</h2>
+    <div class="definitions">
+      {definitions.map((d) => (
+        <p><strong>{d.term}</strong> {d.text}</p>
+      ))}
+    </div>
+
+    {sections.map((section) => (
+      <>
+        <h2><span class="numeral">{section.numeral}.</span> {section.title}</h2>
+        {section.blocks.map((block) =>
+          block.type === "p" ? (
+            <p set:html={block.html} />
+          ) : block.type === "ul" ? (
+            <ul>
+              {block.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <h3>{block.text}</h3>
+          ),
+        )}
+      </>
+    ))}
+
+    <div class="note">
+      <p>
+        En caso de usar una copia impresa de este documento, verificar que el número de versión sea consistente con
+        la versión vigente disponible en el portal web del Centro Latinoamericano del Propósito – CLAP. Esta
+        Política se encuentra vigente desde el 21 de septiembre del año 2018.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contenido {
+    background: #fff;
+    padding: 60px 48px 96px;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .wrap > p {
+    font-size: 16px;
+    line-height: 1.78;
+    color: #4a4463;
+    margin-top: 16px;
+  }
+  .wrap > p:first-child {
+    margin-top: 0;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 23px;
+    color: #341c65;
+    line-height: 1.25;
+    margin-top: 46px;
+    letter-spacing: -0.01em;
+  }
+  .numeral {
+    color: #13b89a;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 17px;
+    color: #341c65;
+    margin-top: 24px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.78;
+    color: #4a4463;
+    margin-top: 16px;
+  }
+  h3 + p {
+    margin-top: 12px;
+  }
+
+  ul {
+    margin: 14px 0 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  li {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #4a4463;
+  }
+
+  .definitions {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #faf7ff;
+    border: 1px solid #ece7f5;
+    border-radius: 18px;
+    padding: 26px 28px;
+  }
+  .definitions p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: #4a4463;
+    margin-top: 0;
+  }
+  .definitions p :global(strong) {
+    color: #341c65;
+  }
+
+  .note {
+    margin-top: 34px;
+    padding: 22px 26px;
+    background: #faf7ff;
+    border: 1px solid #ece7f5;
+    border-radius: 16px;
+  }
+  .note p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #6b6786;
+    margin-top: 0;
+  }
+
+  p :global(.mail-link) {
+    color: #13b89a;
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>

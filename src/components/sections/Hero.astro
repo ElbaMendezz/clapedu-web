@@ -1,0 +1,472 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../../assets/images/hero-comunidad.webp";
+import Aliados from "./Aliados.astro";
+---
+
+<section id="inicio" class="hero">
+  <div class="blob blob--a" aria-hidden="true"></div>
+  <div class="blob blob--b" aria-hidden="true"></div>
+  <div class="blob blob--c" aria-hidden="true"></div>
+  <div class="ring" aria-hidden="true"></div>
+  <div class="ring ring--delay-1" aria-hidden="true"></div>
+  <div class="ring ring--delay-2" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-copy">
+      <h1 class="hero-title">
+        Conviértete en el <span class="highlight">líder</span> que América Latina
+        necesita
+      </h1>
+      <p class="hero-subtitle">
+        Formamos líderes que convierten los desafíos sociales en soluciones
+        reales.
+      </p>
+      <div class="hero-cta">
+        <a href="/programas" class="btn btn--primary">
+          Fórmate en CLAP
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"></path>
+            <path d="M8 7h9v9"></path>
+          </svg>
+        </a>
+        <a href="/#contacto" class="btn btn--secondary">
+          Contáctanos
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"></path>
+            <path d="M8 7h9v9"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-image-frame">
+        <Image src={heroImage} alt="Comunidad CLAP" width={640} height={500} />
+        <div class="hero-image-overlay" aria-hidden="true"></div>
+      </div>
+      <div class="hero-float hero-float--left">
+        <span class="hero-float-icon hero-float-icon--teal">✦</span>
+        <div>
+          <div class="hero-float-title">líderes con proposito</div>
+          <div class="hero-float-subtitle">Comunidades que transforman realidades</div>
+        </div>
+      </div>
+      <div class="hero-float hero-float--right">
+        <span class="hero-float-icon hero-float-icon--purple">✦</span>
+        <div>
+          <div class="hero-float-title">Impacto real</div>
+          <div class="hero-float-subtitle">Cambio colectivo.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-decade">Una década transformando América Latina</div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number" data-count="15000" data-prefix="+">+15.000</div>
+        <div class="stat-label">Personas impactadas</div>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat">
+        <div class="stat-number" data-count="42" data-prefix="+">+42</div>
+        <div class="stat-label">Proyectos</div>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat">
+        <div class="stat-number" data-count="15" data-prefix="+">+15</div>
+        <div class="stat-label">Territorios</div>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat">
+        <div class="stat-number" data-count="150" data-prefix="+">+150</div>
+        <div class="stat-label">Alumnos formados</div>
+      </div>
+    </div>
+  </div>
+
+  <Aliados />
+</section>
+
+<script>
+  import { attachCountUp } from "../../scripts/count-up";
+
+  const hero = document.getElementById("inicio");
+  if (hero) attachCountUp(hero);
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(120deg, #2a1457, #43197c 38%, #3b2a8a 62%, #13b89a);
+    background-size: 220% 220%;
+    animation: clap-gradient-shift 16s ease infinite;
+    padding-top: 96px;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(30px);
+  }
+
+  .blob--a {
+    width: 520px;
+    height: 520px;
+    left: -120px;
+    top: -160px;
+    background: radial-gradient(circle, #3be0bb, transparent 70%);
+    opacity: 0.5;
+    animation: clap-float-a 14s ease-in-out infinite;
+  }
+
+  .blob--b {
+    width: 460px;
+    height: 460px;
+    right: -100px;
+    top: 40px;
+    background: radial-gradient(circle, #7b4dff, transparent 70%);
+    opacity: 0.55;
+    filter: blur(34px);
+    animation: clap-float-b 18s ease-in-out infinite;
+  }
+
+  .blob--c {
+    width: 380px;
+    height: 380px;
+    left: 38%;
+    bottom: -160px;
+    background: radial-gradient(circle, #ffc200, transparent 70%);
+    opacity: 0.26;
+    filter: blur(40px);
+    animation: clap-float-c 20s ease-in-out infinite;
+  }
+
+  .ring {
+    position: absolute;
+    left: 62%;
+    top: 48%;
+    width: 680px;
+    height: 680px;
+    margin: -340px 0 0 -340px;
+    border: 1.5px solid rgba(59, 224, 187, 0.45);
+    border-radius: 50%;
+    animation: clap-ring-pulse 7s ease-out infinite;
+  }
+
+  .ring--delay-1 {
+    border-color: rgba(255, 255, 255, 0.3);
+    animation-delay: 2.3s;
+  }
+
+  .ring--delay-2 {
+    border-color: rgba(59, 224, 187, 0.4);
+    animation-delay: 4.6s;
+  }
+
+  .hero-content {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-areas:
+      "copy   visual"
+      "decade visual"
+      "stats  visual";
+    column-gap: 56px;
+    row-gap: 0;
+    align-items: center;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 56px 48px 64px;
+  }
+
+  .hero-copy {
+    grid-area: copy;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--color-white);
+    margin-bottom: 24px;
+    text-wrap: balance;
+    animation: clap-fade-up-in 0.8s ease 0.08s both;
+  }
+
+  .hero-title .highlight {
+    color: var(--color-teal);
+    text-shadow: 0 0 38px rgba(59, 224, 187, 0.6);
+  }
+
+  .hero-subtitle {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 480px;
+    margin-bottom: 34px;
+    animation: clap-fade-up-in 0.8s ease 0.16s both;
+  }
+
+  .hero-cta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 46px;
+    flex-wrap: wrap;
+    animation: clap-fade-up-in 0.8s ease 0.24s both;
+  }
+
+  .btn {
+    font-family: var(--font-display);
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 46px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .btn--primary {
+    font-weight: 700;
+    color: var(--color-ink);
+    background: var(--color-teal);
+    padding: 16px 32px;
+    box-shadow: 0 16px 40px -12px rgba(59, 224, 187, 0.6);
+    transition: transform 0.2s, gap 0.25s;
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-3px);
+    gap: 13px;
+  }
+
+  .btn--secondary {
+    font-weight: 600;
+    color: var(--color-white);
+    padding: 16px 26px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px);
+    transition: gap 0.25s;
+  }
+
+  .btn--secondary:hover {
+    gap: 15px;
+  }
+
+  .btn--secondary svg {
+    color: var(--color-teal);
+  }
+
+  .hero-decade {
+    grid-area: decade;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+    margin-top: -14px;
+    margin-bottom: 14px;
+    white-space: normal;
+    animation: clap-fade-up-in 0.8s ease 0.3s both;
+  }
+
+  .hero-stats {
+    grid-area: stats;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    animation: clap-fade-up-in 0.8s ease 0.34s both;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--color-white);
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 2px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    flex: none;
+    align-self: stretch;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-visual {
+    grid-area: visual;
+    position: relative;
+    animation: clap-fade-up-in 0.9s ease 0.2s both;
+  }
+
+  .hero-image-frame {
+    position: relative;
+    height: 500px;
+    border-radius: 150px 36px 150px 36px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-image-frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(155deg, rgba(67, 25, 124, 0.4), transparent 45%, rgba(19, 184, 154, 0.28));
+    pointer-events: none;
+  }
+
+  .hero-float {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 15px 19px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    z-index: 2;
+  }
+
+  .hero-float--left {
+    left: -26px;
+    bottom: 54px;
+    animation: clap-bob 5s ease-in-out infinite;
+  }
+
+  .hero-float--right {
+    right: -24px;
+    top: 46px;
+    animation: clap-bob 6s ease-in-out infinite 0.6s;
+  }
+
+  .hero-float-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-family: var(--font-display);
+    flex: none;
+  }
+
+  .hero-float-icon--teal {
+    background: var(--color-teal);
+    color: #0d3256;
+  }
+
+  .hero-float-icon--purple {
+    background: var(--color-ink-strong);
+    color: var(--color-teal);
+  }
+
+  .hero-float-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--color-white);
+  }
+
+  .hero-float-subtitle {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  @media (max-width: 1099.98px) {
+    .hero-title {
+      font-size: 52px;
+    }
+    .hero-image-frame {
+      height: 440px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "copy"
+        "visual"
+        "decade"
+        "stats";
+      gap: 22px;
+      padding: 14px 20px 34px;
+    }
+    .hero-title {
+      font-size: 38px;
+    }
+    .hero-cta {
+      margin-bottom: 6px;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .hero-cta .btn {
+      flex: 1 1 0;
+      min-width: 0;
+      justify-content: center;
+      white-space: nowrap;
+      padding: 14px 10px;
+      font-size: 14px;
+    }
+    .hero-decade {
+      margin-top: 30px;
+      margin-bottom: 6px;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .hero-stats {
+      flex-wrap: nowrap;
+      gap: 7px;
+    }
+    .hero-stats .stat {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+    .stat-number {
+      font-size: 16px;
+      white-space: nowrap;
+    }
+    .stat-label {
+      font-size: 10.5px;
+    }
+    .hero-image-frame {
+      height: 360px;
+    }
+    .hero-float {
+      padding: 9px 14px;
+    }
+    .hero-float--left {
+      left: 8px;
+      bottom: 18px;
+    }
+    .hero-float--right {
+      right: 8px;
+      top: 12px;
+    }
+    .hero-float-icon {
+      width: 34px;
+      height: 34px;
+    }
+  }
+</style>

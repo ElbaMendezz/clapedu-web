@@ -1,0 +1,489 @@
+---
+interface Node {
+  key: string;
+  label: string;
+  modifier: string;
+  iconPaths: string;
+}
+
+const nodes: Node[] = [
+  {
+    key: "LIDERAZGO",
+    label: "LIDERAZGO",
+    modifier: "liderazgo",
+    iconPaths:
+      '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line>',
+  },
+  {
+    key: "SOCIEDAD",
+    label: "SOCIEDAD",
+    modifier: "sociedad",
+    iconPaths:
+      '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
+  },
+  {
+    key: "INNOVACIÓN",
+    label: "INNOVACIÓN",
+    modifier: "innovacion",
+    iconPaths:
+      '<path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>',
+  },
+];
+
+const panels = [
+  {
+    key: "PROPÓSITO",
+    modifier: "proposito",
+    badgeLabel: "el centro · propósito",
+    title: "Propósito",
+    text: 'Es diferente de un objetivo, sueño o meta. Trasciende en el tiempo y en las personas. <strong>El propósito es que el aplauso se realice.</strong>',
+  },
+  {
+    key: "LIDERAZGO",
+    modifier: "liderazgo",
+    badgeLabel: "vértice · liderazgo",
+    title: "Liderazgo",
+    text: 'Es el ejercicio del propósito que un individuo implementa para mejorar la sociedad. <strong>El líder da la primera palmada.</strong>',
+  },
+  {
+    key: "SOCIEDAD",
+    modifier: "sociedad",
+    badgeLabel: "vértice · sociedad",
+    title: "Sociedad",
+    text: 'Es nuestro punto de partida y nuestra meta. En ella identificamos los problemas a resolver, y con ella ideamos las soluciones. <strong>La sociedad es la armonía en el aplauso.</strong>',
+  },
+  {
+    key: "INNOVACIÓN",
+    modifier: "innovacion",
+    badgeLabel: "vértice · innovación",
+    title: "Innovación",
+    text: 'El acto de crear diferentes y mejores maneras de resolver problemas. <strong>Existen múltiples formas de aplaudir que cumplen con el objetivo.</strong>',
+  },
+];
+---
+
+<section id="filosofia">
+  <div class="blob" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="header" data-tri-header>
+      <div class="eyebrow" data-reveal data-delay="0">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>nuestra filosofía</span>
+      </div>
+      <h2 data-reveal data-delay="130">Nuestro <span class="accent">triángulo filosofal</span></h2>
+      <p data-reveal data-delay="260">
+        Todo en CLAP es una metáfora del aplauso. Toca cada concepto para
+        descubrir cómo se conectan.
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="diagram-col" data-reveal="left">
+        <div class="diagram" data-tri-diagram>
+          <svg class="tri-svg" viewBox="0 0 420 380">
+            <polygon points="210,40 380,330 40,330" fill="rgba(123,77,255,.06)" stroke="rgba(123,77,255,.3)" stroke-width="1.5"></polygon>
+          </svg>
+
+          <div class="node node--proposito" data-tri-node="PROPÓSITO">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle>
+            </svg>
+            <span>PROPÓSITO</span>
+          </div>
+
+          {nodes.map((node) => (
+            <div class={`node node--${node.modifier}`} data-tri-node={node.key}>
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={node.iconPaths} />
+              <span>{node.label}</span>
+            </div>
+          ))}
+
+          <div class="hint" data-tri-hint>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7b4dff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0V12"></path>
+              <path d="M14 10.5a2.5 2.5 0 0 1 5 0V14a8 8 0 0 1-8 8h-1a8 8 0 0 1-7-4.5l-1.5-3a2 2 0 0 1 3.5-2L9 14"></path>
+            </svg>
+            <span>Toca cada concepto</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-root" data-reveal="right">
+        {panels.map((panel, i) => (
+          <div class:list={["panel", { "is-active": i === 0 }]} data-tri-panel={panel.key}>
+            <span class={`badge badge--${panel.modifier}`}>{panel.badgeLabel}</span>
+            <h3>{panel.title}</h3>
+            <p set:html={panel.text} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachTriangulo } from "../../scripts/triangulo-filosofal";
+
+  const section = document.querySelector<HTMLElement>("#filosofia");
+  if (section) {
+    const header = section.querySelector<HTMLElement>("[data-tri-header]");
+    const grid = section.querySelector<HTMLElement>(".grid");
+    if (header) attachReveal(header, { threshold: 0.5, repeat: true });
+    if (grid) attachReveal(grid, { rootMargin: "0px 0px -8% 0px", repeat: false });
+    attachTriangulo(section);
+  }
+</script>
+
+<style>
+  section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f6f4fb, #efeaf9);
+    padding: 96px 48px 104px;
+  }
+
+  .blob {
+    position: absolute;
+    width: 460px;
+    height: 460px;
+    right: -150px;
+    top: -120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123, 77, 255, 0.12), transparent 70%);
+    filter: blur(36px);
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    max-width: 740px;
+    margin: 0 auto 56px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    margin-bottom: 18px;
+    background: rgba(123, 77, 255, 0.08);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #43197c;
+    font-weight: 400;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+
+  .header h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.025em;
+    color: #341c65;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  .header h2 .accent {
+    color: #7b4dff;
+  }
+  .header p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #6b6786;
+    margin-top: 12px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .diagram-col {
+    display: flex;
+    justify-content: center;
+  }
+
+  .diagram {
+    position: relative;
+    width: 420px;
+    height: 380px;
+  }
+
+  .tri-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .diagram.is-visible .tri-svg {
+    opacity: 1;
+  }
+
+  .node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    box-sizing: border-box;
+    border: 2.5px solid transparent;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.5, 1), box-shadow 0.35s ease,
+      background 0.35s ease, border-color 0.35s ease, color 0.3s ease;
+  }
+  .node.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .node svg {
+    stroke: currentColor;
+    transition: stroke 0.3s ease;
+  }
+  .node span {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: currentColor;
+    text-align: center;
+    line-height: 1.1;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+  }
+
+  .node--proposito {
+    left: 50%;
+    top: 56%;
+    width: 108px;
+    height: 108px;
+    color: #e8a400;
+    border-color: #e8a400;
+    box-shadow: 0 0 20px rgba(232, 164, 0, 0.33);
+  }
+  .node--proposito span {
+    font-weight: 900;
+    font-size: 13px;
+  }
+  .node--proposito.is-visible.is-active {
+    background: radial-gradient(circle at 35% 30%, #ffd84d, #ffc200 65%, #e8a400);
+    border-color: #e8a400;
+    color: #341c65;
+    box-shadow: 0 0 0 6px rgba(232, 164, 0, 0.13), 0 14px 30px -10px rgba(232, 164, 0, 0.8);
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+
+  .node--liderazgo {
+    left: 50%;
+    top: 34px;
+    width: 92px;
+    height: 92px;
+    color: #13b89a;
+    border-color: #13b89a;
+    box-shadow: 0 0 20px rgba(19, 184, 154, 0.33);
+  }
+  .node--liderazgo span {
+    font-size: 11.5px;
+  }
+  .node--liderazgo.is-visible.is-active {
+    background: #13b89a;
+    color: #fff;
+    box-shadow: 0 0 0 6px rgba(19, 184, 154, 0.13), 0 14px 30px -10px rgba(19, 184, 154, 0.8);
+    transform: translate(-50%, -50%) scale(1.14);
+  }
+
+  .node--sociedad {
+    left: 40px;
+    top: 330px;
+    width: 92px;
+    height: 92px;
+    color: #7b4dff;
+    border-color: #7b4dff;
+    box-shadow: 0 0 20px rgba(123, 77, 255, 0.33);
+  }
+  .node--sociedad span {
+    font-size: 11.5px;
+  }
+  .node--sociedad.is-visible.is-active {
+    background: #7b4dff;
+    color: #fff;
+    box-shadow: 0 0 0 6px rgba(123, 77, 255, 0.13), 0 14px 30px -10px rgba(123, 77, 255, 0.8);
+    transform: translate(-50%, -50%) scale(1.14);
+  }
+
+  .node--innovacion {
+    left: 380px;
+    top: 330px;
+    width: 92px;
+    height: 92px;
+    color: #5b2ea6;
+    border-color: #5b2ea6;
+    box-shadow: 0 0 20px rgba(91, 46, 166, 0.33);
+  }
+  .node--innovacion span {
+    font-size: 10.5px;
+    letter-spacing: 0.01em;
+  }
+  .node--innovacion.is-visible.is-active {
+    background: #43197c;
+    color: #fff;
+    box-shadow: 0 0 0 6px rgba(91, 46, 166, 0.13), 0 14px 30px -10px rgba(91, 46, 166, 0.8);
+    transform: translate(-50%, -50%) scale(1.14);
+  }
+
+  .hint {
+    position: absolute;
+    left: 50%;
+    bottom: -30px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: rgba(123, 77, 255, 0.12);
+    border: 1px solid rgba(123, 77, 255, 0.45);
+    box-shadow: 0 6px 22px -8px rgba(123, 77, 255, 0.5);
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
+    color: #5a1e96;
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    z-index: 4;
+    animation: tri-hint-float 2.6s ease-in-out infinite;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .hint.is-hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  @keyframes tri-hint-float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-6px); }
+  }
+  .hint.is-hidden {
+    animation: none;
+  }
+
+  .panel-root {
+    position: relative;
+    min-height: 300px;
+  }
+
+  .panel {
+    position: absolute;
+    inset: 0;
+    border-radius: 26px;
+    background: #fff;
+    border: 1px solid #ece7f5;
+    padding: 38px 36px;
+    box-shadow: 0 24px 50px -30px rgba(52, 28, 101, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .panel.is-active {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: var(--font-label);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    border-radius: 30px;
+    margin-bottom: 18px;
+  }
+  .badge--proposito {
+    background: #ffc200;
+    color: #341c65;
+  }
+  .badge--liderazgo {
+    background: #13b89a;
+    color: #fff;
+  }
+  .badge--sociedad {
+    background: #7b4dff;
+    color: #fff;
+  }
+  .badge--innovacion {
+    background: #43197c;
+    color: #fff;
+  }
+
+  .panel h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 30px;
+    color: #341c65;
+    margin-bottom: 14px;
+  }
+
+  .panel p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #5b5676;
+  }
+  .panel p :global(strong) {
+    color: #341c65;
+    font-weight: 700;
+  }
+
+  @media (max-width: 1099.98px) {
+    .grid {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .panel-root {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    section {
+      padding: 62px 22px;
+    }
+    .header h2 {
+      font-size: 32px;
+    }
+    .diagram {
+      transform: scale(0.74);
+      margin: -49px -55px;
+    }
+  }
+</style>

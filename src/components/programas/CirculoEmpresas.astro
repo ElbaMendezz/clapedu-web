@@ -1,0 +1,591 @@
+---
+import { programs } from "../../data/programas-tracks";
+import ProgramTabsPanels from "./ProgramTabsPanels.astro";
+
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdUwLTO1qOGkCl3WfXqNKyCaSOjeHKgaUvZsEBmrs-jhco3ZQ/viewform";
+
+interface Benefit {
+  key: string;
+  color: string;
+  iconPaths: string;
+  title: string;
+  desc: string;
+}
+
+const benefits: Benefit[] = [
+  {
+    key: "talento",
+    color: "#E5268E",
+    iconPaths: '<path d="m12 2 2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6L12 2Z"></path>',
+    title: "Fortalece tu talento",
+    desc: "Impulsa el liderazgo de tu equipo con formación aplicada.",
+  },
+  {
+    key: "crecimiento",
+    color: "#13b89a",
+    iconPaths: '<path d="M3 3v18h18"></path><path d="m7 14 4-4 3 3 5-6"></path>',
+    title: "Invierte en crecimiento",
+    desc: "En el desarrollo profesional de colaboradores o beneficiarios.",
+  },
+  {
+    key: "impacto",
+    color: "#2E6FE0",
+    iconPaths: '<circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"></path>',
+    title: "Genera impacto social",
+    desc: "Forma líderes que transforman comunidades e instituciones.",
+  },
+  {
+    key: "proposito",
+    color: "#7B4DFF",
+    iconPaths: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>',
+    title: "Vincula tu propósito",
+    desc: "Haz parte de una red de empresas comprometidas con la región.",
+  },
+];
+---
+
+<section id="empresas-circulo" data-screen-label="Círculo Empresas que Lideran">
+  <div class="blob" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <span class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>Círculo Empresas que Lideran</span>
+      </span>
+      <h2>Sé parte del Círculo: <span class="accent">Empresas que Lideran</span></h2>
+      <p>
+        Las empresas del Círculo impulsan la formación de jóvenes profesionales y líderes sociales con alto
+        potencial de impacto. CLAP cofinancia su formación para que más personas accedan a una educación práctica
+        en liderazgo, innovación social y gestión del desarrollo.
+      </p>
+    </div>
+
+    <div data-circulo-main class="main-grid">
+      <div class="cost-card" data-reveal="left">
+        <div class="cost-blob" aria-hidden="true"></div>
+        <span class="cost-label">¿Cómo funciona?</span>
+        <p class="cost-intro">
+          La empresa patrocina a uno o varios profesionales, internos o externos, para cursar un Programa
+          Especializado de CLAP.
+        </p>
+
+        <div class="price-rows">
+          <div class="price-row price-row--full">
+            <span>Valor del programa</span>
+            <span class="price-value price-value--strike">$6.000.000 COP</span>
+          </div>
+          <div class="price-row price-row--empresa">
+            <span class="price-row-label">Aporte de la empresa</span>
+            <span class="price-value price-value--big">$4.500.000 COP</span>
+          </div>
+          <div class="price-row price-row--clap">
+            <span class="price-row-label">
+              Aporte de CLAP
+              <span class="tag tag--inline">Ahorras</span>
+            </span>
+            <span class="price-value-wrap">
+              <span class="tag tag--stacked" aria-hidden="true">Ahorras</span>
+              <span class="price-value price-value--clap">$1.500.000 COP</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="cert-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6h6"></path><path d="M4 22V4a2 2 0 0 1 2-2h8l6 6v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="m9 15 2 2 4-4"></path></svg>
+          <p>CLAP expide el <b>certificado de donación</b> para acceder a los beneficios tributarios aplicables, conforme a la normatividad vigente.</p>
+        </div>
+      </div>
+
+      <div class="benef-col" data-reveal="right" data-delay="120">
+        <span class="benef-title">¿Por qué unirse?</span>
+        <div class="benef-grid">
+          {benefits.map((b) => (
+            <div class:list={["benef-card", `benef-card--${b.key}`]} data-reveal>
+              <div class="benef-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={b.color} stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" set:html={b.iconPaths} />
+              </div>
+              <h4>{b.title}</h4>
+              <p>{b.desc}</p>
+            </div>
+          ))}
+        </div>
+        <a class="vincular-btn" href={FORM_URL} target="_blank" rel="noopener">
+          Quiero vincular a mi empresa
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+
+    <div data-circulo-progs class="progs">
+      <ProgramTabsPanels programs={programs} ctaLabel="Vincular mi empresa a este programa" ctaHref={FORM_URL} />
+    </div>
+
+    <div class="toggle-wrap">
+      <a href="#" data-circulo-toggle class="toggle-btn">
+        <span data-circulo-toggle-label>Conoce los programas especializados</span>
+        <svg data-circulo-toggle-icon width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachCirculoToggle } from "../../scripts/circulo-toggle";
+
+  const section = document.querySelector<HTMLElement>("#empresas-circulo");
+  if (section) {
+    attachReveal(section, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -12% 0px",
+      repeat: true,
+      duration: 950,
+      distanceY: 46,
+      distanceX: 58,
+      easing: "cubic-bezier(.16,.8,.3,1)",
+    });
+    attachCirculoToggle(section);
+  }
+</script>
+
+<style>
+  #empresas-circulo {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(35deg, rgba(229, 38, 142, 0.3) 0%, rgba(46, 111, 224, 0.28) 16%, rgba(22, 164, 106, 0.2) 33%, transparent 54%),
+      linear-gradient(-35deg, rgba(229, 38, 142, 0.3) 0%, rgba(46, 111, 224, 0.28) 16%, rgba(22, 164, 106, 0.2) 33%, transparent 54%),
+      #ffffff;
+    background-size: 180% 180%, 180% 180%, 100% 100%;
+    animation: circulo-grad 22s ease-in-out infinite;
+    padding: 96px 48px 100px;
+  }
+  @keyframes circulo-grad {
+    0% { background-position: 0% 50%, 0% 50%, 0 0; }
+    50% { background-position: 100% 50%, 100% 50%, 0 0; }
+    100% { background-position: 0% 50%, 0% 50%, 0 0; }
+  }
+
+  .blob {
+    position: absolute;
+    right: -160px;
+    top: -120px;
+    width: 460px;
+    height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(229, 38, 142, 0.08), transparent 68%);
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .head {
+    max-width: 760px;
+    margin: 0 auto 46px;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 17px;
+    border: 1px solid rgba(229, 38, 142, 0.32);
+    border-radius: 40px;
+    background: rgba(229, 38, 142, 0.08);
+  }
+  .eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #e5268e;
+  }
+  .eyebrow span:last-child {
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e5268e;
+    font-weight: 400;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    color: #341c65;
+    line-height: 1.06;
+    letter-spacing: -0.026em;
+    margin-top: 16px;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #e5268e;
+  }
+  .head p {
+    font-size: 16.5px;
+    line-height: 1.62;
+    color: #5b5676;
+    margin-top: 16px;
+  }
+
+  /* ---------- vista "mis beneficios" ---------- */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+  .main-grid.is-hidden {
+    display: none;
+  }
+
+  .cost-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(165deg, #43197c, #2e1258);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 26px;
+    padding: 38px 36px;
+    color: #fff;
+    box-shadow: 0 40px 90px -46px rgba(67, 25, 124, 0.7);
+  }
+  .cost-blob {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(229, 38, 142, 0.3), transparent 70%);
+    pointer-events: none;
+  }
+  .cost-label {
+    position: relative;
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3be0bb;
+    font-weight: 600;
+  }
+  .cost-intro {
+    position: relative;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+    margin-top: 12px;
+  }
+
+  .price-rows {
+    position: relative;
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .price-row--full {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .price-row--empresa {
+    padding: 18px 20px;
+    background: linear-gradient(90deg, rgba(229, 38, 142, 0.28), rgba(229, 38, 142, 0.12));
+  }
+  .price-row--clap {
+    background: rgba(59, 224, 187, 0.12);
+  }
+  .price-row-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .price-value {
+    font-family: var(--font-display);
+    white-space: nowrap;
+  }
+  .price-value--strike {
+    font-weight: 700;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: line-through;
+  }
+  .price-value--big {
+    font-weight: 900;
+    font-size: 24px;
+    color: #fff;
+  }
+  .price-value--clap {
+    font-weight: 900;
+    font-size: 19px;
+    color: #3be0bb;
+  }
+  .price-value-wrap {
+    display: flex;
+    align-items: center;
+  }
+  .tag {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #0c1f1a;
+    background: #3be0bb;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .tag--stacked {
+    display: none;
+  }
+
+  .cert-box {
+    position: relative;
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+    margin-top: 22px;
+    padding: 16px 18px;
+    background: rgba(59, 224, 187, 0.09);
+    border: 1px solid rgba(59, 224, 187, 0.24);
+    border-radius: 14px;
+  }
+  .cert-box svg {
+    flex: none;
+    margin-top: 1px;
+  }
+  .cert-box p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .cert-box p :global(b) {
+    color: #fff;
+  }
+
+  .benef-col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .benef-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    color: #341c65;
+  }
+  .benef-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .benef-card {
+    background: #fff;
+    border: 1px solid rgba(52, 28, 101, 0.08);
+    border-radius: 18px;
+    padding: 22px 20px;
+    box-shadow: 0 24px 54px -38px rgba(52, 28, 101, 0.45);
+    transition: transform 0.38s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.38s, background 0.38s;
+  }
+  .benef-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    transition: transform 0.38s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.38s;
+  }
+  .benef-card--talento .benef-icon {
+    background: rgba(229, 38, 142, 0.12);
+  }
+  .benef-card--crecimiento .benef-icon {
+    background: rgba(19, 184, 154, 0.12);
+  }
+  .benef-card--impacto .benef-icon {
+    background: rgba(46, 111, 224, 0.12);
+  }
+  .benef-card--proposito .benef-icon {
+    background: rgba(123, 77, 255, 0.14);
+  }
+  .benef-card h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: #341c65;
+    line-height: 1.2;
+  }
+  .benef-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #6b6786;
+    margin-top: 6px;
+  }
+  .benef-card svg {
+    transition: stroke 0.38s;
+  }
+  /* Igual que en las tarjetas "why-card" de PorQueClap: al llevar
+     data-reveal, reveal.ts fija transform inline, así que el :hover
+     necesita !important para ganarle. */
+  .benef-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 42px 84px -36px rgba(52, 28, 101, 0.55);
+  }
+  .benef-card--talento:hover {
+    background: linear-gradient(120deg, #b81570, #e5268e);
+    border-color: transparent;
+  }
+  .benef-card--crecimiento:hover {
+    background: linear-gradient(120deg, #0e9e84, #13b89a);
+    border-color: transparent;
+  }
+  .benef-card--impacto:hover {
+    background: linear-gradient(120deg, #1a4fb0, #2e6fe0);
+    border-color: transparent;
+  }
+  .benef-card--proposito:hover {
+    background: linear-gradient(120deg, #5a2b9c, #7b4dff);
+    border-color: transparent;
+  }
+  .benef-card:hover h4,
+  .benef-card:hover p {
+    color: #fff;
+  }
+  .benef-card:hover .benef-icon {
+    transform: scale(1.08) rotate(-4deg);
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+  .benef-card:hover svg {
+    stroke: #fff !important;
+  }
+
+  .vincular-btn {
+    margin-top: auto;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #e5268e;
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15.5px;
+    padding: 16px 30px;
+    border-radius: 44px;
+    text-decoration: none;
+    box-shadow: 0 18px 44px -18px rgba(229, 38, 142, 0.6);
+    transition: transform 0.25s;
+  }
+  .vincular-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  /* ---------- vista "programas especializados" ---------- */
+  .progs {
+    display: none;
+  }
+  .progs.is-open {
+    display: block;
+  }
+
+  .toggle-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 64px auto 8px;
+  }
+  .toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: #341c65;
+    border: 1.5px solid #341c65;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    padding: 15px 30px;
+    border-radius: 44px;
+    text-decoration: none;
+    transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+  .toggle-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(52, 28, 101, 0.06);
+    box-shadow: 0 16px 34px -20px rgba(52, 28, 101, 0.5);
+  }
+  .toggle-btn svg {
+    transition: transform 0.3s;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1099.98px) {
+    .vincular-btn {
+      margin-top: 32px;
+    }
+  }
+  @media (max-width: 879.98px) {
+    .main-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 559.98px) {
+    #empresas-circulo {
+      padding: 52px 20px 54px;
+    }
+    h2 {
+      font-size: 28px;
+    }
+    .benef-col {
+      height: auto;
+    }
+    .vincular-btn {
+      margin-top: 22px;
+    }
+    .price-value--big {
+      font-size: 19px;
+    }
+    .price-row--clap .price-value-wrap {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
+    .price-row--clap .price-value--clap {
+      font-size: 15px;
+    }
+    .price-row--clap .tag--inline {
+      display: none;
+    }
+    .price-row--clap .tag--stacked {
+      display: inline-flex;
+    }
+    .price-row--clap .price-row-label {
+      white-space: normal;
+      line-height: 1.2;
+      flex: 1 1 auto;
+    }
+  }
+  @media (max-width: 479.98px) {
+    .benef-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,163 @@
+---
+interface Props {
+  whatsappHref: string;
+}
+
+const { whatsappHref } = Astro.props;
+---
+
+<div id="mobile-menu" class="mobile-menu" data-mobile-menu>
+  <a href="/#inicio" class="menu-link">Inicio</a>
+
+  <button type="button" class="submenu-btn" data-msub-btn="conocenos">
+    Conócenos
+    <svg
+      class="chevron"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      data-msub-chev="conocenos"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <div class="submenu" data-msub="conocenos">
+    <a href="/sobre-nosotros#que-es" class="submenu-link">Sobre nosotros</a>
+    <a href="/sobre-nosotros#valores" class="submenu-link">Nuestros valores</a>
+    <a href="/sobre-nosotros#filosofia" class="submenu-link">Nuestra filosofía</a>
+    <a href="/sobre-nosotros#historia" class="submenu-link">Nuestra historia</a>
+    <a href="/metodologia" class="submenu-link">Metodología CLAP</a>
+    <a href="/equipo" class="submenu-link submenu-link--last">Equipo de trabajo</a>
+  </div>
+
+  <button type="button" class="submenu-btn" data-msub-btn="educacion">
+    Educación
+    <svg
+      class="chevron"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      data-msub-chev="educacion"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <div class="submenu" data-msub="educacion">
+    <a href="/programas" class="submenu-link">Programas Especializados</a>
+    <a href="/programas#empresas" class="submenu-link submenu-link--last">Programas Especializados Empresas</a>
+  </div>
+
+  <a href="/#contacto" class="menu-link">Contáctanos</a>
+
+  <a href={whatsappHref} target="_blank" rel="noopener" class="menu-cta">
+    Sé voluntario
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"></path>
+      <path d="m12 5 7 7-7 7"></path>
+    </svg>
+  </a>
+</div>
+
+<style>
+  .mobile-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 49;
+    flex-direction: column;
+    gap: 1px;
+    padding: 14px 24px 32px;
+    background: var(--color-menu-mobile-bg);
+    backdrop-filter: blur(14px);
+    overflow-y: auto;
+  }
+
+  .menu-link {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-white);
+    text-decoration: none;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .submenu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-white);
+    text-align: left;
+    padding: 14px 0;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .submenu-btn .chevron {
+    color: var(--color-teal);
+    transition: transform 0.35s ease;
+  }
+
+  .submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0.8, 0.3, 1);
+  }
+
+  .submenu-link {
+    display: block;
+    font-size: 15.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    padding: 10px 0 10px 16px;
+  }
+
+  .submenu-link--last {
+    padding-bottom: 14px;
+  }
+
+  .menu-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+    background: var(--color-teal);
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 15px 22px;
+    border-radius: 40px;
+    text-decoration: none;
+  }
+
+  @media (min-width: 1100px) {
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+</style>

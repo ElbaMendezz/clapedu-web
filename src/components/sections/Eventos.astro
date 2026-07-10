@@ -1,0 +1,358 @@
+---
+import { Image } from "astro:assets";
+import eventTedx from "../../assets/images/event-tedx.jpg";
+import eventPanel from "../../assets/images/event-panel.jpg";
+import eventPanelWhite from "../../assets/images/event-panel-white.jpg";
+import eventNetworking from "../../assets/images/event-networking.jpg";
+
+const events = [
+  {
+    image: eventTedx,
+    alt: "TEDx",
+    badge: { day: "27", month: "FEB" },
+    category: "Charlas",
+    title: "TEDxBucaramanga",
+    description:
+      "Programa de eventos locales con licencia de TED. Líderes y referentes de la ciencia, la educación, el deporte, las artes y los negocios que generan impacto en Santander.",
+    meta: "📍 Bucaramanga · 27 feb 2027",
+    delay: 0,
+  },
+  {
+    image: eventPanel,
+    alt: "Foro Trans-Formación",
+    badge: null,
+    category: "Foro",
+    title: "Foro Trans-Formación",
+    description:
+      "Un evento para explorar los desafíos y apuestas más relevantes en la lucha por la igualdad de género y los derechos de las diversidades sexuales.",
+    meta: "📍 Bucaramanga · Fecha por confirmar",
+    delay: 80,
+  },
+  {
+    image: eventPanelWhite,
+    alt: "Sinergia Social",
+    badge: null,
+    category: "Encuentro",
+    title: "Sinergia Social",
+    description:
+      "Un espacio para conectar empresas sociales, ONGs, fundaciones y organizaciones, compartir experiencias y articular iniciativas que promuevan el desarrollo de la comunidad.",
+    meta: "📍 Bucaramanga · Fecha por confirmar",
+    delay: 160,
+  },
+  {
+    image: eventNetworking,
+    alt: "Congreso Multipartidista",
+    badge: null,
+    category: "Congreso",
+    title: "Congreso Multipartidista",
+    description:
+      "Un espacio para dialogar y co-crear propuestas de ciudad entre actores políticos, líderes juveniles y representantes de la sociedad civil.",
+    meta: "📍 Bucaramanga · Fecha por confirmar",
+    delay: 240,
+  },
+];
+---
+
+<section id="eventos">
+  <div class="container">
+    <div class="header">
+      <div data-reveal>
+        <div class="eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          <span>agenda</span>
+        </div>
+        <h2>Próximos <span class="accent">eventos</span></h2>
+      </div>
+    </div>
+
+    <div class="carousel" data-carousel-root>
+      <div class="track" data-carousel-track>
+        {events.map((event) => (
+          <div class="card" data-reveal data-delay={event.delay}>
+            <div class="card-image">
+              <Image src={event.image} alt={event.alt} width={320} height={180} />
+              {event.badge ? (
+                <span class="date-badge">
+                  <span class="date-day">{event.badge.day}</span>
+                  <span class="date-month">{event.badge.month}</span>
+                </span>
+              ) : (
+                <span class="date-badge date-badge--soon">PRÓXIMAMENTE</span>
+              )}
+            </div>
+            <div class="card-body">
+              <span class="category">{event.category}</span>
+              <h3>{event.title}</h3>
+              <p>{event.description}</p>
+              <div class="meta">{event.meta}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button type="button" class="carousel-arrow carousel-arrow--prev" data-carousel-arrow="prev" aria-label="Anterior">‹</button>
+      <button type="button" class="carousel-arrow carousel-arrow--next" data-carousel-arrow="next" aria-label="Siguiente">›</button>
+
+      <div class="dots" data-carousel-dots>
+        {events.map((_, i) => (
+          <button type="button" class="dot" data-carousel-dot aria-label={`Ir al ${i + 1}`}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachCarousel } from "../../scripts/carousel";
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>("#eventos");
+  if (section) {
+    attachReveal(section);
+    const carouselRoot = section.querySelector<HTMLElement>("[data-carousel-root]");
+    if (carouselRoot) attachCarousel(carouselRoot);
+  }
+</script>
+
+<style>
+  section {
+    background: #f7f7fa;
+    padding: 64px 48px;
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 46px;
+    flex-wrap: wrap;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    background: rgba(123, 77, 255, 0.08);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-ink-strong);
+    font-weight: 600;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+    line-height: 1.05;
+    margin-top: 16px;
+  }
+  h2 .accent {
+    color: var(--color-ink-strong);
+  }
+
+  .carousel {
+    position: relative;
+  }
+
+  .track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+
+  .card {
+    background: var(--color-white);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 50px -30px rgba(52, 28, 101, 0.4);
+  }
+
+  .card-image {
+    position: relative;
+  }
+  .card-image :global(img) {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .date-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--color-white);
+    border-radius: 13px;
+    padding: 6px 11px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .date-day {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--color-ink-strong);
+    line-height: 1;
+  }
+  .date-month {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #9b93bd;
+  }
+  .date-badge--soon {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: #ce6711;
+    padding: 7px 12px;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+  .category {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #13b89a;
+  }
+  .card-body h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--color-ink);
+    margin: 6px 0 8px;
+    line-height: 1.2;
+  }
+  .card-body p {
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .meta {
+    font-size: 13px;
+    color: #8a8699;
+  }
+
+  /* -- Controles de carrusel: solo visibles en móvil -- */
+  .carousel-arrow {
+    display: none;
+    position: absolute;
+    top: 38%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(52, 28, 101, 0.14);
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--color-ink);
+    cursor: pointer;
+    box-shadow: 0 10px 26px -12px rgba(52, 28, 101, 0.5);
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 1;
+    padding: 0;
+  }
+  .carousel-arrow--prev {
+    left: -4px;
+  }
+  .carousel-arrow--next {
+    right: -4px;
+  }
+
+  .dots {
+    display: none;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 22px;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #cdc5e0;
+    cursor: pointer;
+    transition: width 0.3s, background 0.3s, border-radius 0.3s;
+  }
+  .dot.is-active {
+    width: 26px;
+    background: var(--color-ink-strong);
+    border-radius: 5px;
+  }
+
+  @media (max-width: 1099.98px) {
+    .track {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    section {
+      padding: 62px 22px;
+    }
+    h2 {
+      font-size: 32px;
+    }
+    .track {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      touch-action: pan-x;
+      scroll-snap-type: x mandatory;
+      gap: 14px;
+      scroll-behavior: smooth;
+      cursor: grab;
+      scrollbar-width: none;
+      align-items: stretch;
+    }
+    .track::-webkit-scrollbar {
+      display: none;
+    }
+    .track > .card {
+      flex: 0 0 100%;
+      width: 100%;
+      scroll-snap-align: center;
+    }
+    .card:hover {
+      transform: none;
+    }
+    .carousel-arrow,
+    .dots {
+      display: flex;
+    }
+  }
+</style>

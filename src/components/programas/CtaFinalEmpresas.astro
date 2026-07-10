@@ -1,0 +1,141 @@
+---
+const WHATSAPP_EQUIPO = "https://api.whatsapp.com/send/?phone=573114481160&text&type=phone_number&app_absent=0";
+---
+
+<section class="cta-final-empresas" data-screen-label="Empresas · CTA">
+  <div class="ring" aria-hidden="true"></div>
+
+  <div class="content" data-reveal>
+    <h2>Conecta tu organización con la <span class="accent">próxima generación de líderes</span></h2>
+    <p>Profesionales preparados para convertir los desafíos de tu organización en oportunidades reales de crecimiento.</p>
+    <div class="btns">
+      <a class="btn btn--solid" href={WHATSAPP_EQUIPO} target="_blank" rel="noopener">
+        Hablar con el equipo CLAP
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </a>
+      <a class="btn btn--ghost" href="#" data-go="personas">
+        Ver programas para personas
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>(".cta-final-empresas");
+  if (section) {
+    attachReveal(section, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -12% 0px",
+      repeat: true,
+      duration: 950,
+      distanceY: 46,
+      distanceX: 58,
+      easing: "cubic-bezier(.16,.8,.3,1)",
+    });
+  }
+</script>
+
+<style>
+  .cta-final-empresas {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(80% 130% at 12% -10%, rgba(255, 255, 255, 0.95), transparent 58%),
+      radial-gradient(90% 130% at 100% 112%, rgba(229, 38, 142, 0.22), transparent 60%),
+      linear-gradient(150deg, #f7eef6 0%, #f3e6f1 52%, #efdcec 100%);
+    padding: 104px 48px 108px;
+  }
+
+  .ring {
+    position: absolute;
+    right: -110px;
+    top: -90px;
+    width: 360px;
+    height: 360px;
+    border: 1.5px solid rgba(229, 38, 142, 0.24);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .content {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 46px;
+    letter-spacing: -0.026em;
+    color: #341c65;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #e5268e;
+  }
+
+  .content p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #5b5676;
+    margin-top: 20px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 34px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    padding: 17px 34px;
+    border-radius: 44px;
+    text-decoration: none;
+    transition: transform 0.25s, background 0.25s;
+  }
+
+  .btn--solid {
+    font-weight: 800;
+    background: #e5268e;
+    color: #fff;
+    box-shadow: 0 18px 44px -16px rgba(229, 38, 142, 0.6);
+  }
+  .btn--solid:hover {
+    transform: translateY(-3px);
+  }
+
+  .btn--ghost {
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.6);
+    color: #43197c;
+    border: 1px solid rgba(67, 25, 124, 0.2);
+    padding: 17px 32px;
+  }
+  .btn--ghost:hover {
+    background: #fff;
+    transform: translateY(-3px);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 559.98px) {
+    h2 {
+      font-size: 28px;
+    }
+  }
+</style>

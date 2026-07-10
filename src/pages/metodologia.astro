@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/metodologia/Hero.astro";
+import Importancia from "../components/metodologia/Importancia.astro";
+import Fases from "../components/metodologia/Fases.astro";
+import Competencias from "../components/metodologia/Competencias.astro";
+import CtaFinal from "../components/metodologia/CtaFinal.astro";
+---
+
+<BaseLayout
+  title="Metodología"
+  description="Conoce la metodología integral de CLAP: 4 fases de aprendizaje y un modelo de competencias que forma líderes capaces de resolver problemas reales en sus comunidades."
+  path="/metodologia"
+  activeNavLink="metodologia"
+  breadcrumbs={[
+    { name: "Inicio", path: "/" },
+    { name: "Metodología", path: "/metodologia" },
+  ]}
+>
+  <Hero />
+  <Importancia />
+  <Fases />
+  <Competencias />
+  <CtaFinal />
+</BaseLayout>

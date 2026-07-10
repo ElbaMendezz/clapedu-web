@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clapedu.org/sitemap-index.xml

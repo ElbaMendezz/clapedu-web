@@ -1,0 +1,313 @@
+---
+interface Card {
+  href: string;
+  title: string;
+  color: "teal" | "purple" | "orange";
+  delay: number;
+  iconPaths: string;
+}
+
+const cards: Card[] = [
+  {
+    href: "/programas",
+    title: "Educación y liderazgo",
+    color: "teal",
+    delay: 0,
+    iconPaths: '<path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"></path>',
+  },
+  {
+    href: "/#contacto",
+    title: "Desarrollo organizacional",
+    color: "purple",
+    delay: 140,
+    iconPaths: '<rect x="3" y="8" width="7" height="13" rx="1.5"></rect><rect x="14" y="3" width="7" height="18" rx="1.5"></rect>',
+  },
+  {
+    href: "/#contacto",
+    title: "Turismo y desarrollo regional",
+    color: "orange",
+    delay: 280,
+    iconPaths: '<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"></path>',
+  },
+  {
+    href: "/#contacto",
+    title: "Paz territorial",
+    color: "teal",
+    delay: 420,
+    iconPaths: '<path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Z"></path><circle cx="12" cy="9" r="2.5"></circle>',
+  },
+  {
+    href: "/#contacto",
+    title: "Desarrollo socioeconómico",
+    color: "purple",
+    delay: 560,
+    iconPaths: '<path d="M3 17l5-5 4 4 8-8"></path><path d="M16 8h5v5"></path>',
+  },
+  {
+    href: "/#contacto",
+    title: "Desarrollo territorial",
+    color: "orange",
+    delay: 700,
+    iconPaths: '<path d="M3 21V8l9-5 9 5v13"></path><path d="M9 21v-6h6v6"></path>',
+  },
+];
+---
+
+<section id="expertise">
+  <div class="ring" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="intro">
+      <div class="eyebrow" data-reveal>
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>líneas de acción</span>
+      </div>
+      <h2 data-reveal>Nuestra <span class="accent">expertise</span></h2>
+      <p data-reveal data-delay="80">
+        Impulsamos proyectos que conectan <strong class="hl hl--teal">liderazgo</strong>,
+        <strong class="hl hl--purple">innovación social</strong> y
+        <strong class="hl hl--orange">desarrollo territorial</strong><br />para generar
+        impacto sostenible en Colombia.
+      </p>
+    </div>
+
+    <div class="grid">
+      {cards.map((card) => (
+        <a href={card.href} class={`card card--${card.color}`} data-reveal data-reveal-variant="drop" data-delay={card.delay}>
+          <span class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={card.iconPaths} />
+          </span>
+          <h3>{card.title}</h3>
+          <span class="arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"></path><path d="M7 7h10v10"></path>
+            </svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>("#expertise");
+  if (section) attachReveal(section, { rootMargin: "0px 0px -8% 0px", repeat: false });
+</script>
+
+<style>
+  section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #ffffff 0%, #f3f7f6 50%, #e7f4ef 100%);
+    padding: 84px 48px 100px;
+  }
+
+  .ring {
+    position: absolute;
+    right: -120px;
+    top: -80px;
+    width: 360px;
+    height: 360px;
+    border: 2px solid rgba(19, 184, 154, 0.12);
+    border-radius: 50%;
+  }
+
+  .container {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .intro {
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto 52px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    margin-bottom: 18px;
+    background: rgba(123, 77, 255, 0.08);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-ink-strong);
+    font-weight: 400;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+    line-height: 1.08;
+    text-wrap: balance;
+    margin-bottom: 16px;
+  }
+  h2 .accent {
+    color: #13b89a;
+  }
+
+  .intro p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: #5b5676;
+  }
+  .hl--teal {
+    color: #13b89a;
+    font-weight: 700;
+  }
+  .hl--purple {
+    color: rgba(67, 25, 124, 0.92);
+    font-weight: 700;
+  }
+  .hl--orange {
+    color: rgba(206, 103, 17, 0.92);
+    font-weight: 700;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 46px;
+  }
+
+  .card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: 14px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    padding: 14px 16px;
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s, border-color 0.35s;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -20px rgba(52, 28, 101, 0.32);
+    border-color: #e0d8f0;
+  }
+
+  .card--teal { --ac: #13b89a; --ac-bg: rgba(19, 184, 154, 0.12); }
+  .card--purple { --ac: #7b4dff; --ac-bg: rgba(123, 77, 255, 0.12); }
+  .card--orange { --ac: #ce6711; --ac-bg: rgba(206, 103, 17, 0.12); }
+
+  .icon {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ac);
+    background: var(--ac-bg);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card:hover .icon {
+    transform: scale(1.06);
+  }
+
+  .card h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--color-ink-soft);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .arrow {
+    margin-left: auto;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    color: var(--ac);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, color 0.3s ease;
+  }
+  .card:hover .arrow {
+    transform: scale(1.22);
+    background: var(--ac);
+    color: #fff;
+  }
+
+  @media (max-width: 1024px) {
+    section {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .card {
+      min-width: 0;
+      padding: 13px 12px;
+      gap: 10px;
+    }
+    .icon {
+      width: 32px;
+      height: 32px;
+    }
+    .card h3 {
+      font-size: 13px;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .arrow {
+      width: 22px;
+      height: 22px;
+      flex: none;
+      margin-left: 4px;
+    }
+  }
+
+  @media (max-width: 429.98px) {
+    .icon {
+      width: 28px;
+      height: 28px;
+    }
+    .icon svg {
+      width: 15px;
+      height: 15px;
+    }
+    .arrow {
+      width: 20px;
+      height: 20px;
+    }
+    .arrow svg {
+      width: 15px;
+      height: 15px;
+    }
+    .card {
+      padding: 11px 10px;
+      gap: 8px;
+    }
+    .card h3 {
+      font-size: 12px;
+    }
+  }
+</style>

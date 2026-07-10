@@ -1,0 +1,539 @@
+---
+import { Image } from "astro:assets";
+import sedeFachada from "../../assets/images/sede-fachada.jpg";
+import sedeJuntas from "../../assets/images/sede-juntas.jpg";
+import sedeEstar from "../../assets/images/sede-estar.jpg";
+
+const checklistItems = [
+  {
+    label: "Salas de trabajo y espacios de coworking",
+    iconPaths: '<rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 11l3 3 5-5"></path>',
+  },
+  {
+    label: "Auditorio para eventos y talleres",
+    iconPaths: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>',
+  },
+  {
+    label: "Comunidad activa de líderes y emprendedores",
+    iconPaths: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
+  },
+];
+
+const mosaic = [
+  { image: sedeFachada, alt: "Fachada Hub Creativo CLAP", caption: "Fachada principal", tall: true },
+  { image: sedeJuntas, alt: "Sala de juntas", caption: "Sala de juntas Pacífico", tall: false },
+  { image: sedeEstar, alt: "Sala de estar", caption: "Sala de estar", tall: false },
+];
+---
+
+<section id="espacios">
+  <div class="container">
+    <div class="col-left-top">
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>NUESTRO HUB CREATIVO</span>
+      </div>
+      <h2>Trabaja en <span class="accent">nuestros espacios</span></h2>
+      <p>
+        Trae tu equipo a nuestros espacios creativos: ambientes diseñados
+        para colaborar, crear y conectar con una comunidad con propósito.
+      </p>
+    </div>
+
+    <div class="col-right">
+      <a href="/#contacto" class="explore-link">
+        Explora nuestros espacios
+        <span class="explore-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+          </svg>
+        </span>
+      </a>
+
+      <div class="mosaic">
+        {mosaic.map((cell) => (
+          <div class="mosaic-cell" class:list={[{ "mosaic-cell--tall": cell.tall }]} data-lightbox-item>
+            <Image src={cell.image} alt={cell.alt} width={500} height={cell.tall ? 480 : 232} />
+            <div class="mosaic-caption">
+              <span data-lightbox-caption-source>{cell.caption}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="col-left-bottom">
+      <div class="checklist" data-hub-checklist>
+        <div class="checklist-head">
+          <span class="checklist-title">Todo lo que incluye</span>
+          <span class="checklist-done" data-hubdone>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            ¡Completo!
+          </span>
+        </div>
+        <div class="checklist-progress">
+          <div class="checklist-bar" data-hubbar></div>
+        </div>
+        {checklistItems.map((item) => (
+          <div class="checklist-row" data-hubrow>
+            <div class="checklist-row-main">
+              <span class="checklist-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={item.iconPaths} />
+              </span>
+              <span class="checklist-label">{item.label}</span>
+            </div>
+            <span class="checklist-mark">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <a
+        href="https://api.whatsapp.com/send/?phone=3114481160&text&type=phone_number&app_absent=0&utm_source=ig"
+        target="_blank"
+        rel="noopener"
+        class="whatsapp-cta"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
+          <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.219zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.078 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path>
+        </svg>
+        Trae tu equipo · Escríbenos
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" data-lightbox>
+  <button type="button" class="lightbox-close" data-lightbox-close aria-label="Cerrar">✕</button>
+  <button type="button" class="lightbox-nav lightbox-nav--prev" data-lightbox-prev aria-label="Anterior">‹</button>
+  <button type="button" class="lightbox-nav lightbox-nav--next" data-lightbox-next aria-label="Siguiente">›</button>
+  <figure class="lightbox-figure">
+    <img data-lightbox-img alt="" />
+    <figcaption data-lightbox-cap></figcaption>
+  </figure>
+</div>
+
+<script>
+  import { attachHubChecklist } from "../../scripts/hub-checklist";
+  import { attachLightbox } from "../../scripts/lightbox";
+  import { attachEspaciosReveal } from "../../scripts/espacios-reveal";
+
+  const section = document.querySelector<HTMLElement>("#espacios");
+  const lightbox = document.querySelector<HTMLElement>("[data-lightbox]");
+
+  if (section) {
+    const checklist = section.querySelector<HTMLElement>("[data-hub-checklist]");
+    if (checklist) attachHubChecklist(checklist);
+
+    if (lightbox) attachLightbox(section, lightbox);
+
+    const leftItems = Array.from(section.querySelectorAll<HTMLElement>("h2, p, .whatsapp-cta"));
+    const rightItems = Array.from(section.querySelectorAll<HTMLElement>(".explore-link, .mosaic-cell"));
+    attachEspaciosReveal(section, leftItems, rightItems);
+  }
+</script>
+
+<style>
+  section {
+    padding: 96px 48px;
+    background-color: #efeff5;
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 56px;
+    row-gap: 0;
+    align-items: flex-start;
+  }
+
+  /* Desktop: col-left-top y col-left-bottom apilados en la columna 1;
+     col-right ocupa la columna 2 completa. En mobile se reordenan con
+     `order` (ver media query) sin duplicar marcado. */
+  .col-left-top {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .col-left-bottom {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .col-right {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    background: rgba(123, 77, 255, 0.08);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-ink-strong);
+    font-weight: 600;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  .col-left-top h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+    line-height: 1.08;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    text-wrap: balance;
+  }
+  .col-left-top h2 .accent {
+    color: var(--color-ink-strong);
+  }
+  .col-left-top > p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    margin-bottom: 32px;
+    max-width: 440px;
+  }
+
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 36px;
+  }
+  .checklist-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 26px;
+    margin-bottom: 2px;
+  }
+  .checklist-title {
+    font-family: var(--font-label);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-strong);
+    font-weight: 600;
+  }
+  .checklist-done {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transform: translateY(4px) scale(0.9);
+    transition: opacity 0.4s cubic-bezier(0.3, 1.4, 0.5, 1), transform 0.4s cubic-bezier(0.3, 1.4, 0.5, 1);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 12px;
+    color: var(--color-ink);
+    padding: 5px 11px;
+    border-radius: 30px;
+    background-color: #e6e2f6;
+  }
+  .checklist-done.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .checklist-progress {
+    height: 5px;
+    border-radius: 4px;
+    background: #e7e2f2;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .checklist-bar {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #13b89a, var(--color-teal));
+    transition: width 0.55s cubic-bezier(0.4, 0.8, 0.3, 1);
+  }
+
+  .checklist-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 13px;
+    padding: 11px 15px;
+    border-radius: 14px;
+    background: #f4f1fa;
+    transition: background 0.45s ease;
+  }
+  .checklist-row.is-checked {
+    background: #eafaf5;
+  }
+  .checklist-row-main {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+  .checklist-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-teal);
+    color: #fff;
+    flex: none;
+  }
+  .checklist-label {
+    font-size: 15px;
+    color: #4a4663;
+  }
+  .checklist-mark {
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #cfe6dd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .checklist-row.is-checked .checklist-mark {
+    background: #13b89a;
+    border-color: #13b89a;
+  }
+  .checklist-mark svg {
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .checklist-row.is-checked .checklist-mark svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .whatsapp-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background: #25d366;
+    padding: 15px 28px;
+    border-radius: 46px;
+    text-decoration: none;
+    box-shadow: 0 16px 36px -14px rgba(37, 211, 102, 0.6);
+    transition: transform 0.2s;
+  }
+  .whatsapp-cta:hover {
+    transform: translateY(-3px);
+  }
+
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .explore-link {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: gap 0.3s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .explore-link:hover {
+    gap: 18px;
+    transform: translateY(-3px);
+  }
+  .explore-icon {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(123, 77, 255, 0.2);
+    border: 1px solid rgba(123, 77, 255, 0.4);
+    align-items: center;
+    justify-content: center;
+    color: #7b4dff;
+  }
+
+  .mosaic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    height: 480px;
+  }
+  .mosaic-cell {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+  }
+  .mosaic-cell--tall {
+    grid-row: span 2;
+  }
+  .mosaic-cell :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .mosaic-cell:hover :global(img) {
+    transform: scale(1.04);
+  }
+  .mosaic-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .mosaic-caption span {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  /* -- Lightbox -- */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(15, 8, 34, 0.93);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+  }
+  .lightbox.is-open {
+    display: flex;
+  }
+  .lightbox-close,
+  .lightbox-nav {
+    position: absolute;
+    border: none;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .lightbox-close {
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 19px;
+  }
+  .lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    font-size: 28px;
+    line-height: 1;
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .lightbox-nav--prev {
+    left: 10px;
+  }
+  .lightbox-nav--next {
+    right: 10px;
+  }
+  .lightbox-figure {
+    margin: 0;
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .lightbox-figure img {
+    max-width: 100%;
+    max-height: 76vh;
+    border-radius: 18px;
+    object-fit: contain;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+  }
+  .lightbox-figure figcaption {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  @media (max-width: 1099.98px) {
+    .container {
+      grid-template-columns: 1fr;
+    }
+    /* Orden mobile: 1) título+texto, 2) imágenes, 3) checklist+WhatsApp
+       — distinto del orden del DOM (que prioriza lectura sin JS/CSS:
+       título+texto, checklist+CTA, imágenes al final). */
+    .col-left-top {
+      grid-column: 1;
+      grid-row: auto;
+      order: 1;
+    }
+    .col-right {
+      align-self: flex-end;
+      grid-column: 1;
+      grid-row: auto;
+      order: 2;
+    }
+    .col-left-bottom {
+      margin-top: 24px;
+      grid-column: 1;
+      grid-row: auto;
+      order: 3;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    section {
+      padding: 62px 22px;
+    }
+    .col-left-top h2 {
+      font-size: 32px;
+    }
+    .mosaic {
+      height: 380px;
+    }
+  }
+</style>

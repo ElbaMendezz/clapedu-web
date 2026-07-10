@@ -1,0 +1,854 @@
+---
+import { Image } from "astro:assets";
+import faseExplorar from "../../assets/images/metodologia-fase-explorar.webp";
+import faseCrear from "../../assets/images/metodologia-fase-crear.webp";
+import faseActuar from "../../assets/images/metodologia-fase-actuar.webp";
+import faseResolver from "../../assets/images/metodologia-fase-resolver.webp";
+
+interface Tab {
+  modifier: string;
+  num: string;
+  title: string;
+  iconPaths: string;
+}
+
+const tabs: Tab[] = [
+  {
+    modifier: "explorar",
+    num: "fase 01",
+    title: "Explorar",
+    iconPaths: '<circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>',
+  },
+  {
+    modifier: "crear",
+    num: "fase 02",
+    title: "Crear",
+    iconPaths:
+      '<path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.6 1 1.3 1 2.3h6c0-1 .4-1.7 1-2.3A7 7 0 0 0 12 2Z"></path>',
+  },
+  {
+    modifier: "actuar",
+    num: "fase 03",
+    title: "Actuar",
+    iconPaths: '<path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7Z"></path>',
+  },
+  {
+    modifier: "resolver",
+    num: "fase 04",
+    title: "Resolver",
+    iconPaths:
+      '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline>',
+  },
+];
+---
+
+<section class="fases">
+  <div class="ring" aria-hidden="true"></div>
+  <div class="blob" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-reveal data-delay="0">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>el recorrido</span>
+      </div>
+      <h2 data-reveal data-delay="120">Las 4 fases de la <span class="accent">metodología</span></h2>
+      <p data-reveal data-delay="240">
+        Un ciclo continuo: cada fase nos exige aplicar competencias específicas de nuestro modelo.
+        Selecciona una fase para conocerla a fondo.
+      </p>
+    </div>
+
+    <div class="tabs" data-reveal>
+      {tabs.map((tab, i) => (
+        <button
+          type="button"
+          class:list={["tab", `tab--${tab.modifier}`, { "is-active": i === 0 }]}
+          data-phasetab={i}
+        >
+          <span class="tab-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={tab.iconPaths} />
+          </span>
+          <div>
+            <span class="tab-num">{tab.num}</span>
+            <div class="tab-title">{tab.title}</div>
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <div class="stage" data-reveal>
+      <!-- PANEL 0 Explorar -->
+      <div class="panel is-active" data-phasepanel="0">
+        <div class="panel-text">
+          <span class="panel-tag panel-tag--explorar">
+            <span class="panel-tag-dot" aria-hidden="true"></span>
+            fase 01 · explorar
+          </span>
+          <h3>Nos sumergimos en el contexto del problema</h3>
+          <p>
+            El innovador social investiga las necesidades de la comunidad y analiza oportunidades y
+            desafíos. Aquí tomamos decisiones informadas y conectamos a los actores clave del territorio.
+          </p>
+          <div>
+            <div class="comp-label">Competencias que activa</div>
+            <div class="comp-tags">
+              <span class="tag tag--analizar"><span class="tag-dot" aria-hidden="true"></span>Analizar</span>
+              <span class="tag tag--articular"><span class="tag-dot" aria-hidden="true"></span>Articular</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel-media">
+          <Image src={faseExplorar} alt="" width={700} height={600} class="panel-photo" />
+          <div class="panel-media-scrim scrim--explorar" aria-hidden="true"></div>
+          <div class="panel-media-content">
+            <div class="checklist-title">Diagnóstico territorial</div>
+            <div class="check-row"><span class="check-mark">✓</span><span>Mapeo de actores y necesidades</span></div>
+            <div class="check-row"><span class="check-mark">✓</span><span>Escucha activa con la comunidad</span></div>
+            <div class="check-row"><span class="check-mark">✓</span><span>Definición del reto principal</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 1 Crear -->
+      <div class="panel" data-phasepanel="1">
+        <div class="panel-text">
+          <span class="panel-tag panel-tag--crear">
+            <span class="panel-tag-dot" aria-hidden="true"></span>
+            fase 02 · crear
+          </span>
+          <h3>Diseñamos la estrategia y el plan de acción</h3>
+          <p>
+            Definimos objetivos claros alineados con las necesidades identificadas. Es crucial crear
+            sinergias y coordinar recursos de manera efectiva para que la solución sea posible.
+          </p>
+          <div>
+            <div class="comp-label">Competencias que activa</div>
+            <div class="comp-tags">
+              <span class="tag tag--articular"><span class="tag-dot" aria-hidden="true"></span>Articular</span>
+              <span class="tag tag--gestionar"><span class="tag-dot" aria-hidden="true"></span>Gestionar</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel-media panel-media--crear">
+          <Image src={faseCrear} alt="" width={700} height={600} class="panel-photo" />
+          <div class="panel-media-scrim scrim--crear" aria-hidden="true"></div>
+          <div class="panel-media-content">
+            <div class="checklist-title">Tablero de la estrategia</div>
+            <div class="board-grid">
+              <div class="board-card"><div class="board-bar board-bar--teal"></div><div class="board-card-title">Prototipo social</div></div>
+              <div class="board-card"><div class="board-bar board-bar--yellow"></div><div class="board-card-title">Plan de impacto</div></div>
+              <div class="board-card"><div class="board-bar board-bar--white"></div><div class="board-card-title">Aliados clave</div></div>
+              <div class="board-card"><div class="board-bar board-bar--emerald"></div><div class="board-card-title">Presupuesto</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2 Actuar -->
+      <div class="panel" data-phasepanel="2">
+        <div class="panel-text">
+          <span class="panel-tag panel-tag--actuar">
+            <span class="panel-tag-dot" aria-hidden="true"></span>
+            fase 03 · actuar
+          </span>
+          <h3>Convertimos la planificación en acción</h3>
+          <p>
+            Implementamos el plan, aplicamos las estrategias y monitoreamos el progreso. Dirigimos la
+            iniciativa con eficiencia y adaptamos las estrategias en territorio según sea necesario.
+          </p>
+          <div>
+            <div class="comp-label">Competencias que activa</div>
+            <div class="comp-tags">
+              <span class="tag tag--gestionar"><span class="tag-dot" aria-hidden="true"></span>Gestionar</span>
+              <span class="tag tag--intervenir"><span class="tag-dot" aria-hidden="true"></span>Intervenir</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel-media">
+          <Image src={faseActuar} alt="" width={700} height={600} class="panel-photo" />
+          <div class="panel-media-scrim scrim--actuar" aria-hidden="true"></div>
+          <div class="panel-media-content">
+            <div class="action-head">
+              <div class="action-title">Plan de acción</div>
+              <span class="action-badge">En curso</span>
+            </div>
+            <div class="action-row"><span class="action-check">✓</span><span>Conformación del equipo local</span></div>
+            <div class="action-row"><span class="action-check">✓</span><span>Puesta en marcha del piloto</span></div>
+            <div class="action-row"><span class="action-check action-check--soft">✓</span><span>Acompañamiento en campo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3 Resolver -->
+      <div class="panel" data-phasepanel="3">
+        <div class="panel-text">
+          <span class="panel-tag panel-tag--resolver">
+            <span class="panel-tag-dot" aria-hidden="true"></span>
+            fase 04 · resolver
+          </span>
+          <h3>Medimos el impacto y escalamos lo que funciona</h3>
+          <p>
+            Evaluamos el impacto del proyecto, medimos los resultados y los comparamos con los objetivos
+            iniciales. Sistematizamos las lecciones aprendidas para mejorar futuras intervenciones.
+          </p>
+          <div>
+            <div class="comp-label">Competencias que activa</div>
+            <div class="comp-tags">
+              <span class="tag tag--intervenir"><span class="tag-dot" aria-hidden="true"></span>Intervenir</span>
+              <span class="tag tag--analizar"><span class="tag-dot" aria-hidden="true"></span>Analizar</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel-media">
+          <Image src={faseResolver} alt="" width={700} height={600} class="panel-photo" />
+          <div class="panel-media-scrim scrim--resolver" aria-hidden="true"></div>
+          <div class="panel-media-content">
+            <div class="checklist-title">Resultados de impacto</div>
+            <div class="impact-stats">
+              <div><div class="impact-num impact-num--teal">+120</div><div class="impact-label">proyectos en territorio</div></div>
+              <div><div class="impact-num impact-num--yellow">8K</div><div class="impact-label">personas alcanzadas</div></div>
+              <div><div class="impact-num impact-num--white">94%</div><div class="impact-label">continúan liderando</div></div>
+            </div>
+            <div class="impact-bar"><div class="impact-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap" data-reveal>
+      <a
+        class="cta-link"
+        href="https://api.whatsapp.com/send/?phone=3114481160&text&type=phone_number&app_absent=0&utm_source=ig"
+        target="_blank"
+        rel="noopener"
+      >
+        <span class="cta-label">Conoce nuestros proyectos</span>
+        <span class="cta-arrow" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"></path><path d="M7 7h10v10"></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachPhaseStepper } from "../../scripts/phase-stepper";
+
+  const section = document.querySelector<HTMLElement>(".fases");
+  if (section) {
+    attachReveal(section, { threshold: 0.08, rootMargin: "0px 0px -4% 0px", repeat: false, duration: 700 });
+    attachPhaseStepper(section);
+  }
+</script>
+
+<style>
+  .fases {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #ffffff 0%, #f3f1f7 50%, #e9e1f5 100%);
+    padding: 88px 48px 100px;
+  }
+
+  .ring {
+    position: absolute;
+    right: -120px;
+    top: -80px;
+    width: 360px;
+    height: 360px;
+    border: 2px solid rgba(67, 25, 124, 0.12);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .blob {
+    position: absolute;
+    right: -60px;
+    bottom: -80px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(67, 25, 124, 0.13), transparent 70%);
+    filter: blur(30px);
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 46px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    margin-bottom: 16px;
+    background: rgba(123, 77, 255, 0.08);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #43197c;
+    font-weight: 400;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 40px;
+    letter-spacing: -0.025em;
+    color: #341c65;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #7b4dff;
+  }
+  .head p {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: #6b6786;
+    margin-top: 12px;
+  }
+
+  /* ---------- tabs ---------- */
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 38px;
+  }
+
+  .tab {
+    position: relative;
+    text-align: left;
+    border: 1.5px solid rgba(52, 28, 101, 0.13);
+    background: transparent;
+    border-radius: 16px;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #9a93ad;
+    transition: background 0.35s, color 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+  }
+  .tab.is-active {
+    background: #fff;
+    color: #341c65;
+    box-shadow: 0 4px 16px -6px rgba(52, 28, 101, 0.1);
+    transform: translateY(-2px);
+    border-color: rgba(52, 28, 101, 0.06);
+  }
+
+  .tab-icon {
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.35s, color 0.35s, box-shadow 0.35s;
+  }
+  .tab--explorar .tab-icon {
+    background: rgba(240, 98, 146, 0.12);
+    color: #f06292;
+  }
+  .tab--explorar.is-active .tab-icon {
+    background: #f06292;
+    color: #fff;
+    box-shadow: 0 8px 22px -10px rgba(240, 98, 146, 0.7);
+  }
+  .tab--crear .tab-icon {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+  }
+  .tab--crear.is-active .tab-icon {
+    background: #f59e0b;
+    color: #fff;
+    box-shadow: 0 8px 22px -10px rgba(245, 158, 11, 0.7);
+  }
+  .tab--actuar .tab-icon {
+    background: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+  }
+  .tab--actuar.is-active .tab-icon {
+    background: #22c55e;
+    color: #fff;
+    box-shadow: 0 8px 22px -10px rgba(34, 197, 94, 0.7);
+  }
+  .tab--resolver .tab-icon {
+    background: rgba(59, 130, 246, 0.12);
+    color: #3b82f6;
+  }
+  .tab--resolver.is-active .tab-icon {
+    background: #3b82f6;
+    color: #fff;
+    box-shadow: 0 8px 22px -10px rgba(59, 130, 246, 0.7);
+  }
+
+  .tab-num {
+    display: block;
+    font-family: var(--font-label);
+    font-size: 11px;
+    margin-bottom: 3px;
+    opacity: 0.65;
+  }
+  .tab-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---------- stage / panels ---------- */
+  .stage {
+    position: relative;
+    min-height: 380px;
+  }
+
+  .panel {
+    display: none;
+    grid-template-columns: 1.15fr 0.85fr;
+    border-radius: 28px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 34px 80px -44px rgba(52, 28, 101, 0.5);
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .panel.is-active {
+    display: grid;
+  }
+  .panel.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .panel-text {
+    padding: 44px 46px;
+  }
+  .panel-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 6px 14px;
+    border-radius: 30px;
+    margin-bottom: 18px;
+    font-family: var(--font-label);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .panel-tag-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .panel-tag--explorar {
+    background: rgba(240, 98, 146, 0.12);
+    color: #b83470;
+  }
+  .panel-tag--explorar .panel-tag-dot {
+    background: #f06292;
+  }
+  .panel-tag--crear {
+    background: rgba(245, 158, 11, 0.12);
+    color: #b56b00;
+  }
+  .panel-tag--crear .panel-tag-dot {
+    background: #f59e0b;
+  }
+  .panel-tag--actuar {
+    background: rgba(34, 197, 94, 0.12);
+    color: #16843f;
+  }
+  .panel-tag--actuar .panel-tag-dot {
+    background: #22c55e;
+  }
+  .panel-tag--resolver {
+    background: rgba(59, 130, 246, 0.12);
+    color: #1d4ed8;
+  }
+  .panel-tag--resolver .panel-tag-dot {
+    background: #3b82f6;
+  }
+
+  .panel-text h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    color: #341c65;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  .panel-text p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: #6b6786;
+    margin-top: 14px;
+  }
+  .comp-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #9a93ad;
+    margin-bottom: 12px;
+  }
+  .comp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13.5px;
+  }
+  .tag-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .tag--analizar {
+    background: rgba(240, 98, 146, 0.1);
+    border-color: rgba(240, 98, 146, 0.3);
+    color: #b83470;
+  }
+  .tag--analizar .tag-dot {
+    background: #f06292;
+  }
+  .tag--articular {
+    background: rgba(232, 99, 10, 0.1);
+    border-color: rgba(232, 99, 10, 0.3);
+    color: #b84c00;
+  }
+  .tag--articular .tag-dot {
+    background: #e8630a;
+  }
+  .tag--gestionar {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #16843f;
+  }
+  .tag--gestionar .tag-dot {
+    background: #22c55e;
+  }
+  .tag--intervenir {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #2563eb;
+  }
+  .tag--intervenir .tag-dot {
+    background: #3b82f6;
+  }
+
+  /* ---------- panel media ---------- */
+  .panel-media {
+    position: relative;
+    padding: 40px 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .panel-media :global(.panel-photo) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .panel-media--crear :global(.panel-photo) {
+    object-position: center top;
+  }
+  .panel-media-scrim {
+    position: absolute;
+    inset: 0;
+  }
+  .scrim--explorar {
+    background: linear-gradient(155deg, rgba(11, 143, 118, 0.66) 0%, rgba(7, 90, 75, 0.58) 50%, rgba(13, 50, 86, 0.72) 100%);
+  }
+  .scrim--crear {
+    background: linear-gradient(155deg, rgba(94, 44, 204, 0.66) 0%, rgba(67, 25, 124, 0.6) 55%, rgba(13, 50, 86, 0.72) 100%);
+  }
+  .scrim--actuar {
+    background: linear-gradient(155deg, rgba(22, 132, 63, 0.66) 0%, rgba(14, 98, 46, 0.6) 55%, rgba(13, 50, 86, 0.72) 100%);
+  }
+  .scrim--resolver {
+    background: linear-gradient(155deg, rgba(13, 50, 86, 0.72) 0%, rgba(52, 28, 101, 0.64) 55%, rgba(19, 184, 154, 0.55) 100%);
+  }
+  .panel-media-content {
+    position: relative;
+  }
+
+  .checklist-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 16px;
+  }
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .check-row:last-child {
+    border-bottom: none;
+  }
+  .check-mark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: #0b8f76;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex: none;
+  }
+  .check-row span:last-child {
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .board-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+  }
+  .board-card {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 13px;
+    padding: 13px 15px;
+  }
+  .board-bar {
+    width: 28px;
+    height: 6px;
+    border-radius: 4px;
+    margin-bottom: 9px;
+  }
+  .board-bar--teal {
+    background: #3be0bb;
+  }
+  .board-bar--yellow {
+    background: #ffc200;
+  }
+  .board-bar--white {
+    background: #fff;
+  }
+  .board-bar--emerald {
+    background: #13b89a;
+  }
+  .board-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .action-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .action-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+  }
+  .action-badge {
+    font-size: 11px;
+    font-weight: 700;
+    color: #c77a0a;
+    background: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .action-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .action-row:last-child {
+    border-bottom: none;
+  }
+  .action-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    color: #c77a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex: none;
+  }
+  .action-check--soft {
+    background: rgba(255, 255, 255, 0.92);
+  }
+  .action-row span:last-child {
+    font-size: 13.5px;
+    color: #fff;
+  }
+
+  .impact-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .impact-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 28px;
+  }
+  .impact-num--teal {
+    color: #3be0bb;
+  }
+  .impact-num--yellow {
+    color: #ffc200;
+  }
+  .impact-num--white {
+    color: #fff;
+  }
+  .impact-label {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+  .impact-bar {
+    margin-top: 20px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+  }
+  .impact-bar-fill {
+    width: 84%;
+    height: 100%;
+    background: linear-gradient(90deg, #3be0bb, #ffc200);
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 46px;
+  }
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: transform 0.25s;
+  }
+  .cta-link:hover {
+    transform: translateY(-3px);
+  }
+  .cta-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #341c65;
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 17px 32px;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px -18px rgba(52, 28, 101, 0.55);
+  }
+  .cta-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    background: #341c65;
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px -18px rgba(52, 28, 101, 0.55);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 767.98px) {
+    .fases {
+      padding: 62px 22px;
+    }
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 759.98px) {
+    .panel {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 639.98px) {
+    .tabs {
+      gap: 7px;
+    }
+    .tab {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 11px 4px;
+      gap: 7px;
+    }
+    .tab-icon {
+      width: 34px;
+      height: 34px;
+    }
+    .tab-num {
+      display: none;
+    }
+    .tab-title {
+      font-size: 11px;
+    }
+  }
+</style>

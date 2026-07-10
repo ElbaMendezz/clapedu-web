@@ -1,0 +1,516 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import dirigido1 from "../../assets/images/programas-dirigido-1.png";
+import dirigido2 from "../../assets/images/programas-dirigido-2.png";
+import dirigido3 from "../../assets/images/programas-dirigido-3.png";
+import dirigido4 from "../../assets/images/programas-dirigido-4.png";
+
+interface Card {
+  key: string;
+  photo: ImageMetadata;
+  photoAlt: string;
+  badge: "persona" | "empresa";
+  title: string;
+  titleWide?: boolean;
+  desc: string;
+  iconPaths: string;
+  goEmpresas?: boolean;
+}
+
+const cards: Card[] = [
+  {
+    key: "profesionales",
+    photo: dirigido1,
+    photoAlt: "Profesionales",
+    badge: "persona",
+    title: "Profesionales",
+    desc: "Impulsa tu carrera liderando proyectos sociales y de impacto.",
+    iconPaths: '<rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>',
+  },
+  {
+    key: "sector-publico",
+    photo: dirigido2,
+    photoAlt: "Sector público",
+    badge: "empresa",
+    title: "Sector Público",
+    desc: "Genera mejores políticas y soluciones para tu comunidad.",
+    iconPaths: '<path d="M3 21h18"></path><path d="M5 21V10M19 21V10M9 21V10M15 21V10"></path><path d="m12 3 8 5H4l8-5Z"></path>',
+    goEmpresas: true,
+  },
+  {
+    key: "organizaciones-sociales",
+    photo: dirigido3,
+    photoAlt: "Organizaciones sociales",
+    badge: "empresa",
+    title: "Organizaciones Sociales",
+    titleWide: true,
+    desc: "Fortalece tu organización y multiplica tu impacto.",
+    iconPaths:
+      '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>',
+    goEmpresas: true,
+  },
+  {
+    key: "jovenes-lideres",
+    photo: dirigido4,
+    photoAlt: "Jóvenes líderes",
+    badge: "persona",
+    title: "Jóvenes Líderes",
+    desc: "Desarrolla tus habilidades y sé parte generacion del cambio",
+    iconPaths:
+      '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>',
+  },
+];
+
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdUwLTO1qOGkCl3WfXqNKyCaSOjeHKgaUvZsEBmrs-jhco3ZQ/viewform";
+---
+
+<section class="dirigido-a" data-screen-label="Dirigido a">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="ring ring--1" aria-hidden="true"></div>
+  <div class="ring ring--2" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-reveal data-delay="0">
+        <span class="dot" aria-hidden="true"></span>
+        <span>¿Para quienes van dirigidos?</span>
+      </span>
+      <h2 data-reveal data-delay="110" data-dirigidoh2>Diseñado para quienes quieren liderar el cambio</h2>
+      <p data-reveal data-delay="200">
+        Únete a una comunidad diversa que está generando impacto real en América Latina.
+      </p>
+    </div>
+
+    <div class="grid" data-dirigidocards>
+      {cards.map((card, i) => (
+        card.goEmpresas ? (
+          <button
+            type="button"
+            class={`dirigido-card dirigido-card--${card.key}`}
+            data-reveal
+            data-delay={String(i * 150)}
+            data-go="empresas"
+          >
+            <div class="glow" aria-hidden="true"></div>
+            <Image src={card.photo} alt={card.photoAlt} width={480} height={520} class="card-photo" />
+            <div class="scrim" aria-hidden="true"></div>
+            <span class={`badge badge--${card.badge}`}>{card.badge === "persona" ? "Persona" : "Empresa"}</span>
+            <div class="card-content">
+              <div class={`icon-box icon-box--${card.key}`}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" set:html={card.iconPaths} />
+              </div>
+              <h3 class:list={{ "title--wide": card.titleWide }}>{card.title}</h3>
+              <p>{card.desc}</p>
+              <span class="see-programs">
+                Ver programas
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              </span>
+            </div>
+          </button>
+        ) : (
+          <div class={`dirigido-card dirigido-card--${card.key}`} data-reveal data-delay={String(i * 150)}>
+            <div class="glow" aria-hidden="true"></div>
+            <Image src={card.photo} alt={card.photoAlt} width={480} height={520} class="card-photo" />
+            <div class="scrim" aria-hidden="true"></div>
+            <span class={`badge badge--${card.badge}`}>{card.badge === "persona" ? "Persona" : "Empresa"}</span>
+            <div class="card-content">
+              <div class={`icon-box icon-box--${card.key}`}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" set:html={card.iconPaths} />
+              </div>
+              <h3>{card.title}</h3>
+              <p>{card.desc}</p>
+            </div>
+          </div>
+        )
+      ))}
+    </div>
+
+    <div class="footer" data-reveal>
+      <div class="stat-pill">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>Más de <b>150 líderes</b> ya hacen parte de esta comunidad</span>
+      </div>
+      <a class="enroll-cta" data-inscribebtn href={FORM_URL} target="_blank" rel="noopener">
+        Inscribirme a la comunidad
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>(".dirigido-a");
+  if (section) {
+    attachReveal(section, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -12% 0px",
+      repeat: true,
+      duration: 950,
+      distanceY: 46,
+      distanceX: 58,
+      easing: "cubic-bezier(.16,.8,.3,1)",
+    });
+    // Las 2 tarjetas con data-go="empresas" ya las maneja el attachTrackToggle(document)
+    // global de Hero.astro, ver nota en CtaEmpresasBanner.astro.
+  }
+</script>
+
+<style>
+  .dirigido-a {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(85% 62% at 88% -12%, rgba(255, 31, 154, 0.34) 0%, rgba(255, 31, 154, 0) 55%),
+      radial-gradient(72% 56% at 8% -8%, rgba(123, 77, 255, 0.34) 0%, rgba(123, 77, 255, 0) 55%),
+      linear-gradient(180deg, #27124d 0%, #1b0e3a 46%, #160b30 100%);
+    padding: 80px 48px 96px;
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/noise-texture.png");
+    background-size: auto;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .ring--1 {
+    right: -150px;
+    bottom: -150px;
+    width: 520px;
+    height: 520px;
+    border: 1.5px solid rgba(123, 77, 255, 0.14);
+  }
+  .ring--2 {
+    right: -80px;
+    bottom: -80px;
+    width: 360px;
+    height: 360px;
+    border: 1.5px solid rgba(255, 31, 154, 0.1);
+  }
+
+  .wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .head {
+    text-align: center;
+    max-width: 1040px;
+    margin: 0 auto 44px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 17px;
+    border: 1px solid rgba(23, 255, 132, 0.42);
+    border-radius: 40px;
+    background: rgba(23, 255, 132, 0.1);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #17ff84;
+    font-weight: 400;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #17ff84;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 40px;
+    color: #fff;
+    line-height: 1.08;
+    letter-spacing: -0.026em;
+    margin-top: 12px;
+    white-space: nowrap;
+  }
+  .head p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.72);
+    margin-top: 15px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .dirigido-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    min-height: 320px;
+    padding: 26px 24px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+    text-align: left;
+    border-width: 1px;
+    border-style: solid;
+    font-family: inherit;
+  }
+  .dirigido-card :global(.card-photo) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    transition: transform 0.35s;
+  }
+  .dirigido-card:hover :global(.card-photo) {
+    transform: scale(1.03);
+  }
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(18, 9, 38, 0.3) 0%, rgba(18, 9, 38, 0.68) 100%);
+    pointer-events: none;
+  }
+  .glow {
+    position: absolute;
+    left: -30px;
+    top: -30px;
+    width: 180px;
+    height: 180px;
+    pointer-events: none;
+  }
+  .badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 10.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #0c2417;
+    padding: 5px 11px;
+    border-radius: 30px;
+  }
+  .badge--persona {
+    background: #3be0bb;
+  }
+  .badge--empresa {
+    background: #f59e0b;
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .icon-box {
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-content h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.15;
+    margin-top: 20px;
+    max-width: 150px;
+  }
+  .card-content h3.title--wide {
+    max-width: 155px;
+  }
+  .card-content p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 10px;
+    max-width: 150px;
+  }
+  .see-programs {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #fff;
+    padding-top: 16px;
+  }
+
+  /* ---------- per-card colors ---------- */
+  .dirigido-card--profesionales {
+    border-color: rgba(229, 38, 142, 0.32);
+    box-shadow: 0 30px 60px -34px rgba(229, 38, 142, 0.55);
+  }
+  .dirigido-card--profesionales .glow {
+    background: radial-gradient(circle, rgba(229, 38, 142, 0.28), transparent 70%);
+  }
+  .icon-box--profesionales {
+    background: #e5268e;
+  }
+
+  .dirigido-card--sector-publico {
+    border-color: rgba(19, 184, 154, 0.32);
+    box-shadow: 0 30px 60px -34px rgba(19, 184, 154, 0.5);
+    cursor: pointer;
+  }
+  .dirigido-card--sector-publico .glow {
+    background: radial-gradient(circle, rgba(19, 184, 154, 0.26), transparent 70%);
+  }
+  .icon-box--sector-publico {
+    background: #13b89a;
+  }
+
+  .dirigido-card--organizaciones-sociales {
+    border-color: rgba(46, 111, 224, 0.32);
+    box-shadow: 0 30px 60px -34px rgba(46, 111, 224, 0.5);
+    cursor: pointer;
+  }
+  .dirigido-card--organizaciones-sociales .glow {
+    background: radial-gradient(circle, rgba(46, 111, 224, 0.26), transparent 70%);
+  }
+  .icon-box--organizaciones-sociales {
+    background: #2e6fe0;
+  }
+
+  .dirigido-card--jovenes-lideres {
+    border-color: rgba(123, 77, 255, 0.34);
+    box-shadow: 0 30px 60px -34px rgba(123, 77, 255, 0.55);
+  }
+  .dirigido-card--jovenes-lideres .glow {
+    background: radial-gradient(circle, rgba(123, 77, 255, 0.3), transparent 70%);
+  }
+  .icon-box--jovenes-lideres {
+    background: #7b4dff;
+  }
+
+  /* hover: !important necesario — estas tarjetas llevan data-reveal y
+     reveal.ts fija transform inline una vez reveladas (mayor especificidad
+     que cualquier regla de hoja de estilos salvo !important). */
+  .dirigido-card--profesionales:hover {
+    transform: translateY(-9px) scale(1.015) !important;
+    box-shadow: 0 46px 88px -30px rgba(229, 38, 142, 0.62) !important;
+    border-color: rgba(229, 38, 142, 0.68) !important;
+  }
+  .dirigido-card--sector-publico:hover {
+    transform: translateY(-9px) scale(1.015) !important;
+    box-shadow: 0 46px 88px -30px rgba(19, 184, 154, 0.58) !important;
+    border-color: rgba(19, 184, 154, 0.68) !important;
+  }
+  .dirigido-card--organizaciones-sociales:hover {
+    transform: translateY(-9px) scale(1.015) !important;
+    box-shadow: 0 46px 88px -30px rgba(46, 111, 224, 0.58) !important;
+    border-color: rgba(46, 111, 224, 0.68) !important;
+  }
+  .dirigido-card--jovenes-lideres:hover {
+    transform: translateY(-9px) scale(1.015) !important;
+    box-shadow: 0 46px 88px -30px rgba(123, 77, 255, 0.62) !important;
+    border-color: rgba(123, 77, 255, 0.68) !important;
+  }
+
+  /* ---------- footer ---------- */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 34px;
+    margin-top: 34px;
+  }
+  .stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 44px;
+    padding: 12px 26px;
+    backdrop-filter: blur(6px);
+  }
+  .stat-pill span {
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .stat-pill :global(b) {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+  }
+  .enroll-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #17ff84;
+    color: #0c2417;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15.5px;
+    padding: 15px 32px;
+    border-radius: 44px;
+    text-decoration: none;
+    box-shadow: 0 18px 40px -16px rgba(23, 255, 132, 0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .enroll-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 52px -16px rgba(23, 255, 132, 0.7);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 999.98px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 1119.98px) {
+    h2 {
+      white-space: normal;
+    }
+  }
+  @media (max-width: 899.98px) {
+    h2 {
+      font-size: 34px;
+    }
+  }
+  @media (max-width: 619.98px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 559.98px) {
+    .dirigido-a {
+      padding-top: 48px;
+      padding-bottom: 52px;
+    }
+    h2 {
+      font-size: 28px;
+    }
+  }
+</style>

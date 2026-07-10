@@ -1,0 +1,355 @@
+---
+import { Image } from "astro:assets";
+import logoWhite from "../../assets/images/logo-clap-white.png";
+import MobileMenu from "./MobileMenu.astro";
+
+interface Props {
+  /** Resalta en teal el trigger del dropdown correspondiente a la página
+   * actual, igual que el original (presente en sobre-nosotros, equipo y
+   * programas; ausente en metodologia — inconsistencia real del sitio
+   * fuente, no se "corrige" acá, se replica tal cual). */
+  activeDropdown?: "conocenos" | "educacion";
+  /** Resalta el ítem correspondiente a la página actual dentro del panel
+   * desplegado — un indicador separado del trigger (`activeDropdown`), con
+   * su propio patrón por página en el original: "equipo" y "metodologia"
+   * llevan un punto teal + texto teal + fondo teal (mismo estilo que el
+   * hover, pero fijo); "programas" lleva texto teal en negrita sin punto y
+   * con un fondo/hover de opacidad distinta (único ítem de su dropdown).
+   * "sobre-nosotros" deliberadamente no resalta ningún ítem del panel
+   * (verificado en el original: sus 4 anchors del panel no tienen ningún
+   * estilo especial, pese a que el trigger sí está activo) — por eso no
+   * existe como variante aquí. */
+  activeNavLink?: "metodologia" | "equipo" | "programas";
+}
+
+const { activeDropdown, activeNavLink } = Astro.props;
+
+const WHATSAPP_VOLUNTARIO =
+  "https://api.whatsapp.com/send/?phone=3114481160&text&type=phone_number&app_absent=0&utm_source=ig";
+---
+
+<header data-header-root>
+  <nav data-nav aria-label="Principal">
+    <a href="/#inicio" class="logo" aria-label="CLAP — ir al inicio">
+      <Image src={logoWhite} alt="CLAP" height={40} />
+    </a>
+
+    <div class="desktop-nav" data-desktopnav>
+      <a href="/#inicio" class="nav-link">Inicio</a>
+
+      <div class="dropdown" data-dd>
+        <a href="/sobre-nosotros#que-es" class="nav-link dropdown-trigger" class:list={[{ "is-active-page": activeDropdown === "conocenos" }]}>
+          Conócenos
+          <svg
+            class="chevron"
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+        <div class="dropdown-menu">
+          <div class="dropdown-panel">
+            <a href="/sobre-nosotros#que-es">Sobre nosotros</a>
+            <a href="/sobre-nosotros#valores">Nuestros valores</a>
+            <a href="/sobre-nosotros#filosofia">Nuestra filosofía</a>
+            <a href="/sobre-nosotros#historia">Nuestra historia</a>
+            <a href="/metodologia" class:list={[{ "is-active-item": activeNavLink === "metodologia" }]}>
+              {activeNavLink === "metodologia" && <span class="active-dot" aria-hidden="true"></span>}
+              Metodología CLAP
+            </a>
+            <a href="/equipo" class:list={[{ "is-active-item": activeNavLink === "equipo" }]}>
+              {activeNavLink === "equipo" && <span class="active-dot" aria-hidden="true"></span>}
+              Equipo de trabajo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown" data-dd>
+        <a href="/#ecosistema" class="nav-link dropdown-trigger" class:list={[{ "is-active-page": activeDropdown === "educacion" }]}>
+          Educación
+          <svg
+            class="chevron"
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+        <div class="dropdown-menu dropdown-menu--wide">
+          <div class="dropdown-panel">
+            <a href="/programas" class:list={[{ "is-active-item-alt": activeNavLink === "programas" }]}>
+              Programas Especializados CLAP
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="/#contacto" class="nav-link">Contáctanos</a>
+    </div>
+
+    <a
+      href={WHATSAPP_VOLUNTARIO}
+      target="_blank"
+      rel="noopener"
+      class="nav-cta"
+      data-navcta
+    >
+      Sé voluntario
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </a>
+
+    <button
+      type="button"
+      class="burger"
+      data-burger
+      aria-label="Abrir menú"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <MobileMenu whatsappHref={WHATSAPP_VOLUNTARIO} />
+</header>
+
+<script>
+  import { attachBurgerMenu } from "../../scripts/burger-menu";
+  import { attachMobileSubmenuAccordion } from "../../scripts/mobile-submenu-accordion";
+  import { attachNavScrollShrink } from "../../scripts/nav-scroll-shrink";
+
+  const header = document.querySelector<HTMLElement>("[data-header-root]");
+  if (header) {
+    attachBurgerMenu(header);
+    attachMobileSubmenuAccordion(header);
+    const nav = header.querySelector<HTMLElement>("[data-nav]");
+    if (nav) attachNavScrollShrink(nav);
+  }
+</script>
+
+<style>
+  header {
+    position: relative;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 48px;
+    background: transparent;
+    backdrop-filter: none;
+    transition: background 0.35s, backdrop-filter 0.35s, box-shadow 0.35s;
+  }
+
+  nav.is-scrolled {
+    background: var(--color-nav-scrolled-bg);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px -22px rgba(0, 0, 0, 0.6);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    flex: none;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.92);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: var(--color-teal);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .chevron {
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+  }
+
+  .dropdown:hover .dropdown-trigger,
+  .dropdown-trigger.is-active-page {
+    color: var(--color-teal);
+  }
+  .dropdown-trigger.is-active-page {
+    font-weight: 600;
+  }
+
+  .dropdown:hover .chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    padding-top: 16px;
+    min-width: 260px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.26s ease, transform 0.26s ease;
+  }
+
+  .dropdown-menu--wide {
+    min-width: 320px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-panel {
+    background: rgba(12, 10, 26, 0.55);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    padding: 9px;
+    box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .dropdown-panel a {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding: 10px 13px;
+    border-radius: 10px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .dropdown-panel a:hover {
+    background: rgba(59, 224, 187, 0.14);
+    color: var(--color-teal);
+  }
+
+  .dropdown-panel a.is-active-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--color-teal);
+    background: rgba(59, 224, 187, 0.14);
+  }
+  .active-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+    flex: none;
+  }
+
+  .dropdown-panel a.is-active-item-alt {
+    color: var(--color-teal);
+    font-weight: 600;
+    background: rgba(59, 224, 187, 0.12);
+  }
+  .dropdown-panel a.is-active-item-alt:hover {
+    background: rgba(59, 224, 187, 0.2);
+  }
+
+  .nav-cta {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13.5px;
+    padding: 11px 22px;
+    border-radius: 40px;
+    text-decoration: none;
+    box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.32);
+    transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+
+  .nav-cta:hover {
+    transform: scale(1.05);
+    background: var(--color-teal);
+    box-shadow: 0 16px 32px -14px rgba(59, 224, 187, 0.55);
+  }
+
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 51;
+  }
+
+  .burger span {
+    width: 24px;
+    height: 2px;
+    background: var(--color-white);
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.6, 0.2, 0.2, 1), opacity 0.2s ease;
+  }
+
+  @media (max-width: 1099.98px) {
+    .desktop-nav,
+    .nav-cta {
+      display: none;
+    }
+    .burger {
+      display: flex;
+    }
+    nav {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+</style>

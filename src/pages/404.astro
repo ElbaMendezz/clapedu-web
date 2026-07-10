@@ -1,0 +1,215 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Página no encontrada"
+  description="La página que buscas no existe o fue movida. Vuelve al inicio de CLAP — Centro Latinoamericano del Propósito."
+  path="/404"
+  noindex
+>
+  <section class="not-found">
+    <div class="blob blob--a" aria-hidden="true"></div>
+    <div class="blob blob--b" aria-hidden="true"></div>
+    <div class="ring" aria-hidden="true"></div>
+
+    <div class="content">
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>Error 404</span>
+      </div>
+      <p class="code">404</p>
+      <h1>Esta página <span class="accent">no existe</span></h1>
+      <p class="text">
+        El enlace que seguiste puede estar roto, o la página fue movida. Vuelve al inicio para
+        seguir explorando cómo formamos líderes en Latinoamérica.
+      </p>
+      <div class="cta">
+        <a href="/" class="btn btn--primary">
+          Volver al inicio
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"></path>
+            <path d="M8 7h9v9"></path>
+          </svg>
+        </a>
+        <a href="/programas" class="btn btn--secondary">
+          Ver programas
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"></path>
+            <path d="M8 7h9v9"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(120deg, #2a1457, #43197c 38%, #3b2a8a 62%, #13b89a);
+    background-size: 220% 220%;
+    animation: clap-gradient-shift 16s ease infinite;
+    padding: 160px 48px 96px;
+    text-align: center;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .blob--a {
+    width: 460px;
+    height: 460px;
+    left: -140px;
+    top: -120px;
+    background: radial-gradient(circle, #3be0bb, transparent 70%);
+    opacity: 0.4;
+    filter: blur(34px);
+    animation: clap-float-a 14s ease-in-out infinite;
+  }
+  .blob--b {
+    width: 420px;
+    height: 420px;
+    right: -120px;
+    bottom: -140px;
+    background: radial-gradient(circle, #7b4dff, transparent 70%);
+    opacity: 0.45;
+    filter: blur(36px);
+    animation: clap-float-b 18s ease-in-out infinite;
+  }
+
+  .ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 620px;
+    height: 620px;
+    margin: -310px 0 0 -310px;
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .content {
+    position: relative;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.4);
+    border-radius: 40px;
+    margin-bottom: 28px;
+    background: rgba(59, 224, 187, 0.1);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  .code {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 130px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--color-white);
+    text-shadow: 0 0 60px rgba(59, 224, 187, 0.45);
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-white);
+    text-wrap: balance;
+  }
+  h1 .accent {
+    color: var(--color-teal);
+  }
+
+  .text {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 18px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15.5px;
+    padding: 15px 28px;
+    border-radius: 46px;
+    text-decoration: none;
+    transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+
+  .btn--primary {
+    color: var(--color-ink);
+    background: var(--color-teal);
+    box-shadow: 0 16px 36px -14px rgba(59, 224, 187, 0.6);
+  }
+  .btn--primary:hover {
+    transform: translateY(-3px);
+  }
+
+  .btn--secondary {
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px);
+  }
+  .btn--secondary:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 559.98px) {
+    .not-found {
+      padding: 120px 22px 72px;
+    }
+    .code {
+      font-size: 88px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+  }
+</style>

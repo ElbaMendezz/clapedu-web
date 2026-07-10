@@ -1,0 +1,461 @@
+---
+const WHATSAPP_EQUIPO = "https://api.whatsapp.com/send/?phone=3114481160&text&type=phone_number&app_absent=0&utm_source=ig";
+
+interface DevItem {
+  iconPaths: string;
+  label: string;
+  delay: number;
+  wide?: boolean;
+}
+
+const devItems: DevItem[] = [
+  {
+    iconPaths: '<circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>',
+    label: "Estrategias de liderazgo y fortalecimiento organizacional",
+    delay: 0,
+  },
+  {
+    iconPaths:
+      '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>',
+    label: "Proyectos de impacto comunitario",
+    delay: 90,
+  },
+  {
+    iconPaths:
+      '<path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.6 1 1.3 1 2.3h6c0-1 .4-1.7 1-2.3A7 7 0 0 0 12 2Z"></path>',
+    label: "Procesos de innovación social",
+    delay: 180,
+  },
+  {
+    iconPaths: '<path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-6h6v6"></path>',
+    label: "Modelos de gestión y mejora institucional",
+    delay: 270,
+  },
+  {
+    iconPaths:
+      '<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>',
+    label: "Soluciones adaptadas a las necesidades de tu organización",
+    delay: 360,
+    wide: true,
+  },
+];
+
+interface InvItem {
+  iconPaths: string;
+  delay: number;
+  html: string;
+  wide?: boolean;
+}
+
+const invItems: InvItem[] = [
+  {
+    iconPaths:
+      '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>',
+    delay: 0,
+    html: 'Equipo de <b>tres profesionales</b>',
+  },
+  {
+    iconPaths: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>',
+    delay: 110,
+    html: 'Duración: <b>3 meses</b>',
+  },
+  {
+    iconPaths: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path>',
+    delay: 220,
+    html: "Vinculación formal de los participantes, cobertura durante la práctica y acompañamiento del equipo de mentores",
+    wide: true,
+  },
+];
+---
+
+<section id="empresas-laboratorio" data-screen-label="Laboratorio de Innovación">
+  <div class="ring" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <span class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>Laboratorio de Innovación Organizacional</span>
+      </span>
+      <h2>Convierte un desafío en un <span class="accent">proyecto de transformación</span></h2>
+      <p>
+        Tu organización recibirá un equipo de tres profesionales de los Programas Especializados que trabajará
+        exclusivamente en un proyecto de mejora, con el acompañamiento de mentores CLAP y metodologías de
+        innovación social.
+      </p>
+    </div>
+
+    <div class="lab-grid">
+      <div class="lab-col" data-reveal="left">
+        <div class="dev-card">
+          <span class="dev-title">¿Qué puede desarrollar el equipo?</span>
+          <div class="dev-grid">
+            {devItems.map((item) => (
+              <div class:list={["dev-item", { "dev-item--wide": item.wide }]} data-reveal data-delay={item.delay}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={item.iconPaths} />
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="receive-card">
+          <span class="receive-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"></path><path d="M2 7h20v5H2z"></path><path d="M12 22V7"></path><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7Z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z"></path></svg>
+            ¿Qué recibe tu organización?
+          </span>
+          <p>
+            Tres profesionales trabajando durante tres meses en un proyecto estratégico, con acompañamiento
+            metodológico permanente y sin que tu equipo asuma procesos de formación o supervisión académica. CLAP
+            se encarga del seguimiento, la mentoría y el acompañamiento durante toda la experiencia.
+          </p>
+        </div>
+      </div>
+
+      <div class="inv-card" data-reveal="right" data-delay="120">
+        <div class="inv-blob" aria-hidden="true"></div>
+        <span class="inv-label">Inversión</span>
+        <div class="inv-price">
+          <span class="inv-value">$3.000.000</span>
+          <span class="inv-currency">COP</span>
+          <span class="inv-period">/ trimestre</span>
+        </div>
+        <div class="inv-divider"></div>
+        <div class="inv-items">
+          {invItems.map((item) => (
+            <div class:list={["inv-item", { "inv-item--wide": item.wide }]} data-reveal data-delay={item.delay}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6fa0ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" set:html={item.iconPaths} />
+              <span set:html={item.html} />
+            </div>
+          ))}
+        </div>
+        <div class="cert-box">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6h6"></path><path d="M4 22V4a2 2 0 0 1 2-2h8l6 6v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="m9 15 2 2 4-4"></path></svg>
+          <p>CLAP expide el <b>certificado de donación</b> para acceder a los beneficios tributarios aplicables.</p>
+        </div>
+        <a class="inv-cta" href={WHATSAPP_EQUIPO} target="_blank" rel="noopener">
+          Quiero un equipo en mi empresa
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>("#empresas-laboratorio");
+  if (section) {
+    attachReveal(section, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -12% 0px",
+      repeat: true,
+      duration: 950,
+      distanceY: 46,
+      distanceX: 58,
+      easing: "cubic-bezier(.16,.8,.3,1)",
+    });
+  }
+</script>
+
+<style>
+  #empresas-laboratorio {
+    background: radial-gradient(110% 90% at 90% 8%, #16305e 0%, transparent 55%), #160b30;
+    padding: 96px 48px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ring {
+    position: absolute;
+    left: -90px;
+    bottom: -70px;
+    width: 300px;
+    height: 300px;
+    border: 1.5px solid rgba(46, 111, 224, 0.16);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .head {
+    max-width: 760px;
+    margin: 0 auto 46px;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 17px;
+    border: 1px solid rgba(46, 111, 224, 0.42);
+    border-radius: 40px;
+    background: rgba(46, 111, 224, 0.12);
+  }
+  .eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #6fa0ff;
+  }
+  .eyebrow span:last-child {
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #6fa0ff;
+    font-weight: 400;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    color: #fff;
+    line-height: 1.06;
+    letter-spacing: -0.026em;
+    margin-top: 16px;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #6fa0ff;
+  }
+  .head p {
+    font-size: 16.5px;
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 16px;
+  }
+
+  .lab-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .lab-col {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .dev-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    padding: 30px 32px;
+  }
+  .dev-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    color: #fff;
+  }
+  .dev-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .dev-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+  }
+  .dev-item--wide {
+    grid-column: span 2;
+  }
+  .dev-item svg {
+    flex: none;
+    margin-top: 2px;
+  }
+  .dev-item span {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .receive-card {
+    background: linear-gradient(120deg, #1e093a, #5b29a0);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 22px;
+    padding: 30px 32px;
+  }
+  .receive-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    color: #fff;
+  }
+  .receive-title svg {
+    flex: none;
+  }
+  .receive-card p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+    margin-top: 12px;
+  }
+
+  .inv-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 24px;
+    padding: 34px;
+    position: relative;
+    overflow: hidden;
+  }
+  .inv-blob {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46, 111, 224, 0.28), transparent 70%);
+    pointer-events: none;
+  }
+  .inv-label {
+    position: relative;
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6fa0ff;
+    font-weight: 500;
+  }
+  .inv-price {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .inv-value {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    color: #fff;
+    line-height: 1;
+  }
+  .inv-currency {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 700;
+  }
+  .inv-period {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+  }
+  .inv-divider {
+    position: relative;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.14);
+    margin: 24px 0;
+  }
+  .inv-items {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .inv-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .inv-item--wide {
+    align-items: flex-start;
+  }
+  .inv-item svg {
+    flex: none;
+  }
+  .inv-item--wide svg {
+    margin-top: 2px;
+  }
+  .inv-item span {
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .inv-item--wide span {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .inv-item span :global(b) {
+    color: #fff;
+  }
+
+  .cert-box {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 22px;
+    padding: 15px 17px;
+    background: rgba(59, 224, 187, 0.09);
+    border: 1px solid rgba(59, 224, 187, 0.24);
+    border-radius: 14px;
+  }
+  .cert-box svg {
+    flex: none;
+    margin-top: 1px;
+  }
+  .cert-box p {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .cert-box p :global(b) {
+    color: #fff;
+  }
+
+  .inv-cta {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 22px;
+    background: #2e6fe0;
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15.5px;
+    padding: 16px;
+    border-radius: 14px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.25s;
+  }
+  .inv-cta:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 879.98px) {
+    .lab-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 559.98px) {
+    #empresas-laboratorio {
+      padding: 52px 20px 54px;
+    }
+    h2 {
+      font-size: 28px;
+    }
+    .dev-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

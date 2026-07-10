@@ -1,0 +1,202 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../../assets/images/hero-metodologia-analisis.webp";
+---
+
+<section class="hero">
+  <div class="media">
+    <Image src={heroImage} alt="Metodología CLAP" width={1920} height={1080} class="hero-img" />
+    <div class="scrim scrim--h" aria-hidden="true"></div>
+    <div class="scrim scrim--v" aria-hidden="true"></div>
+  </div>
+  <div class="ring" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="eyebrow" data-reveal data-delay="80">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      <span>conócenos · metodología</span>
+    </div>
+    <h1 data-reveal data-delay="200">Conoce nuestra <span class="accent">metodología</span></h1>
+    <p data-reveal data-delay="340">
+      En CLAP creemos que la educación es la herramienta más poderosa para
+      transformar realidades. Por eso desarrollamos una metodología
+      integral y dinámica que no solo enseña, sino que empodera a los
+      líderes sociales para resolver problemas reales en sus comunidades.
+    </p>
+    <div class="cta-row" data-reveal data-delay="480">
+      <a href="#fases" class="cta cta--primary">
+        Explorar las 4 fases
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14"></path><path d="m5 12 7 7 7-7"></path>
+        </svg>
+      </a>
+      <a href="#competencias" class="cta cta--ghost">
+        El modelo de competencias
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14"></path><path d="m5 12 7 7 7-7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>(".hero");
+  if (section) {
+    attachReveal(section, { threshold: 0.08, rootMargin: "0px 0px -4% 0px", repeat: false, duration: 700 });
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: #1a0f36;
+    display: flex;
+    align-items: center;
+    min-height: 720px;
+    padding: 150px 48px 90px;
+  }
+
+  .media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 72% 72%;
+    display: block;
+  }
+  .scrim {
+    position: absolute;
+    inset: 0;
+  }
+  .scrim--h {
+    background: linear-gradient(90deg, rgba(20, 11, 42, 0.92) 0%, rgba(26, 15, 54, 0.7) 48%, rgba(20, 11, 42, 0.32) 80%, rgba(20, 11, 42, 0.2) 100%);
+  }
+  .scrim--v {
+    background: linear-gradient(180deg, rgba(22, 12, 46, 0.45) 0%, transparent 30%, transparent 60%, rgba(15, 8, 38, 0.6) 100%);
+  }
+
+  .ring {
+    position: absolute;
+    right: -120px;
+    top: 80px;
+    width: 360px;
+    height: 360px;
+    border: 1.5px solid rgba(59, 224, 187, 0.18);
+    border-radius: 50%;
+    z-index: 0;
+    animation: clap-float-a 18s ease-in-out infinite;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.4);
+    border-radius: 40px;
+    margin-bottom: 22px;
+    background: rgba(59, 224, 187, 0.1);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #3be0bb;
+    font-weight: 400;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: #fff;
+    text-wrap: balance;
+    max-width: 820px;
+  }
+  h1 .accent {
+    color: #3be0bb;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 22px;
+    max-width: 600px;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14.5px;
+    padding: 13px 26px;
+    border-radius: 40px;
+    text-decoration: none;
+  }
+  .cta--primary {
+    background: #3be0bb;
+    color: #0c1f1a;
+    box-shadow: 0 16px 36px -16px rgba(59, 224, 187, 0.6);
+    transition: transform 0.25s;
+  }
+  .cta--primary:hover {
+    transform: translateY(-3px);
+  }
+  .cta--ghost {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    transition: background 0.25s;
+  }
+  .cta--ghost:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 767.98px) {
+    .hero {
+      min-height: 0;
+      padding: 120px 22px 64px;
+    }
+    h1 {
+      font-size: 38px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+</style>

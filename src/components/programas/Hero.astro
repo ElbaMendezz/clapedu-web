@@ -1,0 +1,685 @@
+---
+import { Image } from "astro:assets";
+import bgAprender from "../../assets/images/programas-bg-aprender.webp";
+---
+
+<section class="hero">
+  <Image src={bgAprender} alt="" width={1800} height={1200} class="bg-photo" />
+  <div class="blob blob--blue" aria-hidden="true"></div>
+  <div class="blob blob--green" aria-hidden="true"></div>
+  <div class="blob blob--pink" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scrim" aria-hidden="true"></div>
+
+  <div class="toggle-wrap" data-reveal data-delay="0">
+    <div class="toggle-pill" data-audtoggle>
+      <button type="button" class="track-btn is-active" data-trackbtn="personas" data-go="personas">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        Para personas
+      </button>
+      <button type="button" class="track-btn" data-trackbtn="empresas" data-go="empresas">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21h18M6 21V7l7-4v18M13 21V9l5 3v9"></path><path d="M9 9h.01M9 13h.01M9 17h.01"></path>
+        </svg>
+        Para empresas
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-grid" data-herogrid>
+    <div class="text-col">
+      <div class="herovar" data-herovar="personas">
+        <div class="eyebrow eyebrow--personas" data-reveal data-delay="80">
+          <span class="pulse-dot" aria-hidden="true">
+            <span class="pulse-dot-ring"></span>
+            <span class="pulse-dot-core"></span>
+          </span>
+          <span>Programas Especializados · Clap 2026</span>
+        </div>
+        <h1 data-reveal data-delay="180">Aprende a <span class="accent accent--personas">liderar el cambio</span>. Hazlo en un solo semestre.</h1>
+        <p data-reveal data-delay="280" data-heropara="personas">
+          Desarrolla las habilidades que hoy necesitan las organizaciones sociales, las entidades públicas
+          y los líderes comunitarios para generar impacto real.
+        </p>
+
+        <div class="facts" data-reveal data-delay="380">
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+            <div><div class="fact-title">20 semanas</div><div class="fact-sub">430 horas</div></div>
+          </div>
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>
+            <div><div class="fact-title">Modalidad remota</div><div class="fact-sub">Intensivo semestral</div></div>
+          </div>
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+            <div><div class="fact-title">3 de agosto</div><div class="fact-sub">Inicio de clases</div></div>
+          </div>
+        </div>
+
+        <div class="cta-row" data-reveal data-delay="480">
+          <a class="ghost-link" href="#rutas">
+            Ver las 3 rutas
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="herovar is-track-hidden" data-herovar="empresas">
+        <div class="eyebrow eyebrow--empresas">
+          <span class="static-dot" aria-hidden="true"></span>
+          <span>Para empresas y organizaciones</span>
+        </div>
+        <h1>Invierte en los <span class="accent accent--empresas">líderes</span> que tu organización necesita</h1>
+        <p data-heropara="empresas">
+          Vincula a tu empresa con la nueva generación de profesionales de CLAP: patrocina formación de
+          alto impacto o recibe un equipo que resuelva un desafío real de tu organización.
+        </p>
+
+        <div class="facts facts--emp">
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <div><div class="fact-title">Beneficio tributario</div><div class="fact-sub">Certificado de donación</div></div>
+          </div>
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <div><div class="fact-title">Talento formado</div><div class="fact-sub">Líderes con impacto</div></div>
+          </div>
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"></path><path d="M12 12l4-7M12 12l7 2"></path></svg>
+            <div><div class="fact-title">Impacto social</div><div class="fact-sub">Propósito compartido</div></div>
+          </div>
+        </div>
+
+        <div class="rutas-label">Rutas de vinculación con los programas especializados</div>
+        <div class="cta-row cta-row--emp">
+          <a class="ghost-link" href="#empresas-circulo">
+            Círculo empresarial
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+          </a>
+          <a class="ghost-link" href="#empresas-laboratorio">
+            Laboratorio de Innovación
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cdcell" data-cdcell data-reveal="right" data-delay="300">
+      <div class="cdcard" data-cdcard>
+        <div class="cdbadge" data-cdbadge>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 7h6l-4 13"></path></svg>
+          <span>LANZAMIENTO · 25% OFF</span>
+        </div>
+        <h3 data-cdtitle>Inscríbete antes del 1 de agosto</h3>
+        <p data-cdsub>Asegura tu descuento especial de lanzamiento.</p>
+        <div class="countdown" data-countdown>
+          <div class="cd-unit"><div class="cd-num cd-num--accent" data-cd="days">--</div><div class="cd-label">Días</div></div>
+          <div class="cd-unit"><div class="cd-num" data-cd="hours">--</div><div class="cd-label">Horas</div></div>
+          <div class="cd-unit"><div class="cd-num" data-cd="mins">--</div><div class="cd-label">Min</div></div>
+          <div class="cd-unit"><div class="cd-num" data-cd="secs">--</div><div class="cd-label">Seg</div></div>
+        </div>
+        <a
+          class="cd-cta"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdUwLTO1qOGkCl3WfXqNKyCaSOjeHKgaUvZsEBmrs-jhco3ZQ/viewform"
+          target="_blank"
+        >
+          Reservar mi cupo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="aliados">
+    <div class="aliados-label-wrap">
+      <span class="aliados-label">Aliados que nos respaldan</span>
+    </div>
+    <div class="marquee-band">
+      <div class="marquee-mask">
+        <div class="marquee-track">
+          <span>GOOGLE&nbsp;&nbsp;✦&nbsp;&nbsp;MICROSOFT&nbsp;&nbsp;✦&nbsp;&nbsp;ALEGRA&nbsp;&nbsp;✦&nbsp;&nbsp;AIESEC&nbsp;&nbsp;✦&nbsp;&nbsp;FAILURE INSTITUTE&nbsp;&nbsp;✦&nbsp;&nbsp;THE POLLINATION PROJECT&nbsp;&nbsp;✦&nbsp;&nbsp;SEMPLI&nbsp;&nbsp;✦&nbsp;&nbsp;INCUBA CESA&nbsp;&nbsp;✦&nbsp;&nbsp;EMPRÉNDELO&nbsp;&nbsp;✦&nbsp;&nbsp;CÁMARA DE COMERCIO DE BUCARAMANGA&nbsp;&nbsp;✦&nbsp;&nbsp;UNAB&nbsp;&nbsp;✦&nbsp;&nbsp;UCC&nbsp;&nbsp;✦&nbsp;&nbsp;UIS&nbsp;&nbsp;✦&nbsp;&nbsp;UDI&nbsp;&nbsp;✦&nbsp;&nbsp;UPB&nbsp;&nbsp;✦&nbsp;&nbsp;ECOEMPRENDER&nbsp;&nbsp;✦&nbsp;&nbsp;ALCALDÍA DE BUCARAMANGA&nbsp;&nbsp;✦&nbsp;&nbsp;INNPULSA COLOMBIA&nbsp;&nbsp;✦&nbsp;&nbsp;</span>
+          <span aria-hidden="true">GOOGLE&nbsp;&nbsp;✦&nbsp;&nbsp;MICROSOFT&nbsp;&nbsp;✦&nbsp;&nbsp;ALEGRA&nbsp;&nbsp;✦&nbsp;&nbsp;AIESEC&nbsp;&nbsp;✦&nbsp;&nbsp;FAILURE INSTITUTE&nbsp;&nbsp;✦&nbsp;&nbsp;THE POLLINATION PROJECT&nbsp;&nbsp;✦&nbsp;&nbsp;SEMPLI&nbsp;&nbsp;✦&nbsp;&nbsp;INCUBA CESA&nbsp;&nbsp;✦&nbsp;&nbsp;EMPRÉNDELO&nbsp;&nbsp;✦&nbsp;&nbsp;CÁMARA DE COMERCIO DE BUCARAMANGA&nbsp;&nbsp;✦&nbsp;&nbsp;UNAB&nbsp;&nbsp;✦&nbsp;&nbsp;UCC&nbsp;&nbsp;✦&nbsp;&nbsp;UIS&nbsp;&nbsp;✦&nbsp;&nbsp;UDI&nbsp;&nbsp;✦&nbsp;&nbsp;UPB&nbsp;&nbsp;✦&nbsp;&nbsp;ECOEMPRENDER&nbsp;&nbsp;✦&nbsp;&nbsp;ALCALDÍA DE BUCARAMANGA&nbsp;&nbsp;✦&nbsp;&nbsp;INNPULSA COLOMBIA&nbsp;&nbsp;✦&nbsp;&nbsp;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachTrackToggle } from "../../scripts/track-toggle";
+  import { attachCountdown } from "../../scripts/countdown";
+  import { attachCountdownPosition } from "../../scripts/countdown-position";
+
+  const section = document.querySelector<HTMLElement>(".hero");
+  if (section) {
+    attachReveal(section, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -12% 0px",
+      repeat: true,
+      duration: 950,
+      distanceY: 46,
+      distanceX: 58,
+      easing: "cubic-bezier(.16,.8,.3,1)",
+    });
+    attachTrackToggle(document);
+    attachCountdown(section);
+    attachCountdownPosition(section);
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(48% 92% at 99% 40%, #ff1f9a 0%, rgba(255, 31, 154, 0.55) 32%, rgba(255, 31, 154, 0) 58%),
+      radial-gradient(52% 82% at 0% 110%, #22e88c 0%, rgba(34, 232, 140, 0) 58%),
+      radial-gradient(62% 80% at 50% 72%, rgba(38, 120, 240, 0.95) 0%, rgba(38, 120, 240, 0) 52%),
+      radial-gradient(82% 92% at 18% -2%, #6a2aa0 0%, rgba(106, 42, 160, 0) 62%),
+      linear-gradient(120deg, #3a1560, #5a1c6e 52%, #a01470);
+    background-size: 135% 135%;
+    animation: pe-grad 22s ease infinite;
+    padding: 158px 48px 0;
+  }
+
+  @keyframes pe-grad {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .bg-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.16;
+    mix-blend-mode: luminosity;
+    pointer-events: none;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .blob--blue {
+    width: 560px;
+    height: 560px;
+    left: 40%;
+    top: 24%;
+    background: radial-gradient(circle, rgba(38, 120, 240, 0.7), transparent 66%);
+    filter: blur(32px);
+    animation: pe-float-b 17s ease-in-out infinite;
+  }
+  .blob--green {
+    width: 460px;
+    height: 460px;
+    left: -70px;
+    bottom: -180px;
+    background: radial-gradient(circle, #22e88c, transparent 66%);
+    opacity: 0.9;
+    filter: blur(26px);
+    animation: pe-float-c 19s ease-in-out infinite;
+  }
+  .blob--pink {
+    width: 400px;
+    height: 400px;
+    right: -180px;
+    top: 10px;
+    background: radial-gradient(circle, #ff1f9a, transparent 66%);
+    opacity: 0.75;
+    filter: blur(30px);
+    animation: pe-float-a 21s ease-in-out infinite;
+  }
+  @keyframes pe-float-a {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -26px) scale(1.1); }
+  }
+  @keyframes pe-float-b {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-34px, 30px) scale(1.14); }
+  }
+  @keyframes pe-float-c {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(22px, 34px) scale(0.92); }
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/noise-texture.png");
+    background-size: auto;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(96deg, rgba(14, 7, 30, 0.66) 0%, rgba(14, 7, 30, 0.28) 34%, transparent 58%);
+    pointer-events: none;
+  }
+
+  /* ---------- track toggle ---------- */
+  .toggle-wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1240px;
+    margin: 0 auto 26px;
+  }
+  .toggle-pill {
+    display: inline-flex;
+    gap: 5px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 46px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 16px 40px -22px rgba(0, 0, 0, 0.6);
+  }
+  .track-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14px;
+    padding: 11px 24px;
+    border-radius: 42px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  }
+  .track-btn.is-active {
+    background: #fff;
+    color: #341c65;
+    box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ---------- hero grid ---------- */
+  .hero-grid {
+    position: relative;
+    z-index: 2;
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.12fr 0.88fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 17px;
+    border-radius: 40px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .eyebrow--personas {
+    border: 1px solid rgba(23, 255, 132, 0.42);
+    background: rgba(23, 255, 132, 0.1);
+    color: #17ff84;
+  }
+  .eyebrow--empresas {
+    border: 1px solid rgba(59, 224, 187, 0.42);
+    background: rgba(59, 224, 187, 0.1);
+    color: #3be0bb;
+  }
+  .static-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+  .pulse-dot {
+    position: relative;
+    display: flex;
+    width: 8px;
+    height: 8px;
+  }
+  .pulse-dot-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #17ff84;
+    animation: pe-pulse 2.2s ease-out infinite;
+  }
+  .pulse-dot-core {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #17ff84;
+  }
+  @keyframes pe-pulse {
+    0% { transform: scale(0.6); opacity: 0.5; }
+    80% { opacity: 0; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 58px;
+    line-height: 1.04;
+    letter-spacing: -0.028em;
+    color: #fff;
+    text-wrap: balance;
+    max-width: 660px;
+  }
+  .herovar[data-herovar="personas"] h1 {
+    max-width: 640px;
+  }
+  .accent--personas {
+    color: #17ff84;
+  }
+  .accent--empresas {
+    color: #3be0bb;
+  }
+
+  .herovar p {
+    font-size: 17px;
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 22px;
+    max-width: 560px;
+  }
+  .herovar[data-herovar="personas"] p {
+    max-width: 540px;
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+  .fact {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 13px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+    backdrop-filter: blur(6px);
+  }
+  .fact-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .fact-sub {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .rutas-label {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3be0bb;
+    margin-top: 34px;
+    font-weight: 600;
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+    align-items: center;
+  }
+  .cta-row--emp {
+    margin-top: 12px;
+  }
+  .ghost-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 16px 26px;
+    border-radius: 44px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: background 0.25s;
+  }
+  .ghost-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* ---------- countdown card ---------- */
+  .cdcell.is-inline {
+    margin-top: 24px;
+  }
+  .cdcard {
+    position: relative;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 26px;
+    padding: 30px 30px 32px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.6);
+  }
+  .cdbadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: linear-gradient(90deg, #e5268e, #ff5aa8);
+    border-radius: 30px;
+    margin-bottom: 16px;
+  }
+  .cdbadge span {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 12.5px;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .cdcard h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 21px;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .cdcard > p {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 7px;
+    line-height: 1.5;
+  }
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    margin-top: 22px;
+  }
+  .cd-unit {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 14px 4px;
+  }
+  .cd-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 30px;
+    color: #fff;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-num--accent {
+    color: #17ff84;
+  }
+  .cd-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+    margin-top: 6px;
+  }
+  .cd-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 18px;
+    background: #fff;
+    color: #160b30;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    padding: 15px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .cd-cta:hover {
+    background: #3be0bb;
+    transform: translateY(-2px);
+  }
+
+  /* ---------- aliados marquee ---------- */
+  .aliados {
+    position: relative;
+    z-index: 2;
+    margin-top: 56px;
+  }
+  .aliados-label-wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 0 13px;
+  }
+  .aliados-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .marquee-band {
+    margin: 0 -48px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(12, 10, 26, 0.26);
+    backdrop-filter: blur(4px);
+    padding: 18px 0 20px;
+  }
+  .marquee-mask {
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 46px;
+    white-space: nowrap;
+    width: max-content;
+    animation: clap-marquee 34s linear infinite;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 979.98px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 899.98px) {
+    h1 {
+      font-size: 46px;
+    }
+  }
+  @media (max-width: 639.98px) {
+    h1 {
+      font-size: 38px;
+    }
+  }
+  @media (max-width: 559.98px) {
+    .hero {
+      padding-top: 92px;
+    }
+    .toggle-pill {
+      padding: 3px;
+    }
+    .toggle-wrap {
+      margin-bottom: 16px;
+    }
+    .track-btn {
+      padding: 7px 16px;
+      font-size: 12.5px;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .fact {
+      padding: 12px 14px;
+    }
+    .fact-title {
+      white-space: nowrap;
+    }
+    .facts .fact:nth-child(1) {
+      order: 0;
+    }
+    .facts .fact:nth-child(3) {
+      order: 1;
+    }
+    .facts .fact:nth-child(2) {
+      order: 2;
+      grid-column: 1 / -1;
+    }
+    .facts--emp .fact:nth-child(1) {
+      order: 0;
+    }
+    .facts--emp .fact:nth-child(2) {
+      order: 1;
+    }
+    .facts--emp .fact:nth-child(3) {
+      order: 2;
+      grid-column: 1 / -1;
+    }
+    .facts--emp .fact-title {
+      white-space: normal;
+      font-size: 13.5px;
+      line-height: 1.15;
+    }
+  }
+</style>

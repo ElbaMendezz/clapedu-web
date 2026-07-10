@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/programas/Hero.astro";
+import AprenderHaciendo from "../components/programas/AprenderHaciendo.astro";
+import Rutas from "../components/programas/Rutas.astro";
+import CtaEmpresasBanner from "../components/programas/CtaEmpresasBanner.astro";
+import AsiAprenderas from "../components/programas/AsiAprenderas.astro";
+import QueDesarrollaras from "../components/programas/QueDesarrollaras.astro";
+import InformacionPrograma from "../components/programas/InformacionPrograma.astro";
+import Inversion from "../components/programas/Inversion.astro";
+import PorQueClap from "../components/programas/PorQueClap.astro";
+import DirigidoA from "../components/programas/DirigidoA.astro";
+import MetodologiaStepper from "../components/programas/MetodologiaStepper.astro";
+import CtaFinal from "../components/programas/CtaFinal.astro";
+import CirculoEmpresas from "../components/programas/CirculoEmpresas.astro";
+import LaboratorioInnovacion from "../components/programas/LaboratorioInnovacion.astro";
+import CtaFinalEmpresas from "../components/programas/CtaFinalEmpresas.astro";
+---
+
+<BaseLayout
+  title="Programas Especializados"
+  description="Conoce los Programas Especializados de CLAP: 3 rutas de formación en liderazgo social, modalidad remota, 20 semanas. También para empresas y organizaciones aliadas."
+  path="/programas"
+  activeDropdown="educacion"
+  activeNavLink="programas"
+  breadcrumbs={[
+    { name: "Inicio", path: "/" },
+    { name: "Programas Especializados", path: "/programas" },
+  ]}
+>
+  <Hero />
+  <div data-track="personas">
+    <AprenderHaciendo />
+    <Rutas />
+    <CtaEmpresasBanner />
+    <AsiAprenderas />
+    <QueDesarrollaras />
+    <InformacionPrograma />
+    <Inversion />
+    <PorQueClap />
+    <DirigidoA />
+    <MetodologiaStepper />
+    <CtaFinal />
+  </div>
+  <div data-track="empresas" class="is-track-hidden">
+    <CirculoEmpresas />
+    <LaboratorioInnovacion />
+    <CtaFinalEmpresas />
+  </div>
+</BaseLayout>

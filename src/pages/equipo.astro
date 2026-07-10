@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/equipo/Hero.astro";
+import EquipoDirectivo from "../components/equipo/EquipoDirectivo.astro";
+import EquiposPorArea from "../components/equipo/EquiposPorArea.astro";
+---
+
+<BaseLayout
+  title="Equipo de trabajo"
+  description="Conoce al equipo directivo y a los equipos por área de CLAP: las personas que hacen posible transformar el liderazgo en Latinoamérica."
+  path="/equipo"
+  activeDropdown="conocenos"
+  activeNavLink="equipo"
+  breadcrumbs={[
+    { name: "Inicio", path: "/" },
+    { name: "Equipo de trabajo", path: "/equipo" },
+  ]}
+>
+  <Hero />
+  <EquipoDirectivo />
+  <EquiposPorArea />
+</BaseLayout>

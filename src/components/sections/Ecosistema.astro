@@ -1,0 +1,522 @@
+---
+import { Image } from "astro:assets";
+import ecoClase from "../../assets/images/eco-clase.webp";
+import bentoEventos from "../../assets/images/bento-eventos.png";
+import bentoProyectos from "../../assets/images/bento-proyectos.png";
+import hubCreativoBg from "../../assets/images/hub-creativo-bg.png";
+import logoHubCreativo from "../../assets/images/logo-hub-creativo.png";
+import urbitLabBg from "../../assets/images/urbit-lab-bg.png";
+import logoUrbitLab from "../../assets/images/logo-urbit-lab.png";
+import uledBg from "../../assets/images/uled-bg.png";
+import logoUled from "../../assets/images/logo-uled.png";
+---
+
+<section id="ecosistema">
+  <div class="noise" aria-hidden="true"></div>
+  <div class="ring ring--1" aria-hidden="true"></div>
+  <div class="ring ring--2" aria-hidden="true"></div>
+  <div class="ring ring--3" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="intro">
+      <div class="eyebrow" data-reveal>
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>un ecosistema completo</span>
+      </div>
+      <h2 data-reveal>Ecosistema <span class="accent">CLAP</span></h2>
+      <p data-reveal>
+        Un modelo integral que integra educación, innovación, mentoría y
+        espacios de trabajo para transformar ideas en impacto social.
+      </p>
+    </div>
+
+    <div class="cards">
+      <a href="/programas" class="card card--lg card--formacion">
+        <Image src={ecoClase} alt="" width={1000} height={300} />
+        <div class="card-scrim card-scrim--formacion" aria-hidden="true"></div>
+        <div class="deco-ring deco-ring--lg" aria-hidden="true"></div>
+        <div class="deco-ring deco-ring--sm" aria-hidden="true"></div>
+        <span class="card-arrow card-arrow--floating">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+          </svg>
+        </span>
+        <div class="card-lg-content">
+          <span class="tag tag--teal">Formación</span>
+          <h3>Tres programas que te transforman en un semestre</h3>
+          <p>Programas especializados que te enseñan a generar impacto real en tu comunidad.</p>
+        </div>
+      </a>
+
+      <a href="/#contacto" class="card card--sm">
+        <Image src={bentoEventos} alt="" width={400} height={280} />
+        <div class="card-scrim card-scrim--dark" aria-hidden="true"></div>
+        <div class="card-sm-top">
+          <span class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </span>
+          <span class="card-arrow">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </div>
+        <div class="card-sm-content">
+          <h3>Eventos</h3>
+          <p>Espacios que conectan a los jóvenes con su propósito.</p>
+        </div>
+      </a>
+
+      <a href="/#contacto" class="card card--sm">
+        <Image src={bentoProyectos} alt="" width={400} height={280} />
+        <div class="card-scrim card-scrim--dark" aria-hidden="true"></div>
+        <div class="card-sm-top">
+          <span class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </span>
+          <span class="card-arrow">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </div>
+        <div class="card-sm-content">
+          <h3>Proyectos</h3>
+          <p>Conocimiento técnico aplicado a problemas complejos.</p>
+        </div>
+      </a>
+
+      <a href="/#espacios" class="card card--sm card--logo">
+        <Image src={hubCreativoBg} alt="" width={400} height={280} />
+        <div class="card-scrim card-scrim--hub" aria-hidden="true"></div>
+        <div class="card-sm-top">
+          <Image src={logoHubCreativo} alt="Hub Creativo" width={140} height={46} class="brand-logo brand-logo--hub" />
+          <span class="card-arrow">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </div>
+        <div class="card-sm-content">
+          <h3>Hub Creativo</h3>
+          <p>Espacios para trabajar y crear en comunidad.</p>
+        </div>
+      </a>
+
+      <a href="/#contacto" class="card card--sm card--logo">
+        <Image src={urbitLabBg} alt="" width={400} height={280} />
+        <div class="card-sm-top">
+          <Image src={logoUrbitLab} alt="Urbit Lab" width={72} height={24} class="brand-logo brand-logo--urbit" />
+          <span class="card-arrow">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </div>
+        <div class="card-sm-content card-sm-content--light">
+          <h3>Urbit Lab</h3>
+          <p>Soluciones territoriales con impacto social y ambiental.</p>
+        </div>
+      </a>
+
+      <a href="/#contacto" class="card card--sm card--logo">
+        <Image src={uledBg} alt="" width={400} height={280} />
+        <div class="card-sm-top">
+          <Image src={logoUled} alt="Uled" width={120} height={40} class="brand-logo brand-logo--uled" />
+          <span class="card-arrow">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"></path><path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </div>
+        <div class="card-sm-content">
+          <h3>Uled</h3>
+          <p>La primera institución de educación dual del nororiente colombiano.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>("#ecosistema");
+  if (section) attachReveal(section);
+</script>
+
+<style>
+  section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #ffffff 50%, rgba(19, 184, 154, 0.1) 76%, rgba(67, 25, 124, 0.14) 100%);
+    padding: 96px 48px;
+  }
+
+  .noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/noise-texture.png");
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .ring {
+    position: absolute;
+    border: 2px solid rgba(123, 77, 255, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .ring--1 {
+    right: -120px;
+    bottom: -100px;
+    width: 500px;
+    height: 500px;
+  }
+  .ring--2 {
+    right: -50px;
+    bottom: -50px;
+    width: 350px;
+    height: 350px;
+    border-color: rgba(123, 77, 255, 0.15);
+  }
+  .ring--3 {
+    right: 100px;
+    bottom: 150px;
+    width: 200px;
+    height: 200px;
+    border-color: rgba(123, 77, 255, 0.1);
+  }
+
+  .container {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .intro {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 56px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    margin-bottom: 18px;
+    backdrop-filter: blur(6px);
+    background-color: #a892e726;
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-ink-strong);
+    font-weight: 600;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  h2 .accent {
+    color: var(--color-teal-dark);
+  }
+
+  .intro p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4a4663;
+    margin-top: 12px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* -- Tarjetas: grid plano de 6 hijos directos -- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 26px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+  }
+  .card :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card--lg {
+    grid-column: 1 / -1;
+    height: 300px;
+    box-shadow: 0 24px 50px -30px rgba(52, 28, 101, 0.5);
+  }
+
+  .card-scrim {
+    position: absolute;
+    inset: 0;
+  }
+  .card-scrim--formacion {
+    background: linear-gradient(100deg, rgba(26, 12, 54, 0.93) 0%, rgba(52, 28, 101, 0.72) 44%, rgba(19, 184, 154, 0.32) 100%);
+  }
+  .card-scrim--dark {
+    background: linear-gradient(180deg, rgba(52, 28, 101, 0.1), transparent 30%, rgba(52, 28, 101, 0.6) 64%, rgba(43, 20, 90, 0.95));
+  }
+  .card-scrim--hub {
+    background: linear-gradient(100deg, rgba(10, 16, 38, 0.82), rgba(10, 16, 38, 0.35) 52%, rgba(6, 10, 26, 0.62));
+  }
+
+  .deco-ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .deco-ring--lg {
+    right: -40px;
+    top: -40px;
+    width: 230px;
+    height: 230px;
+    border: 1.5px solid rgba(59, 224, 187, 0.4);
+  }
+  .deco-ring--sm {
+    right: 20px;
+    top: 20px;
+    width: 150px;
+    height: 150px;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .card-arrow {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    flex: none;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+  }
+  .card--lg:hover .card-arrow,
+  .card--sm:hover .card-arrow {
+    background: #7b4dff;
+    border-color: #7b4dff;
+    color: var(--color-white);
+    transform: translateX(3px) scale(1.1);
+  }
+
+  .card-arrow--floating {
+    position: absolute;
+    right: 26px;
+    top: 26px;
+    z-index: 3;
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(6px);
+  }
+
+  .card-lg-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 52px;
+    max-width: 600px;
+  }
+
+  .tag {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 30px;
+    margin-bottom: 16px;
+  }
+  .tag--teal {
+    color: var(--color-ink);
+    background: var(--color-teal);
+  }
+
+  .card-lg-content h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--color-white);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    max-width: 470px;
+    text-shadow: 0 2px 16px rgba(20, 9, 42, 0.5);
+  }
+
+  .card-lg-content p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.55;
+    max-width: 440px;
+    text-shadow: 0 1px 10px rgba(20, 9, 42, 0.5);
+  }
+
+  .card--sm {
+    height: 280px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #2b145a;
+  }
+
+  .card--logo {
+    background: none;
+  }
+
+  .card-sm-top,
+  .card-sm-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-sm-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .icon-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    color: var(--color-white);
+    backdrop-filter: blur(4px);
+  }
+
+  .card-sm-top :global(.brand-logo) {
+    width: auto;
+    position: static;
+  }
+  .card-sm-top :global(.brand-logo--hub) {
+    height: 46px;
+    filter: brightness(0) invert(1);
+  }
+  .card-sm-top :global(.brand-logo--urbit) {
+    height: 24px;
+  }
+  .card-sm-top :global(.brand-logo--uled) {
+    height: 40px;
+    filter: brightness(0) invert(1);
+  }
+  .card-sm-content h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--color-white);
+    margin-bottom: 5px;
+    text-shadow: 0 2px 12px rgba(20, 9, 42, 0.6);
+  }
+  .card-sm-content p {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    text-shadow: 0 1px 8px rgba(20, 9, 42, 0.55);
+  }
+
+  /* Urbit Lab: fondo claro, texto oscuro (única tarjeta clara del set) */
+  .card-sm-content--light h3 {
+    color: var(--color-ink);
+    text-shadow: none;
+  }
+  .card-sm-content--light p {
+    color: var(--color-ink-soft);
+    text-shadow: none;
+  }
+
+  @media (max-width: 1099.98px) {
+    section {
+      overflow: visible;
+    }
+    .cards {
+      display: block;
+    }
+    .card {
+      position: sticky;
+      min-height: 300px;
+      height: auto;
+      margin: 0 0 16px 0;
+    }
+    .card--lg,
+    .card--sm {
+      height: auto;
+    }
+    .card:nth-child(1) { top: 78px; }
+    .card:nth-child(2) { top: 90px; }
+    .card:nth-child(3) { top: 102px; }
+    .card:nth-child(4) { top: 114px; }
+    .card:nth-child(5) { top: 126px; }
+    .card:nth-child(6) { top: 138px; }
+  }
+
+  @media (max-width: 767.98px) {
+    section {
+      padding: 62px 22px;
+    }
+    h2 {
+      font-size: 34px;
+    }
+    .card-lg-content {
+      padding: 24px;
+    }
+    .card-lg-content h3 {
+      font-size: 26px;
+    }
+  }
+</style>

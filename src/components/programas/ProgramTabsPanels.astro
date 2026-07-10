@@ -1,0 +1,444 @@
+---
+/**
+ * Selector de los 3 programas (Comunidad/Sostenibilidad/Impacto), usado
+ * tanto por "Elige tu ruta" (Rutas.astro) como por "Círculo Empresas que
+ * Lideran" (CirculoEmpresas.astro) — mismo contenido y mismos valores de
+ * diseño verificados en el original para ambos usos, solo cambia el CTA
+ * de cada panel (label/enlace), que cada llamador pasa por prop. El
+ * comportamiento (tabs desktop / acordeón mobile) lo maneja
+ * attachProgSelector, que cada llamador conecta a su propio elemento raíz.
+ */
+import { Image } from "astro:assets";
+import type { Program } from "../../data/programas-tracks";
+
+interface Props {
+  programs: Program[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+const { programs, ctaLabel, ctaHref } = Astro.props;
+---
+
+<div class="tabs" data-reveal data-progtabs>
+  {programs.map((p, i) => (
+    <button type="button" class:list={["tab", `tab--${p.key}`, { "is-active": i === 0 }]} data-progtab={i}>
+      <span class="tab-icon">
+        <Image src={p.logo} alt={p.logoAlt} width={32} height={32} />
+      </span>
+      <span class="tab-text">
+        <span class="tab-name">{p.tabName}</span>
+        <span class="tab-focus">{p.focus}</span>
+      </span>
+      <span class="tab-chevron" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </span>
+    </button>
+  ))}
+</div>
+
+<div class="stage">
+  {programs.map((p, i) => (
+    <div class:list={["panel", `panel--${p.key}`, { "is-active": i === 0 }]} data-progpanel={i}>
+      <div class:list={["panel-media", { "has-ring": p.hasRing }]}>
+        <Image src={p.bgImage} alt="" width={700} height={820} class="panel-bg" />
+        <Image src={p.bgPhotoOverlay} alt="" width={700} height={820} class="panel-photo" />
+        <div class:list={["panel-scrim", { "extra-dark": p.hasExtraDarkOverlay }]} aria-hidden="true"></div>
+        <div class="panel-media-content">
+          <div class:list={["panel-logo-box", `panel-logo-box--${p.key}`]}>
+            <Image src={p.logo} alt={p.logoAlt} width={p.logoImgSize} height={p.logoImgSize} />
+          </div>
+          <span class="panel-badge">{p.badgeLabel}</span>
+          <h3>{p.title}</h3>
+          <p class="panel-subtitle">{p.subtitle}</p>
+          <p class="panel-desc">{p.desc}</p>
+          <div class="panel-footer">
+            <div class="perfil-box">
+              <span class="perfil-label">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Perfil de egreso
+              </span>
+              <p>{p.perfilEgreso}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-develop">
+        <span class="develop-label">Lo que desarrollarás</span>
+        <div class="develop-list">
+          {p.develItems.map((item) => (
+            <div class="develop-item" data-develitem>
+              <span class="develop-icon">
+                {item.useLogo ? (
+                  <Image src={p.logo} alt="" width={21} height={21} />
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={item.iconPaths} />
+                )}
+              </span>
+              <span class="develop-text">{item.label}</span>
+            </div>
+          ))}
+        </div>
+        <a class="panel-cta" href={ctaHref} target="_blank" rel="noopener">
+          {ctaLabel}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  /* ---------- tabs ---------- */
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 42px;
+  }
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+    padding: 18px 20px;
+    border-radius: 18px;
+    border: 1.5px solid rgba(52, 28, 101, 0.28);
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 10px 26px -18px rgba(52, 28, 101, 0.4);
+    transition: transform 0.28s, box-shadow 0.3s, background 0.3s, border-color 0.3s;
+  }
+  .tab--comunidad {
+    --c: #e5268e;
+  }
+  .tab--sostenibilidad {
+    --c: #16a46a;
+  }
+  .tab--impacto {
+    --c: #2e6fe0;
+  }
+  .tab.is-active {
+    border-color: var(--c);
+    background: var(--c);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 42px -18px var(--c);
+  }
+  .tab-icon {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    background: color-mix(in srgb, var(--c) 12%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+  .tab.is-active .tab-icon {
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .tab-name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 1.15;
+    color: #341c65;
+    transition: color 0.3s;
+  }
+  .tab.is-active .tab-name {
+    color: #fff;
+  }
+  .tab-focus {
+    display: block;
+    font-size: 12px;
+    color: #9a93ad;
+    margin-top: 3px;
+    transition: color 0.3s;
+  }
+  .tab.is-active .tab-focus {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .tab-chevron {
+    margin-left: auto;
+    display: none;
+    flex: none;
+    transition: transform 0.3s ease, color 0.3s;
+    color: var(--c);
+  }
+  .tab.is-active .tab-chevron {
+    color: #fff;
+    transform: rotate(180deg);
+  }
+
+  /* ---------- panels ---------- */
+  .stage {
+    margin-top: 22px;
+  }
+  .panel {
+    display: none;
+    grid-template-columns: 0.92fr 1.08fr;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 40px 90px -44px var(--c);
+    border: 1px solid color-mix(in srgb, var(--c) 16%, transparent);
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .panel--comunidad {
+    --c: #e5268e;
+    --scrim-rgb: 150, 15, 90;
+  }
+  .panel--sostenibilidad {
+    --c: #16a46a;
+    --scrim-rgb: 8, 74, 46;
+  }
+  .panel--impacto {
+    --c: #2e6fe0;
+    --scrim-rgb: 14, 48, 116;
+  }
+  .panel.is-active {
+    display: grid;
+  }
+  .panel.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .panel-media {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--c);
+    padding: 44px 40px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel-media :global(.panel-bg) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .panel-media :global(.panel-photo) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    mix-blend-mode: soft-light;
+    z-index: -1;
+  }
+  .panel-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      rgba(var(--scrim-rgb), 0.62) 0%,
+      rgba(var(--scrim-rgb), 0.2) 46%,
+      rgba(var(--scrim-rgb), 0) 66%
+    );
+    z-index: -1;
+  }
+  .panel-scrim.extra-dark::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 26, 16, 0.42);
+  }
+  .panel-media.has-ring::before {
+    content: "";
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    width: 230px;
+    height: 230px;
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .panel-media-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .panel-logo-box {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .panel-logo-box--comunidad {
+    width: 78px;
+    height: 78px;
+  }
+  .panel-logo-box--sostenibilidad,
+  .panel-logo-box--impacto {
+    width: 64px;
+    height: 64px;
+  }
+  .panel-badge {
+    font-family: var(--font-label);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .panel-media-content h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 29px;
+    line-height: 1.1;
+    margin-top: 10px;
+    letter-spacing: -0.02em;
+  }
+  .panel-subtitle {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 14px;
+    font-weight: 600;
+  }
+  .panel-desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+    margin-top: 14px;
+  }
+  .panel-footer {
+    margin-top: auto;
+    padding-top: 26px;
+  }
+  .perfil-box {
+    background: rgba(0, 0, 0, 0.16);
+    border-radius: 15px;
+    padding: 16px 18px;
+  }
+  .perfil-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 700;
+  }
+  .perfil-box p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #fff;
+    margin-top: 7px;
+  }
+
+  /* ---------- develop list ---------- */
+  .panel-develop {
+    background: #fff;
+    padding: 44px 42px;
+    display: flex;
+    flex-direction: column;
+  }
+  .develop-label {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    color: #341c65;
+  }
+  .develop-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-top: 22px;
+  }
+  .develop-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 17px;
+    background: color-mix(in srgb, var(--c) 6%, #fff);
+    border-radius: 14px;
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .develop-item.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  .develop-icon {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .develop-text {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #3a2c52;
+  }
+  .panel-cta {
+    margin-top: 26px;
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 9px;
+    background: var(--c);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: transform 0.25s;
+  }
+  .panel-cta:hover {
+    transform: translateY(-2px);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 899.98px) {
+    .tabs {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 819.98px) {
+    .panel {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 559.98px) {
+    .tab-chevron {
+      display: flex;
+    }
+    .panel-media {
+      padding: 30px 24px;
+    }
+    .panel-develop {
+      padding: 30px 24px 32px;
+    }
+    .panel-cta {
+      align-self: center;
+      white-space: nowrap;
+      text-align: center;
+    }
+  }
+</style>

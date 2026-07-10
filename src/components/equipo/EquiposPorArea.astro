@@ -1,0 +1,644 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import fotoMariana from "../../assets/images/equipo-area-mariana.webp";
+import fotoElba from "../../assets/images/equipo-area-elba.png";
+
+interface Area {
+  label: string;
+  colorClass: string;
+  leader: string;
+}
+
+const areas: Area[] = [
+  { label: "Administrativo y Financiero", colorClass: "admin", leader: "Jorge Toledo" },
+  { label: "Comunidad", colorClass: "comunidad", leader: "Renzo Cuadra" },
+  { label: "Incidencia", colorClass: "incidencia", leader: "Francisco Rey" },
+  { label: "Marca y Comunicaciones", colorClass: "marca", leader: "Julián Amorocho Becerra" },
+  { label: "Proyectos", colorClass: "proyectos", leader: "María Paz Cuadra" },
+  { label: "Educación", colorClass: "educacion", leader: "Diana Rodríguez" },
+  { label: "Cultura Organizacional", colorClass: "cultura", leader: "Erika Gaspar" },
+];
+
+interface Member {
+  theme: "purple" | "teal" | "gold" | "orange" | "violet";
+  roleFront: string;
+  roleBack: string;
+  nameFrontHtml: string;
+  nameBack: string;
+  desc: string;
+  photo?: ImageMetadata;
+  initials?: string;
+}
+
+/** Único panel con integrantes reales por ahora (índice 3, Marca y Comunicaciones). */
+const marcaMembers: Member[] = [
+  {
+    theme: "teal",
+    roleFront: "Brand Manager",
+    roleBack: "Brand Manager",
+    nameFrontHtml: "Laura Marcela<br>Contreras",
+    nameBack: "Laura M. Contreras",
+    desc: "Vela por la coherencia y la fuerza de la marca CLAP en cada punto de contacto.",
+    initials: "LC",
+  },
+  {
+    theme: "violet",
+    roleFront: "Social Media Manager",
+    roleBack: "Social Media Manager",
+    nameFrontHtml: "Liam Parra",
+    nameBack: "Liam Parra",
+    desc: "Planea y dinamiza la presencia digital y las comunidades de CLAP en redes.",
+    initials: "LP",
+  },
+  {
+    theme: "orange",
+    roleFront: "Creadora de Contenido",
+    roleBack: "Creadora de Contenido",
+    nameFrontHtml: "Mariana Saavedra",
+    nameBack: "Mariana Saavedra",
+    desc: "Crea las historias, piezas y mensajes que dan vida a la comunicación de CLAP.",
+    photo: fotoMariana,
+  },
+  {
+    theme: "purple",
+    roleFront: "Diseñador Gráfico",
+    roleBack: "Diseñador Gráfico",
+    nameFrontHtml: "Juan Camilo<br>Álvarez",
+    nameBack: "Juan Camilo Álvarez",
+    desc: "Da forma visual a la marca: campañas, piezas y recursos gráficos.",
+    initials: "JA",
+  },
+  {
+    theme: "gold",
+    roleFront: "Diseñadora Web",
+    roleBack: "Diseñadora Web",
+    nameFrontHtml: "Elba Méndez",
+    nameBack: "Elba Méndez",
+    desc: "Diseña y mantiene las experiencias digitales y el sitio web de CLAP.",
+    photo: fotoElba,
+  },
+];
+---
+
+<section class="por-area">
+  <div class="blob" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-reveal data-delay="0">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>equipos por área</span>
+      </div>
+      <h2 data-reveal data-delay="160">Las áreas que <span class="accent">mueven</span> a CLAP</h2>
+      <p data-reveal data-delay="300">
+        Elige un área para conocer a su equipo. Iremos sumando a sus integrantes muy pronto.
+      </p>
+    </div>
+
+    <div class="tabs" data-reveal>
+      {areas.map((a, i) => (
+        <button
+          type="button"
+          class:list={["tab", `tab--${a.colorClass}`, { "is-active": i === 3 }]}
+          data-areatab={i}
+        >
+          {a.label}
+        </button>
+      ))}
+    </div>
+
+    {areas.map((a, i) => (
+      <div class:list={["panel", { "is-active": i === 3 }]} data-areapanel={i}>
+        <div class="leader">
+          <span>Liderado por</span>
+          <span class="leader-name">{a.leader}</span>
+        </div>
+
+        {i === 3 ? (
+          <div class="grid">
+            {marcaMembers.map((m) => (
+              <div class="flipcard" data-flipcard>
+                <div class={`flipinner theme--${m.theme}`} data-flipinner>
+                  <div class="face face--front">
+                    {m.photo ? (
+                      <Image src={m.photo} alt="" width={520} height={410} class="photo" />
+                    ) : (
+                      <div class="photo photo--placeholder">
+                        <span>{m.initials}</span>
+                      </div>
+                    )}
+                    <div class="scrim" aria-hidden="true"></div>
+                    <div class="front-text">
+                      <div class="role">{m.roleFront}</div>
+                      <div class="front-row">
+                        <h4 set:html={m.nameFrontHtml} />
+                        <span class="more-pill">
+                          Ver más
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="face face--back">
+                    <div class="back-ring" aria-hidden="true"></div>
+                    <div class="back-blob" aria-hidden="true"></div>
+                    <div class="back-content">
+                      {m.photo ? (
+                        <Image src={m.photo} alt="" width={108} height={108} class="avatar" />
+                      ) : (
+                        <div class="avatar avatar--placeholder"><span>{m.initials}</span></div>
+                      )}
+                      <div class="role">{m.roleBack}</div>
+                      <h4>{m.nameBack}</h4>
+                      <p>{m.desc}</p>
+                      <a class="linkedin" href="#" target="_blank" rel="noopener">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"></path>
+                        </svg>
+                        LinkedIn
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="grid">
+            {Array.from({ length: 3 }).map(() => (
+              <div class="empty-card">
+                <div class="empty-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"></circle>
+                    <path d="M4 21v-1a7 7 0 0 1 14 0v1"></path>
+                  </svg>
+                </div>
+                <div class="empty-label">Integrante por confirmar</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachAreaTabs } from "../../scripts/area-tabs";
+  import { attachFlipCards } from "../../scripts/flip-cards";
+
+  const section = document.querySelector<HTMLElement>(".por-area");
+  if (section) {
+    attachReveal(section, { threshold: 0.12, rootMargin: "0px 0px -6% 0px", repeat: false, duration: 700 });
+    attachAreaTabs(section);
+    attachFlipCards(section);
+  }
+</script>
+
+<style>
+  .por-area {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f7f5fc 0%, #f2eefa 100%);
+    padding: 74px 48px 104px;
+  }
+
+  .blob {
+    position: absolute;
+    left: -120px;
+    bottom: 40px;
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgba(19, 184, 154, 0.12);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 36px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    margin-bottom: 16px;
+    background: rgba(123, 77, 255, 0.08);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #43197c;
+    font-weight: 400;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 40px;
+    letter-spacing: -0.025em;
+    color: #341c65;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #7b4dff;
+  }
+  .head p {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: #6b6786;
+    margin-top: 12px;
+  }
+
+  /* ---------- tabs ---------- */
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 42px;
+  }
+  .tab {
+    border: 1.5px solid rgba(52, 28, 101, 0.16);
+    background: transparent;
+    color: #6b6786;
+    border-radius: 30px;
+    padding: 11px 20px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .tab--admin,
+  .tab--educacion {
+    --ac: #c77a0a;
+  }
+  .tab--comunidad {
+    --ac: #ce6711;
+  }
+  .tab--incidencia,
+  .tab--cultura {
+    --ac: #6b3ff0;
+  }
+  .tab--marca {
+    --ac: #0b8f76;
+  }
+  .tab--proyectos {
+    --ac: #5d2099;
+  }
+  .tab.is-active {
+    background: var(--ac);
+    color: #fff;
+    border-color: var(--ac);
+    box-shadow: 0 12px 26px -14px var(--ac);
+  }
+
+  /* ---------- panels ---------- */
+  .panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .panel.is-active {
+    display: block;
+  }
+  .panel.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .leader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-bottom: 28px;
+  }
+  .leader span:first-child {
+    font-size: 13px;
+    color: #8a85a0;
+  }
+  .leader-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14px;
+    color: #341c65;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+
+  /* ---------- empty placeholder card ---------- */
+  .empty-card {
+    height: 306px;
+    border-radius: 22px;
+    border: 2px dashed rgba(52, 28, 101, 0.18);
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+    padding: 24px;
+  }
+  .empty-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(52, 28, 101, 0.05);
+    border: 2px dashed rgba(52, 28, 101, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(52, 28, 101, 0.4);
+  }
+  .empty-label {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14.5px;
+    color: rgba(52, 28, 101, 0.55);
+  }
+
+  /* ---------- flip mechanics (mismos valores que EquipoDirectivo.astro) ---------- */
+  .flipcard {
+    position: relative;
+    height: 306px;
+    perspective: 1600px;
+    cursor: pointer;
+  }
+  .flipinner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.4, 0.15, 0.2, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+    transform: rotateY(0deg);
+  }
+  .flipinner.is-open {
+    transform: rotateY(180deg);
+  }
+  @media (hover: hover) {
+    .flipcard:hover .flipinner:not(.is-locked) {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 22px;
+    overflow: hidden;
+  }
+  .face--front {
+    box-shadow: 0 20px 44px -30px var(--shadow-color);
+  }
+  .face--back {
+    transform: rotateY(180deg);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 26px;
+    background: var(--back-gradient);
+  }
+
+  .theme--purple {
+    --bg-color: #160830;
+    --shadow-color: rgba(52, 28, 101, 0.55);
+    --scrim-rgb: 42, 20, 87;
+    --back-gradient: linear-gradient(150deg, #5d2099, #341c65);
+    --link-color: #5d2099;
+  }
+  .theme--teal {
+    --bg-color: #041a12;
+    --shadow-color: rgba(11, 136, 112, 0.55);
+    --scrim-rgb: 11, 136, 112;
+    --back-gradient: linear-gradient(150deg, #16bd9f, #0b8870);
+    --link-color: #0b8f76;
+  }
+  .theme--gold {
+    --bg-color: #1a1002;
+    --shadow-color: rgba(199, 122, 10, 0.55);
+    --scrim-rgb: 199, 122, 10;
+    --back-gradient: linear-gradient(150deg, #e8a400, #c77a0a);
+    --link-color: #c77a0a;
+  }
+  .theme--orange {
+    --bg-color: #1a0a04;
+    --shadow-color: rgba(206, 103, 17, 0.55);
+    --scrim-rgb: 185, 86, 12;
+    --back-gradient: linear-gradient(150deg, #f0951a, #ce6711);
+    --link-color: #ce6711;
+  }
+  .theme--violet {
+    --bg-color: #12093a;
+    --shadow-color: rgba(123, 77, 255, 0.55);
+    --scrim-rgb: 82, 36, 189;
+    --back-gradient: linear-gradient(150deg, #8a5cff, #5e2ccc);
+    --link-color: #6b3ff0;
+  }
+
+  .face--front {
+    background: var(--bg-color);
+  }
+  .photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--back-gradient);
+  }
+  .photo--placeholder span {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 54px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  /* Este panel usa un solo degradado de scrim (.6/35%/68%) para las 5
+     tarjetas, tengan o no foto real — a diferencia del panel de Equipo
+     Directivo, acá el original no distingue por presencia de foto. */
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(var(--scrim-rgb), 0.95) 0%,
+      rgba(var(--scrim-rgb), 0.6) 35%,
+      transparent 68%
+    );
+  }
+
+  .front-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 22px 20px;
+  }
+  .role {
+    font-family: var(--font-label);
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 2px;
+  }
+  .front-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .front-row h4 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .more-pill {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 15px;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-display);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(4px);
+  }
+
+  .back-ring {
+    position: absolute;
+    right: -44px;
+    top: -44px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+  }
+  .back-blob {
+    position: absolute;
+    left: -30px;
+    bottom: -30px;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .back-content {
+    position: relative;
+  }
+  .avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(255, 255, 255, 0.6);
+    object-fit: cover;
+    display: block;
+    margin-bottom: 13px;
+  }
+  .avatar--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .avatar--placeholder span {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    color: #fff;
+  }
+  .back-content .role {
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0;
+  }
+  .back-content h4 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 19px;
+    line-height: 1.12;
+    margin-top: 5px;
+    color: #fff;
+  }
+  .back-content p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.93);
+    margin-top: 12px;
+  }
+  .linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    background: #fff;
+    color: var(--link-color);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 9px 16px;
+    border-radius: 30px;
+    text-decoration: none;
+  }
+
+  @media (max-width: 979.98px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 619.98px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

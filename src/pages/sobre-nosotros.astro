@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import QueEs from "../components/sobre-nosotros/QueEs.astro";
+import Expertise from "../components/sobre-nosotros/Expertise.astro";
+import Circulo from "../components/sobre-nosotros/Circulo.astro";
+import Valores from "../components/sobre-nosotros/Valores.astro";
+import Cifras from "../components/sobre-nosotros/Cifras.astro";
+import Filosofia from "../components/sobre-nosotros/Filosofia.astro";
+import Historia from "../components/sobre-nosotros/Historia.astro";
+---
+
+<BaseLayout
+  title="Sobre nosotros"
+  description="Somos CLAP, el Centro Latinoamericano del Propósito: formamos líderes y lideresas capaces de resolver problemas sociales complejos en Latinoamérica."
+  path="/sobre-nosotros"
+  activeDropdown="conocenos"
+  breadcrumbs={[
+    { name: "Inicio", path: "/" },
+    { name: "Sobre nosotros", path: "/sobre-nosotros" },
+  ]}
+>
+  <QueEs />
+  <Expertise />
+  <Circulo />
+  <Valores />
+  <Cifras />
+  <Filosofia />
+  <Historia />
+</BaseLayout>

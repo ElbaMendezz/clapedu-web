@@ -1,0 +1,277 @@
+---
+import { programs } from "../../data/programas-tracks";
+import ProgramTabsPanels from "./ProgramTabsPanels.astro";
+
+const WHATSAPP_PROGRAMAS = "https://api.whatsapp.com/send/?phone=573114481160&text&type=phone_number&app_absent=0";
+---
+
+<section id="rutas">
+  <div class="cloud cloud--r1" aria-hidden="true"></div>
+  <div class="cloud cloud--r2" aria-hidden="true"></div>
+  <div class="cloud cloud--r3" aria-hidden="true"></div>
+  <div class="cloud cloud--l1" aria-hidden="true"></div>
+  <div class="cloud cloud--l2" aria-hidden="true"></div>
+  <div class="cloud cloud--l3" aria-hidden="true"></div>
+  <div class="ring ring--r1" aria-hidden="true"></div>
+  <div class="ring ring--r2" aria-hidden="true"></div>
+  <div class="ring ring--l1" aria-hidden="true"></div>
+  <div class="ring ring--l2" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <div class="eyebrow">
+        <span class="pulse-dot" aria-hidden="true">
+          <span class="pulse-dot-ring"></span>
+          <span class="pulse-dot-core"></span>
+        </span>
+        <span>3 focos de transformación</span>
+      </div>
+      <h2 data-rutash2>Elige tu ruta de formación</h2>
+      <p>
+        Un mismo sistema, tres personalidades. Cada programa responde a una necesidad concreta: comunidad,
+        sostenibilidad e impacto institucional.
+      </p>
+    </div>
+
+    <ProgramTabsPanels programs={programs} ctaLabel="Conocer este programa" ctaHref={WHATSAPP_PROGRAMAS} />
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachProgSelector } from "../../scripts/prog-selector";
+
+  const section = document.querySelector<HTMLElement>("#rutas");
+  if (section) {
+    attachReveal(section, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -12% 0px",
+      repeat: true,
+      duration: 950,
+      distanceY: 46,
+      distanceX: 58,
+      easing: "cubic-bezier(.16,.8,.3,1)",
+    });
+    attachProgSelector(section, {
+      tabSelector: "[data-progtab]",
+      panelSelector: "[data-progpanel]",
+      tabsContainerSelector: "[data-progtabs]",
+    });
+  }
+</script>
+
+<style>
+  #rutas {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(35deg, rgba(229, 38, 142, 0.3) 0%, rgba(46, 111, 224, 0.28) 16%, rgba(22, 164, 106, 0.2) 33%, transparent 54%),
+      linear-gradient(-35deg, rgba(229, 38, 142, 0.3) 0%, rgba(46, 111, 224, 0.28) 16%, rgba(22, 164, 106, 0.2) 33%, transparent 54%),
+      #ffffff;
+    background-size: 180% 180%, 180% 180%, 100% 100%;
+    animation: pe-grad 22s ease-in-out infinite;
+    padding: 96px 48px 100px;
+  }
+
+  .cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .cloud--r1 {
+    right: -150px;
+    top: -130px;
+    width: 540px;
+    height: 540px;
+    background: radial-gradient(circle, rgba(22, 164, 106, 0.22), transparent 62%);
+    filter: blur(74px);
+    animation: pe-drift-2 22s ease-in-out infinite;
+  }
+  .cloud--r2 {
+    right: -70px;
+    bottom: -170px;
+    width: 470px;
+    height: 470px;
+    background: radial-gradient(circle, rgba(46, 111, 224, 0.2), transparent 62%);
+    filter: blur(70px);
+    animation: pe-drift-3 26s ease-in-out infinite;
+  }
+  .cloud--r3 {
+    right: 6%;
+    top: 30%;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(229, 38, 142, 0.14), transparent 62%);
+    filter: blur(64px);
+    animation: pe-drift-1 30s ease-in-out infinite;
+  }
+  .cloud--l1 {
+    left: -150px;
+    top: -130px;
+    width: 540px;
+    height: 540px;
+    background: radial-gradient(circle, rgba(22, 164, 106, 0.22), transparent 62%);
+    filter: blur(74px);
+    animation: pe-drift-1 23s ease-in-out infinite;
+  }
+  .cloud--l2 {
+    left: -70px;
+    bottom: -170px;
+    width: 470px;
+    height: 470px;
+    background: radial-gradient(circle, rgba(229, 38, 142, 0.2), transparent 62%);
+    filter: blur(70px);
+    animation: pe-drift-2 27s ease-in-out infinite;
+  }
+  .cloud--l3 {
+    left: 6%;
+    top: 30%;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(46, 111, 224, 0.14), transparent 62%);
+    filter: blur(64px);
+    animation: pe-drift-3 31s ease-in-out infinite;
+  }
+  @keyframes pe-drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(110px, -70px) scale(1.18); }
+  }
+  @keyframes pe-drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-90px, 60px) scale(1.22); }
+  }
+  @keyframes pe-drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(80px, 90px) scale(0.88); }
+  }
+  @keyframes pe-grad {
+    0% { background-position: 0% 50%, 0% 50%, 0 0; }
+    50% { background-position: 100% 50%, 100% 50%, 0 0; }
+    100% { background-position: 0% 50%, 0% 50%, 0 0; }
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid rgba(52, 28, 101, 0.08);
+    pointer-events: none;
+  }
+  .ring--r1 {
+    right: -120px;
+    bottom: -100px;
+    width: 500px;
+    height: 500px;
+  }
+  .ring--r2 {
+    right: -40px;
+    bottom: -40px;
+    width: 300px;
+    height: 300px;
+    border-color: rgba(52, 28, 101, 0.06);
+  }
+  .ring--l1 {
+    left: -120px;
+    bottom: -100px;
+    width: 500px;
+    height: 500px;
+  }
+  .ring--l2 {
+    left: -40px;
+    bottom: -40px;
+    width: 300px;
+    height: 300px;
+    border-color: rgba(52, 28, 101, 0.06);
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/noise-texture.png");
+    background-size: auto;
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 14px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 17px;
+    border: 1px solid rgba(19, 184, 154, 0.4);
+    border-radius: 40px;
+    background: rgba(19, 184, 154, 0.1);
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #341c65;
+    font-weight: 400;
+  }
+  .pulse-dot {
+    position: relative;
+    display: flex;
+    width: 8px;
+    height: 8px;
+  }
+  .pulse-dot-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #13b89a;
+    animation: pe-pulse 2.2s ease-out infinite;
+  }
+  .pulse-dot-core {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #13b89a;
+  }
+  @keyframes pe-pulse {
+    0% { transform: scale(0.6); opacity: 0.5; }
+    80% { opacity: 0; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    color: #341c65;
+    line-height: 1.06;
+    letter-spacing: -0.026em;
+    margin-top: 12px;
+    text-wrap: balance;
+  }
+  .head p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #6b6786;
+    margin-top: 16px;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 559.98px) {
+    #rutas {
+      padding-top: 48px;
+      padding-bottom: 52px;
+    }
+    h2 {
+      font-size: 28px;
+    }
+  }
+</style>

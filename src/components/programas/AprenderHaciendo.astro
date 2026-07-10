@@ -1,0 +1,397 @@
+---
+interface Card {
+  modifier: string;
+  title: string;
+  desc: string;
+  iconPaths: string;
+}
+
+const cards: Card[] = [
+  {
+    modifier: "pink",
+    title: "Desafíos reales",
+    desc: "Trabajas sobre problemas concretos, no casos hipotéticos.",
+    iconPaths: '<path d="m12 14 4-4M3.34 19a10 10 0 1 1 17.32 0"></path>',
+  },
+  {
+    modifier: "teal",
+    title: "Con organizaciones",
+    desc: "Colaboras con aliados reales del sector social y público.",
+    iconPaths: '<path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M15 9h.01M15 13h.01"></path>',
+  },
+  {
+    modifier: "blue",
+    title: "Mentoría experta",
+    desc: "Recibes guía de profesionales que ya lideran el cambio.",
+    iconPaths: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>',
+  },
+  {
+    modifier: "violet",
+    title: "Desde el día uno",
+    desc: "Aplicas lo aprendido inmediatamente, no al final.",
+    iconPaths: '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"></path>',
+  },
+];
+---
+
+<section class="manifiesto">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="ring ring--1" aria-hidden="true"></div>
+  <div class="ring ring--2" aria-hidden="true"></div>
+
+  <div class="grid" data-manifgrid>
+    <div class="text-col" data-reveal="left">
+      <div class="eyebrow">
+        <span class="pulse-dot" aria-hidden="true">
+          <span class="pulse-dot-ring"></span>
+          <span class="pulse-dot-core"></span>
+        </span>
+        <span>Aprender haciendo</span>
+      </div>
+      <h2 data-manifh2>
+        No necesitas otro certificado. <span class="accent">Necesitas experiencia para liderar.</span>
+      </h2>
+      <div class="collapse" data-manifcollapse>
+        <p>
+          En CLAP no vienes solo a estudiar. Vienes a resolver desafíos reales, trabajar con
+          organizaciones, recibir mentoría especializada y desarrollar herramientas que podrás aplicar
+          desde el primer día.
+        </p>
+        <p>
+          Por eso nuestros Programas Especializados están diseñados bajo una metodología de
+          <b>aprender haciendo</b>.
+        </p>
+      </div>
+      <button type="button" class="toggle-btn" data-maniftoggle>
+        <span data-maniftogglelabel>Ver más</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cards" data-reveal="right" data-delay="120" data-manifcards>
+      {cards.map((card) => (
+        <div class={`manif-card manif-card--${card.modifier}`}>
+          <div class="manif-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" set:html={card.iconPaths} />
+          </div>
+          <h3>{card.title}</h3>
+          <p>{card.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachManifCollapse } from "../../scripts/manif-collapse";
+  import { attachManifCardsPosition } from "../../scripts/manif-cards-position";
+
+  const section = document.querySelector<HTMLElement>(".manifiesto");
+  if (section) {
+    attachReveal(section, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -12% 0px",
+      repeat: true,
+      duration: 950,
+      distanceY: 46,
+      distanceX: 58,
+      easing: "cubic-bezier(.16,.8,.3,1)",
+    });
+    attachManifCollapse(section);
+    attachManifCardsPosition(section);
+  }
+</script>
+
+<style>
+  .manifiesto {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(85% 62% at 88% -12%, rgba(255, 31, 154, 0.34) 0%, rgba(255, 31, 154, 0) 55%),
+      radial-gradient(72% 56% at 8% -8%, rgba(123, 77, 255, 0.34) 0%, rgba(123, 77, 255, 0) 55%),
+      linear-gradient(180deg, #27124d 0%, #1b0e3a 46%, #160b30 100%);
+    padding: 96px 48px 100px;
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/noise-texture.png");
+    background-size: auto;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .ring--1 {
+    right: -150px;
+    bottom: -150px;
+    width: 520px;
+    height: 520px;
+    border: 1.5px solid rgba(123, 77, 255, 0.14);
+  }
+  .ring--2 {
+    right: -80px;
+    bottom: -80px;
+    width: 360px;
+    height: 360px;
+    border: 1.5px solid rgba(255, 31, 154, 0.1);
+  }
+
+  .grid {
+    position: relative;
+    z-index: 1;
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 58px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 17px;
+    border: 1px solid rgba(23, 255, 132, 0.42);
+    border-radius: 40px;
+    background: rgba(23, 255, 132, 0.1);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #17ff84;
+    font-weight: 400;
+  }
+  .pulse-dot {
+    position: relative;
+    display: flex;
+    width: 8px;
+    height: 8px;
+  }
+  .pulse-dot-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #17ff84;
+    animation: pe-pulse 2.2s ease-out infinite;
+  }
+  .pulse-dot-core {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #17ff84;
+  }
+  @keyframes pe-pulse {
+    0% { transform: scale(0.6); opacity: 0.5; }
+    80% { opacity: 0; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 46px;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    margin-top: 14px;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #e5268e;
+  }
+
+  .collapse {
+    overflow: hidden;
+    transition: max-height 0.42s cubic-bezier(0.4, 0.8, 0.3, 1), opacity 0.3s ease;
+  }
+  .collapse p {
+    font-size: 17px;
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 22px;
+    max-width: 520px;
+  }
+  .collapse p + p {
+    margin-top: 16px;
+  }
+  .collapse b {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+  }
+
+  .toggle-btn {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 18px;
+    border-radius: 40px;
+    cursor: pointer;
+  }
+  .toggle-btn svg {
+    transition: transform 0.3s ease;
+  }
+  .toggle-btn.is-open svg {
+    transform: rotate(180deg);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .manif-card {
+    position: relative;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 34px 24px;
+    text-align: center;
+    box-shadow: 0 30px 70px -42px rgba(0, 0, 0, 0.55);
+  }
+  .manif-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1.5px;
+    background: var(--border-grad);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .manif-card--pink {
+    --border-grad: linear-gradient(140deg, rgba(229, 38, 142, 0.9), rgba(229, 38, 142, 0.12));
+  }
+  .manif-card--teal {
+    --border-grad: linear-gradient(140deg, rgba(19, 184, 154, 0.9), rgba(19, 184, 154, 0.12));
+  }
+  .manif-card--blue {
+    --border-grad: linear-gradient(140deg, rgba(46, 111, 224, 0.9), rgba(46, 111, 224, 0.12));
+  }
+  .manif-card--violet {
+    --border-grad: linear-gradient(140deg, rgba(123, 77, 255, 0.9), rgba(123, 77, 255, 0.12));
+  }
+
+  .manif-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+  .manif-card--pink .manif-icon {
+    background: radial-gradient(circle at 50% 34%, rgba(229, 38, 142, 0.32), rgba(229, 38, 142, 0.1));
+    border: 1px solid rgba(229, 38, 142, 0.42);
+  }
+  .manif-card--pink .manif-icon svg {
+    stroke: #ff5aa8;
+  }
+  .manif-card--teal .manif-icon {
+    background: radial-gradient(circle at 50% 34%, rgba(19, 184, 154, 0.32), rgba(19, 184, 154, 0.1));
+    border: 1px solid rgba(19, 184, 154, 0.42);
+  }
+  .manif-card--teal .manif-icon svg {
+    stroke: #3be0bb;
+  }
+  .manif-card--blue .manif-icon {
+    background: radial-gradient(circle at 50% 34%, rgba(46, 111, 224, 0.32), rgba(46, 111, 224, 0.1));
+    border: 1px solid rgba(46, 111, 224, 0.42);
+  }
+  .manif-card--blue .manif-icon svg {
+    stroke: #6fa0ff;
+  }
+  .manif-card--violet .manif-icon {
+    background: radial-gradient(circle at 50% 34%, rgba(123, 77, 255, 0.32), rgba(123, 77, 255, 0.1));
+    border: 1px solid rgba(123, 77, 255, 0.42);
+  }
+  .manif-card--violet .manif-icon svg {
+    stroke: #a98cff;
+  }
+
+  .manif-card h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 17px;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .manif-card p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.72);
+    margin-top: 9px;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 899.98px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 559.98px) {
+    h2 {
+      font-size: 28px;
+    }
+    .cards {
+      grid-auto-rows: 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      margin-top: 22px;
+      gap: 12px;
+    }
+    .cards h3 {
+      overflow-wrap: break-word;
+    }
+    .toggle-btn {
+      display: flex;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .collapse:not(.is-open) {
+      opacity: 0;
+    }
+    .manif-card {
+      padding: 18px 12px;
+    }
+    .manif-icon {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 10px;
+    }
+    .manif-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .manif-card h3 {
+      font-size: 15px;
+    }
+    .manif-card p {
+      font-size: 12px;
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+  }
+</style>

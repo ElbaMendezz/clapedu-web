@@ -1,0 +1,91 @@
+---
+const aliados = [
+  "GOOGLE",
+  "MICROSOFT",
+  "ALEGRA",
+  "AIESEC",
+  "FAILURE INSTITUTE",
+  "THE POLLINATION PROJECT",
+  "SEMPLI",
+  "INCUBA CESA",
+  "EMPRÉNDELO",
+  "CÁMARA DE COMERCIO DE BUCARAMANGA",
+  "UNAB",
+  "UCC",
+  "UIS",
+  "UDI",
+  "UPB",
+  "ECOEMPRENDER",
+  "ALCALDÍA DE BUCARAMANGA",
+  "INNPULSA COLOMBIA",
+];
+
+// Réplica exacta del original: separador "✦" con nbsp fijos a cada lado,
+// incrustado en el texto también DESPUÉS del último ítem — así el bloque
+// repetido (aliados-set duplicado para el loop infinito) mantiene el mismo
+// ritmo de separación en la costura entre una vuelta y la siguiente.
+const SEP = "  ✦  ";
+const setText = aliados.join(SEP) + SEP;
+---
+
+<p class="aliados-label">Aliados que nos respaldan</p>
+
+<div class="aliados-scrim" role="group" aria-label="Aliados que nos respaldan">
+  <div class="aliados-mask">
+    <div class="aliados-track">
+      <span class="aliados-set">{setText}</span>
+      <span class="aliados-set" aria-hidden="true">{setText}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .aliados-label {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 6px 48px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .aliados-scrim {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(12, 10, 26, 0.22);
+    backdrop-filter: blur(4px);
+  }
+
+  .aliados-mask {
+    position: relative;
+    overflow: hidden;
+    padding: 18px 0 20px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .aliados-track {
+    display: flex;
+    gap: 46px;
+    white-space: nowrap;
+    width: max-content;
+    animation: clap-marquee 34s linear infinite;
+  }
+
+  .aliados-set {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  @media (max-width: 767.98px) {
+    .aliados-label {
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+  }
+</style>

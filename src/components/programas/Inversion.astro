@@ -1,0 +1,440 @@
+---
+interface DateItem {
+  day: string;
+  month: string;
+  textHtml: string;
+  accent: boolean;
+}
+
+const dates: DateItem[] = [
+  { day: "01", month: "Ago", textHtml: 'Cierre del <b>25% de descuento</b> por pronto pago', accent: true },
+  { day: "03", month: "Ago", textHtml: "Semana de <b>inducción</b>", accent: false },
+  { day: "10", month: "Ago", textHtml: "Inicio de <b>clases</b>", accent: false },
+];
+
+const checks = [
+  'Beneficio por pronto pago: <b>25% de descuento</b>',
+  'Intensidad: <b>20 semanas · 430 horas</b>',
+  "Modalidad: <b>Remota</b>",
+];
+
+const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=573114481160&text&type=phone_number&app_absent=0";
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdUwLTO1qOGkCl3WfXqNKyCaSOjeHKgaUvZsEBmrs-jhco3ZQ/viewform";
+---
+
+<section class="inversion" data-screen-label="Inversión">
+  <div class="ring" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="head">
+      <div class="launch-badge" data-reveal data-delay="0">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 7h6l-4 13"></path></svg>
+        <span>¡ESTAMOS EN LANZAMIENTO!</span>
+      </div>
+      <h2 data-reveal data-delay="140">Asegura tu <span class="accent">25% de descuento</span></h2>
+      <p data-reveal data-delay="240">
+        Inscríbete antes del 1 de agosto y asegura tu descuento especial de lanzamiento.
+      </p>
+    </div>
+
+    <div class="grid" data-pricegrid>
+      <div class="price-card" data-reveal data-delay="120">
+        <div class="price-glow" aria-hidden="true"></div>
+        <span class="price-eyebrow">Inversión con descuento</span>
+        <div class="price-row">
+          <span class="price-val" data-priceval>$4.500.000</span>
+          <span class="price-cop">COP</span>
+        </div>
+        <div class="discount-row">
+          <span class="price-original">$6.000.000</span>
+          <span class="save-tag" data-savetag>Ahorras $1.500.000</span>
+        </div>
+        <div class="divider"></div>
+        <div class="check-list">
+          {checks.map((text) => (
+            <div class="check-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span set:html={text} />
+            </div>
+          ))}
+        </div>
+        <a class="enroll-cta" href={FORM_URL} target="_blank" rel="noopener">
+          Quiero inscribirme
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </div>
+
+      <div class="side-col" data-reveal="left" data-delay="100">
+        <div class="dates-card">
+          <span class="dates-title">Fechas clave</span>
+          <div class="dates-list">
+            {dates.map((d, i) => (
+              <div class="date-item" data-reveal data-delay={String(i * 120)}>
+                <div class="date-num-wrap">
+                  <div class:list={["date-num", { "date-num--accent": d.accent }]}>{d.day}</div>
+                  <div class="date-month">{d.month}</div>
+                </div>
+                <div class="date-sep"></div>
+                <span class="date-text" set:html={d.textHtml} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="info-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3BE0BB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+          <p>
+            Esto no es una universidad, pero recuerda que debes estar <b>ya graduado de tus estudios
+            superiores</b> o haber superado el <b>80% de los créditos</b>.
+          </p>
+        </div>
+
+        <a class="whatsapp-cta" data-wabtn href={WHATSAPP_URL} target="_blank" rel="noopener">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.219zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.078 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path></svg>
+          Escríbenos por WhatsApp para más información
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>(".inversion");
+  if (section) {
+    attachReveal(section, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -12% 0px",
+      repeat: true,
+      duration: 950,
+      distanceY: 46,
+      distanceX: 58,
+      easing: "cubic-bezier(.16,.8,.3,1)",
+    });
+  }
+</script>
+
+<style>
+  .inversion {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(110% 90% at 90% 10%, #2a1358 0%, transparent 55%), #160b30;
+    padding: 96px 48px 100px;
+  }
+
+  .ring {
+    position: absolute;
+    left: -80px;
+    bottom: -60px;
+    width: 280px;
+    height: 280px;
+    border: 1.5px solid rgba(59, 224, 187, 0.14);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 46px;
+  }
+  .launch-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 17px;
+    border-radius: 40px;
+    background: linear-gradient(90deg, #e5268e, #ff5aa8);
+    margin-bottom: 18px;
+  }
+  .launch-badge span {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 12.5px;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    color: #fff;
+    line-height: 1.06;
+    letter-spacing: -0.026em;
+    text-wrap: balance;
+  }
+  h2 .accent {
+    color: #3be0bb;
+  }
+  .head p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 16px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  /* ---------- price card ---------- */
+  .price-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(165deg, rgba(137, 89, 200, 0), rgba(46, 18, 88, 0.5));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 26px;
+    padding: 40px 38px;
+    box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.7);
+  }
+  .price-glow {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 224, 187, 0.25), transparent 70%);
+  }
+  .price-eyebrow {
+    position: relative;
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3be0bb;
+  }
+  .price-row {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .price-val {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 52px;
+    color: #fff;
+    line-height: 1;
+  }
+  .price-cop {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+  }
+  .discount-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .price-original {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: line-through;
+  }
+  .save-tag {
+    display: inline-flex;
+    align-items: center;
+    background: #3be0bb;
+    color: #0c1f1a;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 12.5px;
+    padding: 5px 12px;
+    border-radius: 30px;
+  }
+  .divider {
+    position: relative;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.14);
+    margin: 26px 0;
+  }
+  .check-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .check-item span {
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .check-item :global(b) {
+    color: #fff;
+  }
+  .enroll-cta {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 28px;
+    background: #3be0bb;
+    color: #0c1f1a;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    padding: 16px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: transform 0.25s;
+  }
+  .enroll-cta:hover {
+    transform: translateY(-2px);
+  }
+
+  /* ---------- side col ---------- */
+  .side-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .dates-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 22px;
+    padding: 28px 30px;
+  }
+  .dates-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 17px;
+    color: #fff;
+  }
+  .dates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .date-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .date-num-wrap {
+    flex: none;
+    text-align: center;
+    width: 56px;
+  }
+  .date-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1;
+  }
+  .date-num--accent {
+    color: #3be0bb;
+  }
+  .date-month {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .date-sep {
+    width: 1px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+  .date-text {
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .date-text :global(b) {
+    color: #fff;
+  }
+
+  .info-box {
+    background: rgba(59, 224, 187, 0.09);
+    border: 1px solid rgba(59, 224, 187, 0.24);
+    border-radius: 22px;
+    padding: 22px 26px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  .info-box svg {
+    flex: none;
+    margin-top: 2px;
+  }
+  .info-box p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .info-box :global(b) {
+    color: #fff;
+  }
+
+  .whatsapp-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    padding: 17px;
+    border-radius: 16px;
+    text-decoration: none;
+    background: #25d366;
+    box-shadow: 0 16px 40px -14px rgba(37, 211, 102, 0.65);
+    transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.28s;
+  }
+  .whatsapp-cta:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 26px 56px -12px rgba(37, 211, 102, 0.9);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 859.98px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 559.98px) {
+    .price-card {
+      padding: 32px 20px;
+    }
+    .price-val {
+      font-size: 34px;
+    }
+    .discount-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .save-tag {
+      white-space: nowrap;
+      font-size: 11.5px;
+    }
+    .whatsapp-cta {
+      text-align: center;
+    }
+  }
+</style>

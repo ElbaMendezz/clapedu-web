@@ -1,0 +1,218 @@
+/* ==========================================================================
+   CLAP — estilos globales: fuentes self-hosted, reset, variables, keyframes
+   compartidos. Importado una sola vez desde BaseLayout.astro.
+   ========================================================================== */
+
+/* ---- Fuentes self-hosted --------------------------------------------- */
+
+/* Montserrat: variable font, subset latin, pesos 400-800 realmente usados
+   en el sitio original (ver INVENTARIO.md §9.9). Un solo archivo cubre el
+   rango completo — no se descargó la familia estática completa. */
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Variable.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Extrabld.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neulis";
+  src: url("/fonts/Neulis-Light.otf") format("opentype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neulis";
+  src: url("/fonts/Neulis-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sinete";
+  src: url("/fonts/Sinete-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ---- Variables de marca ------------------------------------------------ */
+
+:root {
+  --font-body: "Montserrat", sans-serif;
+  --font-display: "Proxima Nova", sans-serif;
+  --font-accent: "Neulis", sans-serif;
+  --font-label: "Sinete", sans-serif;
+
+  --color-ink: #341c65; /* texto principal / marca */
+  --color-ink-strong: #43197c; /* iconos, acentos oscuros */
+  --color-ink-soft: #6b6786; /* texto secundario */
+  --color-teal: #3be0bb; /* acento primario (hover, CTAs) */
+  --color-teal-dark: #13b89a; /* acento hover sobre fondo claro */
+  --color-white: #fff;
+  --color-border: #ece7f5;
+  --color-social-bg: #f1ecfa;
+  --color-nav-scrolled-bg: rgba(12, 10, 26, 0.4);
+  --color-menu-mobile-bg: rgba(26, 16, 54, 0.98);
+
+  --nav-height: 72px;
+  --container-max: 1240px;
+}
+
+/* ---- Reset -------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---- Keyframes compartidos ---------------------------------------------
+   Consolidados desde los distintos prefijos por página (clap-, met-, eq-,
+   pe-) que en el original eran el mismo efecto reinventado — ver
+   INVENTARIO.md §5.
+   ------------------------------------------------------------------------- */
+
+@keyframes clap-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes clap-float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.12); }
+}
+
+@keyframes clap-float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, 40px) scale(1.18); }
+}
+
+@keyframes clap-float-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, 50px) scale(0.9); }
+}
+
+@keyframes clap-ring-pulse {
+  0% { transform: scale(0.35); opacity: 0.55; }
+  80% { opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+@keyframes clap-fade-up-in {
+  from { transform: translateY(26px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes clap-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes clap-fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes clap-bounce-in-left {
+  from { opacity: 0; transform: translateX(-60px); }
+  60% { opacity: 1; transform: translateX(10px); }
+  80% { transform: translateX(-5px); }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes clap-bounce-in-right {
+  from { opacity: 0; transform: translateX(60px); }
+  60% { opacity: 1; transform: translateX(-10px); }
+  80% { transform: translateX(5px); }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes clap-scroll-vertical {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes clap-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Utilidad compartida: alterna secciones enteras entre componentes (ej. el
+   selector "Para personas"/"Para empresas" de /programas, ver
+   track-toggle.ts). Vive acá porque cruza los límites de varios
+   componentes — un `<style>` scopeado de un solo componente no alcanzaría
+   a los demás. */
+.is-track-hidden {
+  display: none;
+}
+
+@keyframes clap-pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.4; }
+}

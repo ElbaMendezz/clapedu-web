@@ -1,0 +1,523 @@
+---
+interface Milestone {
+  year: number;
+  theme: "teal" | "purple" | "yellow";
+  title: string;
+  items: string[];
+  twoCol: boolean;
+}
+
+const milestones: Milestone[] = [
+  {
+    year: 2015,
+    theme: "teal",
+    title: "Turismo y desarrollo regional",
+    twoCol: false,
+    items: ["Diseño de 4 rutas turísticas para el departamento de Santander."],
+  },
+  {
+    year: 2016,
+    theme: "teal",
+    title: "Planeación territorial",
+    twoCol: false,
+    items: ["Diagnósticos participativos para planes de desarrollo en municipios de Santander."],
+  },
+  {
+    year: 2018,
+    theme: "purple",
+    title: "Inicio de proyectos de impacto social y territorial",
+    twoCol: true,
+    items: [
+      "Investigación sobre violencia basada en género en Santander.",
+      "Diagnóstico ciudadano sobre problemáticas urbanas en Bucaramanga.",
+      "Diseño de programas especializados en liderazgo y gestión social.",
+      "Proyectos de inclusión laboral y fortalecimiento comunitario.",
+      "Consultorías organizacionales y de marketing estratégico.",
+    ],
+  },
+  {
+    year: 2019,
+    theme: "teal",
+    title: "Expansión en desarrollo territorial y turismo",
+    twoCol: true,
+    items: [
+      "Estudio de impacto ambiental para la CDMB.",
+      "Diseño del Plan Integral de Desarrollo de Topocoro.",
+      "Formación en liderazgo y turismo para barras deportivas.",
+      "Asistencia técnica para formulación de proyectos públicos.",
+      "Consultoría en gestión social y responsabilidad empresarial.",
+    ],
+  },
+  {
+    year: 2020,
+    theme: "purple",
+    title: "Consolidación en paz territorial y desarrollo social",
+    twoCol: true,
+    items: [
+      "Procesos de memoria histórica y convivencia con barras deportivas.",
+      "Programas de emprendimiento para mujeres víctimas de violencia.",
+      "Formulación de planes territoriales de salud pública.",
+      "Estudios de impacto socioeconómico en turismo regional.",
+      "Fortalecimiento de procesos comunitarios rurales.",
+    ],
+  },
+  {
+    year: 2021,
+    theme: "teal",
+    title: "Participación ciudadana y formación especializada",
+    twoCol: true,
+    items: [
+      "Estrategia “Pido la Palabra” para Bucaramanga.",
+      "Actualización de instrumentos ambientales y sociales en Santander.",
+      "Diplomados en turismo y liderazgo territorial.",
+      "Fortalecimiento de procesos comunitarios urbanos.",
+    ],
+  },
+  {
+    year: 2022,
+    theme: "purple",
+    title: "Innovación pública y liderazgo",
+    twoCol: false,
+    items: [
+      "Diagnóstico participativo de parques metropolitanos del AMB.",
+      "Ejecución del proyecto “Ocupar la Política”.",
+      "Asesoría para el Plan Decenal de Turismo de Barrancabermeja.",
+    ],
+  },
+  {
+    year: 2023,
+    theme: "teal",
+    title: "Política pública y desarrollo regional",
+    twoCol: false,
+    items: ["Formulación de la Política Pública de Turismo de Tame, Arauca."],
+  },
+  {
+    year: 2024,
+    theme: "purple",
+    title: "Escalamiento institucional",
+    twoCol: false,
+    items: [
+      "Diseño y producción de 13 cursos virtuales universitarios.",
+      "Estudios de gobernanza compartida para “Chicamocha en Común”.",
+      "Formulación de planes de desarrollo y salud pública municipales.",
+    ],
+  },
+  {
+    year: 2025,
+    theme: "teal",
+    title: "Transformación educativa",
+    twoCol: false,
+    items: [
+      "Interventoría integral para la construcción de objetos virtuales de aprendizaje.",
+      "Programas de liderazgo y oratoria para estudiantes de bachillerato.",
+    ],
+  },
+  {
+    year: 2026,
+    theme: "yellow",
+    title: "Impacto nacional y fortalecimiento productivo",
+    twoCol: true,
+    items: [
+      "Programas nacionales con iNNpulsa Colombia para fortalecimiento empresarial y economía popular.",
+      "Fortalecimiento productivo de mujeres a nivel nacional.",
+      "TEDxBucaramanga Women: liderazgo femenino y comunicación efectiva.",
+      "Formación en liderazgo y comunicación para jóvenes en Cartagena.",
+    ],
+  },
+];
+---
+
+<section id="historia">
+  <div class="overlay" aria-hidden="true"></div>
+  <div class="blob" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="header" data-tri-header>
+      <div class="eyebrow" data-reveal data-delay="0">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>una década de impacto</span>
+      </div>
+      <h2 data-reveal data-delay="130">Nuestra <span class="accent">historia</span></h2>
+      <p data-reveal data-delay="260">
+        De 4 rutas turísticas en Santander a programas de impacto nacional.
+        Recorre el camino, año por año.
+      </p>
+    </div>
+
+    <div class="rail-wrap" data-reveal>
+      <div class="rail-track" aria-hidden="true"></div>
+      <div class="rail-bar" data-year-bar aria-hidden="true"></div>
+      <div class="rail" data-year-rail>
+        {milestones.map((m, i) => (
+          <button type="button" class={`year-btn theme--${m.theme}`} data-year-btn={i}>
+            <span class="year-dot" data-year-dot></span>
+            {m.year}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="panel-root" data-reveal>
+      {milestones.map((m, i) => (
+        <div class:list={["year-panel", `theme--${m.theme}`, { "is-active": i === 0 }]} data-year-panel={i}>
+          <div class="panel-head">
+            <div class="head-row">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 22V4"></path><path d="M4 4h12l-2 4 2 4H4"></path>
+                </svg>
+              </div>
+              <div class="year-number">{m.year}</div>
+            </div>
+            <div class="milestone-title">{m.title}</div>
+          </div>
+          <ul class:list={["checklist", { "checklist--two": m.twoCol }]}>
+            {m.items.map((item) => (
+              <li>
+                <span class="check" data-hist-check>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5"></path>
+                  </svg>
+                </span>
+                <span class="item-text">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+  import { attachHistoriaTimeline } from "../../scripts/historia-timeline";
+
+  const section = document.querySelector<HTMLElement>("#historia");
+  if (section) {
+    const header = section.querySelector<HTMLElement>("[data-tri-header]");
+    if (header) attachReveal(header, { threshold: 0.5, repeat: true });
+    attachReveal(section, { rootMargin: "0px 0px -8% 0px", repeat: false });
+    attachHistoriaTimeline(section);
+  }
+</script>
+
+<style>
+  section {
+    position: relative;
+    overflow: hidden;
+    padding: 96px 48px 104px;
+    background-color: #0d3256;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(59, 224, 187, 0.16) 0%, transparent 42%),
+      radial-gradient(120% 90% at 100% 100%, rgba(59, 224, 187, 0.14), transparent 55%);
+    pointer-events: none;
+  }
+
+  .blob {
+    position: absolute;
+    width: 560px;
+    height: 560px;
+    left: -170px;
+    top: -130px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 224, 187, 0.28), transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 44px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.3);
+    border-radius: 40px;
+    margin-bottom: 18px;
+    background: rgba(59, 224, 187, 0.08);
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #3be0bb;
+    font-weight: 400;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+
+  .header h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.025em;
+    color: #fff;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  .header h2 .accent {
+    color: #3be0bb;
+  }
+  .header p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.74);
+    margin-top: 12px;
+  }
+
+  .rail-wrap {
+    position: relative;
+    margin-bottom: 38px;
+  }
+  .rail-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .rail-bar {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, #3be0bb, #7b4dff);
+    width: 0;
+    transition: width 0.5s ease;
+  }
+  .rail {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 16px 2px;
+  }
+
+  .year-btn {
+    flex: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    padding: 0 6px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+  }
+  .year-btn.is-done {
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .year-btn.is-active {
+    color: #fff;
+  }
+
+  .year-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #241a44;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .theme--teal {
+    --acc: #3be0bb;
+  }
+  .theme--purple {
+    --acc: #7b4dff;
+  }
+  .theme--yellow {
+    --acc: #ffc200;
+  }
+  .year-btn.is-done .year-dot {
+    background: var(--acc);
+    border-color: var(--acc);
+  }
+  .year-btn.is-active .year-dot {
+    transform: scale(1.5);
+  }
+  .theme--teal.year-btn.is-active .year-dot {
+    box-shadow: 0 0 0 6px rgba(59, 224, 187, 0.2);
+  }
+  .theme--purple.year-btn.is-active .year-dot {
+    box-shadow: 0 0 0 6px rgba(123, 77, 255, 0.2);
+  }
+  .theme--yellow.year-btn.is-active .year-dot {
+    box-shadow: 0 0 0 6px rgba(255, 194, 0, 0.2);
+  }
+
+  .panel-root {
+    position: relative;
+    min-height: 330px;
+  }
+
+  .year-panel {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 40px;
+    align-items: start;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(14px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .year-panel.is-active {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .theme--teal.year-panel {
+    --icon-color: #3be0bb;
+    --icon-glow: rgba(59, 224, 187, 0.15);
+    --icon-border: rgba(59, 224, 187, 0.4);
+  }
+  .theme--purple.year-panel {
+    --icon-color: #a78bff;
+    --icon-glow: rgba(167, 139, 255, 0.15);
+    --icon-border: rgba(167, 139, 255, 0.4);
+  }
+  .theme--yellow.year-panel {
+    --icon-color: #ffc200;
+    --icon-glow: rgba(255, 194, 0, 0.15);
+    --icon-border: rgba(255, 194, 0, 0.4);
+  }
+
+  .head-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--icon-glow);
+    border: 1px solid var(--icon-border);
+    color: var(--icon-color);
+    backdrop-filter: blur(4px);
+  }
+  .year-number {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 0.9;
+    color: var(--icon-color);
+  }
+  .milestone-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    color: #fff;
+    margin-top: 8px;
+  }
+
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 8px;
+  }
+  .checklist--two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 28px;
+  }
+  .checklist li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .check {
+    flex: none;
+    margin-top: 1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--icon-color);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: background 0.35s ease;
+  }
+  .check.is-checked {
+    background: var(--icon-color);
+  }
+  .check svg {
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.6, 0.5, 1);
+  }
+  .check.is-checked svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .item-text {
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .checklist--two .item-text {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1099.98px) {
+    .header h2 {
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: 759.98px) {
+    section {
+      padding: 62px 22px;
+    }
+    .year-panel {
+      grid-template-columns: 1fr;
+    }
+    .checklist--two {
+      grid-template-columns: 1fr;
+    }
+    .checklist--two .item-text {
+      font-size: 16px;
+      line-height: 1.55;
+    }
+  }
+</style>
