@@ -1,4 +1,12 @@
 ---
+// Clave pública de reCAPTCHA v3: no es secreta (se ve en el HTML/JS del
+// cliente), así que sí es correcto leerla vía import.meta.env — a
+// diferencia de la clave secreta, que solo se usa en el servidor
+// (src/pages/api/contact.ts) y se lee de process.env, ver el comentario
+// ahí sobre por qué import.meta.env no sirve para secretos con el
+// adapter de Node.
+const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
+
 const WHATSAPP =
   "https://api.whatsapp.com/send/?phone=3114481160&text&type=phone_number&app_absent=0&utm_source=ig";
 
@@ -49,7 +57,7 @@ const socialLinks = [
 ];
 ---
 
-<section id="contacto">
+<section id="contacto" data-recaptcha-site-key={RECAPTCHA_SITE_KEY}>
   <div class="blob" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
   <div class="ring ring--1" aria-hidden="true"></div>
@@ -118,6 +126,8 @@ const socialLinks = [
     </div>
   </div>
 </section>
+
+<script src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`} is:inline></script>
 
 <script>
   import { attachReveal } from "../../scripts/reveal";

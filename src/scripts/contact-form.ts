@@ -1,8 +1,30 @@
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+/** Resuelve un token de reCAPTCHA v3 (invisible) para la acción "contact". */
+function getRecaptchaToken(siteKey: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    if (!window.grecaptcha) {
+      reject(new Error("reCAPTCHA no cargó."));
+      return;
+    }
+    window.grecaptcha.ready(() => {
+      window.grecaptcha!.execute(siteKey, { action: "contact" }).then(resolve).catch(reject);
+    });
+  });
+}
+
 /**
- * Formulario de contacto: envía los datos a /api/contact (Resend en el
- * servidor) y muestra el estado de confirmación solo si el envío fue
- * exitoso. Si el servidor responde con error, lo muestra en línea sin
- * perder lo que la persona ya escribió.
+ * Formulario de contacto: envía los datos a /api/contact (Resend +
+ * verificación de reCAPTCHA v3 en el servidor) y muestra el estado de
+ * confirmación solo si el envío fue exitoso. Si el servidor responde con
+ * error, lo muestra en línea sin perder lo que la persona ya escribió.
  */
 export function attachContactForm(root: HTMLElement): void {
   const form = root.querySelector<HTMLFormElement>("[data-contact-form]");
@@ -10,7 +32,8 @@ export function attachContactForm(root: HTMLElement): void {
   const successState = root.querySelector<HTMLElement>("[data-contact-success-state]");
   const errorEl = root.querySelector<HTMLElement>("[data-contact-error]");
   const submitBtn = form?.querySelector<HTMLButtonElement>("button[type='submit']");
-  if (!form || !formState || !successState || !errorEl || !submitBtn) return;
+  const siteKey = root.dataset.recaptchaSiteKey;
+  if (!form || !formState || !successState || !errorEl || !submitBtn || !siteKey) return;
 
   const idleLabel = submitBtn.textContent ?? "Enviar mensaje";
 
@@ -20,7 +43,7 @@ export function attachContactForm(root: HTMLElement): void {
     errorEl.textContent = "";
 
     const data = new FormData(form);
-    const payload = {
+    const fields = {
       name: String(data.get("name") ?? "").trim(),
       email: String(data.get("email") ?? "").trim(),
       message: String(data.get("message") ?? "").trim(),
@@ -31,10 +54,19 @@ export function attachContactForm(root: HTMLElement): void {
     submitBtn.textContent = "Enviando...";
 
     try {
+      let recaptchaToken: string;
+      try {
+        recaptchaToken = await getRecaptchaToken(siteKey);
+      } catch {
+        throw new Error(
+          "No se pudo verificar que el envío sea humano. Recarga la página e intenta de nuevo.",
+        );
+      }
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...fields, recaptchaToken }),
       });
       const result = await response.json().catch(() => ({}));
 

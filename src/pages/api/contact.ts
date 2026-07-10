@@ -14,6 +14,51 @@ const FROM_EMAIL = "CLAP — Formulario web <no-reply@clapedu.org>";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_LENGTHS = { name: 120, email: 200, message: 5000 } as const;
 
+// reCAPTCHA v3 no bloquea con un checkbox: da un puntaje 0-1 de qué tan
+// humano parece el comportamiento. 0.5 es el umbral que Google recomienda
+// como punto de partida razonable.
+const RECAPTCHA_MIN_SCORE = 0.5;
+const RECAPTCHA_ACTION = "contact";
+
+interface RecaptchaVerifyResponse {
+  success: boolean;
+  score?: number;
+  action?: string;
+  "error-codes"?: string[];
+}
+
+async function verifyRecaptcha(token: string, remoteIp: string | null): Promise<boolean> {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secret) {
+    console.error("RECAPTCHA_SECRET_KEY no está configurada en el entorno del servidor.");
+    return false;
+  }
+
+  const params = new URLSearchParams({ secret, response: token });
+  if (remoteIp) params.set("remoteip", remoteIp);
+
+  const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params,
+  });
+  const result = (await verifyRes.json()) as RecaptchaVerifyResponse;
+
+  if (!result.success) {
+    console.error("reCAPTCHA rechazó el token:", result["error-codes"]);
+    return false;
+  }
+  if (result.action !== RECAPTCHA_ACTION) {
+    console.error("reCAPTCHA: acción inesperada:", result.action);
+    return false;
+  }
+  if ((result.score ?? 0) < RECAPTCHA_MIN_SCORE) {
+    console.error("reCAPTCHA: puntaje demasiado bajo:", result.score);
+    return false;
+  }
+  return true;
+}
+
 function jsonResponse(body: Record<string, unknown>, status: number): Response {
   return new Response(JSON.stringify(body), {
     status,
@@ -52,6 +97,21 @@ export const POST: APIRoute = async ({ request }) => {
     message.length > MAX_LENGTHS.message
   ) {
     return jsonResponse({ error: "Uno de los campos supera el largo permitido." }, 400);
+  }
+
+  const recaptchaToken = String(payload.recaptchaToken ?? "").trim();
+  if (!recaptchaToken) {
+    return jsonResponse(
+      { error: "No se pudo verificar que el envío sea humano. Recarga la página e intenta de nuevo." },
+      400,
+    );
+  }
+  const recaptchaOk = await verifyRecaptcha(recaptchaToken, request.headers.get("x-forwarded-for"));
+  if (!recaptchaOk) {
+    return jsonResponse(
+      { error: "No pudimos verificar que el envío sea humano. Intenta de nuevo." },
+      403,
+    );
   }
 
   // process.env (no import.meta.env): con el adapter de Node, las
