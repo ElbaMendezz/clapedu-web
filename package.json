@@ -9,11 +9,14 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "start": "node ./dist/server/entry.mjs",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^11.0.2",
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^7.0.7"
+    "astro": "^7.0.7",
+    "resend": "^6.17.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

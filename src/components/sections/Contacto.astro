@@ -99,6 +99,13 @@ const socialLinks = [
           <label for="contact-message">Mensaje</label>
           <textarea id="contact-message" name="message" rows="4" required placeholder="Cuéntanos sobre tu propósito..."></textarea>
 
+          <div class="hp-field" aria-hidden="true">
+            <label for="contact-company">Empresa</label>
+            <input id="contact-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <p class="form-error" data-contact-error hidden></p>
+
           <button type="submit">Enviar mensaje</button>
         </form>
       </div>
@@ -300,6 +307,34 @@ const socialLinks = [
   .form-card button[type="submit"]:hover {
     background: var(--color-ink-strong);
     transform: translateY(-2px);
+  }
+  .form-card button[type="submit"]:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-error {
+    display: none;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #c0295a;
+    background: rgba(192, 41, 90, 0.08);
+    border: 1px solid rgba(192, 41, 90, 0.25);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin: -6px 0 18px;
+  }
+  .form-error:not([hidden]) {
+    display: block;
   }
 
   .success {
