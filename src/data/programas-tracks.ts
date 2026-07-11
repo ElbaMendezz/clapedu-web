@@ -1,8 +1,8 @@
 import type { ImageMetadata } from "astro";
-import logoComunidad from "../assets/images/programas-logo-comunidad.png";
-import logoGestion from "../assets/images/programas-logo-gestion.png";
-import logoPolitica from "../assets/images/programas-logo-politica.png";
-import bgComunidad from "../assets/images/programas-bg-comunidad.png";
+import logoComunidad from "../assets/images/programas-logo-comunidad.webp";
+import logoGestion from "../assets/images/programas-logo-gestion.webp";
+import logoPolitica from "../assets/images/programas-logo-politica.webp";
+import bgComunidad from "../assets/images/programas-bg-comunidad.webp";
 import bgComunidadFoto from "../assets/images/programas-bg-comunidad-foto.webp";
 import bgSostenibilidad from "../assets/images/programas-bg-sostenibilidad.webp";
 import bgGestionFoto from "../assets/images/programas-bg-gestion-foto.webp";
