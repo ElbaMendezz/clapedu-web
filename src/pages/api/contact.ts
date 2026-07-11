@@ -8,7 +8,7 @@ import type { APIRoute } from "astro";
 import { Resend } from "resend";
 import { buildContactEmail } from "../../lib/contact-email";
 
-const TO_EMAIL = "elba.mendez@clapedu.org";
+const TO_EMAIL = "comunidad@clapedu.org";
 const FROM_EMAIL = "CLAP — Formulario web <no-reply@clapedu.org>";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,21 +27,29 @@ interface RecaptchaVerifyResponse {
   "error-codes"?: string[];
 }
 
-async function verifyRecaptcha(token: string, remoteIp: string | null): Promise<boolean> {
+async function verifyRecaptcha(
+  token: string,
+  remoteIp: string | null,
+): Promise<boolean> {
   const secret = process.env.RECAPTCHA_SECRET_KEY;
   if (!secret) {
-    console.error("RECAPTCHA_SECRET_KEY no está configurada en el entorno del servidor.");
+    console.error(
+      "RECAPTCHA_SECRET_KEY no está configurada en el entorno del servidor.",
+    );
     return false;
   }
 
   const params = new URLSearchParams({ secret, response: token });
   if (remoteIp) params.set("remoteip", remoteIp);
 
-  const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: params,
-  });
+  const verifyRes = await fetch(
+    "https://www.google.com/recaptcha/api/siteverify",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params,
+    },
+  );
   const result = (await verifyRes.json()) as RecaptchaVerifyResponse;
 
   if (!result.success) {
@@ -89,27 +97,42 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse({ error: "Todos los campos son obligatorios." }, 400);
   }
   if (!EMAIL_RE.test(email)) {
-    return jsonResponse({ error: "Ingresa un correo electrónico válido." }, 400);
+    return jsonResponse(
+      { error: "Ingresa un correo electrónico válido." },
+      400,
+    );
   }
   if (
     name.length > MAX_LENGTHS.name ||
     email.length > MAX_LENGTHS.email ||
     message.length > MAX_LENGTHS.message
   ) {
-    return jsonResponse({ error: "Uno de los campos supera el largo permitido." }, 400);
+    return jsonResponse(
+      { error: "Uno de los campos supera el largo permitido." },
+      400,
+    );
   }
 
   const recaptchaToken = String(payload.recaptchaToken ?? "").trim();
   if (!recaptchaToken) {
     return jsonResponse(
-      { error: "No se pudo verificar que el envío sea humano. Recarga la página e intenta de nuevo." },
+      {
+        error:
+          "No se pudo verificar que el envío sea humano. Recarga la página e intenta de nuevo.",
+      },
       400,
     );
   }
-  const recaptchaOk = await verifyRecaptcha(recaptchaToken, request.headers.get("x-forwarded-for"));
+  const recaptchaOk = await verifyRecaptcha(
+    recaptchaToken,
+    request.headers.get("x-forwarded-for"),
+  );
   if (!recaptchaOk) {
     return jsonResponse(
-      { error: "No pudimos verificar que el envío sea humano. Intenta de nuevo." },
+      {
+        error:
+          "No pudimos verificar que el envío sea humano. Intenta de nuevo.",
+      },
       403,
     );
   }
@@ -121,8 +144,13 @@ export const POST: APIRoute = async ({ request }) => {
   // panel de Hostinger sin volver a compilar no tendría ningún efecto.
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error("RESEND_API_KEY no está configurada en el entorno del servidor.");
-    return jsonResponse({ error: "El formulario no está disponible en este momento." }, 500);
+    console.error(
+      "RESEND_API_KEY no está configurada en el entorno del servidor.",
+    );
+    return jsonResponse(
+      { error: "El formulario no está disponible en este momento." },
+      500,
+    );
   }
 
   const resend = new Resend(apiKey);
@@ -139,7 +167,10 @@ export const POST: APIRoute = async ({ request }) => {
 
   if (error) {
     console.error("Resend no pudo enviar el correo:", error);
-    return jsonResponse({ error: "No se pudo enviar el mensaje. Intenta de nuevo." }, 502);
+    return jsonResponse(
+      { error: "No se pudo enviar el mensaje. Intenta de nuevo." },
+      502,
+    );
   }
 
   return jsonResponse({ ok: true }, 200);
