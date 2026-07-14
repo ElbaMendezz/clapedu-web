@@ -133,16 +133,37 @@ const metrics: Metric[] = [
   section {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(120deg, #2a1457, #43197c 40%, #3b2a8a 64%, #13b89a);
-    background-size: 220% 220%;
-    animation: clap-gradient-shift 16s ease infinite;
+    background: #2f1a68;
     padding: 104px 48px;
+  }
+
+  /* El degradado vive en un pseudo-elemento sobredimensionado que se anima
+     con transform (compositor, no repinta) en vez de animar
+     background-position directamente sobre la sección (fuerza repintado del
+     fondo en cada frame). Esa animación de background-position, sumada al
+     repintado que dispara el conteo de los números (textContent cambiando
+     60x/s), era la causa del parpadeo: dos fuentes de repintado compitiendo
+     por el mismo frame budget sobre una capa con blobs difuminados detrás. */
+  section::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: linear-gradient(120deg, #2a1457, #43197c 40%, #3b2a8a 64%, #13b89a);
+    animation: impacto-gradient-drift 18s ease-in-out infinite;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  @keyframes impacto-gradient-drift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(-3%, 2%, 0) scale(1.08); }
   }
 
   .blob {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
+    will-change: transform;
   }
   .blob--a {
     width: 520px;
@@ -330,10 +351,13 @@ const metrics: Metric[] = [
   }
 
   .metric-number {
+    display: inline-block;
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: 42px;
+    font-size: 38px;
     line-height: 0.9;
+    font-variant-numeric: tabular-nums;
+    contain: content;
   }
   .metric-number--teal {
     color: var(--color-teal);
