@@ -1884,3 +1884,11 @@ Implementado:
 - Bug encontrado y corregido en el mismo cambio: Astro recorta el whitespace entre saltos de línea y elementos inline en el template, así que el texto entre los links quedaba pegado sin espacios ("aplican laPolítica...") — detectado leyendo `textContent` con Playwright, no a simple vista en el screenshot. Se corrigió agregando `{" "}` explícito entre los `<a>` y el texto circundante.
 
 **Verificado:** `astro check` → 0/0/0 · `npm run build` → OK · Playwright confirma `.grecaptcha-badge` con `visibility: hidden` en viewport mobile (390px) y desktop (1440px), y `.recaptcha-disclaimer` visible con el texto completo y los espacios correctos entre palabras y enlaces. Captura visual del formulario en mobile sin badge flotante y con el disclaimer legible bajo el botón.
+
+## Fix — todos los tags/eyebrows pasan de Sinete a Montserrat (2026-07-14)
+
+El usuario pidió que los "tags" del sitio (los pills en mayúsculas con letter-spacing, ej. "HABLEMOS", "NUESTRO IMPACTO", "CONÓCENOS · NUESTRA GENTE") dejaran de usar la fuente Sinete y usaran Montserrat. Los 37 archivos que estilizan esos elementos lo hacen vía `font-family: var(--font-label)`, nunca con "Sinete" hardcodeado directo — verificado con grep antes de tocar nada. Eso significa que el cambio real es de una sola línea: `src/styles/global.css`, la variable `--font-label` pasa de `"Sinete", sans-serif` a `"Montserrat", sans-serif"`.
+
+Como consecuencia directa (no un pedido aparte, sino código muerto que quedó del cambio), se eliminaron los dos únicos rastros restantes de Sinete en el proyecto: el bloque `@font-face` que la declaraba en `global.css` y el archivo `public/fonts/Sinete-Regular.otf` — confirmado con grep en `src/` y `astro.config.mjs` que no quedaba ninguna otra referencia antes de borrar el archivo.
+
+**Verificado:** `astro check` → 0/0/0 · `npm run build` → OK · Playwright confirma en 5 páginas (`/`, `/sobre-nosotros/`, `/metodologia/`, `/programas/`, `/equipo/`) que los elementos `.eyebrow` computan `font-family: Montserrat, sans-serif`, sin requests fallidos (ya no se pide `Sinete-Regular.otf`). Captura visual del hero de `/equipo/` confirma que el tag se ve igual de bien con la nueva fuente, sin regresión visual.
