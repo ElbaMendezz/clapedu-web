@@ -115,6 +115,14 @@ const socialLinks = [
           <p class="form-error" data-contact-error hidden></p>
 
           <button type="submit">Enviar mensaje</button>
+
+          <p class="recaptcha-disclaimer">
+            Este sitio está protegido por reCAPTCHA y aplican la{" "}
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de privacidad</a>{" "}
+            y los{" "}
+            <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Términos de servicio</a>{" "}
+            de Google.
+          </p>
         </form>
       </div>
 
@@ -322,6 +330,18 @@ const socialLinks = [
     opacity: 0.65;
     cursor: not-allowed;
     transform: none;
+  }
+
+  .recaptcha-disclaimer {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+    text-align: center;
+    margin-top: 14px;
+  }
+  .recaptcha-disclaimer a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .hp-field {

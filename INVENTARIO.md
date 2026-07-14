@@ -1871,3 +1871,16 @@ Fix aplicado en `src/components/sections/Impacto.astro` (home) y replicado en `s
 En Impacto.astro el usuario además ajustó a mano el `font-size` de `.metric-number` de 42px a 38px tras revisar el fix — cambio de diseño suyo, no relacionado con el bug de rendimiento, se dejó tal cual. En Cifras.astro el tamaño no se tocó (sigue en 42px / 30px mobile).
 
 **Verificado:** `astro check` → 0/0/0 · `npm run build` → OK · Playwright confirma en ambas páginas que la animación del pseudo-elemento corre (`animationName` = el keyframe nuevo), `will-change: transform` aplicado en los blobs, `tabular-nums`/`contain: content` aplicados en los números, conteo llega al valor final correcto, y no hay requests fallidos. Capturas en varios instantes durante el conteo (0ms/400ms/800ms/1200ms/1800ms) sin artefactos visuales.
+
+## Fix — badge flotante de reCAPTCHA visible en mobile (2026-07-14)
+
+El usuario reportó que en mobile se veía un mensaje "protegido por reCAPTCHA" — es el badge flotante que el script `recaptcha/api.js` (cargado en `Contacto.astro`) inyecta directamente en `<body>`, fuera del scope de cualquier componente, sin que el proyecto lo hubiera estilizado nunca. En mobile resulta más invasivo por el viewport angosto.
+
+Los términos de servicio de Google reCAPTCHA v3 permiten ocultar ese badge con CSS, pero **solo si se reemplaza por un texto de atribución visible** cerca del formulario ("Este sitio está protegido por reCAPTCHA y aplican la Política de privacidad y los Términos de servicio de Google", con enlaces a ambos documentos) — se lo planteé al usuario antes de tocar nada porque quitarlo sin eso viola el ToS y puede llevar a que Google invalide la clave. El usuario eligió ocultarlo en todos los tamaños de pantalla (no solo mobile) con el texto de atribución agregado.
+
+Implementado:
+- `src/styles/global.css`: `.grecaptcha-badge { visibility: hidden; }` — vive en el CSS global (no en un `<style>` scopeado de Astro) porque el badge se inyecta como hijo directo de `<body>`, fuera del alcance de cualquier selector con `data-astro-cid-*`.
+- `src/components/sections/Contacto.astro`: párrafo `.recaptcha-disclaimer` agregado debajo del botón "Enviar mensaje", con los enlaces requeridos a `policies.google.com/privacy` y `/terms`. Texto pequeño (11.5px) y centrado, discreto pero legible.
+- Bug encontrado y corregido en el mismo cambio: Astro recorta el whitespace entre saltos de línea y elementos inline en el template, así que el texto entre los links quedaba pegado sin espacios ("aplican laPolítica...") — detectado leyendo `textContent` con Playwright, no a simple vista en el screenshot. Se corrigió agregando `{" "}` explícito entre los `<a>` y el texto circundante.
+
+**Verificado:** `astro check` → 0/0/0 · `npm run build` → OK · Playwright confirma `.grecaptcha-badge` con `visibility: hidden` en viewport mobile (390px) y desktop (1440px), y `.recaptcha-disclaimer` visible con el texto completo y los espacios correctos entre palabras y enlaces. Captura visual del formulario en mobile sin badge flotante y con el disclaimer legible bajo el botón.

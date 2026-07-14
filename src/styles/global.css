@@ -216,3 +216,12 @@ button {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.4); opacity: 0.4; }
 }
+
+/* El script de reCAPTCHA v3 (Contacto.astro) inyecta este badge flotante
+   directamente en <body>, fuera del scope de cualquier componente — por
+   eso vive acá y no en un <style> scopeado. Los términos de Google
+   permiten ocultarlo solo si se muestra la atribución de texto requerida
+   en su lugar (ver ".recaptcha-disclaimer" en Contacto.astro). */
+.grecaptcha-badge {
+  visibility: hidden;
+}
