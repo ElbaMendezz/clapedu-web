@@ -12,6 +12,15 @@ export interface BreadcrumbItem {
 interface Props {
   title: string;
   description: string;
+  /** Palabras clave para <meta name="keywords">. Opcional — la mayoría de
+   * los buscadores (Google incluido) ya no lo usa para rankear, pero se
+   * soporta cuando una página lo pide explícitamente. */
+  keywords?: string;
+  /** Título exacto para <title>/og:title/twitter:title, sin el sufijo
+   * " · CLAP — Centro Latinoamericano del Propósito" que arma `fullTitle`
+   * a partir de `title`. Pensado para páginas (como home) cuyo título SEO
+   * no sigue el patrón estándar del resto del sitio. */
+  titleOverride?: string;
   /** Ruta relativa al sitio, ej. "/sobre-nosotros". Default: "/". */
   path?: string;
   /** Imagen para Open Graph / Twitter Card. Placeholder hasta tener un
@@ -33,6 +42,8 @@ interface Props {
 const {
   title,
   description,
+  keywords,
+  titleOverride,
   path = "/",
   ogImage = "/social-preview-fallback.png",
   ogImageWidth = 150,
@@ -50,7 +61,7 @@ const {
 const normalizedPath = path.endsWith("/") ? path : `${path}/`;
 const canonicalURL = new URL(normalizedPath, Astro.site);
 const ogImageURL = new URL(ogImage, Astro.site);
-const fullTitle = `${title} · CLAP — Centro Latinoamericano del Propósito`;
+const fullTitle = titleOverride ?? `${title} · CLAP — Centro Latinoamericano del Propósito`;
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -88,6 +99,7 @@ const breadcrumbSchema = breadcrumbs?.length
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <link rel="canonical" href={canonicalURL} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
