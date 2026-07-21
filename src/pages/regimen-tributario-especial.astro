@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/dian/Hero.astro";
+import Contenido from "../components/dian/Contenido.astro";
+---
+
+<BaseLayout
+  title="Régimen Tributario Especial"
+  description="Documentos y certificaciones de la solicitud de CLAP para su incorporación al Régimen Tributario Especial ante la DIAN, conforme al Decreto 2150 de 2017."
+  path="/regimen-tributario-especial"
+  breadcrumbs={[
+    { name: "Inicio", path: "/" },
+    { name: "Régimen Tributario Especial", path: "/regimen-tributario-especial" },
+  ]}
+>
+  <Hero />
+  <Contenido />
+</BaseLayout>

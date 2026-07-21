@@ -1,0 +1,314 @@
+---
+// Los PDFs de soporte (estados financieros, estatutos, actas, RUT, certificados)
+// no se migraron a este proyecto — se replicó la página tal cual estaba
+// publicada, así que los enlaces apuntan al hosting original donde esos
+// documentos siguen alojados. Ver INVENTARIO.md.
+const ORIGIN = "https://clapedu-org-468910.hostingersite.com";
+
+interface Requisito {
+  numero: number;
+  titulo: string;
+  html: string;
+}
+
+const requisitos: Requisito[] = [
+  {
+    numero: 1,
+    titulo:
+      "Los estados financieros de la entidad del año inmediatamente anterior debidamente aprobados por el máximo órgano de administración",
+    html: `<p>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/1.-Estados-financieros-clap-2026.pdf" target="_blank" rel="noopener">Estados financieros 2025</a><br>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/2.-Acta-28-e28093-aprobacion-de-los-estados-financieros-2025.pdf" target="_blank" rel="noopener">Acta 28 – Aprobación de los estados financieros 2025</a></p>`,
+  },
+  {
+    numero: 2,
+    titulo:
+      "Certificación de requisitos del representante legal o revisor fiscal en el que evidencia que han cumplido con todos los requisitos durante el respectivo año, conforme lo ordena el numeral 13 del parágrafo 2 del artículo 364-5 E.T.",
+    html: `<p>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/3.-Certificado-rl-regimen-tributario.pdf" target="_blank" rel="noopener">Certificación firmada por representante legal</a></p>`,
+  },
+  {
+    numero: 3,
+    titulo: "Copia de la escritura pública, documento privado o acta de constitución.",
+    html: `<p>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/12.-Acta-de-constitucion-clap.pdf" target="_blank" rel="noopener">Acta de constitución Asociación Centro Latinoamericano del Propósito</a></p>`,
+  },
+  {
+    numero: 4,
+    titulo: "Certificado de existencia y representación legal expedido por la autoridad competente.",
+    html: `<p>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/6.-Certificado-existen-y-representacion-legal-clap-13052026.pdf" target="_blank" rel="noopener">Certificado de existencia y representación legal actualizado al 13 de mayo de 2026</a></p>`,
+  },
+  {
+    numero: 5,
+    titulo:
+      "Copia del acta de la Asamblea General o máximo órgano de dirección, en la que se autorice al representante legal para que solicite que la entidad permanezca y/o sea calificada, según sea el caso, como entidad del Régimen Tributario Especial del Impuesto sobre la Renta.",
+    html: `<p>➜ <a href="https://clapeduorg.wordpress.com/wp-content/uploads/2026/05/2.-acta-28-e28093-aprobacion-de-los-estados-financieros-2025.pdf" target="_blank" rel="noreferrer noopener">Acta 28 – Aprobación presentación del Régimen Tributario Especial por parte del Representante Legal</a></p>`,
+  },
+  {
+    numero: 6,
+    titulo: "Copia de los estatutos o acta del máximo órgano directivo.",
+    html: `<p>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/4.-Estatutos-centro-latinoamericano-del-proposito.pdf" target="_blank" rel="noopener">Estatutos Asociación Centro Latinoamericano del Propósito</a><br>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/5.-Acta-24-e28093-aprobacion-de-reforma-de-estatutos.pdf" target="_blank" rel="noopener">Acta 24 – Aprobación de Reforma de Estatutos</a></p>
+    <p>Nuestros estatutos indican:</p>
+    <p>a) Actividad meritoria de libre acceso a la comunidad, educación para el trabajo y el desarrollo humano actividad que se encuentra en el artículo 359 del Estatuto Tributario.<br>El Centro Latinoamericano del Propósito es una organización no gubernamental constituida con el fin de formar líderes innovadores para resolver problemas complejos de la sociedad latinoamericana. Para ello se ha propuesto crear programas de educación adaptados al contexto latinoamericano, crear proyectos e iniciativas que contribuyan al fortalecimiento empresarial, social y tecnológico de la región y colaborar en la labor educativa, científica e investigativa del sector público, privado y social. En concreto, realizamos las siguientes actividades económicas:<br>8551 – Formación académica no formal<br>7020 – Actividades de consultoría de gestión<br>7220 – Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades<br>9412 – Actividades de asociaciones profesionales<br>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/7.-RUT-clap-12052026.pdf" target="_blank" rel="noopener">Registro Único Tributario</a></p>
+    <p>b) Nuestros aportes no son reembolsables.<br>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/8.-Resolucion-01-2023-vinculacion-asociados.pdf" target="_blank" rel="noopener">Resolución 01-2023 – Vinculación de asociados</a></p>
+    <p>c) Nuestros excedentes no son distribuidos bajo ninguna modalidad.</p>
+    <p>d) Nuestros cargos directivos son:<br>Presidente de la Junta Directiva<br>Vicepresidente de la Junta Directiva<br>Secretario de la Junta Directiva<br>Vocal de la Junta Directiva<br>Fiscal de la Junta Directiva<br>Director Ejecutivo<br>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/9.-Acta-nc2b0-27-nombramientos-junta-directiva.pdf" target="_blank" rel="noopener">Acta 27 – Nombramiento de la Junta Directiva</a></p>`,
+  },
+  {
+    numero: 7,
+    titulo:
+      "Certificación del Representante Legal de los antecedentes judiciales y declaración de caducidad de contratos estatales de los miembros de la junta directiva, fundadores, representantes legales o miembros de los órganos de dirección de conformidad con el numeral 3 artículo 364-3 E.T.",
+    html: `<p>➜ <a href="${ORIGIN}/wp-content/uploads/2026/06/11.-Certificado-antecedentes-miembros-directivos.pdf" target="_blank" rel="noopener">Certificado de antecedentes de los miembros directivos</a></p>`,
+  },
+];
+---
+
+<section class="contenido">
+  <div class="wrap">
+    <p>
+      De acuerdo a los requerimientos indicados en el Decreto 2150 de 2017, la solicitud consta de los puntos
+      mencionados a continuación:
+    </p>
+    <p>
+      <strong>CLAP</strong> es Asociación Centro Latinoamericano del Propósito, domiciliada en Calle 37 N° 12-46,
+      Casa de la Cultura Custodio García Rovira Oficina 202, Bucaramanga.
+    </p>
+
+    <div class="datos">
+      <p><strong>Nº Identificación Tributaria (NIT):</strong> 900712683-0</p>
+      <p><strong>Matrícula Mercantil:</strong> Nº 512052 – Cámara de Comercio de Bucaramanga</p>
+      <p><strong>Acta de Registro:</strong> Nº 46991 del Libro 1 – Entidades Sin Ánimo de Lucro (ESAL)</p>
+    </div>
+
+    <h2>Documentos de la solicitud</h2>
+    <p>Para efectos de la solicitud, se incluyen los siguientes documentos.</p>
+
+    <div class="accordion">
+      {
+        requisitos.map((r) => (
+          <div class="accordion-item" class:list={[{ "is-open": r.numero === 1 }]}>
+            <button
+              type="button"
+              class="accordion-trigger"
+              aria-expanded={r.numero === 1 ? "true" : "false"}
+            >
+              <span class="accordion-number">{r.numero}</span>
+              <span class="accordion-titulo">{r.titulo}</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-panel">
+              <div class="accordion-content" set:html={r.html} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>(".contenido .accordion-item");
+
+  items.forEach((item) => {
+    const trigger = item.querySelector<HTMLButtonElement>(".accordion-trigger");
+    const panel = item.querySelector<HTMLElement>(".accordion-panel");
+    if (!trigger || !panel) return;
+
+    if (item.classList.contains("is-open")) {
+      panel.style.maxHeight = `${panel.scrollHeight}px`;
+    }
+
+    trigger.addEventListener("click", () => {
+      const isOpen = item.classList.contains("is-open");
+
+      if (isOpen) {
+        panel.style.maxHeight = "0px";
+        item.classList.remove("is-open");
+        trigger.setAttribute("aria-expanded", "false");
+      } else {
+        panel.style.maxHeight = `${panel.scrollHeight}px`;
+        item.classList.add("is-open");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+</script>
+
+<style>
+  .contenido {
+    background: #fff;
+    padding: 60px 48px 96px;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .wrap > p {
+    font-size: 16px;
+    line-height: 1.78;
+    color: #4a4463;
+    margin-top: 16px;
+  }
+  .wrap > p:first-child {
+    margin-top: 0;
+  }
+  .wrap > p :global(strong) {
+    color: #341c65;
+  }
+
+  .datos {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #faf7ff;
+    border: 1px solid #ece7f5;
+    border-radius: 18px;
+    padding: 24px 28px;
+  }
+  .datos p {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: #4a4463;
+  }
+  .datos p :global(strong) {
+    color: #341c65;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 23px;
+    color: #341c65;
+    line-height: 1.25;
+    margin-top: 46px;
+    letter-spacing: -0.01em;
+  }
+
+  .accordion {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .accordion-item {
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    transition: border-color 0.25s ease;
+  }
+  .accordion-item.is-open {
+    border-color: rgba(59, 224, 187, 0.5);
+  }
+
+  .accordion-trigger {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    width: 100%;
+    padding: 18px 22px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+  }
+  .accordion-trigger:focus-visible {
+    outline: 2px solid var(--color-teal-dark);
+    outline-offset: -2px;
+  }
+
+  .accordion-number {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--color-social-bg);
+    color: var(--color-ink-strong);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 13px;
+  }
+
+  .accordion-titulo {
+    flex: 1;
+    font-size: 15.5px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+
+  .accordion-icon {
+    flex-shrink: 0;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    margin-top: 4px;
+  }
+  .accordion-icon::before,
+  .accordion-icon::after {
+    content: "";
+    position: absolute;
+    background: var(--color-teal-dark);
+    border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s ease;
+  }
+  .accordion-icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+  .accordion-icon::after {
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+  .accordion-item.is-open .accordion-icon::after {
+    transform: translateX(-50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .accordion-content {
+    padding: 0 22px 20px 62px;
+  }
+  .accordion-content :global(p) {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #4a4463;
+    margin-top: 12px;
+  }
+  .accordion-content :global(p:first-child) {
+    margin-top: 0;
+  }
+  .accordion-content :global(a) {
+    color: #13b89a;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .accordion-content :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 639.98px) {
+    .contenido {
+      padding: 44px 22px 72px;
+    }
+    .accordion-content {
+      padding-left: 22px;
+    }
+  }
+</style>

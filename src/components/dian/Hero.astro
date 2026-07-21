@@ -1,0 +1,140 @@
+---
+import { Image } from "astro:assets";
+import heroDian from "../../assets/images/dian-hero.webp";
+---
+
+<section class="hero">
+  <div class="media" aria-hidden="true">
+    <Image src={heroDian} alt="" width={1717} height={916} />
+    <div class="scrim scrim--side"></div>
+    <div class="scrim scrim--bottom"></div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow" data-reveal data-delay="100">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      <span>Legal · Régimen Tributario Especial</span>
+    </div>
+    <h1 data-reveal data-delay="270">
+      Solicitud de Incorporación al <span class="accent">Régimen Tributario Especial</span>
+    </h1>
+    <p data-reveal data-delay="460">
+      Documentos y certificaciones presentados ante la DIAN, conforme al Decreto 2150 de 2017 · Asociación Centro
+      Latinoamericano del Propósito — CLAP
+    </p>
+  </div>
+</section>
+
+<script>
+  import { attachReveal } from "../../scripts/reveal";
+
+  const section = document.querySelector<HTMLElement>(".hero");
+  if (section) {
+    attachReveal(section, { threshold: 0.08, rootMargin: "0px 0px -4% 0px", repeat: false, duration: 700 });
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: #1a0f36;
+    display: flex;
+    align-items: center;
+    min-height: 480px;
+    padding: 170px 48px 80px;
+  }
+
+  .media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+  .scrim {
+    position: absolute;
+    inset: 0;
+  }
+  .scrim--side {
+    background: linear-gradient(
+      90deg,
+      rgba(22, 12, 46, 0.86) 0%,
+      rgba(26, 15, 54, 0.58) 46%,
+      rgba(20, 11, 42, 0.28) 78%,
+      rgba(20, 11, 42, 0.12) 100%
+    );
+  }
+  .scrim--bottom {
+    background: linear-gradient(
+      180deg,
+      rgba(22, 12, 46, 0.3) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(15, 8, 38, 0.45) 100%
+    );
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(59, 224, 187, 0.4);
+    border-radius: 40px;
+    margin-bottom: 20px;
+    background: rgba(59, 224, 187, 0.1);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-label);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #3be0bb;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3be0bb;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 46px;
+    line-height: 1.08;
+    letter-spacing: -0.028em;
+    color: #fff;
+    text-wrap: balance;
+  }
+  h1 .accent {
+    color: #3be0bb;
+  }
+
+  .content p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 18px;
+    max-width: 640px;
+  }
+
+  @media (max-width: 639.98px) {
+    h1 {
+      font-size: 34px;
+    }
+  }
+</style>
