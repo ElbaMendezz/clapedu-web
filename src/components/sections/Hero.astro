@@ -42,7 +42,16 @@ import Aliados from "./Aliados.astro";
 
     <div class="hero-visual">
       <div class="hero-image-frame">
-        <Image src={heroImage} alt="Comunidad CLAP" width={640} height={500} loading="eager" fetchpriority="high" layout="constrained" />
+        <Image
+          src={heroImage}
+          alt="Comunidad CLAP"
+          width={640}
+          height={500}
+          loading="eager"
+          fetchpriority="high"
+          layout="constrained"
+          widths={[640, 828, 960]}
+        />
         <div class="hero-image-overlay" aria-hidden="true"></div>
       </div>
       <div class="hero-float hero-float--left">
