@@ -10,7 +10,7 @@
    rango completo — no se descargó la familia estática completa. */
 @font-face {
   font-family: "Montserrat";
-  src: url("/fonts/Montserrat-Variable.woff2") format("woff2");
+  src: url("../assets/fonts/Montserrat-Variable.woff2") format("woff2");
   font-weight: 400 800;
   font-style: normal;
   font-display: swap;
@@ -18,49 +18,49 @@
 
 @font-face {
   font-family: "Proxima Nova";
-  src: url("/fonts/ProximaNova-Light.woff2") format("woff2");
+  src: url("../assets/fonts/ProximaNova-Light.woff2") format("woff2");
   font-weight: 300;
   font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
-  src: url("/fonts/ProximaNova-Regular.woff2") format("woff2");
+  src: url("../assets/fonts/ProximaNova-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
-  src: url("/fonts/ProximaNova-Semibold.woff2") format("woff2");
+  src: url("../assets/fonts/ProximaNova-Semibold.woff2") format("woff2");
   font-weight: 600;
   font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
-  src: url("/fonts/ProximaNova-Bold.woff2") format("woff2");
+  src: url("../assets/fonts/ProximaNova-Bold.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
-  src: url("/fonts/ProximaNova-Extrabld.woff2") format("woff2");
+  src: url("../assets/fonts/ProximaNova-Extrabld.woff2") format("woff2");
   font-weight: 800;
   font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
-  src: url("/fonts/ProximaNova-Black.woff2") format("woff2");
+  src: url("../assets/fonts/ProximaNova-Black.woff2") format("woff2");
   font-weight: 900;
   font-display: swap;
 }
 @font-face {
   font-family: "Neulis";
-  src: url("/fonts/Neulis-Light.otf") format("opentype");
+  src: url("../assets/fonts/Neulis-Light.otf") format("opentype");
   font-weight: 300;
   font-display: swap;
 }
 @font-face {
   font-family: "Neulis";
-  src: url("/fonts/Neulis-SemiBold.otf") format("opentype");
+  src: url("../assets/fonts/Neulis-SemiBold.otf") format("opentype");
   font-weight: 600;
   font-display: swap;
 }
