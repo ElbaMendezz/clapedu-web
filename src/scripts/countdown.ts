@@ -1,5 +1,5 @@
 /**
- * Cuenta regresiva del hero de /programas hasta el 1 de agosto de 2026,
+ * Cuenta regresiva del hero de /programas hasta el 4 de agosto de 2026,
  * 23:59:59 (hora Colombia, UTC-5). Pinta ceros, espera 350ms y hace un
  * "roll-up" de 1.1s desde 0 hasta el valor real (ease-out cúbico) antes de
  * arrancar el conteo en vivo cada 1s. Réplica de setupCountdown(), ver
@@ -9,7 +9,7 @@ export function attachCountdown(root: ParentNode): void {
   const wrap = root.querySelector<HTMLElement>("[data-countdown]");
   if (!wrap) return;
 
-  const target = new Date("2026-08-01T23:59:59-05:00").getTime();
+  const target = new Date("2026-08-04T23:59:59-05:00").getTime();
   const els = {
     days: root.querySelector<HTMLElement>('[data-cd="days"]'),
     hours: root.querySelector<HTMLElement>('[data-cd="hours"]'),
