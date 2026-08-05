@@ -9,7 +9,7 @@ export function attachCountdown(root: ParentNode): void {
   const wrap = root.querySelector<HTMLElement>("[data-countdown]");
   if (!wrap) return;
 
-  const target = new Date("2026-08-04T23:59:59-05:00").getTime();
+  const target = new Date("2026-08-18T23:59:59-05:00").getTime();
   const els = {
     days: root.querySelector<HTMLElement>('[data-cd="days"]'),
     hours: root.querySelector<HTMLElement>('[data-cd="hours"]'),
