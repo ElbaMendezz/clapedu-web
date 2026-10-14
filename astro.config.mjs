@@ -14,4 +14,13 @@ export default defineConfig({
   // un servidor Node autocontenido (dist/server/entry.mjs), compatible con
   // el hosting Node.js de Hostinger Cloud.
   adapter: node({ mode: 'standalone' }),
+  // A partir de astro@7.3.6 / @astrojs/node@11.1.7, el adapter valida el
+  // header Host contra security.allowedDomains; sin esto configurado, cae
+  // a "localhost" en vez de clapedu.org detrás del proxy de Hostinger.
+  security: {
+    allowedDomains: [
+      { hostname: 'clapedu.org', protocol: 'https' },
+      { hostname: 'www.clapedu.org', protocol: 'https' },
+    ],
+  },
 });
