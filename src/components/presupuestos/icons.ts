@@ -1,5 +1,5 @@
 /**
- * Contenido interno (24x24, stroke) de los iconos Lucide que usa /presupuestos.
+ * Contenido interno (24x24, stroke) de los iconos Lucide que usa /presupuestos-participativos.
  * Generado desde lucide-react 0.546.0 (la misma versión de la referencia) para
  * que el trazo sea idéntico sin agregar la dependencia. Ver Icon.astro.
  */

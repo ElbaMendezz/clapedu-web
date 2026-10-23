@@ -1,5 +1,5 @@
 /**
- * Scroll reveal de /presupuestos. Reemplaza los `whileInView` de framer-motion
+ * Scroll reveal de /presupuestos-participativos. Reemplaza los `whileInView` de framer-motion
  * del original (`viewport={{ once: false, amount }}`): al entrar en el viewport
  * el elemento anima a su estado final y, al salir, vuelve al inicial, de modo
  * que se reanima cada vez que reaparece.

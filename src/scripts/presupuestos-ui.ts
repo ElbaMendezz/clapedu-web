@@ -1,5 +1,5 @@
 /**
- * Helpers compartidos por los scripts de /presupuestos.
+ * Helpers compartidos por los scripts de /presupuestos-participativos.
  *
  * El original en React alternaba conjuntos completos de clases de Tailwind
  * según el estado (`isSelected ? '…' : '…'`). Acá cada elemento declara sus

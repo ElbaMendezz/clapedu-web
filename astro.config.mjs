@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://clapedu.org',
   integrations: [sitemap()],
-  // Tailwind v4 solo lo usa /presupuestos (src/styles/presupuestos.css,
+  // Tailwind v4 solo lo usa /presupuestos-participativos (src/styles/presupuestos.css,
   // importado únicamente desde PresupuestosLayout). El resto del sitio sigue
   // con CSS scoped + global.css: el plugin solo procesa los CSS que
   // declaran `@import "tailwindcss"`.

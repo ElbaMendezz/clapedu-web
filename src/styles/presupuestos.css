@@ -1,5 +1,5 @@
 /*
- * Estilos de /presupuestos (Presupuestos Participativos · Póngase Pilas).
+ * Estilos de /presupuestos-participativos (Presupuestos Participativos · Póngase Pilas).
  *
  * Port de `index.css` de la micro-landing React original ("pps final 2").
  * Se importa SOLO desde PresupuestosLayout: esta página no carga global.css,
@@ -13,7 +13,7 @@
 @import "tailwindcss" source(none);
 
 @source "../components/presupuestos";
-@source "../pages/presupuestos.astro";
+@source "../pages/presupuestos-participativos.astro";
 @source "../layouts/PresupuestosLayout.astro";
 @source "../scripts/presupuestos-*.ts";
 

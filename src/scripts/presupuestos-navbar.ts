@@ -4,7 +4,7 @@ import { setState } from "./presupuestos-ui";
 const SCROLLED_AFTER = 40;
 
 /**
- * Navbar de /presupuestos: alterna el estilo de la barra al hacer scroll y
+ * Navbar de /presupuestos-participativos: alterna el estilo de la barra al hacer scroll y
  * maneja el menú móvil (`isScrolled` / `mobileMenuOpen` del original).
  */
 export function attachNavbar(header: HTMLElement): void {
