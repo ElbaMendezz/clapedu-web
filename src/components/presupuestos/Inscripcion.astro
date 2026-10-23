@@ -1,0 +1,250 @@
+---
+import Icon from "./Icon.astro";
+import { CAME_INFO, INSCRIPCION_FORM_URL } from "../../data/presupuestos-data";
+---
+
+<section id="paso-a-paso" class="py-20 sm:py-28 bg-[#0c0817] relative overflow-hidden border-t-4 border-black">
+  <!-- Texture decor -->
+  <div class="absolute inset-0 bg-halftone opacity-30 pointer-events-none"></div>
+  <div class="absolute top-1/3 right-0 w-96 h-96 bg-purple-600/10 blur-[140px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header with inView scroll motion -->
+    <div
+      data-reveal
+      data-y="35"
+      data-amount="0.2"
+      data-duration="0.6"
+      data-ease="out"
+      class="text-center max-w-3xl mx-auto mb-16"
+    >
+      <div class="inline-flex items-center gap-2 bg-[#9eff00] text-black px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-4 border-2 border-black shadow-[3px_3px_0px_#000]">
+        <Icon name="ClipboardList" class="w-4 h-4" />
+        <span>Guía de Postulación Oficial</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        ¿Cómo me inscribo?{" "}
+        <span class="text-[#9eff00] underline decoration-[#ffb703] decoration-wavy">
+          Paso a paso
+        </span>
+      </h2>
+
+      <p class="mt-4 text-base sm:text-lg text-slate-300 font-medium">
+        Siga este recorrido sencillo para asegurar su cupo antes del 24 de octubre.
+        Tenga sus documentos al día para evitar contratiempos en la verificación.
+      </p>
+    </div>
+
+    <!-- 4 Steps Timeline / Process Cards with alternating slide-in animations -->
+    <div class="space-y-6 max-w-4xl mx-auto mb-14">
+      <!-- Paso 1 -->
+      <div
+        data-reveal
+        data-x="-35"
+        data-amount="0.2"
+        data-duration="0.5"
+        data-ease="out"
+        class="motion-hover [--hs:1.01] [--hx:4px] neo-box bg-[#1b1038] p-6 sm:p-8 rounded-3xl border-3 border-black flex flex-col md:flex-row items-start gap-6 relative overflow-hidden group transition-all"
+      >
+        <div class="w-14 h-14 rounded-2xl bg-[#9eff00] text-black font-black text-2xl flex items-center justify-center shrink-0 border-2 border-black shadow-[4px_4px_0px_#000]">
+          1
+        </div>
+        <div class="flex-1">
+          <span class="text-xs font-black uppercase tracking-wider text-lime-400 mb-1 block">
+            Paso 1
+          </span>
+          <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
+            Escoja su diplomado
+          </h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+            Mire cuál corresponde a su barrio. Recuerde que cada una de las 9 ofertas barriales está destinada a sectores específicos convocados.
+          </p>
+          <button
+            type="button"
+            data-scroll-to="oferta"
+            class="inline-flex items-center gap-2 text-xs font-black text-[#9eff00] hover:text-white transition-colors underline decoration-2 cursor-pointer"
+          >
+            <span>Consultar el mapa de diplomados por barrio</span>
+            <Icon name="ArrowRight" class="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 2: Reúna sus documentos -->
+      <div
+        data-reveal
+        data-x="35"
+        data-amount="0.2"
+        data-duration="0.5"
+        data-delay="0.1"
+        data-ease="out"
+        class="motion-hover [--hs:1.01] [--hx:-4px] neo-box bg-[#1d113f] p-6 sm:p-8 rounded-3xl border-3 border-lime-400 flex flex-col md:flex-row items-start gap-6 relative overflow-hidden transition-all"
+      >
+        <div class="w-14 h-14 rounded-2xl bg-[#ffb703] text-black font-black text-2xl flex items-center justify-center shrink-0 border-2 border-black shadow-[4px_4px_0px_#000]">
+          2
+        </div>
+        <div class="flex-1 w-full">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+            <span class="text-xs font-black uppercase tracking-wider text-[#ffb703]">
+              Paso 2 · Clave
+            </span>
+            <span class="bg-[#ffb703] text-black text-[11px] font-black px-2.5 py-0.5 rounded-full border border-black uppercase">
+              Requisito Indispensable
+            </span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black text-white mb-3">
+            Reúna sus documentos
+          </h3>
+          <div class="space-y-3 mb-6">
+            <div class="bg-[#100822] p-3.5 rounded-2xl border border-purple-800/80 flex items-start gap-3">
+              <Icon name="CheckCircle2" class="w-5 h-5 text-lime-400 shrink-0 mt-0.5" />
+              <span class="text-sm text-slate-200 font-medium">
+                <strong class="text-white">Copia legible por ambas caras</strong> de su cédula de ciudadanía o tarjeta de identidad vigente (ampliada al 150%).
+              </span>
+            </div>
+
+            <div class="bg-[#100822] p-3.5 rounded-2xl border border-purple-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-start gap-3">
+                <Icon name="Building2" class="w-5 h-5 text-[#ffb703] shrink-0 mt-0.5" />
+                <div>
+                  <span class="text-sm text-slate-200 font-medium block">
+                    <strong class="text-white">Certificado de residencia</strong> expedido y firmado por la Alcaldía de Bucaramanga.
+                  </span>
+                  <span class="text-xs text-slate-400">
+                    Se gestiona virtualmente o en ventanilla CAME de la Alcaldía.
+                  </span>
+                </div>
+              </div>
+              <a
+                href={CAME_INFO.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="neo-box-sm bg-[#6a0dad] hover:bg-[#580cd2] text-white text-xs font-black px-3.5 py-2 rounded-xl flex items-center justify-center gap-1.5 shrink-0 transition-colors"
+              >
+                <span>Cómo sacar mi certificado</span>
+                <Icon name="ExternalLink" class="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            <div class="bg-[#100822] p-3.5 rounded-2xl border border-purple-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-start gap-3">
+                <Icon name="FileText" class="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                <div>
+                  <span class="text-sm text-slate-200 font-medium block">
+                    <strong class="text-white">Formulario oficial de inscripción</strong> diligenciado y radicado.
+                  </span>
+                  <span class="text-xs text-slate-400">
+                    Formulario digital oficial habilitado para la convocatoria 2026.
+                  </span>
+                </div>
+              </div>
+              <a
+                href={INSCRIPCION_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="neo-box-sm bg-[#9eff00] hover:bg-[#8cee00] text-black text-xs font-black px-4 py-2 rounded-xl flex items-center justify-center gap-1.5 shrink-0 transition-transform cursor-pointer"
+              >
+                <span>Llenar Formulario Oficial</span>
+                <Icon name="ExternalLink" class="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+
+          <!-- Informative CAME Box from the Flyer attachment -->
+          <div class="bg-gradient-to-r from-emerald-950/40 via-purple-950/40 to-black p-4 rounded-2xl border-2 border-emerald-400/60">
+            <div class="flex items-center gap-2 text-emerald-400 text-xs font-black uppercase tracking-wider mb-2">
+              <Icon name="Sparkles" class="w-4 h-4" />
+              <span>Papeles requeridos para el Certificado CAME (Alcaldía - IMEBU):</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-200 font-medium">
+              {
+                CAME_INFO.requisitosJornada.map((req, i) => (
+                  <div class="flex items-start gap-2 bg-black/40 p-2 rounded-lg border border-purple-900/40">
+                    <span class="text-emerald-400 font-black">{i + 1}.</span>
+                    <span>{req}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 3: Si es menor de 18 años -->
+      <div
+        data-reveal
+        data-x="-35"
+        data-amount="0.2"
+        data-duration="0.5"
+        data-delay="0.15"
+        data-ease="out"
+        class="motion-hover [--hs:1.01] [--hx:4px] neo-box bg-[#1b1038] p-6 sm:p-8 rounded-3xl border-3 border-black flex flex-col md:flex-row items-start gap-6 relative overflow-hidden transition-all"
+      >
+        <div class="w-14 h-14 rounded-2xl bg-purple-500 text-white font-black text-2xl flex items-center justify-center shrink-0 border-2 border-black shadow-[4px_4px_0px_#000]">
+          3
+        </div>
+        <div class="flex-1">
+          <span class="text-xs font-black uppercase tracking-wider text-purple-300 mb-1 block">
+            Paso 3 · Casos Especiales
+          </span>
+          <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
+            Si es menor de 18 años (16 y 17 años)
+          </h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
+            Debe presentar una <strong class="text-white font-bold">autorización por escrito firmada por su padre, madre o representante legal</strong>, junto con la copia legible del documento de identidad de quien firma como acudiente.
+          </p>
+        </div>
+      </div>
+
+      <!-- Paso 4: Si se inscribe a Primera Infancia -->
+      <div
+        data-reveal
+        data-x="35"
+        data-amount="0.2"
+        data-duration="0.5"
+        data-delay="0.2"
+        data-ease="out"
+        class="motion-hover [--hs:1.01] [--hx:-4px] neo-box bg-[#221017] p-6 sm:p-8 rounded-3xl border-3 border-[#ff2a85] flex flex-col md:flex-row items-start gap-6 relative overflow-hidden transition-all"
+      >
+        <div class="w-14 h-14 rounded-2xl bg-[#ff2a85] text-white font-black text-2xl flex items-center justify-center shrink-0 border-2 border-black shadow-[4px_4px_0px_#000]">
+          4
+        </div>
+        <div class="flex-1">
+          <span class="text-xs font-black uppercase tracking-wider text-pink-400 mb-1 block">
+            Paso 4 · Específico
+          </span>
+          <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
+            Si se inscribe al diplomado de Primera Infancia
+          </h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
+            Presente además el <strong class="text-pink-300 font-bold">certificado de inhabilidades por delitos sexuales</strong> expedido por la entidad competente, con <strong class="text-white font-bold">máximo 30 días de expedido</strong> a la fecha de radicación.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Big Action Button with inView animation -->
+    <div
+      data-reveal
+      data-scale="0.9"
+      data-amount="0.2"
+      data-duration="0.5"
+      data-ease="out"
+      class="text-center max-w-xl mx-auto"
+    >
+      <a
+        href={INSCRIPCION_FORM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full sm:w-auto neo-box bg-[#9eff00] hover:bg-[#8cee00] text-black font-black text-base sm:text-xl px-10 py-4.5 rounded-2xl inline-flex items-center justify-center gap-3 cursor-pointer transition-transform active:translate-y-1 shadow-2xl animate-button-neon shine-sweep"
+      >
+        <span>Ir al formulario oficial de inscripción</span>
+        <Icon name="ExternalLink" class="w-5 h-5 stroke-[3]" />
+      </a>
+    </div>
+    <p class="mt-4 text-xs text-slate-400 text-center">
+      *Enlace oficial habilitado por la Alcaldía de Bucaramanga y el IMEBU en Google Forms. Formación 100% gratuita.
+    </p>
+  </div>
+</section>

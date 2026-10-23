@@ -1,0 +1,57 @@
+---
+import BaseHead from "../components/layout/BaseHead.astro";
+import type { BreadcrumbItem } from "../components/layout/BaseHead.astro";
+import "../styles/presupuestos.css";
+import barlowBlackUrl from "../assets/fonts/Barlow-Black.woff2?url";
+import poppinsMediumUrl from "../assets/fonts/Poppins-Medium.woff2?url";
+import poppinsBlackUrl from "../assets/fonts/Poppins-Black.woff2?url";
+
+/**
+ * Layout de /presupuestos. A diferencia de BaseLayout no monta el Header,
+ * Footer ni ToTopButton de CLAP (la landing trae los suyos) y no carga
+ * global.css: ver el comentario de src/styles/presupuestos.css.
+ */
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  titleOverride?: string;
+  path?: string;
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  noindex?: boolean;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const head = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead {...head}>
+      <link rel="preload" href={barlowBlackUrl} as="font" type="font/woff2" crossorigin />
+      <link rel="preload" href={poppinsBlackUrl} as="font" type="font/woff2" crossorigin />
+      <link rel="preload" href={poppinsMediumUrl} as="font" type="font/woff2" crossorigin />
+    </BaseHead>
+    <!-- Habilita el estado inicial oculto de [data-reveal] (ver presupuestos.css) -->
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+    <noscript>
+      <style>
+        [data-reveal] {
+          opacity: 1 !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <div
+      class="min-h-screen bg-[#0c0817] text-slate-100 flex flex-col selection:bg-[#9eff00] selection:text-black relative"
+    >
+      <slot />
+    </div>
+  </body>
+</html>

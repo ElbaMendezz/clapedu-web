@@ -1,0 +1,496 @@
+---
+import Icon from "./Icon.astro";
+import { BARRIOS_DATA, DIPLOMADOS_DATA, INSCRIPCION_FORM_URL } from "../../data/presupuestos-data";
+
+const categories = ["Todas", "Belleza", "Diseño & Textil", "Gastronomía", "Oficios Técnicos", "Cuidado Social", "Transporte"];
+
+const zones = [
+  { name: "Norte (Comunas 1 y 2)", filterKey: "Norte" },
+  { name: "Morrorrico (Comuna 14)", filterKey: "Morrorrico" },
+  { name: "Occidental (Comuna 4)", filterKey: "Occidental" },
+  { name: "Sur (Comunas 10 y 11)", filterKey: "Sur" },
+];
+
+// Conjuntos de clases por estado. El script (presupuestos-oferta.ts) los intercambia: ver presupuestos-ui.ts.
+const MODE_ON = "bg-[#9eff00] text-black border-black shadow-[3px_3px_0px_#000]";
+const MODE_OFF = "bg-[#26154d] text-slate-300 border-purple-800 hover:text-white";
+const CAT_ON = "bg-purple-600 text-white border-purple-300 shadow-[2px_2px_0px_#000] scale-105";
+const CAT_OFF = "bg-[#120a26] text-slate-300 hover:text-white border-purple-900/80 hover:border-purple-600";
+const RESET_ON = "bg-[#ff2a85] text-white border-black shadow-[2px_2px_0px_#000] hover:scale-105 active:scale-95";
+const RESET_OFF = "bg-[#120a26] text-slate-500 border-purple-900/50 cursor-not-allowed opacity-40";
+const CHIP_ON = "bg-[#9eff00] text-black border-black shadow-[3px_3px_0px_#000] scale-105";
+const CHIP_ALT = "bg-[#9eff00]/25 text-[#affc41] border-[#9eff00] shadow-[0_0_12px_rgba(158,255,0,0.5)] scale-105 font-black";
+const CHIP_OFF = "bg-[#1e113d] text-slate-300 border-purple-800/80 hover:border-purple-500 hover:text-white";
+const CARD_ON = "bg-gradient-to-b from-[#24154a] to-[#160c30] border-[#9eff00] ring-2 ring-[#9eff00]/30";
+const CARD_OFF = "bg-gradient-to-b from-[#1c113b] to-[#120a26] border-black hover:border-purple-400";
+const TAG_ON = "bg-[#9eff00] text-black border-black font-black shadow-[2px_2px_0px_#000]";
+const TAG_OFF = "bg-purple-950/80 text-purple-200 border-purple-800/80 hover:border-purple-600";
+---
+
+<section id="oferta" data-oferta class="py-20 sm:py-28 bg-[#120a26] relative overflow-hidden border-t-4 border-black">
+  <!-- Background Ambience -->
+  <div class="absolute inset-0 bg-halftone opacity-30 pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Title with inView scroll motion -->
+    <div
+      data-reveal
+      data-y="35"
+      data-amount="0.2"
+      data-duration="0.6"
+      data-ease="out"
+      class="text-center max-w-3xl mx-auto mb-12"
+    >
+      <div class="inline-flex items-center gap-2 bg-[#9eff00] text-black px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-4 border-2 border-black shadow-[3px_3px_0px_#000]">
+        <Icon name="Sparkles" class="w-4 h-4 fill-black" />
+        <span>Convocatoria Barrial 2026</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        La Oferta:{" "}
+        <span class="text-[#9eff00] underline decoration-[#ff2a85] decoration-wavy">
+          Diplomados en su Barrio
+        </span>
+      </h2>
+
+      <p class="mt-4 text-base sm:text-lg text-slate-300 font-medium">
+        Revise cuál se ofrece en su barrio. Cada diplomado tiene zonas y cupos asignados.
+        Seleccione su sector o explore toda la oferta formativa técnica disponible.
+      </p>
+    </div>
+
+    <!-- View Mode Switcher & Search Bar with inView motion -->
+    <div
+      data-reveal
+      data-y="30"
+      data-amount="0.1"
+      data-duration="0.5"
+      data-delay="0.1"
+      data-ease="out"
+      class="neo-box bg-[#1b1038] p-4 sm:p-6 rounded-3xl border-3 border-black mb-10 shadow-xl overflow-hidden"
+    >
+      <div class="space-y-4 pb-5 border-b border-purple-900/80">
+        <!-- 1. Botones Explorar por Barrio y Ver Todos los Diplomados -->
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-2.5 w-full">
+          <button
+            type="button"
+            data-mode-btn="barrios"
+            data-on={MODE_ON}
+            data-off={MODE_OFF}
+            class:list={[
+              "flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 transition-all flex items-center justify-center gap-2 cursor-pointer",
+              MODE_ON,
+            ]}
+          >
+            <Icon name="MapPin" class="w-4 h-4" />
+            <span>Explorar por Barrio</span>
+          </button>
+
+          <button
+            type="button"
+            data-mode-btn="todos"
+            data-on={MODE_ON}
+            data-off={MODE_OFF}
+            class:list={[
+              "flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 transition-all flex items-center justify-center gap-2 cursor-pointer",
+              MODE_OFF,
+            ]}
+          >
+            <Icon name="Filter" class="w-4 h-4" />
+            <span>Ver Todos los Diplomados</span>
+          </button>
+        </div>
+
+        <!-- 2. El Buscador -->
+        <div class="relative w-full">
+          <Icon name="Search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            data-search
+            name="buscar"
+            aria-label="Buscar barrio o diplomado"
+            placeholder="Escriba su barrio (ej: gaitan, roca, betania...) o diplomado..."
+            class="w-full pl-10 pr-10 py-2.5 sm:py-3 bg-[#0f0722] border-2 border-purple-800 focus:border-[#9eff00] text-white rounded-xl text-xs sm:text-sm placeholder:text-slate-500 focus:outline-none transition-colors"
+          />
+          <button
+            type="button"
+            data-search-clear
+            hidden
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-white cursor-pointer p-1"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- 3. Filtro de Área con tabs y barra horizontal navegable + Limpiar Filtros -->
+        <div class="flex flex-col gap-2.5 pt-1">
+          <!-- Cabecera de filtros: Arriba de los tabs para dar 100% de espacio horizontal a la barra deslizadora -->
+          <div class="flex items-center justify-between gap-2 w-full">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <span class="text-slate-300 font-bold whitespace-nowrap flex items-center gap-1.5 text-xs">
+                <Icon name="Filter" class="w-3.5 h-3.5 text-[#9eff00]" />
+                <span>Filtrar área:</span>
+              </span>
+              <span
+                data-cat-chip
+                hidden
+                class="hidden sm:inline-flex bg-purple-900/80 text-purple-200 text-[11px] font-bold px-2 py-0.5 rounded-full border border-purple-500/50 truncate max-w-[120px]"
+              ></span>
+            </div>
+
+            <!-- Botón Limpiar Filtros - Compacto y estratégico en móvil -->
+            <button
+              type="button"
+              data-reset
+              data-on={RESET_ON}
+              data-off={RESET_OFF}
+              disabled
+              class:list={[
+                "px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl font-black text-[11px] sm:text-xs border transition-all flex items-center gap-1 cursor-pointer shrink-0",
+                RESET_OFF,
+              ]}
+              title="Limpiar todos los filtros"
+            >
+              <Icon name="RotateCcw" class="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <span class="sm:hidden">Limpiar</span>
+              <span class="hidden sm:inline">Limpiar filtros</span>
+            </button>
+          </div>
+
+          <!-- Barra de navegación horizontal scrollable con flechas y tabs a ancho completo -->
+          <div class="flex items-center gap-1.5 min-w-0 w-full">
+            <!-- Botón flecha izquierda para navegar tabs -->
+            <button
+              type="button"
+              data-cat-scroll="-1"
+              aria-label="Desplazar filtros a la izquierda"
+              class="shrink-0 w-8 h-8 rounded-lg bg-[#26154d] hover:bg-[#ff2a85] text-slate-300 hover:text-white border border-purple-700/80 hover:border-black flex items-center justify-center transition-all cursor-pointer shadow-sm active:scale-95"
+            >
+              <Icon name="ChevronLeft" class="w-4 h-4" />
+            </button>
+
+            <!-- Barra de navegación horizontal scrollable con tabs -->
+            <div
+              data-cat-scroller
+              class="flex items-center gap-2 overflow-x-auto min-w-0 flex-1 py-1 px-1 text-xs scroll-smooth custom-horizontal-scrollbar"
+            >
+              <div class="flex items-center gap-1.5 flex-nowrap shrink-0">
+                {
+                  categories.map((cat, idx) => (
+                    <button
+                      type="button"
+                      data-cat-btn={cat}
+                      data-on={CAT_ON}
+                      data-off={CAT_OFF}
+                      class:list={[
+                        "px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all cursor-pointer border shrink-0 text-xs",
+                        idx === 0 ? CAT_ON : CAT_OFF,
+                      ]}
+                    >
+                      {cat}
+                    </button>
+                  ))
+                }
+              </div>
+            </div>
+
+            <!-- Botón flecha derecha para navegar tabs -->
+            <button
+              type="button"
+              data-cat-scroll="1"
+              aria-label="Desplazar filtros a la derecha"
+              class="shrink-0 w-8 h-8 rounded-lg bg-[#26154d] hover:bg-[#ff2a85] text-slate-300 hover:text-white border border-purple-700/80 hover:border-black flex items-center justify-center transition-all cursor-pointer shadow-sm active:scale-95"
+            >
+              <Icon name="ChevronRight" class="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-time Detected Barrio Banner when user searches for their community -->
+      <div
+        data-detected
+        hidden
+        class="mt-4 p-4 bg-gradient-to-r from-emerald-950/90 via-purple-950/80 to-black rounded-2xl border-2 border-[#9eff00] shadow-[4px_4px_0px_#000] flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+      >
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#9eff00] text-black font-black flex items-center justify-center shrink-0 shadow-[2px_2px_0px_#000]">
+            <Icon name="Check" class="w-6 h-6 stroke-[3]" />
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-black uppercase text-[#9eff00] tracking-wider bg-black/60 px-2 py-0.5 rounded border border-lime-400/40">
+                ✓ ¡Comunidad encontrada en la convocatoria!
+              </span>
+            </div>
+            <h4 data-detected-title class="text-white text-sm sm:text-base font-black mt-1"></h4>
+            <p class="text-xs text-slate-300 font-medium">
+              <span data-detected-count></span> diplomado(s) técnico(s) 100% gratuito(s) con kit de trabajo asignados para este sector.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 shrink-0 self-start sm:self-auto">
+          <button
+            type="button"
+            data-detected-go
+            class="text-xs font-black bg-[#9eff00] hover:bg-[#8cee00] text-black px-4 py-2 rounded-xl border-2 border-black shadow-[2px_2px_0px_#000] transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+          >
+            Ver este sector
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Neighborhood Visual Grid (when viewMode === 'barrios') -->
+      <div data-barrios-panel class="pt-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+          <span class="text-xs font-black uppercase tracking-wider text-[#ffb703] flex items-center gap-1.5">
+            <Icon name="MapPin" class="w-3.5 h-3.5" />
+            <span>Seleccione su barrio para ver los diplomados disponibles:</span>
+          </span>
+          <button
+            type="button"
+            data-barrios-clear
+            hidden
+            class="text-xs font-bold text-slate-400 hover:text-[#9eff00] flex items-center gap-1 self-start sm:self-auto cursor-pointer"
+          >
+            <Icon name="RotateCcw" class="w-3 h-3" /> Ver todos los barrios
+          </button>
+        </div>
+
+        <!-- Zones & Barrios Chips -->
+        <div class="space-y-3">
+          {
+            zones.map((zone) => (
+              <div class="bg-[#120a26]/70 p-3 rounded-2xl border border-purple-900/60">
+                <span class="text-[11px] font-black uppercase tracking-wider text-purple-300 block mb-2">
+                  {zone.name}
+                </span>
+                <div class="flex flex-wrap gap-2">
+                  {BARRIOS_DATA.filter((b) => b.zone === zone.filterKey).map((barrio) => (
+                    <button
+                      type="button"
+                      data-barrio-btn={barrio.id}
+                      data-on={CHIP_ON}
+                      data-alt={CHIP_ALT}
+                      data-off={CHIP_OFF}
+                      data-color={barrio.color}
+                      class:list={[
+                        "px-3 py-1.5 rounded-xl font-bold text-xs border-2 transition-all flex items-center gap-1.5 cursor-pointer",
+                        CHIP_OFF,
+                      ]}
+                    >
+                      <span data-barrio-dot class="w-2 h-2 rounded-full" style={`background-color: ${barrio.color}`} />
+                      <span>{barrio.name}</span>
+                      <span class="text-[10px] opacity-75 font-semibold">({barrio.diplomadoIds.length})</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Selected Barrio Active Info Banner -->
+        <div
+          data-selected-banner
+          hidden
+          class="mt-4 p-3.5 bg-gradient-to-r from-purple-900/40 via-purple-950/60 to-black rounded-xl border border-lime-400/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+        >
+          <div class="flex items-center gap-3">
+            <div class="p-2 rounded-lg bg-[#9eff00] text-black font-black">
+              <Icon name="MapPin" class="w-5 h-5" />
+            </div>
+            <div>
+              <h4 class="text-sm font-black text-white">
+                Barrio seleccionado: <span data-sel-name class="text-[#9eff00]"></span> (<span data-sel-comuna></span>)
+              </h4>
+              <p class="text-xs text-slate-300">
+                <span data-sel-desc></span> · <span data-sel-count></span> diplomado(s) disponible(s).
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            data-sel-clear
+            class="text-xs font-bold bg-purple-900/80 hover:bg-purple-800 text-white px-3 py-1.5 rounded-lg border border-purple-700 self-start sm:self-auto cursor-pointer"
+          >
+            Limpiar selección
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Bar -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 px-1">
+      <div class="text-sm text-slate-300 font-bold flex items-center gap-2">
+        <span>Resultados de la oferta:</span>
+        <span class="bg-[#9eff00] text-black text-xs font-black px-2.5 py-0.5 rounded-full border border-black">
+          <span data-results-count>{DIPLOMADOS_DATA.length}</span> <span data-results-label>diplomados</span>
+        </span>
+        <span data-results-in hidden class="text-xs text-lime-400 font-semibold">
+          en <span data-results-in-name></span>
+        </span>
+      </div>
+
+      <button
+        type="button"
+        data-reset-all
+        hidden
+        class="text-xs font-bold text-slate-400 hover:text-white underline decoration-[#9eff00] flex items-center gap-1 cursor-pointer"
+      >
+        <Icon name="RotateCcw" class="w-3 h-3" /> Restablecer todos los filtros
+      </button>
+    </div>
+
+    <!-- Diplomados Grid Cards -->
+    <div data-empty hidden class="neo-box bg-[#1b1038] p-8 sm:p-10 rounded-3xl border-3 border-black text-center max-w-2xl mx-auto shadow-xl">
+      <div class="w-14 h-14 rounded-2xl bg-amber-400/20 text-[#ffb703] flex items-center justify-center mx-auto mb-4 border-2 border-[#ffb703] shadow-[3px_3px_0px_#000]">
+        <Icon name="MapPin" class="w-7 h-7" />
+      </div>
+      <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
+        ¿No encontró el nombre exacto de su barrio?
+      </h3>
+      <p class="text-sm text-slate-300 mb-4 font-medium leading-relaxed">
+        ¡No se preocupe! La convocatoria agrupa a las comunidades por <strong>Comunas y sectores</strong> (Comunas 1 y 2 en el Norte, Comuna 14 en Morrorrico, Comuna 4 en Occidente, y Comunas 10 y 11 en el Sur). Si usted vive cerca de estos barrios o en un sector vecino, también puede consultar las opciones disponibles.
+      </p>
+      <div class="bg-purple-950/60 p-4 rounded-2xl border border-purple-800/80 mb-6 text-left">
+        <span class="text-xs font-black uppercase text-[#9eff00] tracking-wider block mb-2.5">
+          📍 Barrios y sectores convocados en esta fase (haga clic en el suyo):
+        </span>
+        <div class="flex flex-wrap gap-1.5">
+          {
+            BARRIOS_DATA.map((b) => (
+              <button
+                type="button"
+                data-empty-barrio={b.id}
+                class="text-xs bg-black/60 hover:bg-[#9eff00] hover:text-black text-slate-200 px-2.5 py-1 rounded-lg border border-purple-800 hover:border-black transition-colors cursor-pointer"
+              >
+                {b.name}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button
+          type="button"
+          data-reset-empty
+          class="neo-box-sm bg-[#9eff00] hover:bg-[#8cee00] text-black font-black text-xs sm:text-sm px-5 py-3 rounded-xl inline-flex items-center gap-2 cursor-pointer shadow-[3px_3px_0px_#000] transition-all hover:scale-105 active:scale-95"
+        >
+          <Icon name="RotateCcw" class="w-4 h-4" /> Ver todos los diplomados
+        </button>
+      </div>
+    </div>
+
+    <div data-grid class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+      {
+        DIPLOMADOS_DATA.map((dip, idx) => (
+          <div
+            data-dip={dip.id}
+            data-reveal
+            data-y="30"
+            data-scale="0.96"
+            data-amount="0.15"
+            data-duration="0.5"
+            data-delay={(idx % 3) * 0.1}
+            data-ease="out"
+            data-on={CARD_ON}
+            data-off={CARD_OFF}
+            class:list={[
+              "motion-hover [--hy:-6px] [--hs:1.01] neo-box rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-3 transition-all relative overflow-hidden group",
+              CARD_OFF,
+            ]}
+          >
+            {/* Top Header Card */}
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="neo-box-sm bg-black text-[#9eff00] font-black text-[11px] uppercase tracking-wider px-3 py-1 rounded-full border border-[#9eff00]/50">
+                  {dip.badge}
+                </span>
+                <span class="text-[11px] font-bold text-purple-300 bg-purple-950/70 px-2.5 py-0.5 rounded-lg border border-purple-800">
+                  {dip.category}
+                </span>
+              </div>
+
+              <h3 class="text-xl sm:text-2xl font-black text-white group-hover:text-[#9eff00] transition-colors leading-tight mb-2">
+                {dip.name}
+              </h3>
+
+              <p class="text-xs font-semibold text-lime-300 mb-4">{dip.tagline}</p>
+
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-5 font-normal">
+                {dip.description}
+              </p>
+
+              {/* Stats pill bar */}
+              <div class="grid grid-cols-2 gap-2 bg-[#0c071a] p-3 rounded-2xl border border-purple-900/60 mb-5">
+                <div class="flex items-center gap-2">
+                  <Icon name="Clock" class="w-4 h-4 text-lime-400 shrink-0" />
+                  <div>
+                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Duración</span>
+                    <span class="text-xs font-black text-white">{dip.hours} horas</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Icon name="Users" class="w-4 h-4 text-[#ff2a85] shrink-0" />
+                  <div>
+                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Cupos</span>
+                    <span class="text-xs font-black text-white">{dip.cupos} cupos</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Barrios Chips - ALL barrios displayed without slicing */}
+              <div class="mb-5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 flex items-center gap-1 mb-2">
+                  <Icon name="MapPin" class="w-3 h-3 text-cyan-400" />
+                  <span>Barrios donde se ofrece ({dip.barrios.length}):</span>
+                </span>
+                <div class="flex flex-wrap gap-1.5">
+                  {dip.barrios.map((b) => (
+                    <span
+                      data-dip-tag={b.toLowerCase()}
+                      data-on={TAG_ON}
+                      data-off={TAG_OFF}
+                      class:list={["text-[11px] font-bold px-2.5 py-0.5 rounded-md border", TAG_OFF]}
+                    >
+                      📍 {b}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Special Requirement Callout if any - no line-clamp ellipsis */}
+              {dip.specialRequirements && (
+                <div class="mb-5 p-2.5 rounded-xl bg-amber-500/10 border border-amber-400/80 text-amber-200 text-[11px] font-bold flex items-center gap-2">
+                  <Icon name="AlertTriangle" class="w-4 h-4 text-amber-400 shrink-0" />
+                  <span class="leading-snug">{dip.specialRequirements}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Card Bottom Actions - Big and prominent Inscribirme Button */}
+            <div class="pt-4 border-t border-purple-900/60 mt-2">
+              <a
+                href={INSCRIPCION_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full neo-box bg-[#9eff00] hover:bg-[#8cee00] text-black font-black text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-[1.02] active:scale-95 shadow-[3px_3px_0px_#000] shine-sweep text-center"
+              >
+                <Icon name="Zap" class="w-4 h-4 fill-black text-black animate-zap shrink-0" />
+                <span>Inscribirme en este diplomado</span>
+                <Icon name="ArrowRight" class="w-4 h-4 stroke-[3] shrink-0" />
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachOferta } from "../../scripts/presupuestos-oferta";
+
+  document.querySelectorAll<HTMLElement>("[data-oferta]").forEach(attachOferta);
+</script>

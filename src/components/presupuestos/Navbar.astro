@@ -1,0 +1,168 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logoPps from "../../assets/images/presupuestos-logo-pps.png";
+import { INSCRIPCION_FORM_URL } from "../../data/presupuestos-data";
+
+const navLinks = [
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Kit de Emprendimiento", href: "#kit" },
+  { label: "¿Qué es?", href: "#que-es" },
+  { label: "Oferta & Barrios", href: "#oferta" },
+  { label: "Requisitos", href: "#requisitos" },
+  { label: "Paso a Paso", href: "#paso-a-paso" },
+  { label: "Preguntas", href: "#faq" },
+];
+
+// Estado de la barra según el scroll (`isScrolled` del original): ver presupuestos-ui.ts.
+const NAV_SCROLLED = "bg-[#100a20]/95 backdrop-blur-md border-b-2 border-black py-2.5 shadow-xl";
+const NAV_TOP = "bg-[#120a26]/80 backdrop-blur-sm border-b border-purple-900/50 py-3.5";
+---
+
+<header data-pps-header class="fixed top-0 left-0 right-0 z-50">
+  <!-- Top Notification Bar -->
+  <div class="bg-[#9eff00] text-black font-extrabold text-xs md:text-sm py-1.5 px-4 text-center tracking-wide border-b-2 border-black flex items-center justify-center gap-2 md:gap-4 overflow-hidden shadow-sm">
+    <span class="inline-flex items-center gap-1.5 bg-black text-[#9eff00] px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider">
+      <Icon name="Sparkles" class="w-3 h-3 text-[#9eff00]" /> Convocatoria 2026
+    </span>
+    <span class="hidden sm:inline">Presupuestos Participativos · Alcaldía de Bucaramanga & IMEBU</span>
+    <span class="font-black underline decoration-black decoration-2">Iniciamos el 24 de Octubre</span>
+    <button
+      type="button"
+      data-scroll-to="oferta"
+      class="ml-2 hidden md:inline-flex items-center gap-1 bg-[#6a0dad] hover:bg-[#580cd2] text-white px-2 py-0.5 rounded text-xs transition-colors"
+    >
+      <Icon name="MapPin" class="w-3 h-3" /> Ver mi barrio
+    </button>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <nav
+    data-pps-nav
+    data-on={NAV_SCROLLED}
+    data-off={NAV_TOP}
+    class:list={["transition-all duration-300", NAV_TOP]}
+  >
+    <div class="w-full max-w-[100rem] mx-auto px-2 sm:px-4 lg:px-8 flex items-center justify-between gap-2 lg:gap-4 relative">
+      <!-- Left Corner: Volver a clapedu.org (Desktop only) or Spacer for mobile/tablet centering -->
+      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+        <!-- Volver a clapedu.org - Hidden on mobile and tablet, only on desktop (xl+) -->
+        <a
+          href="/"
+          class="hidden xl:flex neo-box-sm bg-[#1e1038] hover:bg-[#2c174f] text-slate-200 hover:text-white px-3 sm:px-3.5 py-1.5 rounded-xl border-2 border-purple-800 hover:border-[#9eff00] text-xs font-bold transition-all items-center gap-1.5 group cursor-pointer shadow-[2px_2px_0px_#000] whitespace-nowrap flex-nowrap shrink-0"
+          title="Volver a clapedu.org"
+        >
+          <Icon name="ArrowLeft" class="w-3.5 h-3.5 text-[#9eff00] group-hover:-translate-x-1 transition-transform stroke-[2.5] shrink-0" />
+          <span class="inline text-slate-300 font-medium whitespace-nowrap">Volver a</span>
+          <span class="text-[#9eff00] font-black whitespace-nowrap">clapedu.org</span>
+        </a>
+
+        <!-- Spacer to balance the hamburger button on mobile and tablet -->
+        <div class="w-10 h-10 xl:hidden" aria-hidden="true"></div>
+      </div>
+
+      <!-- Logo Brand - Perfectly centered on mobile and tablet, left-aligned on desktop -->
+      <div class="flex-1 xl:flex-none flex items-center justify-center xl:justify-start">
+        <a href="#" class="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#9eff00] rounded-lg shrink-0">
+          <div class="relative">
+            <Image
+              src={logoPps}
+              alt="Póngase Pilas Logo"
+              format="png"
+              loading="eager"
+              class="h-9 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            />
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation Links - Strictly in one single line -->
+      <div class="hidden xl:flex items-center gap-1 2xl:gap-2 whitespace-nowrap flex-nowrap shrink-0">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-xs 2xl:text-sm font-semibold text-slate-200 hover:text-[#9eff00] px-2.5 2xl:px-3 py-1.5 rounded-md transition-colors hover:bg-white/5 whitespace-nowrap flex-nowrap shrink-0"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Actions - On mobile & tablet only the hamburger menu is shown -->
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0 justify-end">
+        <a
+          href={INSCRIPCION_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden xl:inline-flex neo-box-sm bg-[#9eff00] hover:bg-[#8cee00] text-black font-extrabold text-xs sm:text-sm px-3.5 sm:px-4 py-2 rounded-xl items-center gap-1.5 cursor-pointer animate-button-neon shine-sweep hover:scale-105 active:scale-95 transition-all shadow-[3px_3px_0px_#000] whitespace-nowrap flex-nowrap shrink-0"
+        >
+          <Icon name="Zap" class="w-3.5 h-3.5 fill-black text-black animate-zap shrink-0" />
+          <span class="whitespace-nowrap">¡Quiero inscribirme!</span>
+          <Icon name="ArrowUpRight" class="w-4 h-4 stroke-[3] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
+        </a>
+
+        <!-- Mobile menu trigger - Perfectly balanced on mobile & tablet -->
+        <button
+          type="button"
+          data-pps-burger
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="pps-mobile-menu"
+          class="xl:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-purple-900/50 border border-purple-700 text-white hover:text-[#9eff00] focus:outline-none shrink-0"
+        >
+          <Icon name="Menu" data-pps-burger-open class="w-6 h-6" />
+          <Icon name="X" data-pps-burger-close hidden class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div
+      id="pps-mobile-menu"
+      data-pps-menu
+      hidden
+      class="xl:hidden bg-[#130b29] border-b-2 border-black px-4 pt-3 pb-6 space-y-2 text-center shadow-2xl"
+    >
+      <div class="grid grid-cols-2 gap-2 text-left mb-3">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-xs font-bold text-slate-200 hover:text-black hover:bg-[#9eff00] p-2.5 rounded-lg border border-purple-900/50 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+      <div class="pt-2 border-t border-purple-900/60 flex flex-col gap-2">
+        <a
+          href="/"
+          class="w-full bg-[#1b0f34] hover:bg-[#251547] text-slate-200 p-2.5 rounded-lg border border-purple-800 flex items-center justify-center gap-2 text-xs font-bold"
+        >
+          <Icon name="ArrowLeft" class="w-4 h-4 text-[#9eff00]" />
+          <span>Volver a <strong class="text-[#9eff00]">clapedu.org</strong></span>
+        </a>
+
+        <a
+          href={INSCRIPCION_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full neo-box bg-[#9eff00] text-black font-black py-2.5 rounded-lg text-sm flex items-center justify-center gap-2"
+        >
+          <span>¡Quiero inscribirme ahora!</span>
+          <Icon name="CheckCircle2" class="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  import { attachNavbar } from "../../scripts/presupuestos-navbar";
+
+  const header = document.querySelector<HTMLElement>("[data-pps-header]");
+  if (header) attachNavbar(header);
+</script>

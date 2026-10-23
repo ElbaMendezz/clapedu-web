@@ -1,0 +1,129 @@
+---
+import Icon from "./Icon.astro";
+import { CAME_INFO, FAQ_DATA } from "../../data/presupuestos-data";
+
+// Conjuntos de clases abierto / cerrado (ver presupuestos-ui.ts). La primera pregunta arranca abierta.
+const CARD_ON = "bg-[#1e113e] border-[#9eff00] shadow-[5px_5px_0px_#000]";
+const CARD_OFF = "bg-[#160d2e] border-black hover:border-purple-500";
+const MARK_ON = "bg-[#9eff00] text-black";
+const MARK_OFF = "bg-purple-900/60 text-purple-200";
+const CHEVRON_ON = "rotate-180";
+---
+
+<section id="faq" class="py-20 sm:py-28 bg-[#120a26] relative overflow-hidden border-t-4 border-black">
+  <!-- Texture decor -->
+  <div class="absolute inset-0 bg-halftone opacity-30 pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header with inView scroll motion -->
+    <div
+      data-reveal
+      data-y="35"
+      data-amount="0.2"
+      data-duration="0.6"
+      data-ease="out"
+      class="text-center max-w-2xl mx-auto mb-16"
+    >
+      <div class="inline-flex items-center gap-2 bg-[#6a0dad] text-lime-300 px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-4 border-2 border-black shadow-[3px_3px_0px_#000]">
+        <Icon name="MessageCircleQuestion" class="w-4 h-4 text-lime-400" />
+        <span>Respuestas Claras y Oficiales</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        Preguntas Frecuentes
+      </h2>
+
+      <p class="mt-4 text-base sm:text-lg text-slate-300 font-medium">
+        Todo lo que necesita saber sobre los diplomados, el kit de emprendimiento y el proceso de postulación.
+      </p>
+    </div>
+
+    <!-- Accessible Accordion with inView motion -->
+    <div class="space-y-4" data-faq>
+      {
+        FAQ_DATA.map((item, index) => {
+          const isOpen = index === 0;
+          return (
+            <div
+              data-faq-item
+              data-reveal
+              data-y="20"
+              data-amount="0.15"
+              data-duration="0.45"
+              data-delay={(index % 4) * 0.08}
+              data-ease="out"
+              data-on={CARD_ON}
+              data-off={CARD_OFF}
+              class:list={[
+                "motion-hover [--hs:1.01] neo-box rounded-2xl border-3 transition-all overflow-hidden",
+                isOpen ? CARD_ON : CARD_OFF,
+              ]}
+            >
+              <h3>
+                <button
+                  type="button"
+                  id={`faq-heading-${index}`}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${index}`}
+                  data-faq-btn
+                  class="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#9eff00]"
+                >
+                  <span class="flex items-center gap-3.5">
+                    <span
+                      data-faq-mark
+                      data-on={MARK_ON}
+                      data-off={MARK_OFF}
+                      class:list={[
+                        "w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs border border-black shrink-0",
+                        isOpen ? MARK_ON : MARK_OFF,
+                      ]}
+                    >
+                      ?
+                    </span>
+                    <span class="text-base sm:text-lg font-black text-white leading-snug">{item.question}</span>
+                  </span>
+                  <Icon
+                    name="ChevronDown"
+                    data-faq-chevron
+                    data-on={CHEVRON_ON}
+                    class:list={["w-5 h-5 text-[#9eff00] shrink-0 transition-transform duration-200", isOpen && CHEVRON_ON]}
+                  />
+                </button>
+              </h3>
+              <div
+                id={`faq-panel-${index}`}
+                role="region"
+                aria-labelledby={`faq-heading-${index}`}
+                data-faq-panel
+                hidden={!isOpen}
+                class="px-5 sm:px-6 pb-6 pt-1 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-purple-900/60"
+              >
+                <p class="font-normal text-slate-200">{item.answer}</p>
+                {/* Helpful quick link if question is about residence certificate */}
+                {item.question.includes("certificado de residencia") && (
+                  <div class="mt-4 pt-3 border-t border-purple-900/50">
+                    <a
+                      href={CAME_INFO.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 text-xs font-black text-[#9eff00] hover:text-white underline transition-colors"
+                    >
+                      <span>Ir al trámite virtual en la Alcaldía (CAME)</span>
+                      <Icon name="ExternalLink" class="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachFaq } from "../../scripts/presupuestos-faq";
+
+  document.querySelectorAll<HTMLElement>("[data-faq]").forEach(attachFaq);
+</script>

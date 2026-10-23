@@ -1,0 +1,23 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<button
+  type="button"
+  data-pps-totop
+  hidden
+  aria-label="Subir al inicio de la página"
+  title="Subir al inicio"
+  class="motion-hover [--hs:1.12] [--hy:-3px] [--ts:0.9] fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#271250] hover:bg-[#391b72] active:bg-[#1a0a38] text-white flex items-center justify-center border-2 border-purple-400/80 hover:border-[#9eff00] shadow-[0_8px_25px_rgba(0,0,0,0.6)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#9eff00] transition-colors group"
+>
+  <!-- Subtle neon ring highlight on hover -->
+  <div class="absolute inset-0 rounded-full bg-[#9eff00]/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+  <Icon name="ArrowUp" class="w-5 h-5 sm:w-6 sm:h-6 text-white stroke-[2.75] group-hover:-translate-y-0.5 transition-transform" />
+</button>
+
+<script>
+  import { attachScrollTop } from "../../scripts/presupuestos-scroll-top";
+
+  const button = document.querySelector<HTMLElement>("[data-pps-totop]");
+  if (button) attachScrollTop(button);
+</script>

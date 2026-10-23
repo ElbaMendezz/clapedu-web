@@ -1,0 +1,245 @@
+---
+import Icon from "./Icon.astro";
+import { REQUISITOS_GENERALES } from "../../data/presupuestos-data";
+
+// Botones del comprobador: conjuntos de clases activo / inactivo (ver presupuestos-ui.ts).
+const OPT_BASE = "px-4 py-2 rounded-xl text-xs font-bold border-2 transition-all";
+const OPT_OFF = "bg-black/50 text-slate-300 border-purple-800";
+const OPT_LIME = "bg-[#9eff00] text-black border-black font-black shadow-[2px_2px_0px_#000]";
+const OPT_RED = "bg-red-500 text-white border-black font-black shadow-[2px_2px_0px_#000]";
+const OPT_AMBER = "bg-[#ffb703] text-black border-black font-black shadow-[2px_2px_0px_#000]";
+---
+
+<section id="requisitos" class="py-20 sm:py-28 bg-[#120a26] relative overflow-hidden border-t-4 border-black">
+  <!-- Background Ambience -->
+  <div class="absolute inset-0 bg-halftone opacity-30 pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header with inView scroll motion -->
+    <div
+      data-reveal
+      data-y="35"
+      data-amount="0.2"
+      data-duration="0.6"
+      data-ease="out"
+      class="text-center max-w-3xl mx-auto mb-16"
+    >
+      <div class="inline-flex items-center gap-2 bg-[#ffb703] text-black px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-4 border-2 border-black shadow-[3px_3px_0px_#000]">
+        <Icon name="UserCheck" class="w-4 h-4 fill-black text-black" />
+        <span>Perfil de Convocatoria Abierta</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        ¿Quién puede participar?{" "}
+        <span class="text-[#9eff00] underline decoration-[#ff2a85] decoration-wavy">
+          Estos son los requisitos
+        </span>
+      </h2>
+
+      <p class="mt-4 text-base sm:text-lg text-slate-300 font-medium">
+        La convocatoria es pública, incluyente y abierta para habitantes de Bucaramanga.
+        Revise los requisitos generales y las condiciones especiales antes de reunir sus papeles.
+      </p>
+    </div>
+
+    <!-- Requirements Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+      <!-- General Requirements (4 main cards with inView motion) -->
+      <div
+        data-reveal
+        data-x="-30"
+        data-amount="0.15"
+        data-duration="0.5"
+        data-ease="out"
+        class="lg:col-span-7 space-y-4"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-black uppercase tracking-wider text-lime-400 flex items-center gap-1.5">
+            <Icon name="CheckCircle2" class="w-4 h-4 text-lime-400" />
+            <span>Requisitos Generales (Aplican para todos los aspirantes)</span>
+          </span>
+          <span class="text-[11px] font-bold text-slate-400 bg-black/40 px-2 py-0.5 rounded-md border border-purple-900">
+            Obligatorios
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {
+            REQUISITOS_GENERALES.map((req, idx) => (
+              <div class="motion-hover [--hy:-4px] [--hs:1.02] neo-box bg-[#1b1038] p-5 rounded-2xl border-2 border-lime-400/80 hover:border-lime-400 transition-colors flex flex-col justify-between">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="w-8 h-8 rounded-xl bg-lime-400 text-black font-black text-xs flex items-center justify-center border-2 border-black">
+                    {idx + 1}
+                  </span>
+                  <h3 class="text-base font-black text-white">{req.title}</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">{req.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Special Requirements (Differentiated Callouts with inView motion) -->
+      <div
+        data-reveal
+        data-x="30"
+        data-amount="0.15"
+        data-duration="0.5"
+        data-delay="0.1"
+        data-ease="out"
+        class="lg:col-span-5 space-y-4"
+      >
+        <span class="text-xs font-black uppercase tracking-wider text-[#ffb703] flex items-center gap-1.5 mb-2">
+          <Icon name="AlertTriangle" class="w-4 h-4 text-[#ffb703]" />
+          <span>Condiciones Especiales por Programa</span>
+        </span>
+
+        <!-- Special Condition 1: Primera Infancia -->
+        <div class="motion-hover [--hy:-4px] [--hs:1.015] neo-box bg-[#221017] p-5 rounded-2xl border-2 border-pink-500 relative overflow-hidden">
+          <div class="flex items-center gap-2 text-pink-400 font-black text-xs uppercase tracking-wider mb-2">
+            <span>🧸 Primera Infancia (Brisas de Provenza)</span>
+          </div>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-200 font-medium">
+            <li class="flex items-start gap-2">
+              <span class="text-pink-400 font-bold">⚠️</span>
+              <span><strong>Mayores de 18 años únicamente.</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-pink-400 font-bold">⚠️</span>
+              <span>
+                Sin inhabilidad por delitos sexuales. Debe presentar <strong>certificado oficial de antecedentes de inhabilidades</strong> expedido con máximo 30 días de antelación.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Special Condition 2: Transportadores -->
+        <div class="motion-hover [--hy:-4px] [--hs:1.015] neo-box bg-[#271d0b] p-5 rounded-2xl border-2 border-amber-400 relative overflow-hidden">
+          <div class="flex items-center gap-2 text-amber-400 font-black text-xs uppercase tracking-wider mb-2">
+            <span>🚖 Transportadores / Taxistas</span>
+          </div>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-200 font-medium">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400 font-bold">⚠️</span>
+              <span><strong>Mayores de edad.</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400 font-bold">⚠️</span>
+              <span>
+                Portar <strong>tarjeta de control vigente</strong> correspondiente a la empresa de transporte público individual de Bucaramanga.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Eligibility Quick Checker with inView animation -->
+    <div
+      data-reveal
+      data-y="30"
+      data-amount="0.15"
+      data-duration="0.5"
+      data-ease="out"
+      data-comprobador
+      class="w-full neo-box bg-[#1b1038] p-6 sm:p-8 rounded-3xl border-3 border-black shadow-[5px_5px_0px_#000]"
+    >
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-6 border-b border-purple-900/80">
+        <div class="text-left">
+          <h3 class="text-xl font-black text-white flex items-center gap-2">
+            <Icon name="ShieldCheck" class="w-5 h-5 text-lime-400" />
+            <span>¿Cumple con los requisitos? Compruébelo en 3 clics</span>
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Herramienta interactiva para validar su perfil en menos de 30 segundos.
+          </p>
+        </div>
+        <button
+          type="button"
+          data-check-toggle
+          class="neo-box-sm bg-[#9eff00] hover:bg-[#8cee00] text-black font-black text-xs px-4 py-2 rounded-xl"
+        >
+          Probar comprobador
+        </button>
+      </div>
+
+      <div data-check-panel hidden class="space-y-6 text-left">
+        <!-- Question 1: Citizenship -->
+        <div>
+          <span class="text-xs font-black uppercase text-slate-300 block mb-2">
+            1. ¿Tiene nacionalidad colombiana?
+          </span>
+          <div class="flex gap-3">
+            <button type="button" data-check-opt="colombian" data-value="yes" data-on={OPT_LIME} data-off={OPT_OFF} class:list={[OPT_BASE, OPT_OFF]}>
+              Sí, soy colombiano
+            </button>
+            <button type="button" data-check-opt="colombian" data-value="no" data-on={OPT_RED} data-off={OPT_OFF} class:list={[OPT_BASE, OPT_OFF]}>
+              No
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 2: Age -->
+        <div>
+          <span class="text-xs font-black uppercase text-slate-300 block mb-2">
+            2. ¿Qué edad tiene a la fecha de inicio del programa?
+          </span>
+          <div class="flex flex-wrap gap-2.5">
+            <button type="button" data-check-opt="age" data-value="under16" data-on={OPT_RED} data-off={OPT_OFF} class:list={[OPT_BASE, OPT_OFF]}>
+              Menos de 16 años
+            </button>
+            <button type="button" data-check-opt="age" data-value="16-17" data-on={OPT_AMBER} data-off={OPT_OFF} class:list={[OPT_BASE, OPT_OFF]}>
+              Entre 16 y 17 años
+            </button>
+            <button type="button" data-check-opt="age" data-value="18plus" data-on={OPT_LIME} data-off={OPT_OFF} class:list={[OPT_BASE, OPT_OFF]}>
+              18 años o más
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 3: Residence -->
+        <div>
+          <span class="text-xs font-black uppercase text-slate-300 block mb-2">
+            3. ¿Reside en alguno de los 13 barrios priorizados de Bucaramanga?
+          </span>
+          <div class="flex gap-3">
+            <button type="button" data-check-opt="barrio" data-value="yes" data-on={OPT_LIME} data-off={OPT_OFF} class:list={[OPT_BASE, OPT_OFF]}>
+              Sí, vivo en uno de los barrios convocados
+            </button>
+            <button type="button" data-check-opt="barrio" data-value="no" data-on={OPT_RED} data-off={OPT_OFF} class:list={[OPT_BASE, OPT_OFF]}>
+              Vivo en otro sector no incluido
+            </button>
+          </div>
+        </div>
+
+        <!-- Status Output -->
+        <div
+          data-check-result
+          hidden
+          data-on="bg-lime-950/40 border-[#9eff00] text-lime-200"
+          data-off="bg-red-950/40 border-red-500 text-red-200"
+          class="p-4 rounded-2xl border-2"
+        >
+          <div class="flex items-center gap-2 font-black text-sm mb-1">
+            <span data-check-ok class="contents">
+              <Icon name="Check" class="w-5 h-5 text-[#9eff00]" />
+              <span class="text-[#9eff00]">¡ELEGIBLE PARA PARTICIPAR!</span>
+            </span>
+            <span data-check-fail class="contents">
+              <Icon name="X" class="w-5 h-5 text-red-400" />
+              <span class="text-red-400">NO CUMPLE LOS CRITERIOS ACTUALES</span>
+            </span>
+          </div>
+          <p data-check-message class="text-xs sm:text-sm font-medium"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachComprobador } from "../../scripts/presupuestos-comprobador";
+
+  document.querySelectorAll<HTMLElement>("[data-comprobador]").forEach(attachComprobador);
+</script>

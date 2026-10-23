@@ -1,0 +1,250 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logoPps from "../../assets/images/presupuestos-logo-pps.png";
+import logosAliados from "../../assets/images/presupuestos-logos-aliados.png";
+import { INSCRIPCION_FORM_URL, METRICS } from "../../data/presupuestos-data";
+---
+
+<section class="relative pt-36 pb-16 sm:pt-40 sm:pb-24 lg:pt-44 lg:pb-28 overflow-hidden bg-gradient-to-b from-[#180e33] via-[#120a24] to-[#0c0817]">
+  <!-- Background Decor Elements: Comic Grid, Halftones & Glows -->
+  <div class="absolute inset-0 bg-halftone opacity-40 pointer-events-none"></div>
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-purple-600/25 blur-[130px] rounded-full pointer-events-none animate-pulse duration-1000"></div>
+  <div class="absolute top-1/3 left-10 w-72 h-72 bg-lime-500/15 blur-[100px] rounded-full pointer-events-none animate-pulse"></div>
+  <div class="absolute top-1/2 right-10 w-80 h-80 bg-pink-500/15 blur-[110px] rounded-full pointer-events-none animate-pulse"></div>
+
+  <!-- Decorative Floating Pop Badges - Lowered well below the fixed navbar with vibrant motion -->
+  <div
+    class="hero-badge hero-badge--1 hidden lg:block absolute top-48 xl:top-52 left-4 xl:left-8 z-20 cursor-pointer"
+    title="Formación 100% gratuita financiada por Presupuestos Participativos"
+  >
+    <div class="neo-box-sm bg-[#ffb703] text-black px-4 py-2 rounded-xl font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-xl shine-sweep border-2 border-black">
+      <Icon name="Zap" class="w-4 h-4 fill-black text-black animate-zap" />
+      <span class="whitespace-nowrap font-black">¡Sin costo de matrícula!</span>
+    </div>
+  </div>
+
+  <div
+    class="hero-badge hero-badge--2 hidden lg:block absolute top-52 xl:top-56 right-4 xl:right-8 z-20 cursor-pointer"
+    title="Kit de herramientas para graduados"
+  >
+    <div class="neo-box-sm bg-[#ff2a85] text-white px-4 py-2 rounded-xl font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-xl shine-sweep border-2 border-black">
+      <Icon name="Gift" class="w-4 h-4 text-white animate-bounce" />
+      <span class="whitespace-nowrap font-black">¡Incluye Kit de Trabajo!</span>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <!-- Top Tagline Pill with animated electric sparks - extra mobile top margin to avoid collision with fixed navbar -->
+    <div class="inline-flex items-center gap-2 sm:gap-2.5 bg-black/80 border-2 border-[#9eff00] px-3.5 sm:px-4 py-1.5 rounded-full mt-4 sm:mt-0 mb-6 shadow-lg backdrop-blur-sm hover:scale-105 transition-transform cursor-default max-w-[95%] sm:max-w-none">
+      <Icon name="Zap" class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#00e5ff] text-[#00e5ff] animate-zap shrink-0" />
+      <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#9eff00] animate-ping shrink-0"></span>
+      <span class="text-[11px] sm:text-sm font-extrabold uppercase tracking-wider text-[#9eff00] text-center">
+        Presupuestos Participativos 2026 · Bucaramanga
+      </span>
+      <Icon name="Zap" class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#ff9100] text-[#ff9100] animate-zap-orange shrink-0" />
+    </div>
+
+    <!-- Big Catchy Slogan from Flyer with Dynamic Urban Movement -->
+    <div class="mb-4 relative inline-block">
+      <!-- Subtle glow layer behind -->
+      <div class="absolute inset-0 bg-yellow-400/30 blur-lg rounded-2xl transform scale-105 animate-pulse"></div>
+
+      <div class="relative inline-flex items-center gap-2 sm:gap-3 bg-[#ffb703] text-black px-5 sm:px-7 py-2 sm:py-2.5 rounded-2xl font-black text-base sm:text-xl md:text-2xl tracking-tight border-3 border-black shadow-[5px_5px_0px_#000] animate-tilt-shake shine-sweep cursor-default">
+        <span class="text-lg sm:text-xl animate-bounce inline-block">⚡</span>
+        <span>Hay un cupo con su nombre ¿Lo va a dejar pasar?</span>
+        <span class="text-lg sm:text-xl animate-bounce inline-block" style="animation-delay: 0.2s">⚡</span>
+      </div>
+    </div>
+
+    <!-- Central Official Campaign Logo Visual with Animated Lightning Bolts (Rayos con movimiento continuo) -->
+    <div class="relative inline-flex items-center justify-center my-3 sm:my-5">
+      <!-- Left Electric Cyan Lightning Bolt -->
+      <div class="hidden sm:block absolute -left-12 md:-left-16 top-1/2 -translate-y-1/2 z-20 animate-zap">
+        <div class="p-3 rounded-2xl bg-[#00e5ff] text-black border-2 border-black shadow-[3px_3px_0px_#000] rotate-[-12deg] hover:scale-110 transition-transform cursor-pointer">
+          <Icon name="Zap" class="w-7 h-7 sm:w-9 sm:h-9 fill-black text-black" />
+        </div>
+      </div>
+
+      <!-- Right Solar Orange Lightning Bolt -->
+      <div class="hidden sm:block absolute -right-12 md:-right-16 top-1/2 -translate-y-1/2 z-20 animate-zap-orange">
+        <div class="p-3 rounded-2xl bg-[#ff9100] text-black border-2 border-black shadow-[3px_3px_0px_#000] rotate-[15deg] hover:scale-110 transition-transform cursor-pointer">
+          <Icon name="Zap" class="w-7 h-7 sm:w-9 sm:h-9 fill-black text-black" />
+        </div>
+      </div>
+
+      <!-- Logo with interactive float animation, pulsing energy and glow -->
+      <div class="relative group animate-logo-float">
+        <div class="absolute inset-0 bg-[#9eff00]/25 blur-3xl rounded-full scale-95 group-hover:scale-110 transition-transform duration-500 pointer-events-none animate-pulse"></div>
+        <Image
+          src={logoPps}
+          alt="Póngase Pilas - Presupuestos Participativos"
+          format="png"
+          loading="eager"
+          fetchpriority="high"
+          class="w-72 sm:w-96 md:w-[480px] lg:w-[540px] mx-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.85)] filter hover:scale-[1.04] transition-all duration-300 relative z-10 cursor-pointer"
+        />
+      </div>
+    </div>
+
+    <!-- Main Punchline with Dynamic High-Energy Styling -->
+    <h1 class="mt-4 sm:mt-6 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight">
+      Aprenda un oficio.{" "}
+      <span class="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#9eff00] via-[#affc41] to-[#84ea54] underline decoration-wavy decoration-[#6a0dad] hover:scale-105 transition-transform animate-pulse">
+        Monte su negocio.
+      </span>{" "}
+      Cumpla su sueño.
+    </h1>
+
+    <!-- Explanatory Subtitle -->
+    <p class="mt-5 sm:mt-6 text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
+      <strong class="text-white font-bold">Presupuestos Participativos 2026</strong> le abre las puertas a una formación práctica, <strong class="text-[#9eff00] font-bold">100 % gratis</strong>, en su propio barrio en Bucaramanga.
+    </p>
+
+    <!-- CTAs with Dynamic Buttons in ONE single line with active animations -->
+    <div class="mt-8 sm:mt-10 flex flex-row items-center justify-center gap-2.5 sm:gap-4 max-w-2xl mx-auto flex-nowrap">
+      <a
+        href={INSCRIPCION_FORM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="neo-box bg-[#9eff00] hover:bg-[#8cee00] text-black font-black text-xs sm:text-base md:text-lg px-4 sm:px-7 py-3 sm:py-3.5 rounded-xl flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer transition-all hover:scale-105 active:scale-95 animate-button-neon shine-sweep shadow-[4px_4px_0px_#000] whitespace-nowrap"
+      >
+        <Icon name="Zap" class="w-4 h-4 sm:w-5 sm:h-5 fill-black text-black animate-zap shrink-0" />
+        <span>Quiero inscribirme</span>
+        <Icon name="ArrowRight" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5] shrink-0" />
+      </a>
+
+      <button
+        type="button"
+        data-scroll-to="oferta"
+        class="neo-box bg-[#2a1b4e] hover:bg-[#3b276b] text-white font-black text-xs sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl border-2 border-purple-400 flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer transition-all hover:scale-105 active:scale-95 whitespace-nowrap shadow-[4px_4px_0px_#000] hover:border-[#9eff00] shine-sweep"
+      >
+        <Icon name="Compass" class="w-4 h-4 sm:w-5 sm:h-5 text-[#9eff00] animate-spin-slow shrink-0" />
+        <span>Ver los diplomados</span>
+      </button>
+    </div>
+
+    <!-- 4 Outstanding Metric Cards with Interactive Motion & Scroll Reaction -->
+    <div
+      data-reveal
+      data-y="30"
+      data-amount="0.2"
+      data-duration="0.6"
+      data-ease="out"
+      class="mt-14 sm:mt-18 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 text-left max-w-5xl mx-auto"
+    >
+      <!-- Metric 1 -->
+      <div
+        data-reveal
+        data-y="25"
+        data-scale="0.95"
+        data-amount="0.2"
+        data-duration="0.5"
+        data-delay="0.05"
+        class="motion-hover [--hy:-6px] [--hs:1.03] neo-box bg-[#1b1036] p-4 sm:p-5 rounded-2xl border-2 border-lime-400/80 relative overflow-hidden group hover:border-[#9eff00] transition-all cursor-default"
+      >
+        <div class="absolute top-2 right-2 text-lime-400/20 group-hover:text-lime-400/50 transition-colors group-hover:scale-110">
+          <Icon name="Users" class="w-12 h-12" />
+        </div>
+        <span class="text-2xl sm:text-4xl font-black text-[#9eff00] font-display block group-hover:scale-105 transition-transform origin-left">
+          {METRICS.totalCupos}
+        </span>
+        <span class="text-xs sm:text-sm font-bold text-slate-200 mt-1 block">
+          Cupos disponibles
+        </span>
+        <p class="text-[11px] text-slate-400 mt-1 leading-tight">
+          Para vecinos de barrios priorizados y transportadores.
+        </p>
+      </div>
+
+      <!-- Metric 2 -->
+      <div
+        data-reveal
+        data-y="25"
+        data-scale="0.95"
+        data-amount="0.2"
+        data-duration="0.5"
+        data-delay="0.15"
+        class="motion-hover [--hy:-6px] [--hs:1.03] neo-box bg-[#1b1036] p-4 sm:p-5 rounded-2xl border-2 border-purple-400 relative overflow-hidden group hover:border-purple-300 transition-all cursor-default"
+      >
+        <div class="absolute top-2 right-2 text-purple-400/20 group-hover:text-purple-400/50 transition-colors group-hover:scale-110">
+          <Icon name="Award" class="w-12 h-12" />
+        </div>
+        <span class="text-2xl sm:text-4xl font-black text-purple-300 font-display block group-hover:scale-105 transition-transform origin-left">
+          {METRICS.totalDiplomados}
+        </span>
+        <span class="text-xs sm:text-sm font-bold text-slate-200 mt-1 block">
+          Diplomados para escoger
+        </span>
+        <p class="text-[11px] text-slate-400 mt-1 leading-tight">
+          Belleza, gastronomía, confección, barbería, diseño y más.
+        </p>
+      </div>
+
+      <!-- Metric 3 -->
+      <div
+        data-reveal
+        data-y="25"
+        data-scale="0.95"
+        data-amount="0.2"
+        data-duration="0.5"
+        data-delay="0.25"
+        class="motion-hover [--hy:-6px] [--hs:1.03] neo-box bg-[#1b1036] p-4 sm:p-5 rounded-2xl border-2 border-pink-400 relative overflow-hidden group hover:border-pink-300 transition-all cursor-default"
+      >
+        <div class="absolute top-2 right-2 text-pink-400/20 group-hover:text-pink-400/50 transition-colors group-hover:scale-110">
+          <Icon name="CheckCircle" class="w-12 h-12" />
+        </div>
+        <span class="text-2xl sm:text-4xl font-black text-[#ff2a85] font-display block group-hover:scale-105 transition-transform origin-left">
+          {METRICS.costo}
+        </span>
+        <span class="text-xs sm:text-sm font-bold text-slate-200 mt-1 block">
+          Totalmente gratis
+        </span>
+        <p class="text-[11px] text-slate-400 mt-1 leading-tight">
+          100% financiado por Presupuestos Participativos Bucaramanga.
+        </p>
+      </div>
+
+      <!-- Metric 4 -->
+      <div
+        data-reveal
+        data-y="25"
+        data-scale="0.95"
+        data-amount="0.2"
+        data-duration="0.5"
+        data-delay="0.35"
+        class="motion-hover [--hy:-6px] [--hs:1.03] neo-box bg-[#1b1036] p-4 sm:p-5 rounded-2xl border-2 border-amber-400 relative overflow-hidden group hover:border-amber-300 transition-all cursor-default"
+      >
+        <div class="absolute top-2 right-2 text-amber-400/20 group-hover:text-amber-400/50 transition-colors group-hover:scale-110">
+          <Icon name="Gift" class="w-12 h-12" />
+        </div>
+        <span class="text-2xl sm:text-4xl font-black text-[#ffb703] font-display block group-hover:scale-105 transition-transform origin-left">
+          1 Kit
+        </span>
+        <span class="text-xs sm:text-sm font-bold text-slate-200 mt-1 block">
+          Práctico por graduado
+        </span>
+        <p class="text-[11px] text-slate-400 mt-1 leading-tight">
+          Herramientas e insumos reales para iniciar su propio negocio.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Official Sponsoring Entities Banner (pata de logos reemplazando la barra) -->
+  <div class="mt-8 sm:mt-10 bg-[#120a22] pt-4 sm:pt-5 pb-2.5 sm:pb-3 border-t-3 border-b-3 border-black">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs sm:text-sm font-black uppercase tracking-widest text-slate-300 block mb-2.5 font-display">
+        Iniciativa Institucional Oficial · Alcaldía de Bucaramanga & IMEBU
+      </span>
+      <div class="inline-block rounded-2xl bg-black/50 p-2 sm:p-3 border-2 border-black shadow-[3px_3px_0px_#000] max-w-2xl mx-auto hover:scale-[1.02] transition-transform">
+        <Image
+          src={logosAliados}
+          alt="Alcaldía de Bucaramanga - Instituto de Empleo y Fomento Empresarial (IMEBU) - CLAP"
+          format="png"
+          class="h-16 sm:h-22 md:h-26 lg:h-28 w-auto mx-auto object-contain"
+        />
+      </div>
+    </div>
+  </div>
+</section>

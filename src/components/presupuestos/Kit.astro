@@ -1,0 +1,176 @@
+---
+import Icon from "./Icon.astro";
+import { INSCRIPCION_FORM_URL } from "../../data/presupuestos-data";
+---
+
+<section id="kit" class="py-20 sm:py-28 bg-[#0c0817] relative overflow-hidden border-t-4 border-black">
+  <!-- Texture decor -->
+  <div class="absolute inset-0 bg-halftone opacity-25 pointer-events-none"></div>
+  <div class="absolute top-1/3 left-0 w-80 h-80 bg-pink-600/10 blur-[130px] rounded-full pointer-events-none"></div>
+  <div class="absolute bottom-10 right-10 w-96 h-96 bg-lime-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header with dynamic inView motion -->
+    <div
+      data-reveal
+      data-y="35"
+      data-amount="0.2"
+      data-duration="0.6"
+      data-ease="out"
+      class="text-center max-w-3xl mx-auto mb-14"
+    >
+      <div class="inline-flex items-center gap-2 bg-[#ff2a85] text-white px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-4 border-2 border-black shadow-[3px_3px_0px_#000]">
+        <Icon name="Gift" class="w-4 h-4 text-white" />
+        <span>100% Incluido con su Formación</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        Su kit para arrancar:{" "}
+        <span class="text-[#9eff00] underline decoration-[#ffb703] decoration-wavy">
+          De estudiante a dueño de negocio
+        </span>
+      </h2>
+
+      <p class="mt-3 text-lg sm:text-2xl font-black text-[#ffb703]">
+        Usted estudia, y nosotros le ayudamos a empezar.
+      </p>
+
+      <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+        Cada participante que complete satisfactoriamente su diplomado recibirá una dotación oficial de herramientas e insumos adaptada a su oficio técnico para salir al mercado laboral desde el primer día.
+      </p>
+    </div>
+
+    <div class="space-y-8">
+      <!-- Componente Destacado: Objetivo de este Kit (Animated) -->
+      <div
+        data-reveal
+        data-y="35"
+        data-scale="0.96"
+        data-amount="0.15"
+        data-duration="0.5"
+        data-ease="out"
+        class="motion-hover [--hy:-4px] w-full neo-box bg-gradient-to-r from-[#24134a] via-[#1b0d38] to-[#120726] p-6 sm:p-9 rounded-3xl border-3 border-[#9eff00] shadow-[6px_6px_0px_#000] relative overflow-hidden"
+      >
+        <div class="absolute -right-8 -top-8 w-44 h-44 bg-[#9eff00]/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-6 relative z-10">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#9eff00] text-black flex items-center justify-center shrink-0 border-3 border-black shadow-[4px_4px_0px_#000] animate-zap">
+            <Icon name="Zap" class="w-9 h-9 sm:w-11 sm:h-11 fill-black stroke-[2.5]" />
+          </div>
+
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="bg-[#ff2a85] text-white text-xs font-black uppercase px-3 py-1 rounded-full border border-black shadow-[2px_2px_0px_#000]">
+                Propósito Social del Programa
+              </span>
+              <span class="text-xs text-lime-300 font-bold">
+                Presupuestos Participativos 2026
+              </span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
+              Objetivo de este kit
+            </h3>
+
+            <p class="text-slate-200 text-sm sm:text-base leading-relaxed font-medium">
+              Entregar las piezas y herramientas esenciales para que <strong class="text-[#9eff00] font-bold">ningún graduado tenga que solicitar préstamos informales o &ldquo;gota a gota&rdquo;</strong> para iniciar sus primeros pedidos, reparaciones o servicios a domicilio. El oficio que aprende en el aula se convierte en ingresos reales e inmediatos para su hogar.
+            </p>
+
+            <!-- Graphic badges inside objective -->
+            <div class="mt-4 flex flex-wrap gap-2.5">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold bg-black/60 text-slate-200 px-3 py-1.5 rounded-xl border border-purple-800">
+                <Icon name="ShieldCheck" class="w-3.5 h-3.5 text-[#9eff00]" />
+                <span>Sin costo para el beneficiario</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold bg-black/60 text-slate-200 px-3 py-1.5 rounded-xl border border-purple-800">
+                <Icon name="Rocket" class="w-3.5 h-3.5 text-[#00e5ff]" />
+                <span>Generación de ingresos rápida</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold bg-black/60 text-slate-200 px-3 py-1.5 rounded-xl border border-purple-800">
+                <Icon name="Briefcase" class="w-3.5 h-3.5 text-[#ffb703]" />
+                <span>Listo para trabajar en su barrio</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 Mandatory Official Conditions Card (Animated) -->
+      <div
+        data-reveal
+        data-y="35"
+        data-scale="0.96"
+        data-amount="0.15"
+        data-duration="0.5"
+        data-delay="0.1"
+        data-ease="out"
+        class="motion-hover [--hy:-4px] w-full neo-box bg-[#1b1038] p-6 sm:p-8 rounded-3xl border-3 border-[#ffb703] relative overflow-hidden shadow-[6px_6px_0px_#000]"
+      >
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-purple-900/80">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-xl bg-[#ffb703] text-black font-black border-2 border-black shadow-[2px_2px_0px_#000]">
+              <Icon name="AlertCircle" class="w-6 h-6" />
+            </div>
+            <div>
+              <h3 class="text-xl sm:text-2xl font-black text-white">
+                Condiciones obligatorias para recibir el kit
+              </h3>
+              <p class="text-xs text-[#ffb703] font-bold">
+                El programa premia la disciplina, el compromiso y la asistencia comunitaria.
+              </p>
+            </div>
+          </div>
+
+          <a
+            href={INSCRIPCION_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="neo-box-sm bg-[#9eff00] hover:bg-[#8cee00] text-black font-black text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 self-start sm:self-auto cursor-pointer transition-transform active:scale-95"
+          >
+            <span>Inscribirme en el programa</span>
+            <Icon name="ArrowRight" class="w-3.5 h-3.5 stroke-[3]" />
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <!-- Condition 1 -->
+          <div class="motion-hover [--hs:1.02] bg-[#120a26] p-4 sm:p-5 rounded-2xl border-2 border-black flex items-start gap-3.5 shadow-sm transition-transform">
+            <span class="w-8 h-8 rounded-xl bg-[#9eff00] text-black font-black text-sm flex items-center justify-center shrink-0 border-2 border-black shadow-[2px_2px_0px_#000]">
+              1
+            </span>
+            <div>
+              <h4 class="text-sm font-black text-white mb-1 flex items-center gap-1.5">
+                <span>Asistencia mínima del 70%</span>
+              </h4>
+              <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                Asistir y participar activamente en al menos el <strong class="text-[#9eff00] font-bold">70% de las horas</strong> del diplomado, superando las prácticas del plan de estudios.
+              </p>
+            </div>
+          </div>
+
+          <!-- Condition 2 -->
+          <div class="motion-hover [--hs:1.02] bg-[#120a26] p-4 sm:p-5 rounded-2xl border-2 border-black flex items-start gap-3.5 shadow-sm transition-transform">
+            <span class="w-8 h-8 rounded-xl bg-[#ff2a85] text-white font-black text-sm flex items-center justify-center shrink-0 border-2 border-black shadow-[2px_2px_0px_#000]">
+              2
+            </span>
+            <div>
+              <h4 class="text-sm font-black text-white mb-1 flex items-center gap-1.5">
+                <span>Culminación y Certificación</span>
+              </h4>
+              <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                Completar la formación técnica. El kit se entrega <strong class="text-[#ff2a85] font-bold">al final del programa junto con el certificado oficial</strong> de competencias laborales.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mandatory footnote -->
+        <div class="mt-5 pt-4 border-t border-purple-900/60 text-center">
+          <span class="inline-block bg-black/70 text-[#ffb703] border border-[#ffb703]/50 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider">
+            ⚡ Nota importante: El kit es estrictamente personal e intransferible para el alumno matriculado.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

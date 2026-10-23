@@ -1,0 +1,253 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "./icons";
+
+interface Step {
+  num: string;
+  title: string;
+  icon: IconName;
+  badge: string;
+  color: string;
+  description: string;
+  highlight: string;
+}
+
+const narrativeSteps: Step[] = [
+  {
+    num: "01",
+    title: "La comunidad decide su futuro",
+    icon: "Vote",
+    badge: "Voz Barrial",
+    color: "bg-lime-400 text-black",
+    description:
+      "Los Presupuestos Participativos son el mecanismo democrático donde los habitantes de las comunas de Bucaramanga priorizan el destino de los recursos públicos.",
+    highlight: "La inversión no se queda en un escritorio: llega directo a su cuadra.",
+  },
+  {
+    num: "02",
+    title: "En 2026: Formación para el trabajo",
+    icon: "GraduationCap",
+    badge: "100% Gratuito",
+    color: "bg-purple-500 text-white",
+    description:
+      "Este año, los recursos se materializan en programas de formación intensiva en oficios técnicos y comerciales prácticos para jóvenes y adultos.",
+    highlight: "Sin costo de inscripción ni mensualidades. Maestros con trayectoria real.",
+  },
+  {
+    num: "03",
+    title: "Aprende con manos de maestro",
+    icon: "Hammer",
+    badge: "Técnica Real",
+    color: "bg-amber-400 text-black",
+    description:
+      "Clases dinámicas con maquinaria real: hornos, máquinas de coser, prensas térmicas, navajas de barbería o herramientas de estética profesional.",
+    highlight: "Menos teoría en el tablero y mucha práctica con materiales de primera calidad.",
+  },
+  {
+    num: "04",
+    title: "Se gradúa con kit y monta su negocio",
+    icon: "Rocket",
+    badge: "Emprendimiento",
+    color: "bg-[#ff2a85] text-white",
+    description:
+      "Al cumplir al menos el 70% de asistencia y la evaluación final, recibe un kit completo de herramientas e insumos para generar ingresos de inmediato.",
+    highlight: "El puente directo entre terminar el diplomado y abrir su propio taller o servicio.",
+  },
+];
+
+// Conjuntos de clases por estado (seleccionado / no seleccionado): ver presupuestos-ui.ts.
+const BTN_ON = "bg-[#231548] border-[#9eff00] shadow-[5px_5px_0px_#000] translate-x-2";
+const BTN_OFF = "bg-[#180e33]/70 border-purple-900/60 hover:border-purple-600 hover:bg-[#1f123f]";
+const NUM_ON = "bg-[#9eff00] text-black font-extrabold animate-pulse";
+const NUM_OFF = "bg-purple-950 text-slate-300";
+const TITLE_ON = "text-white";
+const TITLE_OFF = "text-slate-300";
+const ICON_ON = "text-[#9eff00] animate-bounce";
+const ICON_OFF = "text-slate-500";
+const DOT_ON = "w-8 bg-[#9eff00]";
+const DOT_OFF = "w-2.5 bg-purple-800";
+---
+
+<section id="que-es" class="pt-3 sm:pt-5 pb-16 sm:pb-24 bg-[#120a26] relative overflow-hidden">
+  <!-- Texture decor -->
+  <div class="absolute inset-0 bg-halftone opacity-30 pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/4 w-80 h-80 bg-[#9eff00]/5 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" data-ciclo>
+    <!-- Section Header with dynamic scroll animation -->
+    <div
+      data-reveal
+      data-y="35"
+      data-amount="0.2"
+      data-duration="0.6"
+      data-ease="out"
+      class="text-center max-w-3xl mx-auto mb-14"
+    >
+      <div class="inline-flex items-center gap-2 bg-[#6a0dad] border-2 border-black text-lime-300 px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-4 shadow-[3px_3px_0px_#000] hover:scale-105 transition-transform">
+        <Icon name="Zap" class="w-4 h-4 text-lime-400 fill-lime-400 animate-zap" />
+        <span>Inversión pública que transforma barrios</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+        Su barrio también cuenta:{" "}
+        <span class="text-[#9eff00] underline decoration-pink-500 decoration-wavy hover:text-[#affc41] transition-colors">
+          ¿Qué son los Presupuestos Participativos?
+        </span>
+      </h2>
+
+      <p class="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed font-medium">
+        Los Presupuestos Participativos son una oportunidad para que la inversión llegue
+        directamente a las comunidades de Bucaramanga. En 2026 esa inversión se convierte en{" "}
+        <strong class="text-white font-bold">formación para el trabajo</strong>: usted aprende con manos de maestro, y al final recibe un kit para empezar.
+      </p>
+    </div>
+
+    <!-- Interactive Narrative Flow with animated left and right blocks -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <!-- Step Selector Controls -->
+      <div
+        data-reveal
+        data-x="-35"
+        data-amount="0.2"
+        data-duration="0.6"
+        data-delay="0.1"
+        data-ease="out"
+        class="lg:col-span-5 space-y-3"
+      >
+        <span class="text-xs font-black uppercase tracking-widest text-slate-400 block mb-2 flex items-center gap-1.5">
+          <Icon name="Sparkles" class="w-3.5 h-3.5 text-[#ffb703] animate-pulse" />
+          <span>El ciclo del programa paso a paso:</span>
+        </span>
+        {
+          narrativeSteps.map((step, idx) => (
+            <button
+              type="button"
+              data-ciclo-btn
+              data-on={BTN_ON}
+              data-off={BTN_OFF}
+              class:list={[
+                "motion-hover [--hs:1.02] [--ts:0.98] w-full text-left p-4 rounded-xl border-2 transition-all flex items-center justify-between cursor-pointer",
+                idx === 0 ? BTN_ON : BTN_OFF,
+              ]}
+            >
+              <div class="flex items-center gap-3.5">
+                <span
+                  data-ciclo-num
+                  data-on={NUM_ON}
+                  data-off={NUM_OFF}
+                  class:list={[
+                    "w-9 h-9 rounded-lg font-black text-sm flex items-center justify-center border border-black",
+                    idx === 0 ? NUM_ON : NUM_OFF,
+                  ]}
+                >
+                  {step.num}
+                </span>
+                <div>
+                  <h3
+                    data-ciclo-title
+                    data-on={TITLE_ON}
+                    data-off={TITLE_OFF}
+                    class:list={["font-bold text-sm sm:text-base", idx === 0 ? TITLE_ON : TITLE_OFF]}
+                  >
+                    {step.title}
+                  </h3>
+                  <span class="text-xs text-slate-400 block font-medium">{step.badge}</span>
+                </div>
+              </div>
+              <Icon
+                name={step.icon}
+                data-ciclo-icon
+                data-on={ICON_ON}
+                data-off={ICON_OFF}
+                class:list={["w-5 h-5 shrink-0", idx === 0 ? ICON_ON : ICON_OFF]}
+              />
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Active Step Showcase Card with scroll in and step transition -->
+      <div
+        data-reveal
+        data-x="35"
+        data-amount="0.2"
+        data-duration="0.6"
+        data-delay="0.15"
+        data-ease="out"
+        class="lg:col-span-7"
+      >
+        <div class="neo-box bg-[#1c113b] p-6 sm:p-8 rounded-3xl border-3 border-black relative overflow-hidden group">
+          <div class="absolute top-0 right-0 bg-[#9eff00] text-black font-black text-xs px-4 py-1.5 rounded-bl-xl border-l-2 border-b-2 border-black flex items-center gap-1.5 animate-pulse">
+            <Icon name="ShieldCheck" class="w-4 h-4" />
+            <span>Impacto Social Real</span>
+          </div>
+
+          {
+            narrativeSteps.map((step, idx) => (
+              <div data-ciclo-panel hidden={idx !== 0}>
+                <div class="flex items-center gap-4 mb-6">
+                  <div class={`p-4 rounded-2xl border-2 border-black ${step.color} shadow-[4px_4px_0px_#000] group-hover:scale-105 transition-transform`}>
+                    <Icon name={step.icon} class="w-8 h-8 animate-zap" />
+                  </div>
+                  <div>
+                    <span class="text-xs font-black uppercase tracking-wider text-pink-400">
+                      Etapa {step.num} del proceso
+                    </span>
+                    <h3 class="text-xl sm:text-2xl font-black text-white mt-0.5">{step.title}</h3>
+                  </div>
+                </div>
+
+                <p class="text-slate-200 text-base sm:text-lg leading-relaxed mb-6 font-normal">
+                  {step.description}
+                </p>
+
+                <!-- Callout box -->
+                <div class="bg-[#120a26] border-2 border-[#ffb703] p-4 rounded-2xl flex items-start gap-3 shadow-inner">
+                  <span class="text-xl">💡</span>
+                  <div>
+                    <span class="text-xs font-black uppercase text-[#ffb703] tracking-wide block">
+                      Por qué esto importa
+                    </span>
+                    <p class="text-sm font-semibold text-slate-200 mt-0.5">{step.highlight}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+
+          <!-- Step Navigation Pill Dots & Next Step Action -->
+          <div class="mt-6 pt-4 border-t border-purple-900/60 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              {
+                narrativeSteps.map((_, i) => (
+                  <button
+                    type="button"
+                    data-ciclo-dot
+                    data-on={DOT_ON}
+                    data-off={DOT_OFF}
+                    class:list={["h-2.5 rounded-full transition-all", i === 0 ? DOT_ON : DOT_OFF]}
+                    aria-label={`Ver paso ${i + 1}`}
+                  />
+                ))
+              }
+            </div>
+            <button
+              type="button"
+              data-ciclo-next
+              class="text-xs font-black text-[#9eff00] hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <span>Siguiente etapa</span>
+              <Icon name="ArrowRight" class="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachCiclo } from "../../scripts/presupuestos-ciclo";
+
+  document.querySelectorAll<HTMLElement>("[data-ciclo]").forEach(attachCiclo);
+</script>

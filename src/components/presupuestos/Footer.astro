@@ -1,0 +1,197 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logoPps from "../../assets/images/presupuestos-logo-pps.png";
+import logosAliados from "../../assets/images/presupuestos-logos-aliados.png";
+import { CAME_INFO } from "../../data/presupuestos-data";
+---
+
+<footer class="bg-[#07040d] text-slate-400 border-t-4 border-black relative overflow-hidden">
+  <!-- Official Sponsoring Entities Banner -->
+  <div class="bg-[#120a22] py-8 border-b-2 border-black">
+    <div
+      data-reveal
+      data-y="20"
+      data-amount="0.2"
+      data-duration="0.5"
+      data-ease="out"
+      class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+    >
+      <span class="text-[11px] font-black uppercase tracking-widest text-slate-400 block mb-4">
+        Iniciativa Institucional Oficial · Alcaldía de Bucaramanga
+      </span>
+      <div class="inline-block rounded-2xl bg-black/40 p-2 sm:p-4 border-2 border-black shadow-md max-w-xl mx-auto hover:scale-[1.02] transition-transform">
+        <Image
+          src={logosAliados}
+          alt="Alcaldía de Bucaramanga - Instituto de Empleo y Fomento Empresarial (IMEBU) - CLAP"
+          format="png"
+          class="h-14 sm:h-18 md:h-20 w-auto mx-auto object-contain"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer Links & Information -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div
+      data-reveal
+      data-y="30"
+      data-amount="0.15"
+      data-duration="0.6"
+      data-ease="out"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
+    >
+      <!-- Col 1: Brand & Identity -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-2">
+          <Image
+            src={logoPps}
+            alt="Logo Póngase Pilas"
+            format="png"
+            class="h-10 w-auto object-contain hover:scale-105 transition-transform"
+          />
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed font-medium">
+          Programa de formación para el trabajo y dotación de herramientas productivas financiado por los <strong class="text-white">Presupuestos Participativos 2026</strong> en las comunas y asentamientos de Bucaramanga.
+        </p>
+        <div class="text-xs font-bold text-lime-400 flex items-center gap-1.5">
+          <Icon name="Calendar" class="w-4 h-4 text-lime-400" />
+          <span>Inicio de actividades: 24 de Octubre de 2026</span>
+        </div>
+      </div>
+
+      <!-- Col 2: Enlaces Rápidos -->
+      <div>
+        <h4 class="text-xs font-black uppercase tracking-wider text-white mb-4">
+          Navegación del Programa
+        </h4>
+        <ul class="space-y-2 text-xs font-medium">
+          <li>
+            <a href="#que-es" class="hover:text-[#9eff00] transition-colors">
+              ¿Qué son los Presupuestos Participativos?
+            </a>
+          </li>
+          <li>
+            <a href="#beneficios" class="hover:text-[#9eff00] transition-colors">
+              Aprenda haciendo y venda con margen
+            </a>
+          </li>
+          <li>
+            <a href="#oferta" class="hover:text-[#9eff00] transition-colors">
+              Explorador de Diplomados por Barrio
+            </a>
+          </li>
+          <li>
+            <a href="#kit" class="hover:text-[#9eff00] transition-colors">
+              Condiciones y contenido del Kit
+            </a>
+          </li>
+          <li>
+            <a href="#requisitos" class="hover:text-[#9eff00] transition-colors">
+              Requisitos de edad y residencia
+            </a>
+          </li>
+          <li>
+            <a href="#paso-a-paso" class="hover:text-[#9eff00] transition-colors">
+              Paso a paso de radicación
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Canales y Trámites de la Alcaldía -->
+      <div>
+        <h4 class="text-xs font-black uppercase tracking-wider text-white mb-4">
+          Trámites Oficiales
+        </h4>
+        <ul class="space-y-2.5 text-xs">
+          <li>
+            <a
+              href={CAME_INFO.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-start gap-1.5 text-slate-300 hover:text-white transition-colors"
+            >
+              <Icon name="ExternalLink" class="w-3.5 h-3.5 text-[#9eff00] shrink-0 mt-0.5" />
+              <span>Trámite de Certificado de Residencia (CAME Virtual)</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.bucaramanga.gov.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-start gap-1.5 text-slate-300 hover:text-white transition-colors"
+            >
+              <Icon name="ExternalLink" class="w-3.5 h-3.5 text-lime-400 shrink-0 mt-0.5" />
+              <span>Portal Oficial Alcaldía de Bucaramanga</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://imebu.gov.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-start gap-1.5 text-slate-300 hover:text-white transition-colors"
+            >
+              <Icon name="ExternalLink" class="w-3.5 h-3.5 text-[#ffb703] shrink-0 mt-0.5" />
+              <span>Instituto de Empleo y Fomento (IMEBU)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Atención e Información Institucional -->
+      <div>
+        <h4 class="text-xs font-black uppercase tracking-wider text-white mb-4">
+          Datos de Contacto
+        </h4>
+        <p class="text-xs text-slate-400 leading-relaxed mb-3">
+          *Líneas oficiales y puntos de atención física presencial en proceso de publicación final por la coordinación general de la campaña.
+        </p>
+        <div class="space-y-2.5 text-xs">
+          <div class="flex items-center gap-2 text-slate-300">
+            <Icon name="MapPin" class="w-3.5 h-3.5 text-pink-400 shrink-0" />
+            <span>Bucaramanga, Santander, Colombia</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-300">
+            <Icon name="Mail" class="w-3.5 h-3.5 text-lime-400 shrink-0" />
+            <span>info@imebu.gov.co · contacto@bucaramanga.gov.co</span>
+          </div>
+          <a
+            href="https://www.instagram.com/p/DeftBTyiIFm/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 text-slate-200 hover:text-pink-400 transition-colors group pt-1 cursor-pointer"
+            title="Síguenos en Instagram @pongaselaspiilas"
+          >
+            <div class="p-1 rounded-md bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shrink-0 group-hover:scale-110 transition-transform">
+              <Icon name="Instagram" class="w-3.5 h-3.5" />
+            </div>
+            <span class="font-bold underline decoration-pink-500/50 group-hover:decoration-pink-400 text-pink-300 group-hover:text-pink-200">
+              @pongaselaspiilas
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar: Copyright and Accessibility -->
+    <div
+      data-reveal
+      data-amount="0.2"
+      data-duration="0.5"
+      class="pt-8 border-t border-purple-950/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
+    >
+      <p class="text-slate-400 text-center sm:text-left">
+        © 2026 <strong>Póngase Pilas</strong> · Presupuestos Participativos · Alcaldía de Bucaramanga & IMEBU. Todos los derechos reservados.
+      </p>
+
+      <div class="flex items-center gap-4 text-slate-400 text-[11px]">
+        <span>Accesibilidad WCAG 2.2 AA</span>
+        <span>·</span>
+        <span>Formación 100% Gratuita</span>
+      </div>
+    </div>
+  </div>
+</footer>

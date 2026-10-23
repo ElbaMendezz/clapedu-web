@@ -1,0 +1,72 @@
+---
+import Icon from "./Icon.astro";
+import { INSCRIPCION_FORM_URL, METRICS } from "../../data/presupuestos-data";
+---
+
+<section class="py-20 sm:py-28 bg-gradient-to-b from-[#120a26] via-[#1a0e38] to-[#0a0514] relative overflow-hidden border-t-4 border-black">
+  <!-- Visual comic halftones & lighting -->
+  <div class="absolute inset-0 bg-halftone opacity-30 pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-lime-500/10 blur-[130px] rounded-full pointer-events-none animate-pulse"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div
+      data-reveal
+      data-y="35"
+      data-scale="0.92"
+      data-amount="0.2"
+      data-duration="0.6"
+      data-ease="out"
+      class="neo-box bg-gradient-to-br from-[#26134f] via-[#1c0d3d] to-[#120726] p-8 sm:p-14 rounded-3xl border-3 border-[#9eff00] text-center relative overflow-hidden shadow-2xl"
+    >
+      <!-- Top badges -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-6">
+        <span class="neo-box-sm bg-[#ffb703] text-black font-black text-xs uppercase px-4 py-1 rounded-full">
+          ⚡ 774 Oportunidades Reales
+        </span>
+        <span class="bg-[#ff2a85] text-white font-black text-xs uppercase px-3 py-1 rounded-full border border-black">
+          100% Gratuito
+        </span>
+      </div>
+
+      <!-- Main Title with subtle pulse on key phrase -->
+      <h2 class="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight max-w-3xl mx-auto mb-6">
+        Su oficio de hoy puede ser su{" "}
+        <span class="text-[#9eff00] underline decoration-[#ff2a85] decoration-wavy inline-block hover:scale-105 transition-transform">
+          negocio de mañana.
+        </span>
+      </h2>
+
+      <!-- Description -->
+      <p class="text-base sm:text-xl text-slate-200 max-w-2xl mx-auto font-medium leading-relaxed mb-8">
+        Hay <strong class="text-[#9eff00] font-black">{METRICS.totalCupos} cupos</strong> y cada uno es una oportunidad. Revise su barrio, reúna sus papeles e inscríbase.
+      </p>
+
+      <!-- Action Button - Large, Bold and Centered with spring interaction -->
+      <div class="flex items-center justify-center">
+        <a
+          href={INSCRIPCION_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="motion-hover [--hs:1.05] [--ts:0.96] w-full sm:w-auto neo-box bg-[#9eff00] hover:bg-[#8cee00] text-black font-black text-xl sm:text-2xl md:text-3xl px-8 sm:px-14 py-4 sm:py-5 rounded-2xl inline-flex items-center justify-center gap-3 cursor-pointer transition-all shadow-[6px_6px_0px_#000] animate-button-neon shine-sweep"
+        >
+          <Icon name="Zap" class="w-6 h-6 sm:w-8 sm:h-8 fill-black text-black animate-zap shrink-0" />
+          <span>¡Quiero inscribirme ahora!</span>
+          <Icon name="ExternalLink" class="w-6 h-6 sm:w-8 sm:h-8 stroke-[3] shrink-0" />
+        </a>
+      </div>
+
+      <!-- Quick perks footer bar -->
+      <div class="mt-10 pt-6 border-t border-purple-800/60 flex flex-wrap items-center justify-center gap-6 text-xs font-bold text-slate-300">
+        <span class="flex items-center gap-1.5">
+          <Icon name="ShieldCheck" class="w-4 h-4 text-[#9eff00]" /> Certificación oficial IMEBU
+        </span>
+        <span class="flex items-center gap-1.5">
+          <Icon name="Gift" class="w-4 h-4 text-[#ff2a85]" /> Kit de herramientas para graduados
+        </span>
+        <span class="flex items-center gap-1.5">
+          <Icon name="Sparkles" class="w-4 h-4 text-[#ffb703]" /> Clases inician 24 de Octubre
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
