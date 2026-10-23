@@ -57,6 +57,27 @@ const { whatsappHref } = Astro.props;
     <a href="/programas#empresas" class="submenu-link submenu-link--last">Programas Especializados Empresas</a>
   </div>
 
+  <button type="button" class="submenu-btn" data-msub-btn="proyectos">
+    Proyectos
+    <svg
+      class="chevron"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      data-msub-chev="proyectos"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <div class="submenu" data-msub="proyectos">
+    <a href="/presupuestos" class="submenu-link submenu-link--last">Presupuestos Participativos</a>
+  </div>
+
   <a href="/#contacto" class="menu-link">Contáctanos</a>
 
   <a href={whatsappHref} target="_blank" rel="noopener" class="menu-cta">

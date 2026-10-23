@@ -98,6 +98,30 @@ const WHATSAPP_VOLUNTARIO =
         </div>
       </div>
 
+      <div class="dropdown" data-dd>
+        <a href="/presupuestos" class="nav-link dropdown-trigger">
+          Proyectos
+          <svg
+            class="chevron"
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+        <div class="dropdown-menu">
+          <div class="dropdown-panel">
+            <a href="/presupuestos">Presupuestos Participativos</a>
+          </div>
+        </div>
+      </div>
+
       <a href="/#contacto" class="nav-link">Contáctanos</a>
     </div>
 
@@ -213,6 +237,7 @@ const WHATSAPP_VOLUNTARIO =
   }
 
   .dropdown:hover .dropdown-trigger,
+  .dropdown:focus-within .dropdown-trigger,
   .dropdown-trigger.is-active-page {
     color: var(--color-teal);
   }
@@ -220,7 +245,8 @@ const WHATSAPP_VOLUNTARIO =
     font-weight: 600;
   }
 
-  .dropdown:hover .chevron {
+  .dropdown:hover .chevron,
+  .dropdown:focus-within .chevron {
     transform: rotate(180deg);
   }
 
@@ -240,7 +266,8 @@ const WHATSAPP_VOLUNTARIO =
     min-width: 320px;
   }
 
-  .dropdown:hover .dropdown-menu {
+  .dropdown:hover .dropdown-menu,
+  .dropdown:focus-within .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
