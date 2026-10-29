@@ -13,13 +13,16 @@ interface Props {
    * desplegado — un indicador separado del trigger (`activeDropdown`), con
    * su propio patrón por página en el original: "equipo" y "metodologia"
    * llevan un punto teal + texto teal + fondo teal (mismo estilo que el
-   * hover, pero fijo); "programas" lleva texto teal en negrita sin punto y
-   * con un fondo/hover de opacidad distinta (único ítem de su dropdown).
+   * hover, pero fijo); "programas" y "vacantes" llevan texto teal en negrita
+   * sin punto y con un fondo/hover de opacidad distinta. "vacantes" (las
+   * páginas de /vacantes) resalta además "Trabaja con nosotros" en el panel
+   * de Conócenos y marca el enlace de primer nivel "Vacantes" con
+   * aria-current="page", igual que el diseño.
    * "sobre-nosotros" deliberadamente no resalta ningún ítem del panel
    * (verificado en el original: sus 4 anchors del panel no tienen ningún
    * estilo especial, pese a que el trigger sí está activo) — por eso no
    * existe como variante aquí. */
-  activeNavLink?: "metodologia" | "equipo" | "programas";
+  activeNavLink?: "metodologia" | "equipo" | "programas" | "vacantes";
 }
 
 const { activeDropdown, activeNavLink } = Astro.props;
@@ -68,6 +71,13 @@ const WHATSAPP_VOLUNTARIO =
               {activeNavLink === "equipo" && <span class="active-dot" aria-hidden="true"></span>}
               Equipo de trabajo
             </a>
+            <a
+              href="/vacantes"
+              class:list={[{ "is-active-item-alt": activeNavLink === "vacantes" }]}
+              aria-current={activeNavLink === "vacantes" ? "page" : undefined}
+            >
+              Trabaja con nosotros
+            </a>
           </div>
         </div>
       </div>
@@ -94,6 +104,7 @@ const WHATSAPP_VOLUNTARIO =
             <a href="/programas" class:list={[{ "is-active-item-alt": activeNavLink === "programas" }]}>
               Programas Especializados CLAP
             </a>
+            <a href="/programas#empresas">Programas Especializados Empresas</a>
           </div>
         </div>
       </div>
@@ -118,10 +129,12 @@ const WHATSAPP_VOLUNTARIO =
         <div class="dropdown-menu">
           <div class="dropdown-panel">
             <a href="/presupuestos-participativos">Presupuestos Participativos</a>
-            <a href="https://innpulsamujeres.com/" target="_blank" rel="noopener noreferrer">Innpulsa mujeres</a>
+            <a href="https://innpulsamujeres.com/" target="_blank" rel="noopener noreferrer">Innpulsa Mujeres</a>
           </div>
         </div>
       </div>
+
+      <a href="/vacantes" class="nav-link" aria-current={activeNavLink === "vacantes" ? "page" : undefined}>Vacantes</a>
 
       <a href="/#contacto" class="nav-link">Contáctanos</a>
     </div>

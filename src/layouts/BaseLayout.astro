@@ -28,7 +28,7 @@ interface Props {
   /** Resalta el trigger del dropdown de nav correspondiente, ver Header.astro. */
   activeDropdown?: "conocenos" | "educacion";
   /** Resalta el ítem activo dentro del submenu desplegado, ver Header.astro. */
-  activeNavLink?: "metodologia" | "equipo" | "programas";
+  activeNavLink?: "metodologia" | "equipo" | "programas" | "vacantes";
 }
 
 const { activeDropdown, activeNavLink, ...head } = Astro.props;
@@ -40,14 +40,18 @@ const { activeDropdown, activeNavLink, ...head } = Astro.props;
     <BaseHead {...head}>
       <link rel="preload" href={montserratVariableUrl} as="font" type="font/woff2" crossorigin />
       <link rel="preload" href={proximaNovaSemiboldUrl} as="font" type="font/woff2" crossorigin />
+      <!-- Para que una página inyecte tags propios en el <head> (p. ej. JSON-LD) -->
+      <slot name="head" />
     </BaseHead>
   </head>
   <body>
+    <!-- Para enlaces de salto accesibles: van antes del Header, primeros en el orden de tabulación -->
+    <slot name="skip-link" />
     <Header activeDropdown={activeDropdown} activeNavLink={activeNavLink} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer current={activeNavLink === "vacantes" ? "trabaja" : undefined} />
     <ToTopButton />
 
     <script>
