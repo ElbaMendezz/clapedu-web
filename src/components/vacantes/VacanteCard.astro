@@ -1,0 +1,306 @@
+---
+import Icon from "../presupuestos/Icon.astro";
+import EstadoConvocatoria from "./EstadoConvocatoria.astro";
+import type { Vacante } from "../../lib/vacantes/types";
+import {
+  esEnlaceExterno,
+  modalidadTexto,
+  perfilTarjeta,
+  rutaVacante,
+} from "../../lib/vacantes/presentacion";
+
+interface Props {
+  vacante: Vacante;
+}
+
+const { vacante } = Astro.props;
+const activa = vacante.estado === "activa";
+const href = rutaVacante(vacante.id);
+const externo = esEnlaceExterno(vacante.enlacePostulacion);
+
+interface Dato {
+  icono: string;
+  etiqueta: string;
+  valor?: string;
+}
+const datos = (
+  [
+    { icono: "GraduationCap", etiqueta: "Perfil requerido", valor: perfilTarjeta(vacante) },
+    { icono: "Briefcase", etiqueta: "Experiencia", valor: vacante.experiencia },
+    { icono: "FileText", etiqueta: "Tipo de contrato", valor: vacante.tipoContrato },
+    { icono: "MapPin", etiqueta: "Modalidad de trabajo", valor: modalidadTexto(vacante) },
+  ] satisfies Dato[]
+).filter((dato) => dato.valor);
+---
+
+<article class="tarjeta" data-tarjeta data-area={vacante.area}>
+  <div class="interior">
+    <div class="principal">
+      <EstadoConvocatoria activa={activa} />
+
+      <h3 class="cargo">
+        <a href={href}>{vacante.cargo}</a>
+      </h3>
+
+      <p class="resumen">{vacante.resumen}</p>
+
+      {
+        datos.length > 0 && (
+          <div class="datos">
+            {datos.map((dato) => (
+              <div class="dato">
+                <div class="etiqueta">
+                  <Icon name={dato.icono} width="16" height="16" class="ico" />
+                  <span>{dato.etiqueta}</span>
+                </div>
+                <div class="valor">{dato.valor}</div>
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </div>
+
+    <div class="pie">
+      {
+        vacante.salario && (
+          <div>
+            <div class="etiqueta">
+              <Icon name="Banknote" width="16" height="16" class="ico ico--salario" />
+              <span>Asignación salarial</span>
+            </div>
+            <div class="salario">{vacante.salario}</div>
+          </div>
+        )
+      }
+
+      <div class="acciones">
+        <a href={href} class="boton boton--detalle">
+          Ver detalle y requisitos
+          <Icon name="ArrowRight" width="16" height="16" stroke-width="2.3" />
+        </a>
+
+        {
+          activa ? (
+            <a
+              href={vacante.enlacePostulacion}
+              target={externo ? "_blank" : undefined}
+              rel={externo ? "noopener noreferrer" : undefined}
+              class="boton boton--postular"
+            >
+              Postularme ahora
+              <Icon name="ArrowUpRight" width="16" height="16" stroke-width="2.3" />
+            </a>
+          ) : (
+            <span class="cerrada">Recepción finalizada</span>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .tarjeta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 26px;
+    padding: 24px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .tarjeta[hidden] {
+    display: none;
+  }
+  .tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 54px -28px rgba(52, 28, 101, 0.35);
+  }
+
+  .interior {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    height: 100%;
+  }
+
+  .principal {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .cargo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 14px;
+  }
+  .cargo a {
+    color: inherit;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .cargo a:hover {
+    color: var(--color-ink-strong);
+  }
+  .cargo a:focus-visible {
+    outline: 2px solid var(--color-ink-strong);
+    outline-offset: 4px;
+  }
+
+  .resumen {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--vac-body);
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .datos {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    padding-top: 20px;
+    border-top: 1px solid var(--vac-divider);
+  }
+  .dato {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--vac-muted);
+    margin-bottom: 4px;
+  }
+  .etiqueta :global(.ico) {
+    flex: none;
+    color: var(--color-ink-strong);
+  }
+  .etiqueta :global(.ico--salario) {
+    color: var(--vac-green);
+  }
+
+  .valor {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.375;
+    color: var(--color-ink);
+  }
+
+  .pie {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding-top: 20px;
+    border-top: 1px solid var(--vac-divider);
+  }
+
+  .salario {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 1.375;
+    color: var(--color-ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14.5px;
+    padding: 14px 24px;
+    border-radius: 46px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .boton--detalle {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .boton--detalle:hover {
+    background: var(--color-ink-strong);
+  }
+  .boton--detalle:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  .boton--postular {
+    background: var(--color-teal);
+    color: var(--color-ink);
+  }
+  .boton--postular:hover {
+    background: var(--color-teal-dark);
+    color: #fff;
+  }
+  .boton--postular:focus-visible {
+    outline: 2px solid var(--color-teal-dark);
+    outline-offset: 2px;
+  }
+
+  .cerrada {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--vac-muted);
+    padding: 12px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 46px;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 640px) {
+    .tarjeta {
+      padding: 32px;
+    }
+    .cargo {
+      font-size: 30px;
+    }
+    .resumen {
+      font-size: 15.5px;
+    }
+    .salario {
+      font-size: 22px;
+    }
+    .acciones {
+      flex-direction: row;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .acciones {
+      flex-direction: column;
+    }
+  }
+</style>

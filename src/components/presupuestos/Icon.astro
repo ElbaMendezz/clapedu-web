@@ -4,20 +4,33 @@ import { ICONS, type IconName } from "./icons";
 interface Props {
   name: IconName;
   class?: string;
+  /** Tamaño y trazo se desestructuran (en vez de caer en `...attrs`): un
+   * atributo repetido en el <svg> no sobrescribe al primero, así que no
+   * bastaba con esparcirlos después de los valores por defecto. */
+  width?: number | string;
+  height?: number | string;
+  "stroke-width"?: number | string;
   [attr: string]: unknown;
 }
 
-const { name, class: className, ...attrs } = Astro.props;
+const {
+  name,
+  class: className,
+  width = 24,
+  height = 24,
+  "stroke-width": strokeWidth = 2,
+  ...attrs
+} = Astro.props;
 ---
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
+  width={width}
+  height={height}
   viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
-  stroke-width="2"
+  stroke-width={strokeWidth}
   stroke-linecap="round"
   stroke-linejoin="round"
   class:list={["lucide", className]}

@@ -1,0 +1,103 @@
+---
+interface Props {
+  activa: boolean;
+  /** "tarjeta": sobre fondo claro (listado). "hero": sobre el degradé oscuro del detalle. */
+  variante?: "tarjeta" | "hero";
+}
+
+const { activa, variante = "tarjeta" } = Astro.props;
+---
+
+<div class:list={["estado", `estado--${variante}`, { "is-activa": activa }]}>
+  {
+    activa ? (
+      <>
+        <span class="punto" aria-hidden="true">
+          <span class="ping"></span>
+          <span class="nucleo"></span>
+        </span>
+        <span class="texto">Convocatoria abierta</span>
+      </>
+    ) : (
+      <>
+        <span class="punto" aria-hidden="true">
+          <span class="nucleo"></span>
+        </span>
+        <span class="texto">Convocatoria cerrada</span>
+      </>
+    )
+  }
+</div>
+
+<style>
+  .estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .estado--hero {
+    font-size: 13.5px;
+  }
+
+  .punto {
+    position: relative;
+    display: flex;
+    flex: none;
+    width: 10px;
+    height: 10px;
+  }
+  .nucleo {
+    position: relative;
+    display: inline-flex;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ef4444; /* red-500 */
+  }
+  .ping {
+    position: absolute;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #34d399; /* emerald-400 */
+    opacity: 0.75;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @keyframes ping {
+    75%,
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  .texto {
+    color: #dc2626; /* red-600 */
+  }
+  .estado--hero .texto {
+    color: #fca5a5; /* red-300 */
+  }
+
+  .is-activa .nucleo {
+    background: #10b981; /* emerald-500 */
+  }
+  .estado--hero.is-activa .nucleo {
+    background: #34d399; /* emerald-400 */
+  }
+  .is-activa .texto {
+    color: var(--vac-green);
+  }
+  .estado--hero.is-activa .texto {
+    color: var(--color-teal);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ping {
+      animation: none;
+    }
+  }
+</style>

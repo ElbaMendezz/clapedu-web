@@ -7,7 +7,9 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://clapedu.org',
-  integrations: [sitemap()],
+  // El sitemap solo incluye páginas prerenderizadas: /vacantes es on-demand
+  // (lee la hoja de Talento Humano en cada request), así que se declara a mano.
+  integrations: [sitemap({ customPages: ['https://clapedu.org/vacantes/'] })],
   // Tailwind v4 solo lo usa /presupuestos-participativos (src/styles/presupuestos.css,
   // importado únicamente desde PresupuestosLayout). El resto del sitio sigue
   // con CSS scoped + global.css: el plugin solo procesa los CSS que

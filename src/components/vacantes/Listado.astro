@@ -1,0 +1,222 @@
+---
+import FiltroAreas from "./FiltroAreas.astro";
+import VacanteCard from "./VacanteCard.astro";
+import EstadoVacio from "./EstadoVacio.astro";
+import { AREAS_CLAP, TALENTO_HUMANO_EMAIL } from "../../data/vacantes";
+import type { Vacante } from "../../lib/vacantes/types";
+
+interface Props {
+  vacantes: Vacante[];
+}
+
+const { vacantes } = Astro.props;
+
+// Las 7 áreas base de CLAP, más cualquier área nueva creada desde la hoja (ej. "Salud").
+const oficiales: readonly string[] = AREAS_CLAP;
+const areas: string[] = [
+  ...AREAS_CLAP,
+  ...new Set(vacantes.map((v) => v.area).filter((area) => area && !oficiales.includes(area))),
+];
+---
+
+<section id="vacantes" class="listado" data-vacantes>
+  <div class="vac-container">
+    <div class="encabezado">
+      <div class="pildora">
+        <span class="pildora-punto" aria-hidden="true"></span>
+        <span class="pildora-texto">Vacantes por área</span>
+      </div>
+
+      <h2>Oportunidades en las áreas que <span class="acento">mueven</span> a CLAP</h2>
+
+      <p>
+        Elige un área para conocer sus convocatorias disponibles y postularte al rol que mejor
+        conecte con tu perfil profesional.
+      </p>
+    </div>
+
+    <FiltroAreas areas={areas} total={vacantes.length} />
+
+    <div class="grilla" data-grilla hidden={vacantes.length === 0}>
+      {vacantes.map((vacante) => <VacanteCard vacante={vacante} />)}
+    </div>
+
+    <EstadoVacio total={vacantes.length} oculto={vacantes.length > 0} />
+
+    <!-- Guía rápida de postulación -->
+    <div class="guia">
+      <div>
+        <div class="paso paso--verde">01. Consulta el perfil</div>
+        <p>
+          Revisa en detalle las responsabilidades, la modalidad de trabajo y los requisitos
+          específicos de la vacante.
+        </p>
+      </div>
+      <div>
+        <div class="paso paso--violeta">02. Prepara tus soportes</div>
+        <p>
+          Alista tu hoja de vida actualizada, tu portafolio y los soportes requeridos (como tarjeta
+          profesional vigente cuando aplique).
+        </p>
+      </div>
+      <div>
+        <div class="paso paso--ink">03. Postúlate por el canal oficial</div>
+        <p>
+          Haz clic en el botón de postulación de la oferta o envía tu documentación a{" "}
+          <a href={`mailto:${TALENTO_HUMANO_EMAIL}`}>{TALENTO_HUMANO_EMAIL}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { attachFiltroVacantes } from "../../scripts/vacantes-filtro";
+  import { attachCopiar } from "../../scripts/vacantes-copiar";
+
+  const seccion = document.querySelector<HTMLElement>("[data-vacantes]");
+  if (seccion) {
+    attachFiltroVacantes(seccion);
+    attachCopiar(seccion);
+  }
+</script>
+
+<style>
+  .listado {
+    padding: 64px 0;
+    background: var(--vac-surface);
+  }
+
+  .encabezado {
+    max-width: 780px;
+    margin: 0 auto 36px;
+    text-align: center;
+  }
+
+  .pildora {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(59, 224, 187, 0.45);
+    border-radius: 9999px;
+    background: rgba(123, 77, 255, 0.07);
+  }
+  .pildora-punto {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+  .pildora-texto {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--vac-violet-text);
+  }
+
+  h2 {
+    margin-bottom: 14px;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2rem, 3.6vw, 2.85rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--vac-title);
+    text-wrap: balance;
+  }
+  .acento {
+    color: var(--vac-violet);
+  }
+
+  .encabezado p {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+
+  .grilla {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .grilla[hidden] {
+    display: none;
+  }
+  /* Con un área filtrada que deja una sola vacante, la tarjeta se centra (ver vacantes-filtro.ts) */
+  .grilla[data-unica="true"] {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .guia {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--vac-divider-steps);
+  }
+  .paso {
+    margin-bottom: 6px;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .paso--verde {
+    color: var(--vac-green);
+  }
+  .paso--violeta {
+    color: var(--color-ink-strong);
+  }
+  .paso--ink {
+    color: var(--color-ink);
+  }
+  .guia p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--vac-body);
+  }
+  .guia p a {
+    font-weight: 600;
+    color: var(--color-ink-strong);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .guia p a:hover {
+    color: var(--vac-green);
+  }
+
+  @media (min-width: 640px) {
+    .listado {
+      padding: 96px 0;
+    }
+    .encabezado {
+      margin-bottom: 44px;
+    }
+    .encabezado p {
+      font-size: 16.5px;
+    }
+    .guia {
+      gap: 32px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .guia {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grilla {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,299 @@
+---
+import Icon from "../presupuestos/Icon.astro";
+import CondicionesVacante from "./CondicionesVacante.astro";
+import ModalPieza from "./ModalPieza.astro";
+import type { Vacante } from "../../lib/vacantes/types";
+
+interface Props {
+  vacante: Vacante;
+  /** URL pública y canónica de la vacante, para "Compartir vacante". */
+  urlCompartir: string;
+}
+
+const { vacante, urlCompartir } = Astro.props;
+
+const responsabilidades = vacante.responsabilidades ?? [];
+const requisitos = vacante.requisitos ?? [];
+const habilidades = vacante.conocimientosHabilidades ?? [];
+const documentos = vacante.documentosPostulacion ?? [];
+
+const hayRequisitos = requisitos.length > 0 || Boolean(vacante.experiencia);
+const haySoportes = documentos.length > 0 || Boolean(vacante.informacionAdicional);
+---
+
+<section id="detalle" class="detalle">
+  <div class="vac-container">
+    <div class="rejilla">
+      <!-- Columna izquierda: información jerarquizada del rol -->
+      <div class="columna">
+        <div class="bloque bloque--compacto">
+          <h2>Objetivo del rol</h2>
+          <p class="parrafo">{vacante.objetivoRol}</p>
+        </div>
+
+        {
+          responsabilidades.length > 0 && (
+            <div class="bloque bloque--separado">
+              <h2>Responsabilidades principales</h2>
+              <ul class="lista">
+                {responsabilidades.map((item) => (
+                  <li>
+                    <span class="marca marca--verde">
+                      <Icon name="Check" width="12" height="12" stroke-width="3" />
+                    </span>
+                    <span class="item">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+
+        {
+          hayRequisitos && (
+            <div class="bloque bloque--separado">
+              <h2>Requisitos y experiencia</h2>
+              {requisitos.length > 0 ? (
+                <ul class="lista">
+                  {requisitos.map((requisito) => (
+                    <li>
+                      <span class="marca marca--violeta">
+                        <Icon name="Check" width="12" height="12" stroke-width="3" />
+                      </span>
+                      <span class="item">{requisito}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="parrafo parrafo--corto">{vacante.experiencia}</p>
+              )}
+            </div>
+          )
+        }
+
+        {
+          habilidades.length > 0 && (
+            <div class="bloque bloque--separado">
+              <h2>Habilidades y herramientas</h2>
+              <div class="habilidades">
+                {habilidades.map((habilidad, idx) => (
+                  <div class="habilidad">
+                    <div class="habilidad-indice">{String(idx + 1).padStart(2, "0")}.</div>
+                    <div class="habilidad-texto">{habilidad}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        {
+          haySoportes && (
+            <div class="bloque bloque--separado bloque--compacto">
+              <h2>¿Qué debes adjuntar en tu postulación?</h2>
+              {vacante.informacionAdicional && (
+                <p class="info">{vacante.informacionAdicional}</p>
+              )}
+              {documentos.length > 0 && (
+                <ul class="documentos">
+                  {documentos.map((documento) => (
+                    <li>
+                      <span class="vineta" aria-hidden="true"></span>
+                      {documento}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Columna derecha: condiciones y acción de postulación -->
+      <aside class="lateral">
+        <CondicionesVacante vacante={vacante} urlCompartir={urlCompartir} />
+      </aside>
+    </div>
+  </div>
+
+  {vacante.piezaGraficaUrl && <ModalPieza src={vacante.piezaGraficaUrl} cargo={vacante.cargo} />}
+</section>
+
+<script>
+  import { attachCopiar } from "../../scripts/vacantes-copiar";
+  import { attachModalPieza } from "../../scripts/vacantes-modal";
+
+  const seccion = document.querySelector<HTMLElement>("#detalle");
+  if (seccion) {
+    attachCopiar(seccion);
+    attachModalPieza(seccion);
+  }
+</script>
+
+<style>
+  .detalle {
+    padding: 48px 0;
+  }
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  .columna {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .bloque--separado {
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  h2 {
+    margin-bottom: 16px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--color-ink);
+  }
+  .bloque--compacto h2 {
+    margin-bottom: 14px;
+  }
+
+  .parrafo {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--vac-body);
+  }
+  .parrafo--corto {
+    line-height: 1.65;
+  }
+
+  .lista {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    list-style: none;
+  }
+  .lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .marca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    border-radius: 50%;
+    color: #fff;
+  }
+  .marca--verde {
+    background: var(--color-teal-dark);
+  }
+  .marca--violeta {
+    background: var(--color-ink-strong);
+  }
+  .item {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--vac-body);
+  }
+
+  .habilidades {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .habilidad {
+    padding: 16px;
+    background: var(--vac-surface-card);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+  }
+  .habilidad-indice {
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--color-teal-dark);
+    font-variant-numeric: tabular-nums;
+  }
+  .habilidad-texto {
+    font-size: 14.5px;
+    font-weight: 500;
+    line-height: 1.375;
+    color: var(--color-ink);
+  }
+
+  .info {
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--vac-body);
+  }
+  .documentos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+  }
+  .documentos li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .vineta {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-ink);
+  }
+
+  @media (min-width: 640px) {
+    .detalle {
+      padding: 64px 0;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    .parrafo {
+      font-size: 16px;
+    }
+    .item {
+      font-size: 15.5px;
+    }
+    .habilidades {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .detalle {
+      padding: 80px 0;
+    }
+    .rejilla {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 56px;
+    }
+    .columna {
+      grid-column: span 7 / span 7;
+    }
+    .lateral {
+      grid-column: span 5 / span 5;
+      position: sticky;
+      top: 96px;
+    }
+  }
+</style>

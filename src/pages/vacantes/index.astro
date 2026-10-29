@@ -1,0 +1,54 @@
+---
+// Ruta on-demand: las vacantes viven en una Google Sheet que Talento Humano
+// edita sin tocar código, así que se leen en cada request (con caché en
+// memoria, ver src/lib/vacantes/obtener-vacantes.ts) en vez de en el build.
+export const prerender = false;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SaltoContenido from "../../components/vacantes/SaltoContenido.astro";
+import Hero from "../../components/vacantes/Hero.astro";
+import Listado from "../../components/vacantes/Listado.astro";
+import Ecosistema from "../../components/vacantes/Ecosistema.astro";
+import { getVacantes } from "../../lib/vacantes/obtener-vacantes";
+import { rutaVacante } from "../../lib/vacantes/presentacion";
+import "../../styles/vacantes.css";
+
+// Compatibilidad con los enlaces del prototipo (?vacante=<id>) ya compartidos.
+const vacanteLegado = Astro.url.searchParams.get("vacante")?.trim();
+if (vacanteLegado) {
+  return Astro.redirect(rutaVacante(vacanteLegado), 301);
+}
+
+const vacantes = await getVacantes();
+
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=60, s-maxage=300, stale-while-revalidate=600",
+);
+---
+
+<BaseLayout
+  title="Trabaja con nosotros"
+  titleOverride="Trabaja con nosotros | CLAP – Centro Latinoamericano del Propósito"
+  description="Conoce las vacantes disponibles en CLAP (Centro Latinoamericano del Propósito) y postúlate para transformar desafíos sociales en soluciones reales."
+  keywords="vacantes CLAP, trabaja con nosotros, empleo Bucaramanga, ofertas laborales, convocatorias, talento humano"
+  path="/vacantes"
+  activeDropdown="conocenos"
+  activeNavLink="vacantes"
+  breadcrumbs={[
+    { name: "Inicio", path: "/" },
+    { name: "Vacantes", path: "/vacantes" },
+  ]}
+>
+  <SaltoContenido
+    slot="skip-link"
+    href="#vacantes"
+    texto="Ir directamente a las vacantes disponibles"
+  />
+
+  <div class="vac-page">
+    <Hero />
+    <Listado vacantes={vacantes} />
+    <Ecosistema />
+  </div>
+</BaseLayout>

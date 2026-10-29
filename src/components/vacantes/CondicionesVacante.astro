@@ -1,0 +1,254 @@
+---
+import Icon from "../presupuestos/Icon.astro";
+import BotonCopiar from "./BotonCopiar.astro";
+import type { Vacante } from "../../lib/vacantes/types";
+import { esEnlaceExterno, modalidadTexto } from "../../lib/vacantes/presentacion";
+
+/** Contenido del aside del detalle (la columna sticky la define DetalleContenido). */
+interface Props {
+  vacante: Vacante;
+  /** URL pública y canónica de la vacante, para "Compartir vacante". */
+  urlCompartir: string;
+}
+
+const { vacante, urlCompartir } = Astro.props;
+const activa = vacante.estado === "activa";
+const externo = esEnlaceExterno(vacante.enlacePostulacion);
+const porCorreo = vacante.enlacePostulacion.startsWith("mailto:");
+
+interface Fila {
+  icono: string;
+  etiqueta: string;
+  valor?: string;
+  tipo: "salario" | "dato" | "correo";
+}
+const filas = (
+  [
+    { icono: "Banknote", etiqueta: "Salario mensual", valor: vacante.salario, tipo: "salario" },
+    { icono: "FileText", etiqueta: "Tipo de contrato", valor: vacante.tipoContrato, tipo: "dato" },
+    { icono: "MapPin", etiqueta: "Modalidad de trabajo", valor: modalidadTexto(vacante), tipo: "dato" },
+    { icono: "Briefcase", etiqueta: "Experiencia mínima", valor: vacante.experiencia, tipo: "dato" },
+    {
+      icono: "Mail",
+      etiqueta: "Correo oficial de recepción",
+      valor: vacante.correoPostulacion,
+      tipo: "correo",
+    },
+  ] satisfies Fila[]
+).filter((fila) => fila.valor);
+---
+
+<div class="caja">
+    <h2>Condiciones de la vacante</h2>
+
+    <dl>
+      {
+        filas.map((fila) => (
+          <div class="fila">
+            <dt class:list={{ "dt--salario": fila.tipo === "salario" }}>
+              <Icon name={fila.icono} width="16" height="16" class="ico" />
+              <span>{fila.etiqueta}</span>
+            </dt>
+            <dd class={`dd dd--${fila.tipo}`}>{fila.valor}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    {
+      activa ? (
+        <div class="acciones">
+          <a
+            href={vacante.enlacePostulacion}
+            target={externo ? "_blank" : undefined}
+            rel={externo ? "noopener noreferrer" : undefined}
+            class="postular"
+          >
+            {porCorreo ? "Postularme por correo" : "Postularme ahora"}
+            <Icon name="ArrowUpRight" width="16" height="16" stroke-width="2.4" />
+          </a>
+
+          {vacante.correoPostulacion && (
+            <BotonCopiar
+              variante="aside"
+              texto={vacante.correoPostulacion}
+              etiqueta="Copiar correo de Talento Humano"
+              etiquetaCopiado="Correo copiado al portapapeles"
+            />
+          )}
+        </div>
+      ) : (
+        <div class="cierre">Esta convocatoria ya no recibe nuevas postulaciones.</div>
+      )
+    }
+
+    <!-- Acciones complementarias: compartir el enlace directo y ver la pieza gráfica -->
+    <div class="complementarias">
+      <BotonCopiar
+        variante="enlace"
+        texto={urlCompartir}
+        etiqueta="Compartir vacante"
+        etiquetaCopiado="Enlace copiado"
+      />
+
+      {
+        vacante.piezaGraficaUrl && (
+          <button type="button" class="ver-pieza" data-abrir-pieza>
+            <Icon name="Image" width="14" height="14" />
+            Ver pieza oficial
+          </button>
+        )
+      }
+    </div>
+</div>
+
+<style>
+  .caja {
+    padding: 24px;
+    background: var(--vac-surface-card);
+    border: 1px solid var(--color-border);
+    border-radius: 26px;
+  }
+
+  h2 {
+    margin-bottom: 24px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 21px;
+    color: var(--color-ink);
+  }
+
+  dl {
+    margin-bottom: 28px;
+  }
+  .fila {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 0;
+  }
+  .fila + .fila {
+    border-top: 1px solid var(--vac-divider-aside);
+  }
+  .fila:first-child {
+    padding-top: 0;
+  }
+  .fila:last-child {
+    padding-bottom: 0;
+  }
+
+  dt {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--vac-muted);
+  }
+  dt :global(.ico) {
+    flex: none;
+    color: var(--color-ink-strong);
+  }
+  .dt--salario :global(.ico) {
+    color: var(--vac-green);
+  }
+
+  .dd {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .dd--salario {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+  }
+  .dd--correo {
+    font-weight: 700;
+    color: var(--color-ink-strong);
+    word-break: break-all;
+  }
+
+  .acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .postular {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: 46px;
+    background: var(--color-ink);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15.5px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 16px 36px -14px rgba(52, 28, 101, 0.55);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .postular:hover {
+    background: var(--color-ink-strong);
+  }
+  .postular:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .cierre {
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--vac-surface-alt);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+  }
+
+  .complementarias {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--vac-divider-aside);
+  }
+
+  .ver-pieza {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink-strong);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .ver-pieza:hover {
+    color: var(--color-teal-dark);
+  }
+  .ver-pieza[hidden] {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .caja {
+      padding: 32px;
+    }
+  }
+</style>

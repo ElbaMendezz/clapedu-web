@@ -1,0 +1,68 @@
+---
+interface Props {
+  areas: string[];
+  total: number;
+}
+
+const { areas, total } = Astro.props;
+---
+
+<div role="tablist" aria-label="Filtrar vacantes por área de trabajo" class="filtro" data-filtro>
+  <button type="button" role="tab" aria-selected="true" data-area="todas" class="tab">
+    Todas ({total})
+  </button>
+  {
+    areas.map((area) => (
+      <button type="button" role="tab" aria-selected="false" data-area={area} class="tab">
+        {area}
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  .filtro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 44px;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    border: 1px solid var(--vac-chip-border);
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--vac-chip-text);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13.5px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .tab:hover {
+    background: #fff;
+    border-color: var(--color-teal);
+    color: var(--color-ink);
+  }
+  .tab[aria-selected="true"] {
+    background: var(--vac-green);
+    border-color: var(--vac-green);
+    color: #fff;
+    box-shadow: 0 12px 26px -8px rgba(0, 152, 121, 0.55);
+  }
+
+  @media (min-width: 640px) {
+    .filtro {
+      gap: 12px;
+      margin-bottom: 56px;
+    }
+    .tab {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+  }
+</style>

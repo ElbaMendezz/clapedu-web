@@ -1,0 +1,57 @@
+/*
+ * Estilos compartidos de /vacantes y /vacantes/[id] (Trabaja con nosotros).
+ *
+ * Port del diseño "trabaja-con-nosotros-_-clap final" (Tailwind 4). Estas
+ * páginas usan BaseLayout y, por tanto, global.css: su reset sin capas pisaría
+ * las utilidades de Tailwind (ver presupuestos.css), así que el diseño se
+ * tradujo a <style> scoped por componente. Aquí viven solo los tokens que el
+ * diseño usa y que no existen en global.css, y las dos utilidades que cruzan
+ * componentes.
+ */
+
+:root {
+  --vac-deep: #2a1457; /* morado profundo: fondo del hero y degradados */
+  --vac-green: #009879; /* verde de estado/acentos sobre fondo claro */
+  --vac-surface: #f6f5fa; /* fondo de la sección de vacantes */
+  --vac-surface-card: #f7f7fa; /* tarjetas secundarias, aside, habilidades */
+  --vac-surface-alt: #efeff5; /* hover de botones fantasma, aviso de cierre */
+  --vac-muted: #8a8699; /* etiquetas en mayúscula */
+  --vac-body: #4a4663; /* texto de párrafo */
+  --vac-title: #2b1558; /* título de sección centrado */
+  --vac-violet: #7b4dff; /* palabra destacada del título */
+  --vac-violet-text: #56329c; /* texto de la píldora de sección */
+  --vac-chip-border: #dfd9ec;
+  --vac-chip-text: #5e587a;
+  --vac-divider: #f1eef8;
+  --vac-divider-aside: #e6e0f2;
+  --vac-divider-steps: #dfdae9;
+  --vac-yellow: #ffc200;
+}
+
+/* Tailwind (preflight) fija line-height 1.5 en <html>; global.css no. El
+   diseño depende de ese valor en todo texto sin `leading-*` explícito. */
+.vac-page {
+  line-height: 1.5;
+}
+
+/* Contenedor del diseño: max-w-[1240px] + px-5 sm:px-8 lg:px-12 */
+.vac-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 640px) {
+  .vac-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vac-container {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}

@@ -1,0 +1,153 @@
+---
+import Icon from "../presupuestos/Icon.astro";
+
+interface Props {
+  /** Texto que se copia al portapapeles. */
+  texto: string;
+  etiqueta: string;
+  etiquetaCopiado: string;
+  /** "vacio": botón fantasma del estado sin vacantes. "aside": botón fantasma a
+   * todo el ancho de la columna de postulación. "enlace": acción discreta de
+   * compartir. */
+  variante: "vacio" | "aside" | "enlace";
+}
+
+const { texto, etiqueta, etiquetaCopiado, variante } = Astro.props;
+const icono = variante === "enlace" ? "Share2" : "Copy";
+---
+
+<button type="button" class:list={["copiar", `copiar--${variante}`]} data-copiar={texto}>
+  <span class="estado estado--reposo">
+    <Icon name={icono} width="16" height="16" class="icono" />
+    <span>{etiqueta}</span>
+  </span>
+  <span class="estado estado--copiado" aria-live="polite">
+    <span class="check" aria-hidden="true">
+      <Icon name="Check" width="10" height="10" stroke-width="3.2" />
+    </span>
+    <span>{etiquetaCopiado}</span>
+  </span>
+</button>
+
+<style>
+  .copiar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .copiar:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .estado {
+    display: inline-flex;
+    align-items: center;
+    gap: inherit;
+  }
+  .estado--copiado {
+    display: none;
+  }
+  .copiar[data-copiado="true"] .estado--reposo {
+    display: none;
+  }
+  .copiar[data-copiado="true"] .estado--copiado {
+    display: inline-flex;
+  }
+
+  .check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--vac-green);
+    color: #fff;
+  }
+
+  /* Botón fantasma (estado sin vacantes y columna de postulación) */
+  .copiar--vacio,
+  .copiar--aside {
+    background: #fff;
+    color: var(--color-ink);
+    border: 1px solid #dfd8ee;
+    border-radius: 46px;
+    font-size: 11.5px;
+    padding: 14px 16px;
+  }
+  .copiar--vacio:hover,
+  .copiar--aside:hover {
+    background: var(--vac-surface-alt);
+  }
+  .copiar--aside {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .copiar--vacio .estado--copiado,
+  .copiar--aside .estado--copiado {
+    color: var(--vac-green);
+  }
+  .copiar--vacio :global(.icono),
+  .copiar--aside :global(.icono) {
+    width: 14px;
+    height: 14px;
+    flex: none;
+    color: var(--color-ink-strong);
+  }
+
+  /* Enlace discreto de compartir */
+  .copiar--enlace {
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--vac-green);
+    border-radius: 4px;
+  }
+  .copiar--enlace:hover {
+    color: var(--color-teal-dark);
+  }
+  .copiar--enlace:focus-visible {
+    outline-color: var(--vac-green);
+  }
+  .copiar--enlace :global(.icono) {
+    flex: none;
+    color: var(--vac-green);
+  }
+
+  @media (min-width: 390px) {
+    .copiar--vacio,
+    .copiar--aside {
+      font-size: 12.5px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .copiar--vacio,
+    .copiar--aside {
+      gap: 8px;
+      font-size: 14px;
+    }
+    .copiar--vacio {
+      padding: 14px 24px;
+    }
+    .copiar--aside {
+      padding: 14px 20px;
+    }
+    .copiar--vacio :global(.icono),
+    .copiar--aside :global(.icono) {
+      width: 16px;
+      height: 16px;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+// Ruta on-demand: ver el comentario de ./index.astro.
+export const prerender = false;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SaltoContenido from "../../components/vacantes/SaltoContenido.astro";
+import DetalleHero from "../../components/vacantes/DetalleHero.astro";
+import DetalleContenido from "../../components/vacantes/DetalleContenido.astro";
+import Ecosistema from "../../components/vacantes/Ecosistema.astro";
+import NoEncontrada from "../../components/vacantes/NoEncontrada.astro";
+import { getVacante } from "../../lib/vacantes/obtener-vacantes";
+import { rutaVacante } from "../../lib/vacantes/presentacion";
+import { buildJobPosting, serializeJsonLd } from "../../lib/vacantes/job-posting";
+import "../../styles/vacantes.css";
+
+const { id } = Astro.params;
+const vacante = id ? await getVacante(id) : undefined;
+
+if (vacante) {
+  Astro.response.headers.set(
+    "Cache-Control",
+    "public, max-age=60, s-maxage=300, stale-while-revalidate=600",
+  );
+} else {
+  // No se usa Astro.rewrite("/404"): Astro no permite reescribir una ruta
+  // on-demand hacia una estática. Se responde 404 con una pantalla propia.
+  Astro.response.status = 404;
+}
+
+const ruta = vacante ? rutaVacante(vacante.id) : "/vacantes";
+const activa = vacante?.estado === "activa";
+const jobPosting = vacante ? buildJobPosting(vacante) : null;
+
+// La meta description se queda en ~160 caracteres, cortada en una palabra completa.
+const resumen = vacante?.resumen ?? "";
+const descripcion =
+  resumen.length > 160 ? `${resumen.slice(0, 157).replace(/\s+\S*$/, "")}…` : resumen;
+---
+
+{
+  vacante ? (
+    <BaseLayout
+      title={vacante.cargo}
+      titleOverride={`${vacante.cargo} – Trabaja con nosotros | CLAP`}
+      description={descripcion}
+      path={ruta}
+      noindex={!activa}
+      activeDropdown="conocenos"
+      activeNavLink="vacantes"
+      breadcrumbs={[
+        { name: "Inicio", path: "/" },
+        { name: "Vacantes", path: "/vacantes" },
+        { name: vacante.cargo, path: ruta },
+      ]}
+    >
+      <Fragment slot="head">
+        {jobPosting && (
+          <script type="application/ld+json" set:html={serializeJsonLd(jobPosting)} is:inline />
+        )}
+      </Fragment>
+
+      <SaltoContenido
+        slot="skip-link"
+        href="#detalle"
+        texto="Ir directamente al contenido de la vacante"
+      />
+
+      <div class="vac-page">
+        <DetalleHero cargo={vacante.cargo} activa={activa} />
+        <DetalleContenido
+          vacante={vacante}
+          urlCompartir={new URL(ruta, Astro.site).toString()}
+        />
+        <Ecosistema />
+      </div>
+    </BaseLayout>
+  ) : (
+    <BaseLayout
+      title="Vacante no disponible"
+      titleOverride="Vacante no disponible | CLAP – Centro Latinoamericano del Propósito"
+      description="Esta convocatoria ya no está disponible. Explora las vacantes abiertas en CLAP."
+      path="/vacantes"
+      noindex
+      activeDropdown="conocenos"
+      activeNavLink="vacantes"
+    >
+      <div class="vac-page">
+        <NoEncontrada />
+      </div>
+    </BaseLayout>
+  )
+}
